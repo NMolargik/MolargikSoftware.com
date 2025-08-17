@@ -1,0 +1,29 @@
+name: Deploy on Tag
+
+on:
+  push:
+    tags:
+      - 'v*'  # Triggers on tags like v1.0
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - run: npm ci
+      - run: npm run build  # Assumes Vite; outputs to dist
+      - name: Deploy to NAS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          port: ${{ secrets.SSH_PORT }}
+          source: "dist/*"
+          target: "/volume1/web/molargiksoftware"
+          strip_components: 1
+          rm: true  # Overwrite existing files

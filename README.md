@@ -67,3 +67,13 @@ export default tseslint.config([
   },
 ])
 ```
+
+
+To deploy:
+npm run build
+RELEASE=$(date +%Y%m%d%H%M%S)
+rsync -avz dist/ pi:/var/www/molargiksoftware/releases/$RELEASE/
+ssh pi "                                                        
+  ln -sfn /var/www/molargiksoftware/releases/$RELEASE /var/www/molargiksoftware/current &&
+  sudo systemctl reload nginx
+"

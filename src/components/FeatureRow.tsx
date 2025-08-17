@@ -30,8 +30,8 @@ export default function FeatureRow({
   return (
     <section
       className={clsx(
-        'mx-auto max-w-6xl px-4 flex flex-row flex-wrap items-center gap-8 -my-2',
-        reverse && 'flex-row-reverse'
+        'mx-auto my-12 max-w-6xl px-4 flex flex-col md:flex-row items-center gap-10',
+        reverse && 'md:flex-row-reverse'
       )}
     >
       {/* Text box */}
@@ -50,7 +50,7 @@ export default function FeatureRow({
       <img
         src={screenshotSrc}
         alt={title}
-        className="w-60 md:w-72 flex-shrink-0 drop-shadow-xl rotate-6 md:rotate-3"
+        className="w-48 md:w-72 flex-shrink-0 drop-shadow-xl rotate-3 md:rotate-2"
       />
     </section>
   );
