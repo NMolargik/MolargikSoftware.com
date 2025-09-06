@@ -1,6 +1,5 @@
 import React from "react";
 
-// Page component that reads two integers from the URL
 const WaffleLanding: React.FC = () => {
     return (
     <div
