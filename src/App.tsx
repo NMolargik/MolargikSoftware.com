@@ -26,7 +26,7 @@ function AppShell() {
   return (
     <div className="flex flex-col min-h-screen">
       {!isWaffleRoute && <Navbar />}
-      <main className="flex-1 pb-20">
+      <main className={`flex-1 ${isWaffleRoute ? '' : 'pb-20'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/stork" element={<Stork />} />
@@ -37,7 +37,7 @@ function AppShell() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/waffle/:num1/:num2" element={<WaffleLanding />} />
+          <Route path="/wafflelanding" element={<WaffleLanding />} />
           <Route path="*" element={<Home />} />
         </Routes>
       </main>
