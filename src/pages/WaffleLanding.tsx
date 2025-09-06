@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 // Page component that reads two integers from the URL
 const WaffleLanding: React.FC = () => {
