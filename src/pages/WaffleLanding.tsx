@@ -8,8 +8,9 @@ const WaffleLanding: React.FC = () => {
     >
       <div>
         <h1 className="text-5xl font-bold">Waffle<br /><br /></h1>
-        <h4><br />Use the address bar to search or navigate.</h4>
-        <h4>Or open the menu to use Presets or Bookmarks.</h4>
+        <h4><br />Tap a cell to activate it</h4>
+        <h4>then use the address bar to search or navigate</h4>
+        <h4>or open the menu to use Presets or Bookmarks.</h4>
       </div>
     </div>
     );

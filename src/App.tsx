@@ -26,7 +26,7 @@ export default function App() {
 
 function AppShell() {
   const location = useLocation();
-  const isWaffleRoute = location.pathname.startsWith('/waffle/');
+  const isWaffleRoute = location.pathname.startsWith('/waffle/') || location.pathname === '/wafflelanding';
   return (
     <div className="flex flex-col min-h-screen">
       {!isWaffleRoute && <Navbar />}
