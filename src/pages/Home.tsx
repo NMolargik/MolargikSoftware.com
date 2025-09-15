@@ -1,7 +1,8 @@
 import ProjectCard from '../components/ProjectCard';
 import HomeHero from '../components/HomeHero';
 import storkIcon from '../assets/stork/storkicon.svg';
-import mygraIcon from '../assets/comingsoonicon.svg';
+import mygraIcon from '../assets/mygra/mygraicon.png';
+import waffleIcon from '../assets/waffle/waffleicon.png';
 import readySetIcon from '../assets/readyset/readyseticon.svg';
 import v1Icon from '../assets/v1sports/v1icon.svg';
 
@@ -13,16 +14,22 @@ export default function Home() {
       {/* Project cards row */}
       <section className="mx-auto mt-20 flex flex-wrap justify-center gap-8 px-6 max-w-6xl">
         <ProjectCard
+          title="Mygra"
+          tagline="Migraine insights powered by on‑device AI."
+          image={mygraIcon}
+          path="/mygra"
+        />
+        <ProjectCard
           title="Stork"
           tagline="Visual statistics for labor & delivery nurses."
           image={storkIcon}
           path="/stork"
         />
         <ProjectCard
-          title="Mygra"
-          tagline="Coming soon – migraine insights powered by on‑device AI."
-          image={mygraIcon}
-          path="/mygra"
+          title="Waffle"
+          tagline="Webpage multitasking on iPad."
+          image={waffleIcon}
+          path="/waffle"
         />
         <ProjectCard
           title="Ready, Set"

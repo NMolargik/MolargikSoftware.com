@@ -5,11 +5,11 @@ import { Link, NavLink } from 'react-router-dom';
 import Logo from '../assets/logo.svg';   // vite can import SVG as React component
 
 const links = [
-  { label: 'Stork', path: '/stork' },
   { label: 'Mygra', path: '/mygra' },
+  { label: 'Waffle', path: '/waffle' },
+  { label: 'Stork', path: '/stork' },
   { label: 'Ready, Set', path: '/ready-set' },
   { label: 'V1 Sports', path: '/v1sports' },
-  { label: 'Sweetwater', path: '/sweetwater' },
   { label: 'About', path: '/about' },
 ];
 
