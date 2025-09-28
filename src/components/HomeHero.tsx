@@ -1,4 +1,4 @@
-import logo from '../assets/whitelogo.png';
+import logo from '../assets/logolong.png';
 import resumePDF from '../assets/nickmolargikresume.pdf';
 
 export default function HomeHero() {
