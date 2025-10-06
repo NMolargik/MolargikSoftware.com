@@ -86,28 +86,30 @@ export default function Home() {
               fitMode="contain"
             />
           </div>
-          <div className="absolute inset-y-0 left-2 flex items-center sm:hidden">
-            <button
-              type="button"
-              onClick={() => scrollByAmount('left')}
-              aria-label="Scroll left"
-              className="rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur"
-            >
-              ◀
-            </button>
-          </div>
-          <div className="absolute inset-y-0 right-2 flex items-center sm:hidden">
-            <button
-              type="button"
-              onClick={() => scrollByAmount('right')}
-              aria-label="Scroll right"
-              className="rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur"
-            >
-              ▶
-            </button>
+          <div className="md:hidden">
+            <div className="absolute inset-y-0 left-2 flex items-center sm:hidden">
+              <button
+                type="button"
+                onClick={() => scrollByAmount('left')}
+                aria-label="Scroll left"
+                className="rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur"
+              >
+                ◀
+              </button>
+            </div>
+            <div className="absolute inset-y-0 right-2 flex items-center sm:hidden">
+              <button
+                type="button"
+                onClick={() => scrollByAmount('right')}
+                aria-label="Scroll right"
+                className="rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur"
+              >
+                ▶
+              </button>
+            </div>
           </div>
           {/* --- md and up: 2-column grid with transition --- */}
-          <div className="transition-all duration-300">
+          <div className="hidden md:block transition-all duration-300">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 py-4">
               <ProjectCard
                 title="Mygra"

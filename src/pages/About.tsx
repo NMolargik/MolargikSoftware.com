@@ -10,7 +10,7 @@ export default function About() {
     <>
       {/* Personal Hero Section */}
       <Hero
-        heading="Nicholas Molargik"
+        heading="Nick Molargik"
         description="Mobile App Developer & Indie Maker. Specializing in SwiftUI, Kotlin Multiplatform, Flutter, and full-stack mobile solutions. Passionate about creating intuitive, AI-powered apps that solve real problems for users."
         imageSrc={nickheadshot}
         buttonText="Download Resume"
@@ -122,8 +122,8 @@ export default function About() {
                 <div className="w-20 h-16 bg-yellow-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2015-2019</div>
               </div>
               <div className="flex-1">
-                <h3 className="text-2xl font-semibold">Molargik Woodworking INC.</h3>
-                <h4 className="text-xl text-gray-600 mb-3">NSWC Crane</h4>
+                <h3 className="text-2xl font-semibold">Laborer & CNC Operator</h3>
+                <h4 className="text-xl text-gray-600 mb-3">Molargik Woodworking Inc</h4>
                 <p className="text-gray-700">
                   Manual labor and craftsmanship in a family-owned cabinetry business, developing a strong work ethic and attention to detail. Operated various machinery, including a CNC Router and Edge Banding machine. Unofficial tech support.
                 </p>
@@ -245,7 +245,7 @@ export default function About() {
             Ready to collaborate on a mobile or engineering project? Connect with me through email or social platforms.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:nmolargik@gmail.com" className="bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition">
+            <a href="mailto:nick@molargiksoftware.com" className="bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition">
               Email Me
             </a>
             <a href="https://www.linkedin.com/in/nicholas-molargik/" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition">
