@@ -1,9 +1,9 @@
-import logo from '../assets/logolong.png';
+import logo from '../assets/nickheadshot.svg';
 import resumePDF from '../assets/nickmolargikresume.pdf';
 
 export default function HomeHero() {
   return (
-    <section className="relative flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-b from-slate-950 to-black min-h-[40vh] w-full px-6 py-12">
+    <section className="relative flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-b from-slate-950 to-black min-h-[20vh] w-full px-4 py-6">
       {/* Text content */}
       <div className="flex flex-col items-start max-w-lg text-left space-y-4">
         <h2 className="text-4xl font-bold text-white">

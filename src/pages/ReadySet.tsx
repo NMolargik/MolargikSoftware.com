@@ -1,49 +1,101 @@
+import React from 'react';
 import readyseticon from '../assets/readyset/readyseticon.svg';
 import Hero from '../components/Hero';
-
-import FeatureRow from '../components/FeatureRow';
-import dumbbellIcon from '../assets/readyset/dumbbell.svg';
-import dropletIcon from '../assets/readyset/droplet.svg';
-import flameIcon from '../assets/readyset/flame.svg';
-
-import exerciseShot from '../assets/readyset/exercise_screenshot.png';
-import waterShot from '../assets/readyset/water_screenshot.png';
-import energyShot from '../assets/readyset/energy_screenshot.png';
+import screen1 from '../assets/readyset/screen1.png';
+import screen2 from '../assets/readyset/screen2.png';
+import screen3 from '../assets/readyset/screen3.png';
+import screen4 from '../assets/readyset/screen4.png';
 
 export default function ReadySet() {
+  const slides = [screen1, screen2, screen3, screen4];
+  const carouselRef = React.useRef(null);
+
   return (
     <>
       <Hero
-        heading="Ready, Set"
-        description="A fitness metric companion to track & smash personal goals."
+        heading="Ready, Set - Track Your Gym Progress"
+        description="Effortlessly log workouts, water, and caloric intake. Built for gym-goers, by a gym-goer!"
         imageSrc={readyseticon}
         buttonText="View on the App Store"
-        buttonColorClass="bg-orange-500 text-white"
+        buttonColorClass="bg-green-500 text-white"
         buttonHref="https://apps.apple.com/us/app/ready-set/id6484503374"
+        systemRequirements={["iOS 17+", "watchOS 10+"]}
       />
-
-      {/* Feature rows */}
-      <FeatureRow
-        title="Track Exercises"
-        description="List out your daily exercises with sets, reps, and weight. Update sets and challenge yourself to beat your previous PR."
-        iconSrc={dumbbellIcon}
-        screenshotSrc={exerciseShot}
-      />
-
-      <FeatureRow
-        title="Stay Hydrated"
-        description="Swipe to log water consumed and view hydration trends over the last 7 days to keep yourself on track."
-        iconSrc={dropletIcon}
-        screenshotSrc={waterShot}
-        reverse
-      />
-
-      <FeatureRow
-        title="Monitor Energy"
-        description="Track calorie intake and energy burned to ensure you’re meeting your daily goals."
-        iconSrc={flameIcon}
-        screenshotSrc={energyShot}
-      />
+      {/* Responsive screenshots section */}
+      <section className="mt-12">
+        {/* Desktop & large screens: horizontally scrollable images */}
+        <div className="hidden md:block px-4">
+          <div
+            ref={carouselRef}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-4 justify-center"
+          >
+            {slides.map((src, idx) => (
+              <img
+                key={idx}
+                src={src}
+                alt={`Ready, Set screenshot ${idx + 1}`}
+                className="flex-none h-96 w-auto object-contain snap-center"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+        {/* Small screens: seamless horizontal banner */}
+        <div className="md:hidden mt-2">
+          <div
+            ref={carouselRef}
+            className="flex overflow-x-auto snap-x snap-mandatory justify-center"
+          >
+            {slides.map((src, idx) => (
+              <img
+                key={idx}
+                src={src}
+                alt={`Ready, Set screenshot ${idx + 1}`}
+                className="flex-none h-80 w-auto object-cover snap-center"
+                loading="lazy"
+              />
+            ))}
+          </div>
+        </div>
+        {/* Large text area below images */}
+        <section>
+          <div className="mt-10 max-w-3xl mx-auto px-4">
+            <div>
+              <h2 className="text-4xl font-bold tracking-tight mb-6">🏋️ Ready, Set: Your Ultimate Gym Companion</h2>
+              <p className="text-lg leading-relaxed">
+                I'm thrilled to announce the launch of my first solo-developed app, <a href="https://apps.apple.com/us/app/ready-set/id6484503374" className="text-blue-600 hover:underline">Ready, Set</a>, now available on the App Store! While I've been part of several team projects, this is the first app I've published independently.
+              </p>
+              <p className="text-lg leading-relaxed mt-4">
+                Ready, Set is designed to help gym-goers track their progress with minimal effort. As someone who often forgot the weights lifted during previous sessions, I built this app to solve that problem by allowing users to log exercises set-by-set, including weights lifted, reps completed, and time spent.
+              </p>
+              <h3 className="text-2xl font-semibold mt-10 mb-4">🔑 Key Features</h3>
+              <ul className="list-disc pl-6 space-y-3 text-lg leading-relaxed">
+                <li>
+                  <strong>Effortless Workout Tracking:</strong> Log exercises set-by-set, including weights, reps, and time spent, to monitor your gym progress with ease.
+                </li>
+                <li>
+                  <strong>Water & Caloric Intake:</strong> Track daily water and caloric intake with simple swipe gestures, keeping all your fitness metrics in one place.
+                </li>
+                <li>
+                  <strong>Trend Analysis:</strong> View day-over-day trends in your workouts, water, and caloric intake to stay informed about your progress.
+                </li>
+                <li>
+                  <strong>HealthKit Integration:</strong> Seamlessly integrates with HealthKit to enhance data in Apple's Health app, with alerts for concerning trends.
+                </li>
+                <li>
+                  <strong>Swipe-Based Navigation:</strong> Built with Swift, SwiftUI, and SwiftData, featuring intuitive swipe-based navigation for a modern iOS experience.
+                </li>
+              </ul>
+              <p className="text-lg leading-relaxed mt-10">
+                From concept to launch in just ten days, Ready, Set is crafted for gym-goers who want a streamlined way to track their fitness journey. Currently available for iPhone, with Apple Watch compatibility and quick-action home screen widgets coming soon!
+              </p>
+              <p className="text-base italic mt-6">
+                Ready, Set is available now for devices running iOS. Some features may require access to Apple’s latest APIs. Every. Set. Counts.
+              </p>
+            </div>
+          </div>
+        </section>
+      </section>
     </>
   );
 }

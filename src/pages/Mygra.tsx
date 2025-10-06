@@ -3,11 +3,11 @@ import mygraicon from '../assets/mygra/mygraicon.png';
 import Hero from '../components/Hero';
 
 
-import screen1 from '../assets/mygra/iPhone Screen 1.png';
-import screen2 from '../assets/mygra/iPhone Screen 2.png';
-import screen3 from '../assets/mygra/iPhone Screen 3.png';
-import screen4 from '../assets/mygra/iPhone Screen 4.png';
-import screen5 from '../assets/mygra/iPhone Screen 5.png';
+import screen1 from '../assets/mygra/screen1.png';
+import screen2 from '../assets/mygra/screen2.png';
+import screen3 from '../assets/mygra/screen3.png';
+import screen4 from '../assets/mygra/screen4.png';
+import screen5 from '../assets/mygra/screen5.png';
 
 export default function Mygra() {
   const slides: string[] = [screen1, screen2, screen3, screen4, screen5];
@@ -16,25 +16,26 @@ export default function Mygra() {
 
   return (
     <>
-      <Hero
+    <Hero
         heading="Mygra"
         description="Your Intelligent Migraine Journal."
         imageSrc={mygraicon}
         buttonText="View on the App Store"
-        buttonColorClass="bg-orange-500 text-white"
+        buttonColorClass="bg-purple-500 text-white"
         buttonHref="https://apps.apple.com/us/app/mygra/id6747298583"
+        systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 10.6+"]}
       />
 
       {/* Responsive screenshots section */}
       <section className="mt-12">
         {/* Desktop & large screens: 5 images in a single row */}
-        <div className="hidden md:flex items-start justify-center gap-6 px-4">
+        <div className="hidden md:flex items-start justify-center gap-0 px-4">
           {slides.map((src, idx) => (
             <img
               key={idx}
               src={src}
               alt={`Mygra screenshot ${idx + 1}`}
-              className="h-96 w-auto rounded-xl shadow-md object-contain"
+              className="h-96 w-auto object-contain"
               loading="lazy"
             />
           ))}

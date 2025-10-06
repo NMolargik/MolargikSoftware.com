@@ -6,6 +6,7 @@ interface HeroProps {
   buttonColorClass?: string;
   buttonHref?: string;
   buttonDownload?: boolean;
+  systemRequirements?: string[];
 }
 
 export default function Hero({
@@ -16,6 +17,7 @@ export default function Hero({
   buttonColorClass = "bg-primary text-black",
   buttonHref = "#",
   buttonDownload = false,
+  systemRequirements = [],
 }: HeroProps) {
   return (
     <section className="relative flex flex-col md:flex-row items-center justify-between gap-8 bg-gradient-to-b from-slate-950 to-black min-h-[40vh] w-full px-6 py-12">
@@ -32,8 +34,20 @@ export default function Hero({
             {buttonText}
           </a>
         )}
+        {/* System requirements pills */}
+        {systemRequirements.length > 0 && (
+          <div className="flex flex-wrap gap-2 mt-4">
+            {systemRequirements.map((req, idx) => (
+              <span
+                key={idx}
+                className="inline-block bg-gray-700 text-white text-sm font-medium px-3 py-1 rounded-full"
+              >
+                {req}
+              </span>
+            ))}
+          </div>
+        )}
       </div>
-
       {/* Image section */}
       <div className="flex justify-center md:justify-end w-full md:w-1/2">
         <img
