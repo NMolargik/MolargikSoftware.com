@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import mygraicon from '../assets/mygra/mygraicon.png';
 import Hero from '../components/Hero';
 
@@ -14,45 +14,84 @@ export default function Mygra() {
 
   const carouselRef = React.useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    document.title = 'Mygra – Intelligent Migraine Journal | Nick Molargik';
+    const desc = 'Log migraines fast, get on‑device AI insights, see weather correlations, and integrate with Apple Health. Private by default.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+    // Set accent color for navbar hover on Mygra
+    document.documentElement.style.setProperty('--accent', '#a855f7'); // purple-500
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = mygraicon as unknown as string;
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, []);
+
   return (
     <>
-    <Hero
+    <style>{`
+      :root { --accent: #a855f7; }
+      header nav a:hover, nav a:hover, .nav-link:hover {
+        color: var(--accent) !important;
+      }
+      header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
+        outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
+        outline-offset: 2px;
+        border-radius: 6px;
+      }
+    `}</style>
+    <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+      <Hero
         heading="Mygra"
         description="Your Intelligent Migraine Journal."
         imageSrc={mygraicon}
         buttonText="View on the App Store"
-        buttonColorClass="bg-purple-500 text-white"
+        buttonColorClass="bg-purple-500 text-white hover:text-white hover:bg-purple-600"
         buttonHref="https://apps.apple.com/us/app/mygra/id6747298583"
         systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 10.6+"]}
       />
+    </section>
 
       {/* Responsive screenshots section */}
       <section className="mt-12">
         {/* Desktop & large screens: 5 images in a single row */}
-        <div className="hidden md:flex items-start justify-center gap-0 px-4">
-          {slides.map((src, idx) => (
-            <img
-              key={idx}
-              src={src}
-              alt={`Mygra screenshot ${idx + 1}`}
-              className="h-96 w-auto object-contain"
-              loading="lazy"
-            />
-          ))}
+        <div className="hidden md:block px-4">
+          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center">
+            {slides.map((src, idx) => (
+              <img
+                key={idx}
+                src={src}
+                alt={`Mygra screenshot ${idx + 1}`}
+                width={1170}
+                height={2532}
+                loading="lazy"
+                className="flex-none h-96 w-auto object-contain snap-center"
+              />
+            ))}
+          </div>
         </div>
 
         {/* Small screens: seamless horizontal banner */}
         <div className="md:hidden mt-2">
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
           >
             {slides.map((src, idx) => (
               <img
                 key={idx}
                 src={src}
                 alt={`Mygra screenshot ${idx + 1}`}
-                className="flex-none h-80 w-auto object-cover snap-start"
+                width={1170}
+                height={2532}
+                className="flex-none h-80 w-auto object-contain snap-center"
                 loading="lazy"
               />
             ))}
@@ -126,6 +165,20 @@ export default function Mygra() {
           </div>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Mygra",
+            "applicationCategory": "HealthApplication",
+            "operatingSystem": "iOS, iPadOS, watchOS",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "url": "https://apps.apple.com/us/app/mygra/id6747298583"
+          })
+        }}
+      />
     </>
   );
 }

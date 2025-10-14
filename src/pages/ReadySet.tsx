@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import readyseticon from '../assets/readyset/readyseticon.svg';
 import Hero from '../components/Hero';
 import screen1 from '../assets/readyset/screen1.png';
@@ -10,30 +10,65 @@ export default function ReadySet() {
   const slides = [screen1, screen2, screen3, screen4];
   const carouselRef = React.useRef(null);
 
+  useEffect(() => {
+    document.title = 'Ready, Set – Track Your Gym Progress | Nick Molargik';
+    const desc = 'Effortless workout logging with set-by-set tracking, water & calories, trends, and HealthKit. Built with Swift & SwiftUI.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+    // Set accent color for navbar hover on Ready, Set
+    document.documentElement.style.setProperty('--accent', '#22c55e'); // green-500
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = readyseticon as unknown as string;
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, []);
+
   return (
     <>
-      <Hero
-        heading="Ready, Set - Track Your Gym Progress"
-        description="Effortlessly log workouts, water, and caloric intake. Built for gym-goers, by a gym-goer!"
-        imageSrc={readyseticon}
-        buttonText="View on the App Store"
-        buttonColorClass="bg-green-500 text-white"
-        buttonHref="https://apps.apple.com/us/app/ready-set/id6484503374"
-        systemRequirements={["iOS 17+", "watchOS 10+"]}
-      />
+      <style>{`
+        :root { --accent: #22c55e; }
+        header nav a:hover, nav a:hover, .nav-link:hover {
+          color: var(--accent) !important;
+        }
+        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
+          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
+          outline-offset: 2px;
+          border-radius: 6px;
+        }
+      `}</style>
+      <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+        <Hero
+          heading="Ready, Set"
+          description="Effortlessly log workouts, sets, water, and caloric intake. Built for gym-goers, by a gym-goer!"
+          imageSrc={readyseticon}
+          buttonText="View on the App Store"
+          buttonColorClass="bg-green-500 text-white hover:text-white hover:bg-green-600"
+          buttonHref="https://apps.apple.com/us/app/ready-set/id6484503374"
+          systemRequirements={["iOS 17+", "watchOS 10+"]}
+        />
+      </section>
       {/* Responsive screenshots section */}
       <section className="mt-12">
         {/* Desktop & large screens: horizontally scrollable images */}
         <div className="hidden md:block px-4">
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4 justify-center"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
           >
             {slides.map((src, idx) => (
               <img
                 key={idx}
                 src={src}
                 alt={`Ready, Set screenshot ${idx + 1}`}
+                width={1170}
+                height={2532}
                 className="flex-none h-96 w-auto object-contain snap-center"
                 loading="lazy"
               />
@@ -44,14 +79,16 @@ export default function ReadySet() {
         <div className="md:hidden mt-2">
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory justify-center"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
           >
             {slides.map((src, idx) => (
               <img
                 key={idx}
                 src={src}
                 alt={`Ready, Set screenshot ${idx + 1}`}
-                className="flex-none h-80 w-auto object-cover snap-center"
+                width={1170}
+                height={2532}
+                className="flex-none h-80 w-auto object-contain snap-center"
                 loading="lazy"
               />
             ))}
@@ -63,7 +100,7 @@ export default function ReadySet() {
             <div>
               <h2 className="text-4xl font-bold tracking-tight mb-6">🏋️ Ready, Set: Your Ultimate Gym Companion</h2>
               <p className="text-lg leading-relaxed">
-                I'm thrilled to announce the launch of my first solo-developed app, <a href="https://apps.apple.com/us/app/ready-set/id6484503374" className="text-blue-600 hover:underline">Ready, Set</a>, now available on the App Store! While I've been part of several team projects, this is the first app I've published independently.
+                I'm thrilled to announce the launch of my first solo-developed app, <a href="https://apps.apple.com/us/app/ready-set/id6484503374" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ready, Set</a>, now available on the App Store! While I've been part of several team projects, this is the first app I've published independently.
               </p>
               <p className="text-lg leading-relaxed mt-4">
                 Ready, Set is designed to help gym-goers track their progress with minimal effort. As someone who often forgot the weights lifted during previous sessions, I built this app to solve that problem by allowing users to log exercises set-by-set, including weights lifted, reps completed, and time spent.
@@ -96,6 +133,20 @@ export default function ReadySet() {
           </div>
         </section>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Ready, Set",
+            "applicationCategory": "FitnessApplication",
+            "operatingSystem": "iOS, watchOS",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "url": "https://apps.apple.com/us/app/ready-set/id6484503374"
+          })
+        }}
+      />
     </>
   );
 }

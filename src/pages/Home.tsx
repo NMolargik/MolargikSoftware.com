@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import HomeHero from '../components/HomeHero';
 import storkIcon from '../assets/stork/storkicon.svg';
@@ -11,106 +11,59 @@ import waffleBackground from '../assets/waffle/cardBackground.png';
 import readySetBackground from '../assets/readyset/cardBackground.png';
 
 export default function Home() {
-  const scrollerRef = useRef<HTMLDivElement>(null);
-
-  const scrollByAmount = (dir: 'left' | 'right') => {
-    const el = scrollerRef.current;
-    if (!el) return;
-    const dx = Math.round(el.clientWidth * 0.9) * (dir === 'left' ? -1 : 1);
-    el.scrollBy({ left: dx, behavior: 'smooth' });
-  };
+  useEffect(() => {
+    document.title = 'Nick Molargik – Mobile Engineer | SwiftUI · Kotlin · Flutter';
+    const desc =
+      'Nick Molargik — Expert iOS engineer specializing in Swift & SwiftUI. I build high‑performance apps for iPhone, iPad, Apple Watch, and Mac using UIKit, Combine, SwiftData/Core Data, CloudKit, HealthKit, AVFoundation, Core ML and more.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+    // Set accent color for navbar hover on Home
+    document.documentElement.style.setProperty('--accent', '#38bdf8'); // sky-400
+  }, []);
 
   return (
     <>
+      <style>{`
+        :root { --accent: #38bdf8; }
+        header nav a:hover, nav a:hover, .nav-link:hover {
+          color: var(--accent) !important;
+        }
+        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
+          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
+          outline-offset: 2px;
+          border-radius: 6px;
+        }
+      `}</style>
       <HomeHero />
       {/* Latest Projects section */}
-      <section className="mx-auto mt-16 w-full max-w-6xl px-6">
+      <section className="mx-auto mt-16 w-full max-w-7xl px-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-bold tracking-tight">Latest Projects</h2>
-          <div className="flex gap-2 md:hidden">
-            <button
-              type="button"
-              onClick={() => scrollByAmount('left')}
-              aria-label="Scroll left"
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur transition hover:bg-white/10"
+          <div>
+            <div className="text-xs uppercase tracking-wider text-white/60">Featured work</div>
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Latest Projects</h2>
+            <p className="mt-1 text-sm text-white/60 md:hidden">Swipe to explore →</p>
+          </div>
+          <div className="hidden md:flex gap-2">
+            <a
+              href="https://github.com/NMolargik"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/80 backdrop-blur transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
             >
-              ◀
-            </button>
-            <button
-              type="button"
-              onClick={() => scrollByAmount('right')}
-              aria-label="Scroll right"
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-2 backdrop-blur transition hover:bg-white/10"
-            >
-              ▶
-            </button>
+              More on GitHub
+            </a>
           </div>
         </div>
         {/* Responsive list: mobile = horizontal carousel, md+ = 2-column grid */}
         <div className="relative md:static">
-          {/* --- Mobile / small screens: Horizontal carousel --- */}
-          <div
-            ref={scrollerRef}
-            className="flex flex-nowrap gap-8 overflow-x-auto pb-8 snap-x snap-mandatory md:hidden"
-          >
-            <ProjectCard
-              title="Mygra"
-              tagline="Migraine insights powered by on-device AI."
-              image={mygraIcon}
-              background={mygraBackground}
-              path="/mygra"
-              fitMode="contain"
-            />
-            <ProjectCard
-              title="Waffle"
-              tagline="Webpage multitasking on iPad."
-              image={waffleIcon}
-              background={waffleBackground}
-              path="/waffle"
-              fitMode="contain"
-            />
-            <ProjectCard
-              title="Stork"
-              tagline="Visual statistics for labor & delivery nurses."
-              image={storkIcon}
-              background={storkBackground}
-              path="/stork"
-              fitMode="contain"
-            />
-            <ProjectCard
-              title="Ready, Set"
-              tagline="A fitness metric companion to track & smash personal goals."
-              image={readySetIcon}
-              background={readySetBackground}
-              path="/ready-set"
-              fitMode="contain"
-            />
-          </div>
-          <div className="md:hidden">
-            <div className="absolute inset-y-0 left-2 flex items-center sm:hidden">
-              <button
-                type="button"
-                onClick={() => scrollByAmount('left')}
-                aria-label="Scroll left"
-                className="rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur"
-              >
-                ◀
-              </button>
-            </div>
-            <div className="absolute inset-y-0 right-2 flex items-center sm:hidden">
-              <button
-                type="button"
-                onClick={() => scrollByAmount('right')}
-                aria-label="Scroll right"
-                className="rounded-full border border-white/10 bg-white/10 px-3 py-2 backdrop-blur"
-              >
-                ▶
-              </button>
-            </div>
-          </div>
-          {/* --- md and up: 2-column grid with transition --- */}
-          <div className="hidden md:block transition-all duration-300">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-16 py-4">
+          {/* Responsive grid: small = 1 column list, md+ = 2 columns */}
+          <div className="transition-all duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
               <ProjectCard
                 title="Mygra"
                 tagline="Migraine insights powered by on-device AI."

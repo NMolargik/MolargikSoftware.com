@@ -10,6 +10,17 @@ export default function Contact() {
     e.preventDefault();
     if (!formRef.current) return;
 
+    const formData = new FormData(formRef.current);
+    const website = String(formData.get('website') || '');
+    const ts = Number(formData.get('ts') || 0);
+    const tooFast = Date.now() - ts < 3000;
+
+    if (website.trim().length > 0 || tooFast) {
+      // Pretend to succeed to avoid giving feedback to bots.
+      setState('sent');
+      return;
+    }
+
     setState('sending');
 
     emailjs
@@ -54,6 +65,8 @@ export default function Contact() {
           onSubmit={handleSubmit}
           className="relative space-y-8 rounded-3xl border border-white/15 bg-white/10 p-8 shadow-2xl backdrop-blur-xl sm:p-10"
         >
+          <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+          <input type="hidden" name="ts" value={String(Date.now())} />
           {/* Subtle card highlight */}
           <div className="pointer-events-none absolute -inset-px -z-10 rounded-[1.6rem] bg-gradient-to-br from-white/20 via-transparent to-brandPurple/20 opacity-60" />
 
@@ -70,6 +83,7 @@ export default function Contact() {
                 placeholder="Jane Doe"
                 required
                 autoComplete="name"
+                disabled={state === 'sending'}
               />
             </div>
 
@@ -85,6 +99,7 @@ export default function Contact() {
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
+                disabled={state === 'sending'}
               />
             </div>
           </div>
@@ -101,6 +116,7 @@ export default function Contact() {
               className="w-full resize-y rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-black placeholder-black/40 shadow-inner outline-none transition focus:border-brandPurple/60 focus:bg-white/20 focus:ring-4 focus:ring-brandPurple/20"
               placeholder="How can I help?"
               required
+              disabled={state === 'sending'}
             />
             <p className="mt-2 text-xs text-black/50">
               I typically respond within 1–2 business days.
@@ -130,7 +146,7 @@ export default function Contact() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                     <path className="opacity-75" d="M4 12a8 8 0 018-8" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
                   </svg>
-                  Sending…
+                  <span role="status" aria-live="polite">Sending…</span>
                 </>
               ) : (
                 <>

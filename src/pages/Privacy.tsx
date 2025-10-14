@@ -11,6 +11,17 @@ export default function Privacy() {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+  useEffect(() => {
+    document.title = 'Privacy Policy – Molargik Software LLC';
+    const desc = 'Privacy policy for Molargik Software LLC apps and website.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+  }, []);
 
   return (
     <main className="min-h-screen bg-white text-black">

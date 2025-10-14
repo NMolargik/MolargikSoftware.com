@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import waffleicon from '../assets/waffle/waffleicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/waffle/screen1.png';
@@ -11,33 +11,67 @@ export default function Waffle() {
   const slides = [screen1, screen2, screen3, screen4, screen5];
   const carouselRef = React.useRef(null);
 
+  useEffect(() => {
+    document.title = 'Waffle – Grid Browser for iPad | Nick Molargik';
+    const desc = 'Waffle lets you browse multiple sites side-by-side in a customizable grid on iPad. Presets, multi-window, CloudKit sync.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+    // Set accent color for navbar hover on Waffle
+    document.documentElement.style.setProperty('--accent', '#eab308'); // yellow-500
+    const link = document.createElement('link');
+    link.rel = 'preload';
+    link.as = 'image';
+    link.href = waffleicon as unknown as string;
+    document.head.appendChild(link);
+    return () => { document.head.removeChild(link); };
+  }, []);
+
   return (
     <>
-      <Hero
-        heading="Waffle"
-        description="Webpage multitasking made easy on iPad."
-        imageSrc={waffleicon}
-        buttonText="View on the App Store"
-        buttonColorClass="bg-yellow-500 text-white"
-        buttonHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
-        systemRequirements={["iPadOS 26+"]}
-
-      />
+      <style>{`
+        :root { --accent: #eab308; }
+        header nav a:hover, nav a:hover, .nav-link:hover {
+          color: var(--accent) !important;
+        }
+        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
+          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
+          outline-offset: 2px;
+          border-radius: 6px;
+        }
+      `}</style>
+      <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+        <Hero
+          heading="Waffle"
+          description="Webpage multitasking made easy on iPad."
+          imageSrc={waffleicon}
+          buttonText="View on the App Store"
+          buttonColorClass="bg-yellow-500 text-white hover:text-white hover:bg-yellow-600"
+          buttonHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
+          systemRequirements={["iPadOS 26+"]}
+        />
+      </section>
       {/* Responsive screenshots section */}
       <section className="mt-12">
         {/* Desktop & large screens: horizontally scrollable images */}
         <div className="hidden md:block px-4">
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-4"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
           >
             {slides.map((src, idx) => (
               <img
                 key={idx}
                 src={src}
                 alt={`Waffle screenshot ${idx + 1}`}
-                className="flex-none h-96 w-auto object-contain snap-start"
+                width={1170}
+                height={2532}
                 loading="lazy"
+                className="flex-none h-96 w-auto object-contain snap-center"
               />
             ))}
           </div>
@@ -46,15 +80,17 @@ export default function Waffle() {
         <div className="md:hidden mt-2">
           <div
             ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory"
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
           >
             {slides.map((src, idx) => (
               <img
                 key={idx}
                 src={src}
                 alt={`Waffle screenshot ${idx + 1}`}
-                className="flex-none h-80 w-auto object-cover snap-start"
+                width={1170}
+                height={2532}
                 loading="lazy"
+                className="flex-none h-80 w-auto object-contain snap-center"
               />
             ))}
           </div>
@@ -64,7 +100,7 @@ export default function Waffle() {
           <div>
             <h2 className="text-4xl font-bold tracking-tight mb-6">🧇 Waffle: A New Way to Browse on iPad</h2>
             <p className="text-lg leading-relaxed">
-              Discover <a href="https://apps.apple.com/us/app/waffle-browser/id6751783473" className="text-blue-600 hover:underline">Waffle</a>, a revolutionary browser experience crafted exclusively for iPad. Say goodbye to tab juggling and hello to a customizable grid of webpages, letting you browse multiple sites side by side in any layout you choose, up to a 4x4 grid. Whether you're researching, comparing, or multitasking, Waffle transforms your iPad into a powerful multi-site workspace.
+              Discover <a href="https://apps.apple.com/us/app/waffle-browser/id6751783473" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Waffle</a>, a revolutionary browser experience crafted exclusively for iPad. Say goodbye to tab juggling and hello to a customizable grid of webpages, letting you browse multiple sites side by side in any layout you choose, up to a 4x4 grid. Whether you're researching, comparing, or multitasking, Waffle transforms your iPad into a powerful multi-site workspace.
             </p>
             <h3 className="text-2xl font-semibold mt-10 mb-4">🧩 Key Features</h3>
             <ul className="list-disc pl-6 space-y-3 text-lg leading-relaxed">
@@ -96,6 +132,20 @@ export default function Waffle() {
           </div>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "SoftwareApplication",
+            "name": "Waffle",
+            "applicationCategory": "BrowserApplication",
+            "operatingSystem": "iPadOS",
+            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+            "url": "https://apps.apple.com/us/app/waffle-browser/id6751783473"
+          })
+        }}
+      />
     </>
   );
 }

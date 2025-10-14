@@ -1,3 +1,5 @@
+import { useEffect } from 'react';
+
 import nickheadshot from '../assets/nickheadshot.svg';
 import whitelogo from '../assets/whitelogo.png';
 import Hero from '../components/Hero';
@@ -6,6 +8,17 @@ import waffleIcon from '../assets/waffle/waffleicon.png';
 import { Link } from 'react-router-dom'; // Or your routing library
 
 export default function About() {
+  useEffect(() => {
+    document.title = 'About – Nick Molargik | Molargik Software LLC';
+    const desc = 'About Nick Molargik: indie iOS & cross‑platform engineer. SwiftUI, Kotlin, Flutter. Privacy-first apps with on-device AI.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+  }, []);
   return (
     <>
       {/* Personal Hero Section */}
@@ -13,7 +26,7 @@ export default function About() {
         heading="Nick Molargik"
         description="Mobile App Developer & Indie Maker. Specializing in SwiftUI, Kotlin Multiplatform, Flutter, and full-stack mobile solutions. Passionate about creating intuitive, AI-powered apps that solve real problems for users."
         imageSrc={nickheadshot}
-        buttonText="Download Resume"
+        buttonText="Download Résumé"
         buttonColorClass="bg-orange-500 text-white"
         buttonHref="/resume.pdf"
         buttonDownload
@@ -26,18 +39,18 @@ export default function About() {
             <img src={whitelogo} alt="Molargik Software LLC" className="mx-auto h-16 w-auto mb-4 rounded-md" />
             <h2 className="text-3xl font-bold">Molargik Software LLC</h2>
             <p className="text-xl text-gray-300 mt-4">
-              Founded in 2025 as a solo venture to bring innovative mobile applications to life. Focused on iOS, iPadOS, watchOS, visionOS, and macOS development with a emphasis on user-centric design and the safe use of AI.
+              Founded in 2025 as a solo venture to bring innovative mobile applications to life. Focused on iOS, iPadOS, watchOS, visionOS, and macOS development with an emphasis on user-centric design and the safe use of AI.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className="rounded-2xl p-6 bg-white/10 backdrop-blur-xl ring-1 ring-white/15">
               <h3 className="text-2xl font-semibold mb-4">Mission</h3>
               <p className="text-gray-300">
                 To craft delightful, accessible apps that empower users through smart technology. From health tracking to productivity tools, every project prioritizes privacy, performance, and ease of use.
               </p>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className="rounded-2xl p-6 bg-white/10 backdrop-blur-xl ring-1 ring-white/15">
               <h3 className="text-2xl font-semibold mb-4">Values</h3>
               <ul className="space-y-2 text-gray-300">
                 <li>• User-First Design</li>
@@ -46,6 +59,11 @@ export default function About() {
                 <li>• Lifelong Learning</li>
               </ul>
             </div>
+          </div>
+          <div className="mt-12 text-center text-gray-400 text-sm">
+            <p>
+              This website? Built with <span className="text-white font-medium">React</span>, powered by <span className="text-white font-medium">Vite</span>, styled with <span className="text-white font-medium">Tailwind CSS</span>, and deployed out of my living room. Designed, developed, and maintained entirely by Nick Molargik. I do not claim to be a good web developer.
+            </p>
           </div>
         </div>
       </section>
@@ -58,7 +76,13 @@ export default function About() {
             {/* Current Role */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-gray-50 rounded-lg">
               <div className="md:w-24 text-center">
-                <div className="w-20 h-16 bg-red-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2024 - Present</div>
+                <div className="w-20 h-16 bg-red-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">
+                  <div>
+                    <span className="block leading-tight">2024</span>
+                    <span className="block leading-tight text-sm opacity-80">to</span>
+                    <span className="block leading-tight">Present</span>
+                  </div>
+                </div>
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Software Engineer</h3>
@@ -70,7 +94,13 @@ export default function About() {
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-gray-50 rounded-lg">
               <div className="md:w-24 text-center">
-                <div className="w-20 h-16 bg-purple-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2024 - Present</div>
+                <div className="w-20 h-16 bg-purple-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">
+                  <div>
+                    <span className="block leading-tight">2024</span>
+                    <span className="block leading-tight text-sm opacity-80">to</span>
+                    <span className="block leading-tight">Present</span>
+                  </div>
+                </div>
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Founder and Developer</h3>
@@ -83,7 +113,13 @@ export default function About() {
             {/* Previous Experience */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-gray-50 rounded-lg">
               <div className="md:w-24 text-center">
-                <div className="w-20 h-16 bg-blue-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2022 - 2024</div>
+                <div className="w-20 h-16 bg-blue-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">
+                  <div>
+                    <span className="block leading-tight">2022</span>
+                    <span className="block leading-tight text-sm opacity-80">to</span>
+                    <span className="block leading-tight">2024</span>
+                  </div>
+                </div>
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Software Engineer, Mobile & Desktop</h3>
@@ -95,7 +131,13 @@ export default function About() {
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-gray-50 rounded-lg">
               <div className="md:w-24 text-center">
-                <div className="w-20 h-16 bg-orange-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2020 - 2022</div>
+                <div className="w-20 h-16 bg-orange-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">
+                  <div>
+                    <span className="block leading-tight">2020</span>
+                    <span className="block leading-tight text-sm opacity-80">to</span>
+                    <span className="block leading-tight">2022</span>
+                  </div>
+                </div>
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Electrical Engineer</h3>
@@ -107,7 +149,13 @@ export default function About() {
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-gray-50 rounded-lg">
               <div className="md:w-24 text-center">
-                <div className="w-20 h-16 bg-green-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2019 - 2020</div>
+                <div className="w-20 h-16 bg-green-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">
+                  <div>
+                    <span className="block leading-tight">2019</span>
+                    <span className="block leading-tight text-sm opacity-80">to</span>
+                    <span className="block leading-tight">2020</span>
+                  </div>
+                </div>
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Electrical Engineering Intern</h3>
@@ -119,7 +167,13 @@ export default function About() {
             </div>
             <div className="flex flex-col md:flex-row gap-6 items-start p-6 bg-gray-50 rounded-lg">
               <div className="md:w-24 text-center">
-                <div className="w-20 h-16 bg-yellow-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">2015-2019</div>
+                <div className="w-20 h-16 bg-yellow-500 rounded flex items-center justify-center text-white font-bold text-lg mx-auto">
+                  <div>
+                    <span className="block leading-tight">2015</span>
+                    <span className="block leading-tight text-sm opacity-80">to</span>
+                    <span className="block leading-tight">2019</span>
+                  </div>
+                </div>
               </div>
               <div className="flex-1">
                 <h3 className="text-2xl font-semibold">Laborer & CNC Operator</h3>
@@ -138,7 +192,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12">Education</h2>
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className="rounded-2xl p-6 bg-white/10 backdrop-blur-xl ring-1 ring-white/15">
               <h3 className="text-2xl font-semibold mb-3">Bachelor of Science in Electrical Engineering</h3>
               <h4 className="text-xl text-gray-300 mb-4">Purdue School of Engineering and Technology, IUPUI, 2020</h4>
               <ul className="space-y-2 text-gray-400">
@@ -146,7 +200,7 @@ export default function About() {
                 <li>• Achieved a commendable 3.72 GPA</li>
               </ul>
             </div>
-            <div className="bg-gray-800 rounded-lg p-6">
+            <div className="rounded-2xl p-6 bg-white/10 backdrop-blur-xl ring-1 ring-white/15">
               <h3 className="text-2xl font-semibold mb-3">Certifications & Self-Study</h3>
               <ul className="space-y-2 text-gray-300">
                 <li>• Acquired diverse programming skills through Codecademy, covering web technologies and mobile development</li>
@@ -216,7 +270,10 @@ export default function About() {
                 <p className="text-gray-300 mb-4">
                   A health-focused app delivering AI-enhanced migraine tracking across multiple Apple platforms.
                 </p>
-                <Link to="/mygra" className="inline-block bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition">
+                <Link
+                  to="/mygra"
+                  className="inline-block bg-[#6313F5] text-white px-4 py-2 rounded-md hover:bg-[#4F0ED1] transition"
+                >
                   Learn More
                 </Link>
               </div>
@@ -228,7 +285,10 @@ export default function About() {
                 <p className="text-gray-300 mb-4">
                   An iPad browser innovating multi-webpage management with customizable layouts.
                 </p>
-                <Link to="/waffle" className="inline-block bg-orange-500 text-white px-4 py-2 rounded-md hover:bg-orange-600 transition">
+                <Link
+                  to="/waffle"
+                  className="inline-block bg-[#F5D20A] text-gray-900 px-4 py-2 rounded-md hover:bg-[#D9BB09] transition"
+                >
                   Learn More
                 </Link>
               </div>
@@ -245,18 +305,52 @@ export default function About() {
             Ready to collaborate on a mobile or engineering project? Connect with me through email or social platforms.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="mailto:nick@molargiksoftware.com" className="bg-gray-900 text-white px-6 py-3 rounded-md hover:bg-gray-800 transition">
+            <a
+              href="mailto:nick@molargiksoftware.com"
+              className="bg-[#ED752F] text-white px-6 py-3 rounded-md hover:bg-[#cf6427] hover:text-white transition focus-visible:ring-2 focus-visible:ring-white/40"
+            >
               Email Me
             </a>
-            <a href="https://www.linkedin.com/in/nicholas-molargik/" className="bg-blue-600 text-white px-6 py-3 rounded-md hover:bg-blue-700 transition">
+            <a
+              href="https://www.linkedin.com/in/nicholas-molargik/"
+              className="bg-[#0A66C2] text-white px-6 py-3 rounded-md hover:bg-[#085aab] hover:text-white transition focus-visible:ring-2 focus-visible:ring-white/40"
+            >
               LinkedIn
             </a>
-            <a href="https://github.com/nmolargik" className="bg-black text-white px-6 py-3 rounded-md hover:bg-gray-800 transition">
+            <a
+              href="https://github.com/nmolargik"
+              className="bg-[#171515] text-white px-6 py-3 rounded-md hover:bg-[#24292F] hover:text-white transition focus-visible:ring-2 focus-visible:ring-white/40"
+            >
               GitHub
             </a>
           </div>
         </div>
       </section>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@graph": [
+              {
+                "@type": "Person",
+                "name": "Nick Molargik",
+                "jobTitle": "Mobile Software Engineer",
+                "url": "https://molargiksoftware.com/",
+                "sameAs": [
+                  "https://www.linkedin.com/in/nicholas-molargik/",
+                  "https://github.com/nmolargik"
+                ]
+              },
+              {
+                "@type": "Organization",
+                "name": "Molargik Software LLC",
+                "url": "https://molargiksoftware.com/"
+              }
+            ]
+          })
+        }}
+      />
     </>
   );
 }

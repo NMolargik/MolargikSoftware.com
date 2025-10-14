@@ -14,7 +14,7 @@ const WaffleLanding: React.FC = () => {
     >
       {/* Waffle cell */}
       <div
-        className="relative w-[88vw] max-w-[520px] aspect-square rounded-[28px] overflow-hidden"
+        className="relative w-[88vw] max-w-[320px] aspect-[4/3] rounded-[28px] overflow-hidden"
         style={{
           // Base bake color
           backgroundColor: "#E2A656",
@@ -37,8 +37,8 @@ const WaffleLanding: React.FC = () => {
         {/* Title & glyph */}
         <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <h1 className="text-xl sm:text-2xl font-extrabold tracking-tight text-black/80 drop-shadow">
-              Waffle
+            <h1 className="text-xl sm:text-2xl font-bold tracking-tight text-black/80 drop-shadow">
+              Empty Cell
             </h1>
           </div>
         </div>
