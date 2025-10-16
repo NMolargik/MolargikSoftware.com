@@ -48,16 +48,6 @@ export default function Home() {
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Latest Projects</h2>
             <p className="mt-1 text-sm text-white/60 md:hidden">Swipe to explore →</p>
           </div>
-          <div className="hidden md:flex gap-2">
-            <a
-              href="https://github.com/NMolargik"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-white/80 backdrop-blur transition hover:bg-white/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white/30"
-            >
-              More on GitHub
-            </a>
-          </div>
         </div>
         {/* Responsive list: mobile = horizontal carousel, md+ = 2-column grid */}
         <div className="relative md:static">

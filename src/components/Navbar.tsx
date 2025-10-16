@@ -56,7 +56,7 @@ export default function Navbar() {
           {/* contact button */}
           <Link
             to="/contact"
-            className="hidden rounded-md bg-[#f97316] px-4 py-2 text-sm font-semibold text-white hover:bg-[#fb923c] lg:inline-block"
+            className="hidden rounded-md bg-[#f97316] px-4 py-2 text-sm font-semibold text-white hover:bg-[#fb923c] lg:inline-block hover:text-white"
           >
             Contact
           </Link>
