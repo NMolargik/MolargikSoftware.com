@@ -12,7 +12,8 @@ import screen5 from '../assets/mygra/screen5.png';
 export default function Mygra() {
   const slides: string[] = [screen1, screen2, screen3, screen4, screen5];
 
-  const carouselRef = React.useRef<HTMLDivElement>(null);
+  const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
+  const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.title = 'Mygra – Intelligent Migraine Journal | Nick Molargik';
@@ -31,7 +32,24 @@ export default function Mygra() {
     link.as = 'image';
     link.href = mygraicon as unknown as string;
     document.head.appendChild(link);
-    return () => { document.head.removeChild(link); };
+
+    const scrollToStart = () => {
+      if (carouselRefDesktop.current) {
+        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
+      }
+      if (carouselRefMobile.current) {
+        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
+      }
+    };
+    // attempt immediately, next frame, and after full load (covers image decode timing)
+    scrollToStart();
+    requestAnimationFrame(scrollToStart);
+    window.addEventListener('load', scrollToStart);
+
+    return () => {
+      window.removeEventListener('load', scrollToStart);
+      document.head.removeChild(link);
+    };
   }, []);
 
   return (
@@ -63,7 +81,7 @@ export default function Mygra() {
       <section className="mt-12">
         {/* Desktop & large screens: 5 images in a single row */}
         <div className="hidden md:block px-4">
-          <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center">
+          <div ref={carouselRefDesktop} className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center">
             {slides.map((src, idx) => (
               <img
                 key={idx}
@@ -72,7 +90,7 @@ export default function Mygra() {
                 width={1170}
                 height={2532}
                 loading="lazy"
-                className="flex-none h-96 w-auto object-contain snap-center"
+                className="flex-none h-96 w-auto object-contain snap-start"
               />
             ))}
           </div>
@@ -81,8 +99,8 @@ export default function Mygra() {
         {/* Small screens: seamless horizontal banner */}
         <div className="md:hidden mt-2">
           <div
-            ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
+            ref={carouselRefMobile}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
               <img
@@ -91,7 +109,7 @@ export default function Mygra() {
                 alt={`Mygra screenshot ${idx + 1}`}
                 width={1170}
                 height={2532}
-                className="flex-none h-80 w-auto object-contain snap-center"
+                className="flex-none h-80 w-auto object-contain snap-start"
                 loading="lazy"
               />
             ))}

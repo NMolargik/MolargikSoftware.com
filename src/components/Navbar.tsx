@@ -1,6 +1,6 @@
 import { Menu, X } from 'lucide-react';
 import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Logo from '../assets/logolong.png'; // vite can import SVG as React component
 
 const links = [
@@ -13,6 +13,8 @@ const links = [
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === '/';
   const base = 'nav-link px-3 py-2 rounded-md font-semibold text-gray-700/90 hover:bg-gray-100 hover:text-[var(--link-accent)] transition';
 
   return (
@@ -36,6 +38,17 @@ export default function Navbar() {
           {/* desktop links */}
           <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
             <ul className="hidden gap-1 lg:flex items-center">
+              {!isHome && (
+                <li>
+                  <NavLink
+                    to="/"
+                    className={`${base} hover:text-black`}
+                    style={{ ['--link-accent' as any]: '#000000' }}
+                  >
+                    Home
+                  </NavLink>
+                </li>
+              )}
               {links.map(({ label, path, color }) => (
                 <li key={path}>
                   <NavLink
@@ -72,6 +85,18 @@ export default function Navbar() {
         {/* mobile menu */}
         {open && (
           <ul className="space-y-1 border-t bg-white px-6 pb-4 pt-3 lg:hidden">
+            {!isHome && (
+              <li>
+                <NavLink
+                  to="/"
+                  className={`${base} block w-full hover:text-black`}
+                  style={{ ['--link-accent' as any]: '#000000' }}
+                  onClick={() => setOpen(false)}
+                >
+                  Home
+                </NavLink>
+              </li>
+            )}
             {links.map(({ label, path, color }) => (
               <li key={path}>
                 <NavLink

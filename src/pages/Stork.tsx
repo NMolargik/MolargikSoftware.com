@@ -8,7 +8,8 @@ import screen4 from '../assets/stork/screen4.png';
 
 export default function Stork() {
   const slides = [screen1, screen2, screen3, screen4];
-  const carouselRef = React.useRef(null);
+  const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
+  const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.title = 'Stork – Delivery Stats for L&D Nurses | Nick Molargik';
@@ -27,7 +28,21 @@ export default function Stork() {
     link.as = 'image';
     link.href = storkicon as unknown as string;
     document.head.appendChild(link);
-    return () => { document.head.removeChild(link); };
+    const scrollToStart = () => {
+      if (carouselRefDesktop.current) {
+        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
+      }
+      if (carouselRefMobile.current) {
+        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
+      }
+    };
+    scrollToStart();
+    requestAnimationFrame(scrollToStart);
+    window.addEventListener('load', scrollToStart);
+    return () => {
+      window.removeEventListener('load', scrollToStart);
+      document.head.removeChild(link);
+    };
   }, []);
 
   return (
@@ -59,8 +74,8 @@ export default function Stork() {
         {/* Desktop & large screens: horizontally scrollable images */}
         <div className="hidden md:block px-4">
           <div
-            ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
+            ref={carouselRefDesktop}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
               <img
@@ -70,7 +85,7 @@ export default function Stork() {
                 width={1170}
                 height={2532}
                 loading="lazy"
-                className="flex-none h-96 w-auto object-contain snap-center"
+                className="flex-none h-96 w-auto object-contain snap-start"
               />
             ))}
           </div>
@@ -78,8 +93,8 @@ export default function Stork() {
         {/* Small screens: seamless horizontal banner */}
         <div className="md:hidden mt-2">
           <div
-            ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
+            ref={carouselRefMobile}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
               <img
@@ -89,7 +104,7 @@ export default function Stork() {
                 width={1170}
                 height={2532}
                 loading="lazy"
-                className="flex-none h-80 w-auto object-contain snap-center"
+                className="flex-none h-80 w-auto object-contain snap-start"
               />
             ))}
           </div>

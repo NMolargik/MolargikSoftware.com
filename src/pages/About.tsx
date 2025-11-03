@@ -11,7 +11,7 @@ import { Link } from 'react-router-dom';
 export default function About() {
   useEffect(() => {
     document.title = 'About – Nick Molargik | Molargik Software LLC';
-    const desc = 'Nick Molargik: From Raytheon radar systems to V1 Sports video analysis, now indie iOS engineer building Mygra, Waffle, Stork & Ready, Set with SwiftUI, Apple Intelligence, and Skip.tools.';
+    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports, now also developing useful, Apple-centric tools like Mygra, Waffle, Stork, and Ready, Set.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -26,7 +26,7 @@ export default function About() {
       {/* Personal Hero Section */}
       <Hero
         heading="Nick Molargik"
-        description="Versatile engineer transitioning from defense and sports tech to indie mobile development. Expertise in SwiftUI, Kotlin Multiplatform, hardware integration, and AI-powered Apple apps. Building privacy-first solutions that solve real user problems."
+        description="Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Kotlin Multiplatform, Flutter, and hardware integration. Building privacy-first solutions that solve real user problems."
         imageSrc={nickheadshot}
         buttonText="Download Résumé"
         buttonColorClass="bg-orange-500 text-white"
@@ -63,7 +63,7 @@ export default function About() {
           </div>
           <div className="mt-12 text-center text-gray-400 text-sm">
             <p>
-              Built with <span className="text-white font-medium">React</span>, <span className="text-white font-medium">Vite</span>, and <span className="text-white font-medium">Tailwind CSS</span>. Web dev supports my mobile passion—indie style from home.
+              Built with <span className="text-white font-medium">React</span>, <span className="text-white font-medium">Vite</span>, and <span className="text-white font-medium">Tailwind CSS</span>. Web dev supports my mobile passion—but is certainly not my expertise.
             </p>
           </div>
         </div>
@@ -72,25 +72,32 @@ export default function About() {
       {/* Professional Journey Section - EXPANDED */}
       <section className="py-16 bg-white">
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Professional Journey</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Professional Journey</h2>
           <div className="space-y-8">
             {/* V1 Sports */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-8 bg-gray-50 rounded-xl border border-gray-200">
-              <div className="md:w-24 text-center md:order-2">
-                <div className="w-20 h-16 bg-red-500 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto">
-                  <div>
+              <div className="md:w-auto text-center md:order-2">
+                <div className="w-20 md:w-auto h-16 md:h-auto bg-red-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
+                  {/* Stacked (mobile) */}
+                  <div className="md:hidden text-center">
                     <span className="block leading-tight">2024</span>
                     <span className="block leading-tight text-xs opacity-80">to</span>
                     <span className="block leading-tight">Present</span>
                   </div>
+                  {/* Single-line (md+) */}
+                  <div className="hidden md:flex items-center justify-center gap-1 px-2 whitespace-nowrap">
+                    <span>2024</span>
+                    <span className="text-xs opacity-80">to</span>
+                    <span>Present</span>
+                  </div>
                 </div>
               </div>
               <div className="flex-1 md:order-1">
-                <h3 className="text-2xl font-semibold mb-2">Software Engineer</h3>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-900">Software Engineer</h3>
                 <h4 className="text-xl text-gray-600 mb-4">V1 Sports</h4>
                 <div className="space-y-3 text-gray-700 leading-relaxed">
                   <p>
-                    Transitioned from contractor to full-time, leading mobile development for V1's flagship apps (Coach, Golf, Baseball). Mastered <strong>Kotlin Multiplatform</strong> to unify video analysis and camera systems across iOS/Android, reducing code duplication while maintaining native performance.
+                    Transitioned from contractor to full-time, leading mobile development for V1's flagship apps (Coach, Golf, Baseball). Utilized <strong>Kotlin Multiplatform</strong> to unify video analysis and camera systems across iOS/Android, reducing code duplication while maintaining native performance.
                   </p>
                   <p>
                     Engineered a custom <strong>C library</strong> interfacing with SensorEdge pressure mats, processing biomechanical data into real-time Swift heat map visualizations for golf swing analysis—enabling coaches to provide precise stance feedback to athletes.
@@ -107,17 +114,24 @@ export default function About() {
 
             {/* Molargik Software */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-8 bg-gray-50 rounded-xl border border-gray-200">
-              <div className="md:w-24 text-center md:order-2">
-                <div className="w-20 h-16 bg-purple-500 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto">
-                  <div>
+              <div className="md:w-auto text-center md:order-2">
+                <div className="w-20 md:w-auto h-16 md:h-auto bg-purple-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
+                  {/* Stacked (mobile) */}
+                  <div className="md:hidden text-center">
                     <span className="block leading-tight">2025</span>
                     <span className="block leading-tight text-xs opacity-80">to</span>
                     <span className="block leading-tight">Present</span>
                   </div>
+                  {/* Single-line (md+) */}
+                  <div className="hidden md:flex items-center justify-center gap-1 px-2 whitespace-nowrap">
+                    <span>2025</span>
+                    <span className="text-xs opacity-80">to</span>
+                    <span>Present</span>
+                  </div>
                 </div>
               </div>
               <div className="flex-1 md:order-1">
-                <h3 className="text-2xl font-semibold mb-2">Founder & Sole Developer</h3>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-900">Founder & Sole Developer</h3>
                 <h4 className="text-xl text-gray-600 mb-4">Molargik Software LLC</h4>
                 <div className="space-y-3 text-gray-700 leading-relaxed">
                   <p>
@@ -138,17 +152,24 @@ export default function About() {
 
             {/* Sweetwater */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-8 bg-gray-50 rounded-xl border border-gray-200">
-              <div className="md:w-24 text-center md:order-2">
-                <div className="w-20 h-16 bg-blue-500 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto">
-                  <div>
+              <div className="md:w-auto text-center md:order-2">
+                <div className="w-20 md:w-auto h-16 md:h-auto bg-blue-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
+                  {/* Stacked (mobile) */}
+                  <div className="md:hidden text-center">
                     <span className="block leading-tight">2022</span>
                     <span className="block leading-tight text-xs opacity-80">to</span>
                     <span className="block leading-tight">2024</span>
                   </div>
+                  {/* Single-line (md+) */}
+                  <div className="hidden md:flex items-center justify-center gap-1 px-2 whitespace-nowrap">
+                    <span>2022</span>
+                    <span className="text-xs opacity-80">to</span>
+                    <span>2024</span>
+                  </div>
                 </div>
               </div>
               <div className="flex-1 md:order-1">
-                <h3 className="text-2xl font-semibold mb-2">Mobile & Desktop Applications Engineer</h3>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-900">Mobile & Desktop Applications Engineer</h3>
                 <h4 className="text-xl text-gray-600 mb-4">Sweetwater Sound</h4>
                 <div className="space-y-3 text-gray-700 leading-relaxed">
                   <p>
@@ -169,17 +190,24 @@ export default function About() {
 
             {/* Raytheon */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-8 bg-gray-50 rounded-xl border border-gray-200">
-              <div className="md:w-24 text-center md:order-2">
-                <div className="w-20 h-16 bg-orange-500 rounded-lg flex items-center justify-center text-white font-bold text-sm mx-auto">
-                  <div>
+              <div className="md:w-auto text-center md:order-2">
+                <div className="w-20 md:w-auto h-16 md:h-auto bg-orange-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
+                  {/* Stacked (mobile) */}
+                  <div className="md:hidden text-center">
                     <span className="block leading-tight">2020</span>
                     <span className="block leading-tight text-xs opacity-80">to</span>
                     <span className="block leading-tight">2022</span>
                   </div>
+                  {/* Single-line (md+) */}
+                  <div className="hidden md:flex items-center justify-center gap-1 px-2 whitespace-nowrap">
+                    <span>2020</span>
+                    <span className="text-xs opacity-80">to</span>
+                    <span>2022</span>
+                  </div>
                 </div>
               </div>
               <div className="flex-1 md:order-1">
-                <h3 className="text-2xl font-semibold mb-2">Electrical Engineer</h3>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-900">Electrical Engineer</h3>
                 <h4 className="text-xl text-gray-600 mb-4">Raytheon Technologies</h4>
                 <div className="space-y-3 text-gray-700 leading-relaxed">
                   <p>
@@ -200,7 +228,7 @@ export default function About() {
 
             {/* Early Career Summary */}
             <div className="p-8 bg-gray-50 rounded-xl border border-gray-200">
-              <h3 className="text-2xl font-semibold mb-4">Early Foundation</h3>
+              <h3 className="text-2xl font-semibold mb-4 text-gray-900">Early Foundation</h3>
               <div className="grid md:grid-cols-2 gap-6 text-gray-700">
                 <div>
                   <h4 className="font-medium mb-2">NAVSEA Crane Intern (2019-2020)</h4>
@@ -265,7 +293,7 @@ export default function About() {
       {/* Featured Projects Section - Now at bottom with taller cards */}
       <section className="py-16 bg-white">
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12">Featured Projects</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Mygra */}
             <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">

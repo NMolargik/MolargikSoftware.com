@@ -8,7 +8,8 @@ import screen4 from '../assets/readyset/screen4.png';
 
 export default function ReadySet() {
   const slides = [screen1, screen2, screen3, screen4];
-  const carouselRef = React.useRef(null);
+  const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
+  const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     document.title = 'Ready, Set – Track Your Gym Progress | Nick Molargik';
@@ -27,7 +28,23 @@ export default function ReadySet() {
     link.as = 'image';
     link.href = readyseticon as unknown as string;
     document.head.appendChild(link);
-    return () => { document.head.removeChild(link); };
+
+    const scrollToStart = () => {
+      if (carouselRefDesktop.current) {
+        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
+      }
+      if (carouselRefMobile.current) {
+        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
+      }
+    };
+    scrollToStart();
+    requestAnimationFrame(scrollToStart);
+    window.addEventListener('load', scrollToStart);
+
+    return () => {
+      window.removeEventListener('load', scrollToStart);
+      document.head.removeChild(link);
+    };
   }, []);
 
   return (
@@ -59,8 +76,8 @@ export default function ReadySet() {
         {/* Desktop & large screens: horizontally scrollable images */}
         <div className="hidden md:block px-4">
           <div
-            ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
+            ref={carouselRefDesktop}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
               <img
@@ -69,7 +86,7 @@ export default function ReadySet() {
                 alt={`Ready, Set screenshot ${idx + 1}`}
                 width={1170}
                 height={2532}
-                className="flex-none h-96 w-auto object-contain snap-center"
+                className="flex-none h-96 w-auto object-contain snap-start"
                 loading="lazy"
               />
             ))}
@@ -78,8 +95,8 @@ export default function ReadySet() {
         {/* Small screens: seamless horizontal banner */}
         <div className="md:hidden mt-2">
           <div
-            ref={carouselRef}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-center"
+            ref={carouselRefMobile}
+            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
               <img
@@ -88,7 +105,7 @@ export default function ReadySet() {
                 alt={`Ready, Set screenshot ${idx + 1}`}
                 width={1170}
                 height={2532}
-                className="flex-none h-80 w-auto object-contain snap-center"
+                className="flex-none h-80 w-auto object-contain snap-start"
                 loading="lazy"
               />
             ))}
