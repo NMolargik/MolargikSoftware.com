@@ -78,7 +78,7 @@ export default function Mygra() {
     </section>
 
       {/* Responsive screenshots section */}
-      <section className="mt-12">
+      <section className="mt-12 pb-24">
         {/* Desktop & large screens: 5 images in a single row */}
         <div className="hidden md:block px-4">
           <div ref={carouselRefDesktop} className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center">

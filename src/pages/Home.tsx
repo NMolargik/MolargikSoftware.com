@@ -26,10 +26,10 @@ export default function Home() {
     document.documentElement.style.setProperty('--accent', '#38bdf8'); // sky-400
   }, []);
 
-  const roadmap: { date: string; title: string; description?: string; color?: string }[] = [
-    { date: "⭐️ Just Released", title: "Stork 2.0", description: "Major focus on a visual refresh, iPad support, home screen widget", color: "#38bdf8" },
-    { date: "🦃 Late Nov 2025", title: "Ready, Set 2.0", description: "Major UX overhaul, code cleanup, additional features", color: "#f97316" },
-    { date: "🎄 Late Dec 2025", title: "Opalite", description: "A brand new project", color: "#a78bfa" },
+  const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
+    { date: "⭐️ Just Released", title: "Stork 2.0", description: "A major visual refresh, iPad support, home screen widget", color: "#f97316" },
+    { date: "🦃 Late Nov 2025", title: "Ready, Set 2.0", description: "A major UX overhaul, code cleanup, additional features", color: "#22c55e" },
+    { date: "🎄 Late Dec 2025", title: "Opalite", description: "A brand new project", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
   ];
 
   return (
@@ -51,12 +51,12 @@ export default function Home() {
       <section className="mx-auto mt-16 w-full max-w-7xl px-6">
         <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Roadmap</h2>
         <div className="mt-6">
-          <ol className="relative flex flex-col md:flex-row md:justify-between border-s-4 border-slate-200 md:border-s-0 md:border-t-4 border-slate-200 dark:border-slate-800 dark:md:border-slate-800">
+          <ol className="relative flex flex-col md:flex-row md:justify-between border-s-4 border-red-500 md:border-s-0 md:border-t-4 border-red-500 dark:border-red-700 dark:md:border-red-700">
             {roadmap.map((item, idx) => (
               <li key={idx} className="relative flex-1 md:flex-initial md:w-auto ps-6 md:ps-0 py-4 md:py-0">
                 <span
-                  className="absolute left-0 top-[1rem] md:left-1/2 md:top-[-0.375rem] -translate-x-1/2 md:-translate-x-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
-                  style={{ backgroundColor: item.color || 'var(--accent)' }}
+                  className="absolute left-[-0.4rem] top-1/2 md:left-1/2 md:top-0 -translate-y-1/2 md:-translate-x-1/2 md:-translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
+                  style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
                 />
                 <div className="flex flex-col items-start md:items-center text-center md:text-center gap-1 mt-2 md:mt-6">
                   <div className="text-sm font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">
@@ -78,7 +78,7 @@ export default function Home() {
       </section>
 
       {/* Latest Projects section */}
-      <section className="mx-auto mt-16 w-full max-w-7xl px-6">
+      <section className="mx-auto mt-16 w-full max-w-7xl px-6 pb-24">
         <div className="mb-4 flex items-center justify-between">
           <div>
             <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Latest Projects</h2>

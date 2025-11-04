@@ -75,7 +75,7 @@ export default function Waffle() {
         />
       </section>
       {/* Responsive screenshots section */}
-      <section className="mt-12">
+      <section className="mt-12 pb-24">
         {/* Desktop & large screens: horizontally scrollable images */}
         <div className="hidden md:block px-4">
           <div
