@@ -33,9 +33,10 @@ export default {
     const cached = await cache.match(request);
     if (cached) return cached;
 
-    // Query the past 24 hours of analytics data
-    const end = new Date();
-    const start = new Date(Date.now() - 24 * 60 * 60 * 1000);
+    // Query analytics data for the current calendar day (midnight to now)
+    const now = new Date();
+    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    const end = now;
 
     // First, try minute-level dataset (may require extra permissions/plan).
     let query = `
