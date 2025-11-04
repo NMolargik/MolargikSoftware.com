@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import nickheadshot from '../assets/nickheadshot.svg';
+import nickheadshot from '../assets/nickheadshot.jpeg';
 import whitelogo from '../assets/whitelogo.png';
 import Hero from '../components/Hero';
 import mygraIcon from '../assets/mygra/mygraicon.png';
@@ -26,7 +26,7 @@ export default function About() {
       {/* Personal Hero Section */}
       <Hero
         heading="Nick Molargik"
-        description="Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Kotlin Multiplatform, Flutter, and hardware integration. Building privacy-first solutions that solve real user problems."
+        description="Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Kotlin Multiplatform, Flutter, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living my best life in Indiana."
         imageSrc={nickheadshot}
         buttonText="Download Résumé"
         buttonColorClass="bg-orange-500 text-white"
