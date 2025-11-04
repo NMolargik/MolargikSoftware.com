@@ -1,13 +1,14 @@
 import React, { useEffect } from 'react';
-import storkicon from '../assets/stork/storkicon.svg';
+import storkicon from '../assets/stork/storkicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/stork/screen1.png';
 import screen2 from '../assets/stork/screen2.png';
 import screen3 from '../assets/stork/screen3.png';
 import screen4 from '../assets/stork/screen4.png';
+import screen5 from '../assets/stork/screen5.png';
 
 export default function Stork() {
-  const slides = [screen1, screen2, screen3, screen4];
+  const slides = [screen1, screen2, screen3, screen4, screen5];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
@@ -61,12 +62,12 @@ export default function Stork() {
       <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
         <Hero
           heading="Stork - Delivery Stats"
-          description="Visual statistics for labor & delivery nurses. Receiving a major visual update soon!"
+          description="Journal and statistics for labor & delivery nurses."
           imageSrc={storkicon}
           buttonText="View on the App Store"
           buttonColorClass="bg-orange-500 text-white hover:text-white hover:bg-orange-600"
           buttonHref="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
-          systemRequirements={["iOS 16+"]}
+          systemRequirements={["iOS 18+", "iPadOS 18+"]}
         />
       </section>
       {/* Responsive screenshots section */}
@@ -113,30 +114,65 @@ export default function Stork() {
         <section>
           <div className="mt-10 max-w-3xl mx-auto px-4">
             <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-6">🍼 Stork: Track Baby Deliveries with Ease</h2>
+              <h2 className="text-4xl font-bold tracking-tight mb-6">Stork — Labor &amp; Delivery Companion</h2>
               <p className="text-lg leading-relaxed">
-                Discover <a href="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Stork</a>, an app designed for medical professionals to track baby deliveries and analyze trends over time—individually or with peers. Stork streamlines the process, making it easy for labor and delivery nurses, midwives, and OB-GYNs to log and manage delivery data on iOS.
+                Stork helps medical professionals track baby deliveries, visualize trends, and celebrate every birth.
               </p>
-              <h3 className="text-2xl font-semibold mt-10 mb-4">🧩 Key Features</h3>
-              <ul className="list-disc pl-6 space-y-3 text-lg leading-relaxed">
-                <li>
-                  <strong>Track Deliveries:</strong> Log details for each baby delivery, including individual baby information, birthplace, and other delivery properties. Deliveries fill a visual “weekly marble jar” to track baby gender stats at a glance.
-                </li>
-                <li>
-                  <strong>Hospital Database:</strong> Search for hospitals with delivery departments, reference their details, and set a default hospital for deliveries. Missing a hospital? Suggest it, and we’ll add it.
-                </li>
-                <li>
-                  <strong>Muster:</strong> Create a group, invite peers, and track deliveries together to view group-wide trends.
-                </li>
-                <li>
-                  <strong>Built for iOS:</strong> Powered by Swift and SwiftUI for a smooth, native iOS experience with top-notch performance and modern compatibility.
-                </li>
-              </ul>
-              <p className="text-lg leading-relaxed mt-10">
-                Designed for medical professionals, Stork is perfect for anyone managing baby deliveries and analyzing trends. From logging individual deliveries to collaborating with peers, Stork makes it effortless to stay organized and informed.
+              <p className="text-lg leading-relaxed">
+                Designed for Labor &amp; Delivery nurses, midwives, and OB-GYNs, Stork makes it simple to record, review, and analyze delivery data — all in one intuitive iOS app.
               </p>
-              <p className="text-base italic mt-6">
-                Stork is available now for devices running iOS. Some features may require access to Apple’s latest APIs.
+
+              <h3 className="text-2xl font-semibold mt-10 mb-4"></h3>
+
+              <div className="space-y-6 text-lg leading-relaxed">
+                <div>
+                  <h4 className="text-xl font-semibold mb-1">🍼 Track Every Delivery</h4>
+                  <p>
+                    Record detailed information for each baby delivery — including gender, birth date, hospital, and delivery notes.
+                    Each entry adds to your <em>Marble Jar</em>, a beautiful visualization showing weekly delivery trends at a glance.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold mb-1">🏥 Explore Hospital Data</h4>
+                  <p>
+                    Search hospitals with active delivery departments, view facility details, and set your default hospital to keep logs consistent and accurate.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold mb-1">📊 View Trends &amp; Statistics</h4>
+                  <p>
+                    See your work come to life with charts and summaries that highlight delivery counts, baby gender ratios, and other helpful insights over time.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold mb-1">📱 Built for iOS</h4>
+                  <p>
+                    Powered by Swift and SwiftUI for a smooth, responsive experience on iPhone and iPad. Stork supports iOS and iPadOS 18+, designed to feel at home on every Apple device.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold mb-1">🔔 Home Screen Widget</h4>
+                  <p>
+                    Quickly check how many deliveries you’ve logged this week — right from your Home Screen.
+                  </p>
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-semibold mt-10 mb-2">💡 Perfect For</h3>
+              <p className="text-lg leading-relaxed">
+                Labor &amp; Delivery nurses • Midwives • OB-GYNs • Maternity unit staff
+              </p>
+              <p className="text-lg leading-relaxed mt-4">
+                Whether you’re tracking your own deliveries or analyzing department trends, Stork streamlines your workflow, helps visualize your impact, and keeps every birth beautifully organized.
+              </p>
+
+              <h3 className="text-2xl font-semibold mt-10 mb-2">🚀 Stork Has Taken Flight</h3>
+              <p className="text-lg leading-relaxed">
+                Download Stork today and see your deliveries — and your impact — in a whole new way.
               </p>
             </div>
           </div>

@@ -32,13 +32,13 @@ function AppShell() {
       <main className={`flex-1 ${isWaffleRoute ? '' : 'pb-20'}`}>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/stork" element={<Stork />} />
           <Route path="/mygra" element={<Mygra />} />
+          <Route path="/stork" element={<Stork />} />
+          <Route path="/waffle" element={<Waffle />} />
           <Route path="/ready-set" element={<ReadySet />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-          <Route path="/waffle" element={<Waffle />} />
           <Route path="/wafflelanding" element={<WaffleLanding />} />
           <Route path="*" element={<Home />} />
         </Routes>

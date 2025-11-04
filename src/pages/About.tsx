@@ -4,8 +4,8 @@ import whitelogo from '../assets/whitelogo.png';
 import Hero from '../components/Hero';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
-import storkIcon from '../assets/stork/storkicon.svg';
-import readySetIcon from '../assets/readyset/readyseticon.svg';
+import storkIcon from '../assets/stork/storkicon.png';
+import readySetIcon from '../assets/readyset/readyseticon.png';
 import { Link } from 'react-router-dom';
 
 export default function About() {
@@ -41,7 +41,7 @@ export default function About() {
             <img src={whitelogo} alt="Molargik Software LLC" className="mx-auto h-16 w-auto mb-4 rounded-md" />
             <h2 className="text-3xl font-bold">Molargik Software LLC</h2>
             <p className="text-xl text-gray-300 mt-4">
-              Founded in 2025 to transform personal pain points into innovative Apple ecosystem apps. Specializing in privacy-first development with iOS 26+, Apple Intelligence, HealthKit, WeatherKit, and Skip.tools for native multiplatform experiences.
+              Founded in 2025 to transform personal pain points into innovative Apple ecosystem apps. Specializing in privacy-first development with iOS 26+, Apple Intelligence, HealthKit, WeatherKit, and more for native multiplatform experiences.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -55,7 +55,6 @@ export default function About() {
               <h3 className="text-2xl font-semibold mb-4">Core Technologies</h3>
               <ul className="space-y-2 text-gray-300">
                 <li>• SwiftUI + Apple Intelligence (iOS 26+)</li>
-                <li>• Skip.tools (Swift → Kotlin transpilation)</li>
                 <li>• SwiftData + CloudKit cross-device sync</li>
                 <li>• HealthKit, WeatherKit, WebView API</li>
               </ul>
@@ -138,10 +137,7 @@ export default function About() {
                     Founded to build Apple apps from real user needs identified through friends, family, and professional networks. Solo-developing full lifecycle—from user interviews and SwiftUI prototyping to App Store deployment and iteration.
                   </p>
                   <p>
-                    Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker via Skip.tools), and <strong>Ready, Set</strong> (10-day MVP workout logger).
-                  </p>
-                  <p>
-                    Pioneering <strong>Skip.tools</strong> for Swift-to-Kotlin transpilation, enabling native multiplatform apps with 90% shared SwiftUI code. Deep expertise in Apple Intelligence, SwiftData+CloudKit sync, and privacy-focused health integrations.
+                    Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker), and <strong>Ready, Set</strong> (10-day MVP workout logger).
                   </p>
                   <p className="text-sm font-medium text-gray-500 italic">
                     <strong>Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user pain transformed into intuitive solutions.
@@ -259,7 +255,6 @@ export default function About() {
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">SwiftUI</span>
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Swift 6</span>
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Kotlin Multiplatform</span>
-                <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Skip.tools</span>
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Flutter + BLoC</span>
                 <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Jetpack Compose</span>
               </div>
@@ -297,7 +292,9 @@ export default function About() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {/* Mygra */}
             <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
-              <img src={mygraIcon} alt="Mygra" className="w-full h-[24rem] object-cover" />
+              <div className="p-4">
+                <img src={mygraIcon} alt="Mygra" className="w-full h-[24rem] object-contain rounded-[2rem]" />
+              </div>
               <div className="p-6 text-white">
                 <h3 className="text-xl font-semibold mb-2">Mygra</h3>
                 <p className="text-blue-100 mb-4 text-sm">
@@ -309,12 +306,30 @@ export default function About() {
               </div>
             </div>
 
+            {/* Stork */}
+            <div className="bg-gradient-to-br from-orange-500 to-purple-500 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
+              <div className="p-4">
+                <img src={storkIcon} alt="Stork" className="w-full h-[24rem] object-contain rounded-[2rem]" />
+              </div>
+              <div className="p-6 text-white">
+                <h3 className="text-xl font-semibold mb-2">Stork</h3>
+                <p className="text-pink-100 mb-4 text-sm">
+                  L&D delivery tracker with marble jar, lifelong statistics, and a built-in hospital database.
+                </p>
+                <Link to="/stork" className="inline-block bg-white/20 text-white px-4 py-2 rounded-md hover:bg-white/30 transition">
+                  View Project →
+                </Link>
+              </div>
+            </div>
+
             {/* Waffle */}
             <div className="bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
-              <img src={waffleIcon} alt="Waffle" className="w-full h-[24rem] object-cover" />
-              <div className="p-6 text-gray-900">
+              <div className="p-4">
+                <img src={waffleIcon} alt="Waffle" className="w-full h-[24rem] object-contain rounded-[2rem]" />
+              </div>
+              <div className="p-6 text-white">
                 <h3 className="text-xl font-semibold mb-2">Waffle</h3>
-                <p className="text-gray-700 mb-4 text-sm">
+                <p className="text-white-100 mb-4 text-sm">
                   iPadOS 26 grid browser with 4x4 layouts, pop-out windows, WebView API, and Liquid Glass effects.
                 </p>
                 <Link to="/waffle" className="inline-block bg-white/80 text-gray-900 px-4 py-2 rounded-md hover:bg-white transition">
@@ -323,23 +338,11 @@ export default function About() {
               </div>
             </div>
 
-            {/* Stork */}
-            <div className="bg-gradient-to-br from-pink-500 to-red-500 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
-              <img src={storkIcon} alt="Stork" className="w-full h-[24rem] object-cover" />
-              <div className="p-6 text-white">
-                <h3 className="text-xl font-semibold mb-2">Stork</h3>
-                <p className="text-pink-100 mb-4 text-sm">
-                  L&D delivery tracker with Skip.tools multiplatform, marble jar stats, hospital database, and Muster groups.
-                </p>
-                <Link to="/stork" className="inline-block bg-white/20 text-white px-4 py-2 rounded-md hover:bg-white/30 transition">
-                  View Project →
-                </Link>
-              </div>
-            </div>
-
             {/* Ready, Set */}
             <div className="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
-              <img src={readySetIcon} alt="Ready, Set" className="w-full h-[24rem] object-cover" />
+              <div className="p-4">
+                <img src={readySetIcon} alt="Ready, Set" className="w-full h-[24rem] object-contain rounded-[2rem]" />
+              </div>
               <div className="p-6 text-white">
                 <h3 className="text-xl font-semibold mb-2">Ready, Set</h3>
                 <p className="text-emerald-100 mb-4 text-sm">
@@ -359,12 +362,38 @@ export default function About() {
         </div>
       </section>
 
+      {/* GitHub Contributions Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-5xl mx-auto px-4">
+          <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">GitHub Contributions</h2>
+
+          <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
+            <a
+              href="https://github.com/NMolargik"
+              aria-label="View Nick Molargik on GitHub"
+              className="block"
+            >
+              <img
+                src="https://ghchart.rshah.org/NMolargik"
+                alt="GitHub contribution graph for NMolargik"
+                loading="lazy"
+                className="w-full max-w-[820px] mx-auto"
+              />
+            </a>
+
+            <p className="text-center text-sm text-gray-500 mt-3">
+              Data updates automatically from GitHub. Click the graph to visit my profile.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Contact Section */}
       <section className="py-16 bg-gray-900 text-white">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">Let's Build Together</h2>
           <p className="text-lg text-gray-300 mb-8">
-            Open to collaborations on Apple development, health tech, sports analytics, or custom mobile solutions. From enterprise automation to indie apps—let's solve challenging problems.
+            Open to collaborations on Apple development or IoT projects. From data-drive solutions to indie apps—let's, solve challenging problems together!.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="mailto:nick@molargiksoftware.com" className="bg-[#ED752F] text-white px-6 py-3 rounded-md hover:bg-[#cf6427] transition">

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import HomeHero from '../components/HomeHero';
-import storkIcon from '../assets/stork/storkicon.svg';
+import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
-import readySetIcon from '../assets/readyset/readyseticon.svg';
+import readySetIcon from '../assets/readyset/readyseticon.png';
 import mygraBackground from '../assets/mygra/cardBackground.png';
 import storkBackground from '../assets/stork/cardBackground.png';
 import waffleBackground from '../assets/waffle/cardBackground.png';
@@ -27,9 +27,9 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string }[] = [
-    { date: "❗️ Early Nov 2025", title: "Major Stork Update", description: "Removal of Android support, major focus on iOS, visual refresh, iPad support, home screen widget", color: "#38bdf8" },
+    { date: "⭐️ Just Released", title: "Stork 2.0", description: "Major focus on a visual refresh, iPad support, home screen widget", color: "#38bdf8" },
     { date: "🦃 Late Nov 2025", title: "Ready, Set 2.0", description: "Major UX overhaul, code cleanup, additional features", color: "#f97316" },
-    { date: "🎅 Late Dec 2025", title: "Opalite", description: "A brand new project", color: "#a78bfa" },
+    { date: "🎄 Late Dec 2025", title: "Opalite", description: "A brand new project", color: "#a78bfa" },
   ];
 
   return (
@@ -99,7 +99,7 @@ export default function Home() {
               />
               <ProjectCard
                 title="Waffle"
-                tagline="Webpage multitasking on iPad."
+                tagline="Webpage multitasking, managed, on iPad."
                 image={waffleIcon}
                 background={waffleBackground}
                 path="/waffle"
@@ -107,7 +107,7 @@ export default function Home() {
               />
               <ProjectCard
                 title="Stork"
-                tagline="Visual statistics for labor & delivery nurses."
+                tagline="Journal and statistics for labor & delivery nurses."
                 image={storkIcon}
                 background={storkBackground}
                 path="/stork"
@@ -115,7 +115,7 @@ export default function Home() {
               />
               <ProjectCard
                 title="Ready, Set"
-                tagline="A fitness metric companion to track & smash personal goals."
+                tagline="A fitness metric companion to track & smash personal goals. Major overhaul coming soon!"
                 image={readySetIcon}
                 background={readySetBackground}
                 path="/ready-set"

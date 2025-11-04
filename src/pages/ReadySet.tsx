@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import readyseticon from '../assets/readyset/readyseticon.svg';
+import readyseticon from '../assets/readyset/readyseticon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/readyset/screen1.png';
 import screen2 from '../assets/readyset/screen2.png';
