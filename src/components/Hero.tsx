@@ -76,7 +76,7 @@ export default function Hero({
                   key={idx}
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: idx * 0.1, duration: 0.4 }}
+                  transition={{ delay: idx * 0.5, duration: 1.5 }}
                   className="inline-flex items-center rounded-full bg-orange-500 ring-1 ring-orange-400 px-2 py-1 text-xs font-medium text-white/100"
                 >
                   {req}

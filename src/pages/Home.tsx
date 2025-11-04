@@ -51,7 +51,7 @@ export default function Home() {
       <section className="mx-auto mt-16 w-full max-w-7xl px-6">
         <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Roadmap</h2>
         <div className="mt-6">
-          <ol className="relative flex flex-col md:flex-row md:justify-between border-s border-slate-200 md:border-s-0 md:border-t border-slate-200 dark:border-slate-800 dark:md:border-slate-800">
+          <ol className="relative flex flex-col md:flex-row md:justify-between border-s-4 border-slate-200 md:border-s-0 md:border-t-4 border-slate-200 dark:border-slate-800 dark:md:border-slate-800">
             {roadmap.map((item, idx) => (
               <li key={idx} className="relative flex-1 md:flex-initial md:w-auto ps-6 md:ps-0 py-4 md:py-0">
                 <span
