@@ -19,7 +19,7 @@ export default function HomeHero() {
               Indie Mobile App Development
             </h1>
             <p className="text-gray-300 text-base md:text-lg leading-relaxed">
-              Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports, now also developing useful tools like Mygra, Waffle, Stork, and Ready, Set.
+              Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. Leveraging the latest Apple frameworks to build utilities for medical, fitness, and general use.
             </p>
             <div className="flex flex-wrap gap-3">
               {['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS'].map((platform, idx) => (
@@ -64,7 +64,7 @@ export default function HomeHero() {
           </div>
           {/* Image/Content Accent - Hidden on narrow screens */}
           <div className="hidden md:block flex-shrink-0 w-full md:w-auto">
-            <div className="bg-white/5 rounded-xl p-4 md:p-6 shadow-inner ring-1 ring-white/10">
+            <div className="rounded-xl p-4 md:p-6 shadow-inner">
               <img
                 src={logo}
                 alt="Nick Molargik — Indie iOS Engineer"

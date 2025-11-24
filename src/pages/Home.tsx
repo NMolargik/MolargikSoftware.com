@@ -12,9 +12,9 @@ import readySetBackground from '../assets/readyset/cardBackground.png';
 
 export default function Home() {
   useEffect(() => {
-    document.title = 'Nick Molargik – Mobile Engineer | SwiftUI · Kotlin · Flutter';
+    document.title = 'Molargik Software LLC - Indie Mobile App Development';
     const desc =
-      'Nick Molargik — Expert iOS engineer specializing in Swift & SwiftUI. I build high‑performance apps for iPhone, iPad, Apple Watch, and Mac using UIKit, Combine, SwiftData/Core Data, CloudKit, HealthKit, AVFoundation, Core ML and more.';
+      'Molargik Software LLC - Indie Mobile App Development. Expert iOS engineer specializing in Swift & SwiftUI. I build high‑performance apps for iPhone, iPad, Apple Watch, and Mac using Swift, SwiftData, Combine, SwiftData/Core Data, CloudKit, HealthKit, AVFoundation, Core ML and more.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -27,9 +27,9 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "⭐️ Just Released", title: "Stork 2.0", description: "A major visual refresh, iPad support, home screen widget", color: "#f97316" },
-    { date: "🦃 Late Nov 2025", title: "Ready, Set 2.0", description: "A major UX overhaul, code cleanup, additional features", color: "#22c55e" },
-    { date: "🎄 Late Dec 2025", title: "Opalite", description: "A brand new project", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "⭐️ Just Released", title: "Stork 2.0", description: "A major visual refresh, iPad support, home screen widgets", color: "#f97316" },
+    { date: "🦃 Late Nov-Early Dec", title: "Ready, Set 2.0", description: "A massive UX overhaul, code cleanup, additional features", color: "#22c55e" },
+    { date: "☃️ January 2026", title: "Opalite", description: "A brand new project and the one I'm most excited about", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
   ];
 
   return (

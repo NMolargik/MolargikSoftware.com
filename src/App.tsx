@@ -28,7 +28,11 @@ function AppShell() {
   const isWaffleRoute = location.pathname.startsWith('/waffle/') || location.pathname === '/wafflelanding';
   return (
     <div className="flex flex-col min-h-screen">
-      {!isWaffleRoute && <Navbar />}
+      {!isWaffleRoute && (
+        <>
+          <Navbar />
+        </>
+      )}
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />

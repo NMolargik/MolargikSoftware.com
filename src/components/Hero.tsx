@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { useState } from "react";
 
 interface HeroProps {
   heading: string;
@@ -21,6 +22,7 @@ export default function Hero({
   buttonDownload = false,
   systemRequirements = [],
 }: HeroProps) {
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <section
       className="relative flex flex-col md:flex-row items-start md:items-start justify-between md:justify-center gap-6 md:gap-4 bg-gradient-to-br from-indigo-900 via-purple-900 to-gray-900 min-h-[20vh] w-full px-4 py-4 sm:py-6 md:py-8 shadow-[0_20px_50px_-5px_rgba(0,0,0,0.5)] overflow-hidden"
@@ -42,11 +44,19 @@ export default function Hero({
       >
         {/* Image and title row on mobile, hidden on md+ */}
         <div className="flex flex-row items-end mb-0 md:hidden">
-          <img
-            src={imageSrc}
-            alt={`${heading} Icon`}
-            className="w-20 h-20 mr-4 rounded-lg object-contain"
-          />
+          <div className="relative w-20 h-20 mr-4">
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-8 w-8 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+              </div>
+            )}
+            <img
+              src={imageSrc}
+              alt={`${heading} Icon`}
+              className={`w-20 h-20 rounded-lg object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+              onLoad={() => setImageLoaded(true)}
+            />
+          </div>
           <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-white [text-wrap:balance]">
             {heading}
           </h2>
@@ -87,11 +97,17 @@ export default function Hero({
         </div>
       </div>
       {/* Image section - Visible on md+, aligned to the right, matching text area height */}
-      <div className="hidden md:flex justify-end flex-1 max-w-[22rem] shrink-0 image-container">
+      <div className="hidden md:flex justify-end flex-1 max-w-[22rem] shrink-0 image-container relative">
+        {!imageLoaded && (
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="h-10 w-10 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+          </div>
+        )}
         <img
           src={imageSrc}
           alt={heading}
-          className="w-auto h-full max-w-full rounded-xl shadow-lg object-contain"
+          className={`w-auto h-full max-w-full rounded-xl shadow-lg object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+          onLoad={() => setImageLoaded(true)}
         />
       </div>
     </section>

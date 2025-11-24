@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
 
 export interface ProjectCardProps {
   title: string;
@@ -15,6 +16,7 @@ export interface ProjectCardProps {
  */
 export default function ProjectCard({ title, tagline, image, background, path, fitMode = 'cover' }: ProjectCardProps) {
   const bgFitClass = fitMode === 'contain' ? 'bg-contain' : 'bg-cover';
+  const [imageLoaded, setImageLoaded] = useState(false);
   return (
     <Link
       to={path}
@@ -41,14 +43,22 @@ export default function ProjectCard({ title, tagline, image, background, path, f
           </div>
         </div>
         <div className="justify-self-end aspect-square w-[24%] min-w-[96px] sm:min-w-[120px] rounded-[2rem] overflow-hidden transition duration-300 group-hover:-translate-y-0.5 bg-transparent">
-          <img
-            src={image}
-            alt={`${title} icon`}
-            width={120}
-            height={120}
-            loading="lazy"
-            className="w-full h-full object-contain"
-          />
+          <div className="relative w-full h-full">
+            {!imageLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="h-6 w-6 rounded-full border-2 border-white/30 border-t-white animate-spin" />
+              </div>
+            )}
+            <img
+              src={image}
+              alt={`${title} icon`}
+              width={120}
+              height={120}
+              loading="lazy"
+              className={`w-full h-full object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+              onLoad={() => setImageLoaded(true)}
+            />
+          </div>
         </div>
       </div>
     </Link>

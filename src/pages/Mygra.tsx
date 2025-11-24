@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import mygraicon from '../assets/mygra/mygraicon.png';
 import Hero from '../components/Hero';
 
@@ -14,6 +14,9 @@ export default function Mygra() {
 
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
+
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
   useEffect(() => {
     document.title = 'Mygra – Intelligent Migraine Journal | Nick Molargik';
@@ -83,15 +86,22 @@ export default function Mygra() {
         <div className="hidden md:block px-4">
           <div ref={carouselRefDesktop} className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center">
             {slides.map((src, idx) => (
-              <img
-                key={idx}
-                src={src}
-                alt={`Mygra screenshot ${idx + 1}`}
-                width={1170}
-                height={2532}
-                loading="lazy"
-                className="flex-none h-96 w-auto object-contain snap-start"
-              />
+              <div key={idx} className="relative flex-none h-96 w-auto snap-start">
+                {!loaded[idx] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
+                  </div>
+                )}
+                <img
+                  src={src}
+                  alt={`Mygra screenshot ${idx + 1}`}
+                  width={1170}
+                  height={2532}
+                  loading="lazy"
+                  className={`h-96 w-auto object-contain transition-opacity duration-300 ${loaded[idx] ? "opacity-100" : "opacity-0"}`}
+                  onLoad={() => markLoaded(idx)}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -103,15 +113,22 @@ export default function Mygra() {
             className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
-              <img
-                key={idx}
-                src={src}
-                alt={`Mygra screenshot ${idx + 1}`}
-                width={1170}
-                height={2532}
-                className="flex-none h-80 w-auto object-contain snap-start"
-                loading="lazy"
-              />
+              <div key={idx} className="relative flex-none h-80 w-auto snap-start">
+                {!loaded[idx] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
+                  </div>
+                )}
+                <img
+                  src={src}
+                  alt={`Mygra screenshot ${idx + 1}`}
+                  width={1170}
+                  height={2532}
+                  loading="lazy"
+                  className={`h-80 w-auto object-contain transition-opacity duration-300 ${loaded[idx] ? "opacity-100" : "opacity-0"}`}
+                  onLoad={() => markLoaded(idx)}
+                />
+              </div>
             ))}
           </div>
         </div>

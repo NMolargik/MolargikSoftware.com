@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import storkicon from '../assets/stork/storkicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/stork/screen1.png';
@@ -11,6 +11,9 @@ export default function Stork() {
   const slides = [screen1, screen2, screen3, screen4, screen5];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
+
+  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
   useEffect(() => {
     document.title = 'Stork – Delivery Stats for L&D Nurses | Nick Molargik';
@@ -79,15 +82,22 @@ export default function Stork() {
             className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
-              <img
-                key={idx}
-                src={src}
-                alt={`Stork screenshot ${idx + 1}`}
-                width={1170}
-                height={2532}
-                loading="lazy"
-                className="flex-none h-96 w-auto object-contain snap-start"
-              />
+              <div key={idx} className="relative flex-none h-96 w-auto snap-start">
+                {!loaded[idx] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
+                  </div>
+                )}
+                <img
+                  src={src}
+                  alt={`Stork screenshot ${idx + 1}`}
+                  width={1170}
+                  height={2532}
+                  loading="lazy"
+                  className={`h-96 w-auto object-contain transition-opacity duration-300 ${loaded[idx] ? "opacity-100" : "opacity-0"}`}
+                  onLoad={() => markLoaded(idx)}
+                />
+              </div>
             ))}
           </div>
         </div>
@@ -98,15 +108,22 @@ export default function Stork() {
             className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
           >
             {slides.map((src, idx) => (
-              <img
-                key={idx}
-                src={src}
-                alt={`Stork screenshot ${idx + 1}`}
-                width={1170}
-                height={2532}
-                loading="lazy"
-                className="flex-none h-80 w-auto object-contain snap-start"
-              />
+              <div key={idx} className="relative flex-none h-80 w-auto snap-start">
+                {!loaded[idx] && (
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
+                  </div>
+                )}
+                <img
+                  src={src}
+                  alt={`Stork screenshot ${idx + 1}`}
+                  width={1170}
+                  height={2532}
+                  loading="lazy"
+                  className={`h-80 w-auto object-contain transition-opacity duration-300 ${loaded[idx] ? "opacity-100" : "opacity-0"}`}
+                  onLoad={() => markLoaded(idx)}
+                />
+              </div>
             ))}
           </div>
         </div>

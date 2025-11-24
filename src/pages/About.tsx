@@ -41,7 +41,7 @@ export default function About() {
             <img src={whitelogo} alt="Molargik Software LLC" className="mx-auto h-16 w-auto mb-4 rounded-md" />
             <h2 className="text-3xl font-bold">Molargik Software LLC</h2>
             <p className="text-xl text-gray-300 mt-4">
-              Founded in 2025 to transform personal pain points into innovative Apple ecosystem apps. Specializing in privacy-first development with iOS 26+, Apple Intelligence, HealthKit, WeatherKit, and more for native multiplatform experiences.
+              Founded in 2025 to transform personal pain points into innovative Apple ecosystem apps. Specializing in privacy-first development with iOS 26+, Apple Intelligence, HealthKit, WeatherKit, and more for native experiences.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8">
@@ -102,7 +102,7 @@ export default function About() {
                     Engineered a custom <strong>C library</strong> interfacing with SensorEdge pressure mats, processing biomechanical data into real-time Swift heat map visualizations for golf swing analysis—enabling coaches to provide precise stance feedback to athletes.
                   </p>
                   <p>
-                    Developed <strong>Flutter Native Plugins</strong> bridging camera capture between Flutter and native iOS/Android implementations. Led the creation of <strong>Developer Code QA Sessions</strong>, establishing peer review processes that improved code quality without formal QA resources.
+                    Developed <strong>Flutter Native Plugins</strong> bridging camera capture between Flutter and native iOS/Android implementations. Led the creation of <strong>Developer QA Sessions</strong>, establishing peer review processes that improved code quality without formal QA resources.
                   </p>
                   <p className="text-sm font-medium text-gray-500 italic">
                     <strong>Impact:</strong> Enhanced video analysis tools used by thousands of coaches/athletes; delivered hardware integration enabling new revenue streams through advanced analytics.
@@ -140,7 +140,7 @@ export default function About() {
                     Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker), and <strong>Ready, Set</strong> (10-day MVP workout logger).
                   </p>
                   <p className="text-sm font-medium text-gray-500 italic">
-                    <strong>Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user pain transformed into intuitive solutions.
+                    <strong>Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user frustration transformed into intuitive solutions.
                   </p>
                 </div>
               </div>
@@ -393,7 +393,7 @@ export default function About() {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold mb-6">Let's Build Together</h2>
           <p className="text-lg text-gray-300 mb-8">
-            Open to collaborations on Apple development or IoT projects. From data-drive solutions to indie apps—let's, solve challenging problems together!.
+            Open to collaborations on Apple platform development or IoT projects. From data-driven solutions to indie apps — let's solve challenging problems together!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a href="mailto:nick@molargiksoftware.com" className="bg-[#ED752F] text-white px-6 py-3 rounded-md hover:bg-[#cf6427] transition">
