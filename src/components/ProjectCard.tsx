@@ -35,7 +35,7 @@ export default function ProjectCard({ title, tagline, image, background, path, f
       {/* Dark gradient for legibility */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-transparent transition-opacity duration-300 group-hover:opacity-70" />
       {/* Bottom overlay: text at left, image at right */}
-      <div className="absolute inset-x-4 bottom-4 grid grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)] items-end gap-4">
+      <div className="absolute inset-x-4 bottom-4 grid grid-cols-[minmax(0,2.2fr)_minmax(0,1fr)] items-end gap-4 transition-opacity duration-300 group-hover:opacity-0">
         <div className="pointer-events-none max-w-none">
           <div className="block w-full rounded-xl bg-white/10 backdrop-blur-xl px-4 py-3 ring-1 ring-white/15 transition-all duration-300 group-hover:bg-white/12">
             <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-white">{title}</h3>

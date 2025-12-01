@@ -5,13 +5,13 @@ import Hero from '../components/Hero';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import storkIcon from '../assets/stork/storkicon.png';
-import readySetIcon from '../assets/readyset/readyseticon.png';
+import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import { Link } from 'react-router-dom';
 
 export default function About() {
   useEffect(() => {
     document.title = 'About – Nick Molargik | Molargik Software LLC';
-    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports, now also developing useful, Apple-centric tools like Mygra, Waffle, Stork, and Ready, Set.';
+    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports, now also developing useful, Apple-centric tools like SetDeck, Mygra, Waffle, and Stork.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -32,6 +32,7 @@ export default function About() {
         buttonColorClass="bg-orange-500 text-white"
         buttonHref="/resume.pdf"
         buttonDownload
+        cropImage={true}
       />
 
       {/* Company Section */}
@@ -137,7 +138,7 @@ export default function About() {
                     Founded to build Apple apps from real user needs identified through friends, family, and professional networks. Solo-developing full lifecycle—from user interviews and SwiftUI prototyping to App Store deployment and iteration.
                   </p>
                   <p>
-                    Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker), and <strong>Ready, Set</strong> (10-day MVP workout logger).
+                    Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker), and <strong>SetDeck</strong> (Fitness companion, workout tracker.).
                   </p>
                   <p className="text-sm font-medium text-gray-500 italic">
                     <strong>Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user frustration transformed into intuitive solutions.
@@ -290,6 +291,21 @@ export default function About() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {/* SetDeck */}
+            <div className="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
+              <div className="p-4">
+                <img src={setDeckIcon} alt="SetDeck" className="w-full h-[24rem] object-contain rounded-[2rem]" />
+              </div>
+              <div className="p-6 text-white">
+                <h3 className="text-xl font-semibold mb-2">SetDeck</h3>
+                <p className="text-emerald-100 mb-4 text-sm">
+                  Workout tracker with HealthKit sync, and set-by-set logging.
+                </p>
+                <Link to="/setdeck" className="inline-block bg-white/20 text-white px-4 py-2 rounded-md hover:bg-white/30 transition">
+                  View Project →
+                </Link>
+              </div>
+            </div>
             {/* Mygra */}
             <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
               <div className="p-4">
@@ -333,22 +349,6 @@ export default function About() {
                   iPadOS 26 grid browser with 4x4 layouts, pop-out windows, WebView API, and Liquid Glass effects.
                 </p>
                 <Link to="/waffle" className="inline-block bg-white/80 text-gray-900 px-4 py-2 rounded-md hover:bg-white transition">
-                  View Project →
-                </Link>
-              </div>
-            </div>
-
-            {/* Ready, Set */}
-            <div className="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
-              <div className="p-4">
-                <img src={readySetIcon} alt="Ready, Set" className="w-full h-[24rem] object-contain rounded-[2rem]" />
-              </div>
-              <div className="p-6 text-white">
-                <h3 className="text-xl font-semibold mb-2">Ready, Set</h3>
-                <p className="text-emerald-100 mb-4 text-sm">
-                  10-day MVP workout tracker with swipe navigation, HealthKit sync, and set-by-set logging.
-                </p>
-                <Link to="/ready-set" className="inline-block bg-white/20 text-white px-4 py-2 rounded-md hover:bg-white/30 transition">
                   View Project →
                 </Link>
               </div>

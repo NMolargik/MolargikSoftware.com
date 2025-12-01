@@ -11,16 +11,11 @@ async function cfGqlFetch(env, query, variables) {
   const json = await resp.json();
   return { resp, json };
 }
-/**
- * Welcome to Cloudflare Workers! This is your first worker.
- *
- * - Run `npm run dev` in your terminal to start a development server
- * - Open a browser tab at http://localhost:8787/ to see your worker in action
- * - Run `npm run deploy` to publish your worker
- *
- * Learn more at https://developers.cloudflare.com/workers/
- */
 
+/**
+ * Cloudflare Worker to fetch unique viewers (IPs) for the last 24 hours (current day).
+ * Matches dashboard's "Unique Viewers" metric.
+ */
 export default {
   async fetch(request, env, ctx) {
     const url = new URL(request.url);
@@ -28,60 +23,58 @@ export default {
       return new Response('Not Found', { status: 404 });
     }
 
-    // Simple edge cache (5 min at edge, 1 min for browsers)
+    // Simple edge cache (1 hour at edge, 5 min for browsers—uniques update slowly)
     const cache = caches.default;
     const cached = await cache.match(request);
     if (cached) return cached;
 
-    // Query analytics data for the current calendar day (midnight to now)
+    // Get current day (UTC midnight to end)
     const now = new Date();
-    const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
-    const end = now;
+    const today = now.toISOString().split('T')[0];  // YYYY-MM-DD format for date filter
 
-    // First, try minute-level dataset (may require extra permissions/plan).
+    // Main query: Use 1dGroups for uniques (required for uniq aggregation)
     let query = `
-      query GetTraffic($zone: String!, $start: Time!, $end: Time!) {
+      query GetUniqueVisitors($zone: String!, $date: Date!) {
         viewer {
           zones(filter: { zoneTag: $zone }) {
-            httpRequests1mGroups(
-              filter: { datetime_geq: $start, datetime_leq: $end }
-              limit: 2000
+            httpRequests1dGroups(
+              filter: { date: $date }
+              limit: 1
             ) {
+              uniq {
+                uniques  # Unique IP addresses (visitors)
+              }
               sum {
-                requests
-                pageViews
+                requests  # Total requests (for comparison)
+                pageViews # Uncached page views
               }
             }
           }
         }
       }`;
-
     const variables = {
       zone: env.CF_ZONE_ID,
-      start: start.toISOString(),
-      end: end.toISOString(),
+      date: today,
     };
 
     let { resp, json } = await cfGqlFetch(env, query, variables);
 
-    // If minute-level is unauthorized for this zone/token, fall back to 1-hour groups.
-    const hasAuthzError =
-      !resp.ok ||
+    // Fallback: If 1dGroups unauthorized (unlikely on paid plans), use 1hGroups for totals only
+    const hasAuthzError = !resp.ok ||
       !json?.data?.viewer?.zones?.[0] ||
-      Array.isArray(json?.errors) &&
-      json.errors.some(e =>
-        e?.extensions?.code === 'authz' ||
-        /does not have access to the path/i.test(e?.message || '')
-      );
-
+      (Array.isArray(json?.errors) &&
+       json.errors.some(e =>
+         e?.extensions?.code === 'authz' ||
+         /does not have access to the path/i.test(e?.message || '')
+       ));
     if (hasAuthzError) {
       query = `
-        query GetTrafficFallback($zone: String!, $start: Time!, $end: Time!) {
+        query GetTrafficFallback($zone: String!, $start: DateTime!, $end: DateTime!) {
           viewer {
             zones(filter: { zoneTag: $zone }) {
               httpRequests1hGroups(
                 filter: { datetime_geq: $start, datetime_leq: $end }
-                limit: 1000
+                limit: 24  # ~24 hours
               ) {
                 sum {
                   requests
@@ -91,38 +84,60 @@ export default {
             }
           }
         }`;
+      const start = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+      const end = now;
+      variables.start = start.toISOString();
+      variables.end = end.toISOString();
+      delete variables.date;  // Clean up
       ({ resp, json } = await cfGqlFetch(env, query, variables));
+
+      // For fallback, aggregate totals (no uniques available)
+      const z = json.data.viewer.zones[0];
+      const groups = z.httpRequests1hGroups ?? [];
+      const totals = groups.reduce(
+        (acc, g) => {
+          acc.requests += g?.sum?.requests || 0;
+          acc.pageViews += g?.sum?.pageViews || 0;
+          return acc;
+        },
+        { requests: 0, pageViews: 0, uniques: null }  // No uniques in fallback
+      );
+      totals.error = "Fallback: Uniques unavailable in hourly data. Upgrade plan or use daily query.";
+
+      const out = new Response(JSON.stringify(totals), {
+        status: 200,
+        headers: {
+          "content-type": "application/json",
+          "Cache-Control": "public, max-age=300, s-maxage=3600"  // 5 min / 1 hour
+        }
+      });
+      ctx.waitUntil(cache.put(request, out.clone()));
+      return out;
     }
 
-    if (!resp.ok || !json?.data?.viewer?.zones?.[0]) {
-      return new Response(JSON.stringify({
-        error: "Cloudflare API error",
-        details: json?.errors ?? null
-      }), {
-        status: 502,
+    // Success: Extract from 1dGroups (single group for the day)
+    const group = json.data.viewer.zones[0].httpRequests1dGroups[0];
+    if (!group) {
+      return new Response(JSON.stringify({ error: "No data for today" }), {
+        status: 404,
         headers: { "content-type": "application/json", "Cache-Control": "no-store" }
       });
     }
 
-    const z = json.data.viewer.zones[0];
-    const groups = z.httpRequests1mGroups ?? z.httpRequests1hGroups ?? [];
-	const totals = groups.reduce(
-      (acc, g) => {
-        acc.requests += g?.sum?.requests || 0;
-        acc.pageViews += g?.sum?.pageViews || 0;
-        return acc;
-      },
-      { requests: 0, pageViews: 0 }
-    );
+    const totals = {
+      uniques: group.uniq?.uniques || 0,  // Unique viewers (IPs)
+      requests: group.sum?.requests || 0,
+      pageViews: group.sum?.pageViews || 0,
+      date: today  // For reference
+    };
 
     const out = new Response(JSON.stringify(totals), {
       status: 200,
       headers: {
         "content-type": "application/json",
-        "Cache-Control": "public, max-age=20, s-maxage=120"
+        "Cache-Control": "public, max-age=300, s-maxage=3600"
       }
     });
-
     ctx.waitUntil(cache.put(request, out.clone()));
     return out;
   },

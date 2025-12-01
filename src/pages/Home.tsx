@@ -4,11 +4,11 @@ import HomeHero from '../components/HomeHero';
 import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
-import readySetIcon from '../assets/readyset/readyseticon.png';
+import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import mygraBackground from '../assets/mygra/cardBackground.png';
 import storkBackground from '../assets/stork/cardBackground.png';
 import waffleBackground from '../assets/waffle/cardBackground.png';
-import readySetBackground from '../assets/readyset/cardBackground.png';
+import setDeckBackground from '../assets/setdeck/cardBackground.png';
 
 export default function Home() {
   useEffect(() => {
@@ -27,9 +27,9 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "⭐️ Just Released", title: "Stork 2.0", description: "A major visual refresh, iPad support, home screen widgets", color: "#f97316" },
-    { date: "🦃 Late Nov-Early Dec", title: "Ready, Set 2.0", description: "A massive UX overhaul, code cleanup, additional features", color: "#22c55e" },
-    { date: "☃️ January 2026", title: "Opalite", description: "A brand new project and the one I'm most excited about", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "⭐️ Just Released", title: "SetDeck", description: "Ready, Set 2.0 with a massive UX overhaul and additional features.", color: "#65DA92" },
+    { date: "☃️ January 2026", title: "Opalite", description: "A brand new project all about color.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🚂 2026", title: "SwiftTrain", description: "Not an app 🤔", color: "#f97316" },
   ];
 
   return (
@@ -90,6 +90,14 @@ export default function Home() {
           <div className="transition-all duration-300">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
               <ProjectCard
+                title="SetDeck"
+                tagline="A gym companion to track & smash workout routines. Every Set Counts!"
+                image={setDeckIcon}
+                background={setDeckBackground}
+                path="/setdeck"
+                fitMode="contain"
+              />
+              <ProjectCard
                 title="Mygra"
                 tagline="Migraine insights powered by on-device AI."
                 image={mygraIcon}
@@ -111,14 +119,6 @@ export default function Home() {
                 image={storkIcon}
                 background={storkBackground}
                 path="/stork"
-                fitMode="contain"
-              />
-              <ProjectCard
-                title="Ready, Set"
-                tagline="A fitness metric companion to track & smash personal goals. Major overhaul coming soon!"
-                image={readySetIcon}
-                background={readySetBackground}
-                path="/ready-set"
                 fitMode="contain"
               />
             </div>

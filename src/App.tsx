@@ -6,10 +6,12 @@ import About from './pages/About';
 import Contact from './pages/Contact';
 import Stork from './pages/Stork';
 import Mygra from './pages/Mygra';
-import ReadySet from './pages/ReadySet';
+import SetDeck from './pages/SetDeck';
 import Privacy from './pages/Privacy';
 import WaffleLanding from './pages/WaffleLanding';
 import Waffle from './pages/Waffle';
+import Opalite from './pages/Opalite';
+import SwiftTrain from './pages/SwiftTrain';
 
 export default function App() {
   return import.meta.env.PROD ? (
@@ -36,10 +38,12 @@ function AppShell() {
       <main className="flex-1">
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/opalite" element={<Opalite />} />
+          <Route path="/swifttrain" element={<SwiftTrain />} />
+          <Route path="/setdeck" element={<SetDeck />} />
           <Route path="/mygra" element={<Mygra />} />
           <Route path="/stork" element={<Stork />} />
           <Route path="/waffle" element={<Waffle />} />
-          <Route path="/ready-set" element={<ReadySet />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />

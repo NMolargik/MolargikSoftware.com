@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import readyseticon from '../assets/readyset/readyseticon.png';
+import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import Hero from '../components/Hero';
-import screen1 from '../assets/readyset/screen1.png';
-import screen2 from '../assets/readyset/screen2.png';
-import screen3 from '../assets/readyset/screen3.png';
-import screen4 from '../assets/readyset/screen4.png';
+import screen1 from '../assets/setdeck/screen1.png';
+import screen2 from '../assets/setdeck/screen2.png';
+import screen3 from '../assets/setdeck/screen3.png';
+import screen4 from '../assets/setdeck/screen4.png';
 
-export default function ReadySet() {
+export default function SetDeck() {
   const slides = [screen1, screen2, screen3, screen4];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
@@ -24,12 +24,12 @@ export default function ReadySet() {
       document.head.appendChild(meta);
     }
     meta.content = desc;
-    // Set accent color for navbar hover on Ready, Set
-    document.documentElement.style.setProperty('--accent', '#22c55e'); // green-500
+    // Set accent color for navbar hover on SetDeck
+    document.documentElement.style.setProperty('--accent', '#65DA92');
     const link = document.createElement('link');
     link.rel = 'preload';
     link.as = 'image';
-    link.href = readyseticon as unknown as string;
+    link.href = setDeckIcon as unknown as string;
     document.head.appendChild(link);
 
     const scrollToStart = () => {
@@ -65,13 +65,13 @@ export default function ReadySet() {
       `}</style>
       <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
         <Hero
-          heading="Ready, Set"
-          description="Effortlessly log workouts, sets, water, and caloric intake. Built for gym-goers, by a gym-goer!"
-          imageSrc={readyseticon}
+          heading="SetDeck"
+          description="Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals. Now also available on iPad!"
+          imageSrc={setDeckIcon}
           buttonText="View on the App Store"
           buttonColorClass="bg-green-500 text-white hover:text-white hover:bg-green-600"
           buttonHref="https://apps.apple.com/us/app/ready-set/id6484503374"
-          systemRequirements={["iOS 17+", "watchOS 10+"]}
+          systemRequirements={["iOS 26+", "iPadOS 26+"]}
         />
       </section>
       {/* Responsive screenshots section */}
@@ -91,7 +91,7 @@ export default function ReadySet() {
                 )}
                 <img
                   src={src}
-                  alt={`Ready, Set screenshot ${idx + 1}`}
+                  alt={`SetDeck screenshot ${idx + 1}`}
                   width={1170}
                   height={2532}
                   loading="lazy"
@@ -117,7 +117,7 @@ export default function ReadySet() {
                 )}
                 <img
                   src={src}
-                  alt={`Ready, Set screenshot ${idx + 1}`}
+                  alt={`SetDeck screenshot ${idx + 1}`}
                   width={1170}
                   height={2532}
                   loading="lazy"
@@ -131,37 +131,79 @@ export default function ReadySet() {
         {/* Large text area below images */}
         <section>
           <div className="mt-10 max-w-3xl mx-auto px-4">
-            <div>
-              <h2 className="text-4xl font-bold tracking-tight mb-6">🏋️ Ready, Set: Your Ultimate Gym Companion</h2>
+            <div className="space-y-6">
+              <h2 className="text-4xl font-bold tracking-tight">
+                SetDeck — Your Complete Workout Routine Companion
+              </h2>
               <p className="text-lg leading-relaxed">
-                I'm thrilled to announce the launch of my first solo-developed app, <a href="https://apps.apple.com/us/app/ready-set/id6484503374" className="text-blue-600 hover:underline" target="_blank" rel="noopener noreferrer">Ready, Set</a>, now available on the App Store! While I've been part of several team projects, this is the first app I've published independently.
+                Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals—all in one beautifully streamlined app.
               </p>
-              <p className="text-lg leading-relaxed mt-4">
-                Ready, Set is designed to help gym-goers track their progress with minimal effort. As someone who often forgot the weights lifted during previous sessions, I built this app to solve that problem by allowing users to log exercises set-by-set, including weights lifted, reps completed, and time spent.
+
+              <h3 className="text-2xl font-semibold mt-8">What is SetDeck?</h3>
+              <p className="text-lg leading-relaxed">
+                SetDeck is a modern fitness companion built for people who want structure, progression, and clarity. Whether you’re following a weekly routine or building your own from scratch, SetDeck guides you through every exercise set by set while automatically tracking your performance over time. Plus: quickly log water intake, calorie intake, and other daily stats with a single swipe.
               </p>
-              <h3 className="text-2xl font-semibold mt-10 mb-4">🔑 Key Features</h3>
-              <ul className="list-disc pl-6 space-y-3 text-lg leading-relaxed">
-                <li>
-                  <strong>Effortless Workout Tracking:</strong> Log exercises set-by-set, including weights, reps, and time spent, to monitor your gym progress with ease.
-                </li>
-                <li>
-                  <strong>Water & Caloric Intake:</strong> Track daily water and caloric intake with simple swipe gestures, keeping all your fitness metrics in one place.
-                </li>
-                <li>
-                  <strong>Trend Analysis:</strong> View day-over-day trends in your workouts, water, and caloric intake to stay informed about your progress.
-                </li>
-                <li>
-                  <strong>HealthKit Integration:</strong> Seamlessly integrates with HealthKit to enhance data in Apple's Health app, with alerts for concerning trends.
-                </li>
-                <li>
-                  <strong>Swipe-Based Navigation:</strong> Built with Swift, SwiftUI, and SwiftData, featuring intuitive swipe-based navigation for a modern iOS experience.
-                </li>
-              </ul>
-              <p className="text-lg leading-relaxed mt-10">
-                From concept to launch in just ten days, Ready, Set is crafted for gym-goers who want a streamlined way to track their fitness journey. Currently available for iPhone, with Apple Watch compatibility and quick-action home screen widgets coming soon!
+
+              <hr className="my-8 border-white/10" />
+
+              <h3 className="text-2xl font-semibold mt-4">Key Features</h3>
+
+              <div className="space-y-4">
+                <div>
+                  <h4 className="text-xl font-semibold">📅 Daily Routines, Clearly Organized</h4>
+                  <p className="text-lg leading-relaxed">
+                    Create or customize your weekly workout routine with up to seven distinct training days. Each day holds its own list of exercises to keep your sessions focused and intentional.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold">🏋️ Set-By-Set Workout Flow</h4>
+                  <p className="text-lg leading-relaxed">
+                    Every exercise includes one or more sets—with reps, weight, RPE, or duration. As you train, log your actual results to track true progress.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold">📈 Automatic Set History &amp; Strength Progression</h4>
+                  <p className="text-lg leading-relaxed">
+                    SetDeck saves a history entry every time you complete a set. Over weeks and months, your stats reveal patterns, trends, and areas of growth—helping you outlift your past self every session.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold">💧 Water &amp; 🔥 Energy Tracking</h4>
+                  <p className="text-lg leading-relaxed">
+                    Swipe to log water consumed or calories taken in. See your hydration and intake trends over time to ensure you’re fueling properly for your training.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold">📊 Insightful Trends &amp; Analytics</h4>
+                  <p className="text-lg leading-relaxed">
+                    View your patterns for hydration, calories, and—new with SetDeck—your strength performance across exercises and sets.
+                  </p>
+                </div>
+
+                <div>
+                  <h4 className="text-xl font-semibold">🔧 Custom Routine Builder</h4>
+                  <p className="text-lg leading-relaxed">
+                    Build new routines in seconds and shape your ideal training week.
+                  </p>
+                </div>
+              </div>
+
+              <hr className="my-8 border-white/10" />
+
+              <h3 className="text-2xl font-semibold mt-4">Why Choose SetDeck?</h3>
+              <p className="text-lg leading-relaxed">
+                SetDeck is built for lifters, athletes, and anyone who wants a structured, measurable path toward real progress. With a clean UI designed around clarity and speed, every workout becomes easier to follow—and every metric becomes easier to track.
               </p>
-              <p className="text-base italic mt-6">
-                Ready, Set is available now for devices running iOS. Some features may require access to Apple’s latest APIs. Every. Set. Counts.
+
+              <hr className="my-8 border-white/10" />
+
+              <h3 className="text-2xl font-semibold mt-4">Start Building a Stronger You</h3>
+              <p className="text-lg leading-relaxed">
+                Download SetDeck today and take control of your training—one set at a time.
               </p>
             </div>
           </div>
@@ -173,11 +215,12 @@ export default function ReadySet() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "SoftwareApplication",
-            "name": "Ready, Set",
+            "name": "SetDeck",
             "applicationCategory": "FitnessApplication",
-            "operatingSystem": "iOS, watchOS",
+            "operatingSystem": "iOS, iPadOS",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-            "url": "https://apps.apple.com/us/app/ready-set/id6484503374"
+            "url": "https://apps.apple.com/us/app/ready-set/id6484503374",
+            "description": "SetDeck is a structured workout companion that tracks routines, sets, hydration, calories, and long-term strength progression."
           })
         }}
       />

@@ -10,6 +10,7 @@ interface HeroProps {
   buttonHref?: string;
   buttonDownload?: boolean;
   systemRequirements?: string[];
+  cropImage?: boolean;
 }
 
 export default function Hero({
@@ -21,6 +22,7 @@ export default function Hero({
   buttonHref = "#",
   buttonDownload = false,
   systemRequirements = [],
+  cropImage = false,
 }: HeroProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
   return (
@@ -53,7 +55,7 @@ export default function Hero({
             <img
               src={imageSrc}
               alt={`${heading} Icon`}
-              className={`w-20 h-20 rounded-lg object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+              className={`w-20 h-20 rounded-lg ${cropImage ? "object-cover" : "object-contain"} transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
               onLoad={() => setImageLoaded(true)}
             />
           </div>
@@ -97,7 +99,7 @@ export default function Hero({
         </div>
       </div>
       {/* Image section - Visible on md+, aligned to the right, matching text area height */}
-      <div className="hidden md:flex justify-end flex-1 max-w-[22rem] shrink-0 image-container relative">
+      <div className={`hidden md:flex justify-end flex-1 max-w-[22rem] shrink-0 image-container relative ${cropImage ? "overflow-hidden" : ""}`}>
         {!imageLoaded && (
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="h-10 w-10 rounded-full border-2 border-white/30 border-t-white animate-spin" />
@@ -106,7 +108,7 @@ export default function Hero({
         <img
           src={imageSrc}
           alt={heading}
-          className={`w-auto h-full max-w-full rounded-xl shadow-lg object-contain transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
+          className={`w-full h-full rounded-xl shadow-lg ${cropImage ? "object-cover" : "object-contain"} transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
           onLoad={() => setImageLoaded(true)}
         />
       </div>
