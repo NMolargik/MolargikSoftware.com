@@ -20,7 +20,8 @@ export default function ProjectCard({ title, tagline, image, background, path, f
   return (
     <Link
       to={path}
-      className="group relative block w-full overflow-hidden rounded-2xl border border-white/10 motion-safe:transition-transform motion-safe:duration-300 hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple shrink-0 snap-start"
+      data-snow-card="true"
+      className="group relative block w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40 motion-safe:transition-transform motion-safe:duration-300 hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple shrink-0 snap-start"
       style={{ aspectRatio: '16 / 9' }}
       aria-label={`${title} — ${tagline}`}
     >

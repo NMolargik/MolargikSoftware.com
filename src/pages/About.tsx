@@ -28,11 +28,9 @@ export default function About() {
         heading="Nick Molargik"
         description="Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Kotlin Multiplatform, Flutter, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living my best life in Indiana."
         imageSrc={nickheadshot}
-        buttonText="Download Résumé"
-        buttonColorClass="bg-orange-500 text-white"
         buttonHref="/resume.pdf"
-        buttonDownload
         cropImage={true}
+        showButton={false}
       />
 
       {/* Company Section */}
@@ -70,9 +68,12 @@ export default function About() {
       </section>
 
       {/* Professional Journey Section - EXPANDED */}
-      <section className="py-16 bg-white">
+      <section
+        className="py-16 text-white"
+        style={{ backgroundColor: 'rgb(36,36,36)' }}
+      >
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Professional Journey</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">Professional Journey</h2>
           <div className="space-y-8">
             {/* V1 Sports */}
             <div className="flex flex-col md:flex-row gap-6 items-start p-8 bg-gray-50 rounded-xl border border-gray-200">
@@ -131,7 +132,7 @@ export default function About() {
                 </div>
               </div>
               <div className="flex-1 md:order-1">
-                <h3 className="text-2xl font-semibold mb-2 text-gray-900">Founder & Sole Developer</h3>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-900">Founder & Developer</h3>
                 <h4 className="text-xl text-gray-600 mb-4">Molargik Software LLC</h4>
                 <div className="space-y-3 text-gray-700 leading-relaxed">
                   <p>
@@ -287,10 +288,14 @@ export default function About() {
       </section>
 
       {/* Featured Projects Section - Now at bottom with taller cards */}
-      <section className="py-16 bg-white">
+      <section
+        className="py-16 text-white"
+        style={{ backgroundColor: 'rgb(36,36,36)' }}
+      >
         <div className="max-w-6xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-900">Featured Projects</h2>
+          <h2 className="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
             {/* SetDeck */}
             <div className="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
               <div className="p-4">
@@ -299,15 +304,16 @@ export default function About() {
               <div className="p-6 text-white">
                 <h3 className="text-xl font-semibold mb-2">SetDeck</h3>
                 <p className="text-emerald-100 mb-4 text-sm">
-                  Workout tracker with HealthKit sync, and set-by-set logging.
+                  Workout tracker with HealthKit sync and set-by-set progress statistics.
                 </p>
                 <Link to="/setdeck" className="inline-block bg-white/20 text-white px-4 py-2 rounded-md hover:bg-white/30 transition">
                   View Project →
                 </Link>
               </div>
             </div>
+
             {/* Mygra */}
-            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
+            <div className="bg-gradient-to-br from-orange-500 to-purple-500 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
               <div className="p-4">
                 <img src={mygraIcon} alt="Mygra" className="w-full h-[24rem] object-contain rounded-[2rem]" />
               </div>
@@ -323,7 +329,7 @@ export default function About() {
             </div>
 
             {/* Stork */}
-            <div className="bg-gradient-to-br from-orange-500 to-purple-500 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
+            <div className="bg-gradient-to-br from-purple-500 to-indigo-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
               <div className="p-4">
                 <img src={storkIcon} alt="Stork" className="w-full h-[24rem] object-contain rounded-[2rem]" />
               </div>
@@ -355,17 +361,20 @@ export default function About() {
             </div>
           </div>
           <div className="text-center mt-12">
-            <p className="text-gray-600">
-              All apps available on the <strong>App Store</strong>. Built solo from ideation to launch.
+            <p className="text-white">
+              All apps available on the <strong>App Store</strong>. Built solo from conceptualization to launch. Some graphic design has been outsourced to (much more talented) artists.
             </p>
           </div>
         </div>
       </section>
 
       {/* GitHub Contributions Section */}
-      <section className="py-16 bg-white">
+      <section
+        className="py-16 text-white"
+        style={{ backgroundColor: 'rgb(36,36,36)' }}
+      >
         <div className="max-w-5xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-8 text-gray-900">GitHub Contributions</h2>
+          <h2 className="text-3xl font-bold text-center mb-8 text-white">GitHub Contributions</h2>
 
           <div className="rounded-2xl border border-gray-200 bg-white shadow-sm p-4">
             <a

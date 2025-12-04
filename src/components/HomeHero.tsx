@@ -28,7 +28,7 @@ export default function HomeHero() {
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: idx * 0.5, duration: 1.5 }}
-                  className="inline-flex items-center rounded-full bg-white-500 ring-1 ring-purple-400 px-2 py-1 text-xs font-medium text-white/100"
+                  className="inline-flex items-center rounded-md bg-white ring-1 ring-black px-2 py-1 text-xs font-medium text-black"
                 >
                   {platform}
                 </motion.span>
@@ -68,7 +68,7 @@ export default function HomeHero() {
               <img
                 src={logo}
                 alt="Nick Molargik — Indie iOS Engineer"
-                className="w-full max-w-[18rem] md:max-w-[22rem] rounded-lg object-contain"
+                className="w-full max-w-[18rem] md:max-w-[22rem] rounded-lg object-contain drop-shadow-2xl"
               />
             </div>
           </div>

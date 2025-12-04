@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 export default function Footer() {
-  const [uniqueViews, setUniqueViews] = useState<number | null>(null);
+  const [, setUniqueViews] = useState<number | null>(null);
 
   useEffect(() => {
     let mounted = true;
@@ -31,9 +31,7 @@ export default function Footer() {
         <span>© 2025 Molargik Software LLC</span>
 
         <span aria-live="polite" className="text-gray-400">
-          {uniqueViews === null
-            ? '—'
-            : `Unique Views Today: ${uniqueViews.toLocaleString()}`}
+          Happy Holidays
         </span>
 
         <div className="flex gap-6">

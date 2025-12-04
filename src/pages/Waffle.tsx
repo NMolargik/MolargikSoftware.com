@@ -6,6 +6,7 @@ import screen2 from '../assets/waffle/screen2.png';
 import screen3 from '../assets/waffle/screen3.png';
 import screen4 from '../assets/waffle/screen4.png';
 import screen5 from '../assets/waffle/screen5.png';
+import ScreensCarousel from '../components/ScreensCarousel';
 
 export default function Waffle() {
   const slides = [screen1, screen2, screen3, screen4, screen5];
@@ -71,101 +72,179 @@ export default function Waffle() {
           heading="Waffle"
           description="Webpage multitasking made easy on iPad."
           imageSrc={waffleicon}
-          buttonText="View on the App Store"
-          buttonColorClass="bg-yellow-500 text-white hover:text-white hover:bg-yellow-600"
           buttonHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
           systemRequirements={["iPadOS 26+"]}
         />
       </section>
       {/* Responsive screenshots section */}
-      <section className="mt-12 pb-24">
-        {/* Desktop & large screens: horizontally scrollable images */}
-        <div className="hidden md:block px-4">
-          <div
-            ref={carouselRefDesktop}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
+      <section
+        className="pb-24 text-white"
+        style={{ backgroundColor: 'rgb(36,36,36)' }}
+      >
+        <div className="pt-12">
+          <ScreensCarousel
+            slides={slides}
+            loaded={loaded}
+            offset={0}
+            markLoaded={markLoaded}
+            desktopRef={carouselRefDesktop}
+            mobileRef={carouselRefMobile}
+            altPrefix="Waffle"
+          />
+          {/* Large text area below images */}
+          <section
+            aria-label="About Waffle"
+            className="mt-16 px-4"
           >
-            {slides.map((src, idx) => (
-              <div key={idx} className="relative flex-none h-96 w-auto snap-start">
-                {!loaded[idx] && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
-                  </div>
-                )}
-                <img
-                  src={src}
-                  alt={`Waffle screenshot ${idx + 1}`}
-                  width={1170}
-                  height={2532}
-                  loading="lazy"
-                  className={`h-96 w-auto object-contain transition-opacity duration-300 ${loaded[idx] ? "opacity-100" : "opacity-0"}`}
-                  onLoad={() => markLoaded(idx)}
+            <div className="mx-auto max-w-5xl">
+              <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_18px_45px_rgba(0,0,0,0.7)] sm:px-10">
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#eab308] to-transparent opacity-80"
                 />
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Small screens: seamless horizontal banner */}
-        <div className="md:hidden mt-2">
-          <div
-            ref={carouselRefMobile}
-            className="flex overflow-x-auto snap-x snap-mandatory gap-6 justify-start md:justify-center"
-          >
-            {slides.map((src, idx) => (
-              <div key={idx} className="relative flex-none h-80 w-auto snap-start">
-                {!loaded[idx] && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
+                <div className="relative space-y-6">
+                  <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+                    🧇 Waffle — A New Way to Browse on iPad
+                  </h2>
+                  <p className="text-base sm:text-lg leading-relaxed text-white/80">
+                    Discover Waffle, a browser experience crafted exclusively for iPad. Say goodbye to tab juggling and hello to a
+                    customizable grid of webpages, letting you browse multiple sites side by side in any layout you choose, up to
+                    a 4×4 grid. Whether you're researching, comparing, or multitasking, Waffle transforms your iPad into a powerful
+                    multi-site workspace.
+                  </p>
+
+                  <hr className="my-6 border-white/10" />
+
+                  <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
+                    <div className="space-y-6">
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                          What is Waffle?
+                        </h3>
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                          Waffle is a grid-based browser for iPad that gives you full control over how you view the web. Arrange
+                          sites in rows and columns, save presets for workflows you reuse, and snap layouts back exactly how you
+                          like them—no more constantly rearranging windows.
+                        </p>
+                      </div>
+
+                      <hr className="my-6 border-white/10 lg:hidden" />
+
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                          Built for Power Users &amp; Multitaskers
+                        </h3>
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                          Whether you're comparing products, monitoring dashboards, following along with documentation, or keeping
+                          multiple research sources open at once, Waffle helps you stay organized and in flow without losing track
+                          of your tabs.
+                        </p>
+                      </div>
+
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                          iPad-First, Through and Through
+                        </h3>
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                          Waffle is built for iPadOS 26 with Apple&apos;s latest WebView APIs, multi-window support, and CloudKit
+                          sync—so your browsing workspace feels fast, fluid, and native on every supported iPad.
+                        </p>
+                      </div>
+                      
+                      <div>
+                        <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                          Designed for power users, researchers, and serious multitaskers
+                        </h3>                          
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                          Waffle is perfect for anyone who wants to
+                          unlock the full potential of their iPad. From following rocket launches across multiple sites to managing
+                          complex workflows, Waffle makes it effortless to work across multiple pages at once.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="mt-4 lg:mt-0">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Key Features
+                      </h3>
+                      <div className="mt-4 grid gap-4">
+                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="text-lg">🔳</span>
+                            <span>Adjustable Grid Layout</span>
+                          </h4>
+                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                            Dynamically add or remove rows and columns to build the perfect grid for your workflow—up to a 4×4
+                            layout of webpages on screen at once.
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="text-lg">🪟</span>
+                            <span>Pop-Out Windows</span>
+                          </h4>
+                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                            Detach any grid cell into its own window using iPadOS multi-window, giving you even more flexibility
+                            when you need a page to stand alone.
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="text-lg">⤢</span>
+                            <span>Maximize When You Need Focus</span>
+                          </h4>
+                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                            Bring any site front and center with a tap, then drop it back into the grid when you&apos;re ready to
+                            multitask again.
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="text-lg">⭐️</span>
+                            <span>Presets for Your Workflows</span>
+                          </h4>
+                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                            Save your favorite grid configurations as Presets—perfect for repeatable tasks like research,
+                            dashboards, or content monitoring. Reload them instantly whenever you need them.
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="text-lg">☁️</span>
+                            <span>Cloud Sync with SwiftData + CloudKit</span>
+                          </h4>
+                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                            Your presets and layouts sync securely across your iPads, so your favorite setups are always right
+                            where you left them.
+                          </p>
+                        </div>
+
+                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                            <span className="text-lg">⚡️</span>
+                            <span>Built for iPadOS 26</span>
+                          </h4>
+                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                            Powered by Apple&apos;s new WebView API for speed, security, and compatibility—enhanced with Liquid
+                            Glass visuals to make every grid feel polished and modern.
+                          </p>
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                )}
-                <img
-                  src={src}
-                  alt={`Waffle screenshot ${idx + 1}`}
-                  width={1170}
-                  height={2532}
-                  loading="lazy"
-                  className={`h-80 w-auto object-contain transition-opacity duration-300 ${loaded[idx] ? "opacity-100" : "opacity-0"}`}
-                  onLoad={() => markLoaded(idx)}
-                />
+
+                  <p className="mt-4 text-sm italic text-white/70">
+                    Waffle is available for devices running iPadOS 26 or later. Some features require access to Apple&apos;s latest
+                    APIs.
+                  </p>
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-        {/* Large text area below images */}
-        <div className="mt-10 max-w-3xl mx-auto px-4">
-          <div>
-            <h2 className="text-4xl font-bold tracking-tight mb-6">🧇 Waffle: A New Way to Browse on iPad</h2>
-            <p className="text-lg leading-relaxed">
-              Discover <a href="https://apps.apple.com/us/app/waffle-browser/id6751783473" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">Waffle</a>, a revolutionary browser experience crafted exclusively for iPad. Say goodbye to tab juggling and hello to a customizable grid of webpages, letting you browse multiple sites side by side in any layout you choose, up to a 4x4 grid. Whether you're researching, comparing, or multitasking, Waffle transforms your iPad into a powerful multi-site workspace.
-            </p>
-            <h3 className="text-2xl font-semibold mt-10 mb-4">🧩 Key Features</h3>
-            <ul className="list-disc pl-6 space-y-3 text-lg leading-relaxed">
-              <li>
-                <strong>Adjustable Grid Layout:</strong> Dynamically add or remove rows and columns to create the perfect browsing workspace tailored to your needs.
-              </li>
-              <li>
-                <strong>Pop-Out Windows:</strong> Detach any grid cell into a standalone window, leveraging iPadOS multi-window support for ultimate flexibility.
-              </li>
-              <li>
-                <strong>Maximize:</strong> Focus on a single webpage by bringing it front and center with a single tap.
-              </li>
-              <li>
-                <strong>Presets:</strong> Save your favorite grid configurations as Presets and reload them instantly whenever you need them.
-              </li>
-              <li>
-                <strong>Cloud Sync with SwiftData + CloudKit:</strong> Seamlessly sync your grid presets and browsing setup across all your iPads.
-              </li>
-              <li>
-                <strong>Built for iOS 26:</strong> Powered by Apple’s new WebView API for blazing speed, top-notch security, and modern web compatibility, enhanced with Liquid Glass.
-              </li>
-            </ul>
-            <p className="text-lg leading-relaxed mt-10">
-              Designed for power users, researchers, and multitaskers, Waffle is perfect for anyone who wants to unlock the full potential of their iPad. From browsing rocketry pages to managing complex workflows, Waffle makes it effortless to work across multiple sites at once.
-            </p>
-            <p className="text-base italic mt-6">
-              Waffle is available now for devices running iPadOS 26. Some features require access to Apple’s latest APIs.
-            </p>
-          </div>
+            </div>
+          </section>
         </div>
       </section>
       <script
