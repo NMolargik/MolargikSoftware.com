@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import mygraicon from '../assets/mygra/mygraicon.png';
 import Hero from '../components/Hero';
-
-
 import screen1 from '../assets/mygra/screen1.png';
 import screen2 from '../assets/mygra/screen2.png';
 import screen3 from '../assets/mygra/screen3.png';
@@ -18,6 +16,9 @@ import screen12 from '../assets/mygra/screen12.png';
 import screen13 from '../assets/mygra/screen13.png';
 import screen14 from '../assets/mygra/screen14.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import { usePageMeta, useScrollToStart } from '../hooks';
+
+const ACCENT_COLOR = '#a855f7';
 
 export default function Mygra() {
   const slides: string[] = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14];
@@ -28,47 +29,19 @@ export default function Mygra() {
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
-  useEffect(() => {
-    document.title = 'Mygra – Intelligent Migraine Journal | Nick Molargik';
-    const desc = 'Log migraines fast, get on‑device AI insights, see weather correlations, and integrate with Apple Health. Private by default.';
-    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = desc;
-    // Set accent color for navbar hover on Mygra
-    document.documentElement.style.setProperty('--accent', '#a855f7'); // purple-500
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = mygraicon as unknown as string;
-    document.head.appendChild(link);
+  usePageMeta({
+    title: 'Mygra – Intelligent Migraine Journal | Nick Molargik',
+    description: 'Log migraines fast, get on‑device AI insights, see weather correlations, and integrate with Apple Health. Private by default.',
+    accentColor: ACCENT_COLOR,
+    preloadImage: mygraicon,
+  });
 
-    const scrollToStart = () => {
-      if (carouselRefDesktop.current) {
-        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-      if (carouselRefMobile.current) {
-        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-    };
-    // attempt immediately, next frame, and after full load (covers image decode timing)
-    scrollToStart();
-    requestAnimationFrame(scrollToStart);
-    window.addEventListener('load', scrollToStart);
-
-    return () => {
-      window.removeEventListener('load', scrollToStart);
-      document.head.removeChild(link);
-    };
-  }, []);
+  useScrollToStart(carouselRefDesktop, carouselRefMobile);
 
   return (
     <>
     <style>{`
-      :root { --accent: #a855f7; }
+      :root { --accent: ${ACCENT_COLOR}; }
       header nav a:hover, nav a:hover, .nav-link:hover {
         color: var(--accent) !important;
       }
@@ -100,7 +73,7 @@ export default function Mygra() {
           markLoaded={markLoaded}
           desktopRef={carouselRefDesktop}
           mobileRef={carouselRefMobile}
-          altPrefix="Stork"
+          altPrefix="Mygra"
         />
         {/* Large text area below images */}
         <section

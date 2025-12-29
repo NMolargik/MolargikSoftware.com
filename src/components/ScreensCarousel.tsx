@@ -1,5 +1,5 @@
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import LoadingSpinner from './LoadingSpinner';
 
 interface ScreensCarouselProps {
   slides: string[];
@@ -31,7 +31,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
     if (mobileRef?.current) {
       mobileRef.current.scrollTo({ left: 0, behavior: 'auto' });
     }
-  }, [slides]);
+  }, [slides, desktopRef, mobileRef]);
   return (
     <>
       {/* Desktop & large screens: horizontally scrollable images */}
@@ -44,11 +44,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
             const globalIndex = offset + idx;
             return (
               <div key={idx} className="relative flex-none h-96 w-auto snap-start">
-                {!loaded[globalIndex] && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
-                  </div>
-                )}
+                {!loaded[globalIndex] && <LoadingSpinner />}
                 <img
                   src={src}
                   alt={`${altPrefix} screenshot ${idx + 1}`}
@@ -75,11 +71,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
             const globalIndex = offset + idx;
             return (
               <div key={idx} className="relative flex-none h-80 w-auto snap-start">
-                {!loaded[globalIndex] && (
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="h-8 w-8 rounded-full border-2 border-black/20 dark:border-white/30 border-t-black/60 dark:border-t-white animate-spin" />
-                  </div>
-                )}
+                {!loaded[globalIndex] && <LoadingSpinner />}
                 <img
                   src={src}
                   alt={`${altPrefix} screenshot ${idx + 1}`}

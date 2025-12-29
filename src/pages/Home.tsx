@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import HomeHero from '../components/HomeHero';
+import opaliteIcon from '../assets/opalite/opaliteicon.png'
 import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
+import opaliteBackground from '../assets/opalite/cardBackground.png';
 import mygraBackground from '../assets/mygra/cardBackground.png';
 import storkBackground from '../assets/stork/cardBackground.png';
 import waffleBackground from '../assets/waffle/cardBackground.png';
@@ -29,9 +31,8 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "⭐️ December 2025", title: "SetDeck 2.1", description: "Previously \"Ready, Set\", reborn with a massive UX overhaul and additional features.", color: "#65DA92" },
-    { date: "☃️ January 2026", title: "Opalite", description: "A brand new project all about color.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
-    { date: "🚂 2026", title: "SwiftTrain", description: "Not an app 🤔", color: "#f97316" },
+    { date: "☃️ Launching Soon!", title: "Opalite", description: "The ultimate color manager.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🚂 2026", title: "SwiftTrain", description: "Ready to learn app development?", color: "#f97316" },
   ];
 
   const snowContainerRef = useRef<HTMLDivElement | null>(null);
@@ -110,16 +111,19 @@ export default function Home() {
 
         {/* Latest Projects section */}
         <section className="mx-auto mt-16 w-full max-w-7xl px-6 pb-24">
-          <div className="mb-4 flex items-center justify-between">
-            <div>
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Latest Projects</h2>
-            </div>
-          </div>
           {/* Responsive list: mobile = horizontal carousel, md+ = 2-column grid */}
           <div className="relative md:static">
             {/* Responsive grid: small = 1 column list, md+ = 2 columns */}
             <div className="transition-all duration-300">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
+                <ProjectCard
+                  title="Opalite - Launching Very Soon!"
+                  tagline="The ultimate color companion for designers, developers, and digital artists."
+                  image={opaliteIcon}
+                  background={opaliteBackground}
+                  path="/opalite"
+                  fitMode="contain"
+                />
                 <ProjectCard
                   title="SetDeck"
                   tagline="A gym companion to track & smash workout routines. Every Set Counts!"

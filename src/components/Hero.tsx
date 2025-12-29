@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import appStoreBadge from "../assets/appStore.svg";
+import LoadingSpinner from "./LoadingSpinner";
 
 interface HeroProps {
   heading: string;
@@ -44,11 +45,7 @@ export default function Hero({
         {/* Image and title row on mobile, hidden on md+ */}
         <div className="flex flex-row items-end mb-0 md:hidden">
           <div className="relative w-20 h-20 mr-4">
-            {!imageLoaded && (
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="h-8 w-8 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-              </div>
-            )}
+            {!imageLoaded && <LoadingSpinner />}
             <img
               src={imageSrc}
               alt={`${heading} Icon`}
@@ -65,7 +62,7 @@ export default function Hero({
           <h2 className="hidden md:block text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white [text-wrap:balance]">
             {heading}
           </h2>
-          <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed [text-wrap:balance] max-h-[10rem] overflow-y-auto">
+          <p className="text-gray-200 text-sm sm:text-base md:text-lg leading-relaxed [text-wrap:balance] max-h-[10rem] overflow-y-auto pb-1">
             {description}
           </p>
           {/* System requirements pills */}
@@ -99,11 +96,7 @@ export default function Hero({
       </div>
       {/* Image section - Visible on md+, aligned to the right, matching text area height */}
       <div className={`hidden md:flex justify-end flex-1 max-w-[22rem] shrink-0 image-container relative ${cropImage ? "overflow-hidden" : ""}`}>
-        {!imageLoaded && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="h-10 w-10 rounded-full border-2 border-white/30 border-t-white animate-spin" />
-          </div>
-        )}
+        {!imageLoaded && <LoadingSpinner size="lg" />}
         <img
           src={imageSrc}
           alt={heading}

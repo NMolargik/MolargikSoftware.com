@@ -1,30 +1,6 @@
 import { Link } from 'react-router-dom';
-import { useEffect, useState } from 'react';
 
 export default function Footer() {
-  const [, setUniqueViews] = useState<number | null>(null);
-
-  useEffect(() => {
-    let mounted = true;
-
-    fetch('/cf-requests')
-      .then((r) => (r.ok ? r.json() : Promise.reject(r)))
-      .then((data) => {
-        if (!mounted) return;
-        // Use the correct field from the Worker: `uniques`
-        const views = typeof data?.uniques === 'number' ? data.uniques : null;
-        setUniqueViews(views);
-      })
-      .catch(() => {
-        if (!mounted) return;
-        setUniqueViews(null);
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
-
   return (
     <footer className="border-t border-white/10 bg-slate-950 px-6 py-8 text-center text-sm text-gray-300">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">

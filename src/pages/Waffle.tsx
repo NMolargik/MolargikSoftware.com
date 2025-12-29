@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import waffleicon from '../assets/waffle/waffleicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/waffle/screen1.png';
@@ -7,6 +7,9 @@ import screen3 from '../assets/waffle/screen3.png';
 import screen4 from '../assets/waffle/screen4.png';
 import screen5 from '../assets/waffle/screen5.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import { usePageMeta, useScrollToStart } from '../hooks';
+
+const ACCENT_COLOR = '#eab308';
 
 export default function Waffle() {
   const slides = [screen1, screen2, screen3, screen4, screen5];
@@ -16,48 +19,19 @@ export default function Waffle() {
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
-  useEffect(() => {
-    document.title = 'Waffle – Grid Browser for iPad | Nick Molargik';
-    const desc = 'Waffle lets you browse multiple sites side-by-side in a customizable grid on iPad. Presets, multi-window, CloudKit sync.';
-    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = desc;
-    // Set accent color for navbar hover on Waffle
-    document.documentElement.style.setProperty('--accent', '#eab308'); // yellow-500
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = waffleicon as unknown as string;
-    document.head.appendChild(link);
+  usePageMeta({
+    title: 'Waffle – Grid Browser for iPad | Nick Molargik',
+    description: 'Waffle lets you browse multiple sites side-by-side in a customizable grid on iPad. Presets, multi-window, CloudKit sync.',
+    accentColor: ACCENT_COLOR,
+    preloadImage: waffleicon,
+  });
 
-    const scrollToStart = () => {
-      if (carouselRefDesktop.current) {
-        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-      if (carouselRefMobile.current) {
-        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-    };
-
-    // Try immediately, then on next frame, then on load to cover image decode timing
-    scrollToStart();
-    requestAnimationFrame(scrollToStart);
-    window.addEventListener('load', scrollToStart);
-
-    return () => { 
-      window.removeEventListener('load', scrollToStart);
-      document.head.removeChild(link); 
-    };
-  }, []);
+  useScrollToStart(carouselRefDesktop, carouselRefMobile);
 
   return (
     <>
       <style>{`
-        :root { --accent: #eab308; }
+        :root { --accent: ${ACCENT_COLOR}; }
         header nav a:hover, nav a:hover, .nav-link:hover {
           color: var(--accent) !important;
         }

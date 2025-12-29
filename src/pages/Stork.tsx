@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import storkicon from '../assets/stork/storkicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/stork/screen1.png';
@@ -11,6 +11,9 @@ import screen7 from '../assets/stork/screen7.png';
 import screen8 from '../assets/stork/screen8.png';
 import screen9 from '../assets/stork/screen9.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import { usePageMeta, useScrollToStart } from '../hooks';
+
+const ACCENT_COLOR = '#f97316';
 
 export default function Stork() {
   const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9];
@@ -20,44 +23,19 @@ export default function Stork() {
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
-  useEffect(() => {
-    document.title = 'Stork – Delivery Stats for L&D Nurses | Nick Molargik';
-    const desc = 'Track baby deliveries and trends with Stork. Log details, analyze stats, collaborate with peers. Built with Swift & SwiftUI.';
-    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = desc;
-    // Set accent color for navbar hover on Stork
-    document.documentElement.style.setProperty('--accent', '#f97316'); // orange-500
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = storkicon as unknown as string;
-    document.head.appendChild(link);
-    const scrollToStart = () => {
-      if (carouselRefDesktop.current) {
-        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-      if (carouselRefMobile.current) {
-        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-    };
-    scrollToStart();
-    requestAnimationFrame(scrollToStart);
-    window.addEventListener('load', scrollToStart);
-    return () => {
-      window.removeEventListener('load', scrollToStart);
-      document.head.removeChild(link);
-    };
-  }, []);
+  usePageMeta({
+    title: 'Stork – Delivery Stats for L&D Nurses | Nick Molargik',
+    description: 'Track baby deliveries and trends with Stork. Log details, analyze stats, collaborate with peers. Built with Swift & SwiftUI.',
+    accentColor: ACCENT_COLOR,
+    preloadImage: storkicon,
+  });
+
+  useScrollToStart(carouselRefDesktop, carouselRefMobile);
 
   return (
     <>
       <style>{`
-        :root { --accent: #f97316; }
+        :root { --accent: ${ACCENT_COLOR}; }
         header nav a:hover, nav a:hover, .nav-link:hover {
           color: var(--accent) !important;
         }

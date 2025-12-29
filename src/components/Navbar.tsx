@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import Logo from '../assets/logolong.png'; // vite can import SVG as React component
 
 const links = [
+  { label: 'Opalite', path: '/opalite', color: '#B4A7D6' },
   { label: 'SetDeck', path: '/setdeck', color: '#65DA92' },
   { label: 'Mygra', path: '/mygra', color: '#6E60F6' },
   { label: 'Stork', path: '/stork', color: '#E8672B' },
@@ -44,8 +45,8 @@ export default function Navbar() {
                     className={base}
                     style={({ isActive }) => ({
                       ...(isActive ? { color } : {}),
-                      ['--link-accent' as any]: color
-                    })}
+                      '--link-accent': color
+                    } as React.CSSProperties)}
                   >
                     {label}
                   </NavLink>
@@ -80,8 +81,8 @@ export default function Navbar() {
                   className={`${base} block w-full`}
                   style={({ isActive }) => ({
                     ...(isActive ? { color } : {}),
-                    ['--link-accent' as any]: color
-                  })}
+                    '--link-accent': color
+                  } as React.CSSProperties)}
                   onClick={() => setOpen(false)}
                 >
                   {label}

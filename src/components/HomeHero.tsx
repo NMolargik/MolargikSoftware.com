@@ -22,7 +22,7 @@ export default function HomeHero() {
               Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. Leveraging the latest Apple frameworks to build utilities for medical, fitness, and general use.
             </p>
             <div className="flex flex-wrap gap-3">
-              {['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS'].map((platform, idx) => (
+              {['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS', 'tvOS'].map((platform, idx) => (
                 <motion.span
                   key={platform}
                   initial={{ opacity: 0, x: -20 }}

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import nickheadshot from '../assets/nickheadshot.jpeg';
 import whitelogo from '../assets/whitelogo.png';
 import Hero from '../components/Hero';
+import opaliteIcon from '../assets/opalite/opaliteicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import storkIcon from '../assets/stork/storkicon.png';
@@ -26,7 +27,7 @@ export default function About() {
       {/* Personal Hero Section */}
       <Hero
         heading="Nick Molargik"
-        description="Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Kotlin Multiplatform, Flutter, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living my best life in Indiana."
+        description="Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Kotlin Multiplatform, Flutter, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living life in Indiana."
         imageSrc={nickheadshot}
         buttonHref="/resume.pdf"
         cropImage={true}
@@ -139,7 +140,7 @@ export default function About() {
                     Founded to build Apple apps from real user needs identified through friends, family, and professional networks. Solo-developing full lifecycle—from user interviews and SwiftUI prototyping to App Store deployment and iteration.
                   </p>
                   <p>
-                    Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker), and <strong>SetDeck</strong> (Fitness companion, workout tracker.).
+                    Launched four apps in first year: <strong>Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong>Waffle</strong> (iPadOS 26 grid browser), <strong>Stork</strong> (L&D delivery tracker), and <strong>SetDeck</strong> (Fitness companion, workout tracker), followed by <strong>Opalite</strong> (color palette manager with iCloud sync, canvas, and more) in year two.
                   </p>
                   <p className="text-sm font-medium text-gray-500 italic">
                     <strong>Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user frustration transformed into intuitive solutions.
@@ -295,6 +296,22 @@ export default function About() {
         <div className="max-w-6xl mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 text-white">Featured Projects</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+
+            {/* Opalite */}
+            <div className="bg-gradient-to-br from-blue-100 to-pink-100 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">
+              <div className="p-4">
+                <img src={opaliteIcon} alt="Opalite" className="w-full h-[24rem] object-contain rounded-[2rem]" />
+              </div>
+              <div className="p-6 text-black">
+                <h3 className="text-xl font-semibold mb-2">Opalite</h3>
+                <p className="text-black-100 mb-4 text-sm">
+                  The ultimate color manager: create, organize, and share palettes with AI-generated names, contrast checking, and seamless iCloud sync.
+                </p>
+                <Link to="/opalite" className="inline-block bg-black/20 text-black px-4 py-2 rounded-md hover:bg-black/30 transition">
+                  View Project →
+                </Link>
+              </div>
+            </div>
             
             {/* SetDeck */}
             <div className="bg-gradient-to-br from-green-500 to-teal-600 rounded-lg overflow-hidden shadow-xl min-h-[30rem]">

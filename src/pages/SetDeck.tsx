@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/setdeck/screen1.png';
@@ -10,6 +10,9 @@ import screen6 from '../assets/setdeck/screen6.png';
 import screen7 from '../assets/setdeck/screen7.png';
 import screen8 from '../assets/setdeck/screen8.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import { usePageMeta, useScrollToStart } from '../hooks';
+
+const ACCENT_COLOR = '#65DA92';
 
 export default function SetDeck() {
   const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8];
@@ -19,46 +22,19 @@ export default function SetDeck() {
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
-  useEffect(() => {
-    document.title = 'SetDeck – Track Your Gym Progress | Nick Molargik';
-    const desc = 'Effortless workout logging with set-by-set tracking, water & calories, trends, and HealthKit. Built with Swift & SwiftUI.';
-    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = desc;
-    // Set accent color for navbar hover on SetDeck
-    document.documentElement.style.setProperty('--accent', '#65DA92');
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = setDeckIcon as unknown as string;
-    document.head.appendChild(link);
+  usePageMeta({
+    title: 'SetDeck – Track Your Gym Progress | Nick Molargik',
+    description: 'Effortless workout logging with set-by-set tracking, water & calories, trends, and HealthKit. Built with Swift & SwiftUI.',
+    accentColor: ACCENT_COLOR,
+    preloadImage: setDeckIcon,
+  });
 
-    const scrollToStart = () => {
-      if (carouselRefDesktop.current) {
-        carouselRefDesktop.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-      if (carouselRefMobile.current) {
-        carouselRefMobile.current.scrollTo({ left: 0, behavior: 'auto' });
-      }
-    };
-    scrollToStart();
-    requestAnimationFrame(scrollToStart);
-    window.addEventListener('load', scrollToStart);
-
-    return () => {
-      window.removeEventListener('load', scrollToStart);
-      document.head.removeChild(link);
-    };
-  }, []);
+  useScrollToStart(carouselRefDesktop, carouselRefMobile);
 
   return (
     <>
       <style>{`
-        :root { --accent: #65AA00; }
+        :root { --accent: ${ACCENT_COLOR}; }
         header nav a:hover, nav a:hover, .nav-link:hover {
           color: var(--accent) !important;
         }
