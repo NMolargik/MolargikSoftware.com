@@ -12,6 +12,7 @@ import screen8 from '../assets/setdeck/screen8.png';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
+// Official brand color: SetDeck Green Start
 const ACCENT_COLOR = '#65DA92';
 
 export default function SetDeck() {

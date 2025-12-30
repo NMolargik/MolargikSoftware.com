@@ -81,16 +81,20 @@ export default function Hero({
               ))}
             </div>
           )}
-          {showButton && (
-            <button
-              onClick={() => (window.location.href = buttonHref)}
-              className="cursor-pointer w-full h-16 relative bg-transparent"
+          {showButton && buttonHref && (
+            <a
+              href={buttonHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full h-16 relative"
+              aria-label={`Download ${heading} on the App Store`}
             >
               <img
                 src={appStoreBadge}
+                alt="Download on the App Store"
                 className="absolute inset-0 left-[-5px] h-full object-contain object-left"
               />
-            </button>
+            </a>
           )}
         </div>
       </div>

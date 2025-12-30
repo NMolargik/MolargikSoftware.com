@@ -22,7 +22,8 @@ import screen18 from '../assets/opalite/screen18.jpg';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
-const ACCENT_COLOR = '#B4A7D6';
+// Official brand color: Opalite Purple
+const ACCENT_COLOR = '#9F95AF';
 
 export default function Opalite() {
   const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18];
@@ -56,7 +57,7 @@ export default function Opalite() {
       `}</style>
       <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
         <Hero
-          heading="Opalite - Launching Very Soon!"
+          heading="Opalite - Launching Soon!"
           description="The ultimate color companion for designers, developers, and digital artists. Pick colors five different ways, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools."
           imageSrc={opaliteIcon}
           buttonHref=""
@@ -87,20 +88,33 @@ export default function Opalite() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_18px_45px_rgba(0,0,0,0.7)] sm:px-10">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#B4A7D6] to-transparent opacity-80"
+                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#9F95AF] to-transparent opacity-80"
               />
               <div className="relative space-y-6">
                 <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
                   Opalite — Your Complete Color Companion
                 </h2>
                 <p className="text-base sm:text-lg leading-relaxed text-white/80">
-                  Whether you're designing interfaces, creating digital art, or building apps, Opalite gives you professional-grade color tools in a beautifully crafted native experience.
+                  Whether you're designing interfaces, creating digital art, or building apps, Opalite gives you professional-grade color tools in a beautifully crafted native experience. Built for iPhone, iPad, Mac, and Vision Pro.
                 </p>
 
                 <hr className="my-6 border-white/10" />
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                   <div className="space-y-6">
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        What is Opalite?
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        Opalite is the ultimate color companion for designers, developers, and digital artists. Pick colors
+                        five different ways, organize with smart palettes, draw on a full-featured canvas, test accessibility,
+                        and export to your favorite tools—all from one beautifully designed app.
+                      </p>
+                    </div>
+
+                    <hr className="my-6 border-white/10 lg:hidden" />
+
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold text-white">
                         Pick Colors Your Way
@@ -112,7 +126,16 @@ export default function Opalite() {
                       </p>
                     </div>
 
-                    <hr className="my-6 border-white/10 lg:hidden" />
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Stay Organized
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        Create unlimited colors for free and group them into smart palettes with names, notes, and tags.
+                        Drag and drop to rearrange, search across your entire color library instantly, and let iCloud sync
+                        keep everything in perfect harmony across all your devices.
+                      </p>
+                    </div>
 
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold text-white">
@@ -121,7 +144,31 @@ export default function Opalite() {
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
                         Built-in WCAG contrast checker ensures AA & AAA compliance. Simulate color blindness (Protanopia,
                         Deuteranopia, Tritanopia) to verify your designs work for everyone. Auto-generated color harmonies
-                        and AI-powered color name suggestions help you create cohesive palettes.
+                        (complementary, triadic, analogous & more) and AI-powered color name suggestions help you create
+                        cohesive, memorable palettes.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Draw & Create
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        <span className="text-[#9F95AF] font-medium">Requires Onyx</span> — Unlock a full PencilKit canvas with
+                        Apple Pencil support. Use shape tools for squares, circles, triangles, lines, and arrows. Pan, zoom,
+                        and rotate with precision, and save unlimited canvas projects to bring your color palettes to life.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Export Everywhere
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        <span className="text-[#9F95AF] font-medium">Requires Onyx</span> — Take your colors anywhere: Adobe Swatch
+                        Exchange (ASE) for Photoshop and Illustrator, Procreate Swatches for iPad artists, GIMP/GPL for open-source
+                        tools, CSS custom properties for web developers, SwiftUI code for iOS developers, and PDF portfolios of
+                        your entire collection.
                       </p>
                     </div>
 
@@ -130,8 +177,17 @@ export default function Opalite() {
                         Pricing
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        <strong className="text-white">Free:</strong> Unlimited colors, 5 palettes, all creation tools, contrast checker, and more!<br />
-                        <strong className="text-white">Onyx ($4.99/year, $19.99/lifetime):</strong> Unlimited palettes, Canvas drawing experience, import/export capabilities.
+                        <strong className="text-white">Free:</strong> Unlimited colors, 5 palettes, all picking tools, contrast checker, and more!<br />
+                        <strong className="text-white">Onyx ($4.99/year or $19.99/lifetime):</strong> Unlimited palettes, Canvas drawing experience, import/export capabilities.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Start Creating with Color
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        From the solo developer at Molargik Software LLC—download Opalite and discover a better way to work with color.
                       </p>
                     </div>
                   </div>
@@ -157,7 +213,7 @@ export default function Opalite() {
                           <span>Smart Palette Organization</span>
                         </h4>
                         <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Create unlimited colors for free. Group into palettes with names, notes, and tags. Drag and drop to rearrange. Search your entire library instantly.
+                          Create unlimited colors for free. Group into palettes with names, notes, and metadata. Drag and drop to reassign. Search your entire library instantly.
                         </p>
                       </div>
 
@@ -174,7 +230,7 @@ export default function Opalite() {
                       <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
                         <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
                           <span className="text-lg">✏️</span>
-                          <span>Canvas Drawing (Requires Onyx)</span>
+                          <span>Canvas (Requires Onyx)</span>
                         </h4>
                         <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
                           Full PencilKit canvas with Apple Pencil support. Shape tools, pan/zoom/rotate, and unlimited canvas projects.

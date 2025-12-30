@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Fallback for browsers that don't support color-mix() */
+@supports not (color: color-mix(in oklab, red, blue)) {
+  :root {
+    --focus-outline-color: currentColor;
+  }
+
+  header nav a.nav-link:focus-visible,
+  nav a:focus-visible,
+  .nav-link:focus-visible {
+    outline: 2px solid var(--accent, #6D00FF);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+}
+
 :root {
   font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;

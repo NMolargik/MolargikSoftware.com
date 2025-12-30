@@ -3,12 +3,13 @@ import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import Logo from '../assets/logolong.png'; // vite can import SVG as React component
 
+// Official brand colors from Opalite Portfolio
 const links = [
-  { label: 'Opalite', path: '/opalite', color: '#B4A7D6' },
-  { label: 'SetDeck', path: '/setdeck', color: '#65DA92' },
-  { label: 'Mygra', path: '/mygra', color: '#6E60F6' },
-  { label: 'Stork', path: '/stork', color: '#E8672B' },
-  { label: 'Waffle', path: '/waffle', color: '#DFA656' },
+  { label: 'Opalite', path: '/opalite', color: '#9F95AF' },   // Opalite Purple
+  { label: 'SetDeck', path: '/setdeck', color: '#65DA92' },   // SetDeck Green Start
+  { label: 'Mygra', path: '/mygra', color: '#6E60FF' },       // Mygra Purple
+  { label: 'Stork', path: '/stork', color: '#E8672B' },       // Stork Orange
+  { label: 'Waffle', path: '/waffle', color: '#DFA656' },     // Waffle Secondary
   { label: 'About', path: '/about', color: '#3B82F6' },
 ];
 

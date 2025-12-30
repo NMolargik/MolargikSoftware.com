@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import ProjectCard from '../components/ProjectCard';
 import HomeHero from '../components/HomeHero';
 import opaliteIcon from '../assets/opalite/opaliteicon.png'
@@ -6,15 +6,36 @@ import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
-import opaliteBackground from '../assets/opalite/cardBackground.png';
-import mygraBackground from '../assets/mygra/cardBackground.png';
-import storkBackground from '../assets/stork/cardBackground.png';
-import waffleBackground from '../assets/waffle/cardBackground.png';
-import setDeckBackground from '../assets/setdeck/cardBackground.png';
+import opaliteBackground from '../assets/opalite/cardBackground.jpg';
+import mygraBackground from '../assets/mygra/cardBackground.jpg';
+import storkBackground from '../assets/stork/cardBackground.jpg';
+import waffleBackground from '../assets/waffle/cardBackground.jpg';
+import setDeckBackground from '../assets/setdeck/cardBackground.jpg';
 
 const CHRISTMAS_CHEER = true; // toggle this to enable/disable the snowfall + accumulation
 
+// Hook to detect prefers-reduced-motion
+function usePrefersReducedMotion() {
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  });
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const handler = (event: MediaQueryListEvent) => {
+      setPrefersReducedMotion(event.matches);
+    };
+    mediaQuery.addEventListener('change', handler);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+  return prefersReducedMotion;
+}
+
 export default function Home() {
+  const prefersReducedMotion = usePrefersReducedMotion();
+  const showSnow = CHRISTMAS_CHEER && !prefersReducedMotion;
   useEffect(() => {
     document.title = 'Molargik Software LLC - Indie Mobile App Development';
     const desc =
@@ -72,7 +93,7 @@ export default function Home() {
         className="relative overflow-hidden text-white"
         style={{ backgroundColor: 'rgb(36,36,36)' }}
       >
-        {CHRISTMAS_CHEER && (
+        {showSnow && (
           <>
             <SnowCanvas containerRef={snowContainerRef} />
             <SnowCapsCanvas containerRef={snowContainerRef} />
@@ -117,7 +138,7 @@ export default function Home() {
             <div className="transition-all duration-300">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
                 <ProjectCard
-                  title="Opalite - Launching Very Soon!"
+                  title="Opalite - Launching Soon!"
                   tagline="The ultimate color companion for designers, developers, and digital artists."
                   image={opaliteIcon}
                   background={opaliteBackground}

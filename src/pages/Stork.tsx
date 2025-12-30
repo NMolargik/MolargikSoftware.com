@@ -13,7 +13,8 @@ import screen9 from '../assets/stork/screen9.png';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
-const ACCENT_COLOR = '#f97316';
+// Official brand color: Stork Orange
+const ACCENT_COLOR = '#E8672B';
 
 export default function Stork() {
   const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9];
@@ -78,7 +79,7 @@ export default function Stork() {
             <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_18px_45px_rgba(0,0,0,0.7)] sm:px-10">
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#f97316] to-transparent opacity-80"
+                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#E8672B] to-transparent opacity-80"
               />
               <div className="relative space-y-6">
                 <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">

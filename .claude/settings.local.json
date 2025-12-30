@@ -5,7 +5,11 @@
       "Bash(cd:*)",
       "Bash(xargs:*)",
       "Bash(npm run lint)",
-      "Bash(npx tsc:*)"
+      "Bash(npx tsc:*)",
+      "Bash(npm run build:*)",
+      "Bash(ls:*)",
+      "Bash(cd /Users/nickmolargik/Developer/Molargik\\\\ Software\\\\ LLC/MolargikSoftware && grep:*)",
+      "Bash(cd /Users/nickmolargik/Developer/Molargik\\\\ Software\\\\ LLC/MolargikSoftware:*)"
     ]
   }
 }
