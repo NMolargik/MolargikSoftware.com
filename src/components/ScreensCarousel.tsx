@@ -30,16 +30,6 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  // Scroll to start on mount
-  useEffect(() => {
-    if (desktopRef?.current) {
-      desktopRef.current.scrollTo({ left: 0, behavior: 'auto' });
-    }
-    if (mobileRef?.current) {
-      mobileRef.current.scrollTo({ left: 0, behavior: 'auto' });
-    }
-  }, [slides, desktopRef, mobileRef]);
-
   // Open lightbox
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);

@@ -19,6 +19,7 @@ import screen15 from '../assets/opalite/screen15.jpg';
 import screen16 from '../assets/opalite/screen16.jpg';
 import screen17 from '../assets/opalite/screen17.jpg';
 import screen18 from '../assets/opalite/screen18.jpg';
+import opaliteDemo from '../assets/opalite/opaliteDemo.mov';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
@@ -79,6 +80,17 @@ export default function Opalite() {
           mobileRef={carouselRefMobile}
           altPrefix="Opalite"
         />
+        {/* Demo video */}
+        <div className="mt-12 px-4 flex justify-center">
+          <video
+            src={opaliteDemo}
+            controls
+            playsInline
+            className="max-w-full max-h-[70vh] rounded-2xl shadow-lg"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
         {/* Large text area below images */}
         <section
           aria-label="About Opalite"
