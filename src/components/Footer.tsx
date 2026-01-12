@@ -7,7 +7,7 @@ export default function Footer() {
         <span>© 2025 Molargik Software LLC</span>
 
         <span aria-live="polite" className="text-gray-400">
-          Happy Holidays
+          "Doing stuff in the pursuit of things."
         </span>
 
         <div className="flex gap-6">

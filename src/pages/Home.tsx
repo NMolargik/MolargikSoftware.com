@@ -6,13 +6,21 @@ import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
-import opaliteBackground from '../assets/opalite/cardBackground.jpg';
+import opaliteBackground from '../assets/opalite/cardBackground.png';
 import mygraBackground from '../assets/mygra/cardBackground.jpg';
 import storkBackground from '../assets/stork/cardBackground.jpg';
-import waffleBackground from '../assets/waffle/cardBackground.jpg';
-import setDeckBackground from '../assets/setdeck/cardBackground.jpg';
+import waffleBackground from '../assets/waffle/cardBackground.png';
+import setDeckBackground from '../assets/setdeck/cardBackground.png';
 
-const CHRISTMAS_CHEER = true; // toggle this to enable/disable the snowfall + accumulation
+// Automatically enable snowfall + accumulation from Nov 1 through Jan 10
+const isChristmasSeason = (): boolean => {
+  const now = new Date();
+  const month = now.getMonth(); // 0-indexed: 0 = Jan, 10 = Nov, 11 = Dec
+  const day = now.getDate();
+  // Nov 1 - Dec 31 (months 10, 11) or Jan 1-10 (month 0, day <= 10)
+  return month >= 10 || (month === 0 && day <= 10);
+};
+const CHRISTMAS_CHEER = isChristmasSeason();
 
 // Hook to detect prefers-reduced-motion
 function usePrefersReducedMotion() {
@@ -52,7 +60,9 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "☃️ Launching Soon!", title: "Opalite", description: "The ultimate color manager.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🧇 This Week", title: "Waffle 1.3", description: "Major visual cleanup, UX improvements", gradient: 'linear-gradient(135deg, #DFA656)'},
+    { date: "🏋 This Week", title: "SetDeck 2.2", description: "Apple Watch App and AI-driven muscle group tracking", gradient: 'linear-gradient(135deg, #65DA92)'},
+    { date: "☃️ Coming 1/26!", title: "Opalite", description: "The ultimate color manager.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
     { date: "🚂 2026", title: "SwiftTrain", description: "Ready to learn app development?", color: "#f97316" },
   ];
 
@@ -119,7 +129,7 @@ export default function Home() {
                       {item.title}
                     </div>
                     {item.description && (
-                      <p className="text-white">
+                      <p className="text-white max-w-48 text-sm leading-snug">
                         {item.description}
                       </p>
                     )}
@@ -138,8 +148,8 @@ export default function Home() {
             <div className="transition-all duration-300">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
                 <ProjectCard
-                  title="Opalite - Launching Soon!"
-                  tagline="The ultimate color companion for designers, developers, and digital artists."
+                  title="Opalite - Coming 1/26"
+                  tagline="The ultimate color manager for designers, developers, and digital artists."
                   image={opaliteIcon}
                   background={opaliteBackground}
                   path="/opalite"

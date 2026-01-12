@@ -1,5 +1,5 @@
 import { lazy, Suspense } from 'react';
-import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -12,11 +12,15 @@ const Stork = lazy(() => import('./pages/Stork'));
 const Mygra = lazy(() => import('./pages/Mygra'));
 const SetDeck = lazy(() => import('./pages/SetDeck'));
 const Privacy = lazy(() => import('./pages/Privacy'));
-const WaffleLanding = lazy(() => import('./pages/WaffleLanding'));
 const Waffle = lazy(() => import('./pages/Waffle'));
 const Opalite = lazy(() => import('./pages/Opalite'));
 const SwiftTrain = lazy(() => import('./pages/SwiftTrain'));
 const NotFound = lazy(() => import('./pages/NotFound'));
+
+// Opalite Web (CloudKit-connected color viewer)
+const OpaliteWebPortfolio = lazy(() => import('./pages/opalite-web/OpaliteWebPortfolio'));
+const OpaliteWebColorDetail = lazy(() => import('./pages/opalite-web/OpaliteWebColorDetail'));
+const OpaliteWebPaletteDetail = lazy(() => import('./pages/opalite-web/OpaliteWebPaletteDetail'));
 
 function PageLoader() {
   return (
@@ -39,8 +43,6 @@ export default function App() {
 }
 
 function AppShell() {
-  const location = useLocation();
-  const isWaffleRoute = location.pathname.startsWith('/waffle/') || location.pathname === '/wafflelanding';
   return (
     <div className="flex flex-col min-h-screen">
       {/* Skip to main content link for accessibility */}
@@ -50,16 +52,17 @@ function AppShell() {
       >
         Skip to main content
       </a>
-      {!isWaffleRoute && (
-        <>
-          <Navbar />
-        </>
-      )}
+      <>
+        <Navbar />
+      </>
       <main id="main-content" className="flex-1">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/opalite" element={<Opalite />} />
+            <Route path="/opalite-web" element={<OpaliteWebPortfolio />} />
+            <Route path="/opalite-web/color/:id" element={<OpaliteWebColorDetail />} />
+            <Route path="/opalite-web/palette/:id" element={<OpaliteWebPaletteDetail />} />
             <Route path="/swifttrain" element={<SwiftTrain />} />
             <Route path="/setdeck" element={<SetDeck />} />
             <Route path="/mygra" element={<Mygra />} />
@@ -68,12 +71,11 @@ function AppShell() {
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
-            <Route path="/wafflelanding" element={<WaffleLanding />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
       </main>
-      {!isWaffleRoute && <Footer />}
+      <Footer />
     </div>
   );
 }

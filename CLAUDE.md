@@ -36,8 +36,6 @@ GitHub Actions workflow (`.github/workflows/deploy.yml`) triggers on git tags ma
 
 Per-project accent colors are set via CSS variables (`--link-accent`, `--accent`) in inline `<style>` tags within page components.
 
-**Special routes:** Waffle routes (`/waffle/*`) hide the main Navbar and Footer for a standalone landing page experience.
-
 ## Tech Stack
 
 - React 19 + TypeScript (strict mode)

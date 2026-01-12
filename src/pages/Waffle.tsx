@@ -6,6 +6,7 @@ import screen2 from '../assets/waffle/screen2.png';
 import screen3 from '../assets/waffle/screen3.png';
 import screen4 from '../assets/waffle/screen4.png';
 import screen5 from '../assets/waffle/screen5.png';
+import screen6 from '../assets/waffle/screen6.png';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
@@ -13,7 +14,7 @@ import { usePageMeta, useScrollToStart } from '../hooks';
 const ACCENT_COLOR = '#DFA656';
 
 export default function Waffle() {
-  const slides = [screen1, screen2, screen3, screen4, screen5];
+  const slides = [screen1, screen2, screen3, screen4, screen5, screen6];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
@@ -48,7 +49,7 @@ export default function Waffle() {
           description="Webpage multitasking made easy on iPad."
           imageSrc={waffleicon}
           buttonHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
-          systemRequirements={["iPadOS 26+"]}
+          systemRequirements={["iPadOS 26+", "macOS 26+", "visionOS 26+"]}
         />
       </section>
       {/* Responsive screenshots section */}

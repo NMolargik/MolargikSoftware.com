@@ -9,6 +9,11 @@ import screen5 from '../assets/setdeck/screen5.png';
 import screen6 from '../assets/setdeck/screen6.png';
 import screen7 from '../assets/setdeck/screen7.png';
 import screen8 from '../assets/setdeck/screen8.png';
+import screen9 from '../assets/setdeck/screen9.png';
+import screen10 from '../assets/setdeck/screen10.png';
+import screen11 from '../assets/setdeck/screen11.png';
+import screen12 from '../assets/setdeck/screen12.png';
+import screen13 from '../assets/setdeck/screen13.png';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
@@ -16,7 +21,7 @@ import { usePageMeta, useScrollToStart } from '../hooks';
 const ACCENT_COLOR = '#65DA92';
 
 export default function SetDeck() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8];
+  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
@@ -51,7 +56,7 @@ export default function SetDeck() {
           description="Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals. Now also available on iPad!"
           imageSrc={setDeckIcon}
           buttonHref="https://apps.apple.com/us/app/setdeck/id6484503374"
-          systemRequirements={["iOS 26+", "iPadOS 26+"]}
+          systemRequirements={["iOS 18+", "iPadOS 18+", "visionOS 2+", "watchOS 11+"]}
         />
       </section>
       {/* Responsive screenshots section */}
@@ -203,7 +208,17 @@ export default function SetDeck() {
                           <span>Home Screen Widgets</span>
                         </h4>
                         <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Add SetDeck widgets to your Home Screen to instantly see today’s water intake and calorie consumption at a glance.
+                          Add SetDeck widgets to your Home Screen to instantly see today's water intake and calorie consumption at a glance.
+                        </p>
+                      </div>
+
+                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
+                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
+                          <span className="text-lg">🤖</span>
+                          <span>AI-Powered Muscle Group Tracking</span>
+                        </h4>
+                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
+                          SetDeck uses Foundation Models to automatically associate muscle groups with your exercises—no manual tagging required. It tracks your muscle group and push/pull distribution over time, helping you identify imbalances and find muscle groups that need more attention in your training.
                         </p>
                       </div>
                     </div>

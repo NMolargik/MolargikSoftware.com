@@ -1,25 +1,25 @@
 import React, { useState } from 'react';
 import opaliteIcon from '../assets/opalite/opaliteicon.png';
 import Hero from '../components/Hero';
-import screen1 from '../assets/opalite/screen1.jpg';
-import screen2 from '../assets/opalite/screen2.jpg';
-import screen3 from '../assets/opalite/screen3.jpg';
-import screen4 from '../assets/opalite/screen4.jpg';
-import screen5 from '../assets/opalite/screen5.jpg';
-import screen6 from '../assets/opalite/screen6.jpg';
-import screen7 from '../assets/opalite/screen7.jpg';
-import screen8 from '../assets/opalite/screen8.jpg';
-import screen9 from '../assets/opalite/screen9.jpg';
-import screen10 from '../assets/opalite/screen10.jpg';
-import screen11 from '../assets/opalite/screen11.jpg';
-import screen12 from '../assets/opalite/screen12.jpg';
-import screen13 from '../assets/opalite/screen13.jpg';
-import screen14 from '../assets/opalite/screen14.jpg';
-import screen15 from '../assets/opalite/screen15.jpg';
-import screen16 from '../assets/opalite/screen16.jpg';
-import screen17 from '../assets/opalite/screen17.jpg';
-import screen18 from '../assets/opalite/screen18.jpg';
-import opaliteDemo from '../assets/opalite/opaliteDemo.mov';
+import screen1 from '../assets/opalite/screen1.png';
+import screen2 from '../assets/opalite/screen2.png';
+import screen3 from '../assets/opalite/screen3.png';
+import screen4 from '../assets/opalite/screen4.png';
+import screen5 from '../assets/opalite/screen5.png';
+import screen6 from '../assets/opalite/screen6.png';
+import screen7 from '../assets/opalite/screen7.png';
+import screen8 from '../assets/opalite/screen8.png';
+import screen9 from '../assets/opalite/screen9.png';
+import screen10 from '../assets/opalite/screen10.png';
+import screen11 from '../assets/opalite/screen11.png';
+import screen12 from '../assets/opalite/screen12.png';
+import screen13 from '../assets/opalite/screen13.png';
+import screen14 from '../assets/opalite/screen14.png';
+import screen15 from '../assets/opalite/screen15.png';
+import screen16 from '../assets/opalite/screen16.png';
+import screen17 from '../assets/opalite/screen17.png';
+import screen18 from '../assets/opalite/screen18.png';
+import opaliteDemo from '../assets/opalite/opaliteDemo.mp4';
 import ScreensCarousel from '../components/ScreensCarousel';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
@@ -36,7 +36,7 @@ export default function Opalite() {
 
   usePageMeta({
     title: 'Opalite – The Ultimate Color Companion | Nick Molargik',
-    description: 'Pick colors five different ways, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools. Built with Swift & SwiftUI.',
+    description: 'Create colors using various tools, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools. Built with Swift & SwiftUI.',
     accentColor: ACCENT_COLOR,
     preloadImage: opaliteIcon,
   });
@@ -58,8 +58,8 @@ export default function Opalite() {
       `}</style>
       <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
         <Hero
-          heading="Opalite - Launching Soon!"
-          description="The ultimate color companion for designers, developers, and digital artists. Pick colors five different ways, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools."
+          heading="Opalite - Coming 1/26"
+          description="The ultimate color manager for designers, developers, and digital artists. Create colors using various tools, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools."
           imageSrc={opaliteIcon}
           buttonHref=""
           systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 9+", "macOS 15+", "visionOS 2+"]}
@@ -82,14 +82,19 @@ export default function Opalite() {
         />
         {/* Demo video */}
         <div className="mt-12 px-4 flex justify-center">
-          <video
-            src={opaliteDemo}
-            controls
-            playsInline
-            className="max-w-full max-h-[70vh] rounded-2xl shadow-lg"
-          >
-            Your browser does not support the video tag.
-          </video>
+          <div className="relative inline-block">
+            <video
+              src={opaliteDemo}
+              controls
+              playsInline
+              className="max-w-full max-h-[50vh] rounded-2xl shadow-lg"
+            >
+              Your browser does not support the video tag.
+            </video>
+            <span className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-lg">
+              Example Workflow
+            </span>
+          </div>
         </div>
         {/* Large text area below images */}
         <section
@@ -119,7 +124,7 @@ export default function Opalite() {
                         What is Opalite?
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        Opalite is the ultimate color companion for designers, developers, and digital artists. Pick colors
+                        Opalite is the ultimate color manager for designers, developers, and digital artists. Pick colors
                         five different ways, organize with smart palettes, draw on a full-featured canvas, test accessibility,
                         and export to your favorite tools—all from one beautifully designed app.
                       </p>
@@ -268,16 +273,6 @@ export default function Opalite() {
                           Your colors and palettes stay in perfect harmony across iPhone, iPad, Mac, and Vision Pro.
                         </p>
                       </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🤖</span>
-                          <span>AI Color Names</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          AI-powered suggestions give your colors meaningful, memorable names instantly.
-                        </p>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -298,7 +293,7 @@ export default function Opalite() {
             "operatingSystem": "iOS, iPadOS, macOS, visionOS",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
             "url": "https://apps.apple.com/us/app/opalite/id0000000000",
-            "description": "Opalite is the ultimate color companion for designers, developers, and digital artists. Pick colors, organize palettes, test accessibility, and export everywhere."
+            "description": "Opalite is the ultimate color manager for designers, developers, and digital artists. Pick colors, organize palettes, test accessibility, and export everywhere."
           })
         }}
       />
