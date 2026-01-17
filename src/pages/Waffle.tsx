@@ -8,6 +8,9 @@ import screen4 from '../assets/waffle/screen4.png';
 import screen5 from '../assets/waffle/screen5.png';
 import screen6 from '../assets/waffle/screen6.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import FeatureCard from '../components/FeatureCard';
+import ScrollToTop from '../components/ScrollToTop';
+import DownloadCTA from '../components/DownloadCTA';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
 // Official brand color: Waffle Secondary
@@ -43,12 +46,12 @@ export default function Waffle() {
           border-radius: 6px;
         }
       `}</style>
-      <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+      <section>
         <Hero
           heading="Waffle"
           description="Webpage multitasking made easy on iPad."
           imageSrc={waffleicon}
-          buttonHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
+          appStoreHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
           systemRequirements={["iPadOS 26+", "macOS 26+", "visionOS 26+"]}
         />
       </section>
@@ -139,76 +142,53 @@ export default function Waffle() {
                       </div>
                     </div>
 
-                    <div className="mt-4 lg:mt-0">
+                    <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
                       <h3 className="text-xl sm:text-2xl font-semibold text-white">
                         Key Features
                       </h3>
                       <div className="mt-4 grid gap-4">
-                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                            <span className="text-lg">🔳</span>
-                            <span>Adjustable Grid Layout</span>
-                          </h4>
-                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                            Dynamically add or remove rows and columns to build the perfect grid for your workflow—up to a 4×4
-                            layout of webpages on screen at once.
-                          </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                            <span className="text-lg">🪟</span>
-                            <span>Pop-Out Windows</span>
-                          </h4>
-                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                            Detach any grid cell into its own window using iPadOS multi-window, giving you even more flexibility
-                            when you need a page to stand alone.
-                          </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                            <span className="text-lg">⤢</span>
-                            <span>Maximize When You Need Focus</span>
-                          </h4>
-                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                            Bring any site front and center with a tap, then drop it back into the grid when you&apos;re ready to
-                            multitask again.
-                          </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                            <span className="text-lg">⭐️</span>
-                            <span>Presets for Your Workflows</span>
-                          </h4>
-                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                            Save your favorite grid configurations as Presets—perfect for repeatable tasks like research,
-                            dashboards, or content monitoring. Reload them instantly whenever you need them.
-                          </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                            <span className="text-lg">☁️</span>
-                            <span>Cloud Sync with SwiftData + CloudKit</span>
-                          </h4>
-                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                            Your presets and layouts sync securely across your iPads, so your favorite setups are always right
-                            where you left them.
-                          </p>
-                        </div>
-
-                        <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                          <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                            <span className="text-lg">⚡️</span>
-                            <span>Built for iPadOS 26</span>
-                          </h4>
-                          <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                            Powered by Apple&apos;s new WebView API for speed, security, and compatibility—enhanced with Liquid
-                            Glass visuals to make every grid feel polished and modern.
-                          </p>
-                        </div>
+                        <FeatureCard
+                          icon="🔳"
+                          title="Adjustable Grid Layout"
+                          description="Dynamically add or remove rows and columns to build the perfect grid for your workflow—up to a 4×4 layout of webpages on screen at once."
+                          index={0}
+                          accentColor={ACCENT_COLOR}
+                        />
+                        <FeatureCard
+                          icon="🪟"
+                          title="Pop-Out Windows"
+                          description="Detach any grid cell into its own window using iPadOS multi-window, giving you even more flexibility when you need a page to stand alone."
+                          index={1}
+                          accentColor={ACCENT_COLOR}
+                        />
+                        <FeatureCard
+                          icon="⤢"
+                          title="Maximize When You Need Focus"
+                          description="Bring any site front and center with a tap, then drop it back into the grid when you're ready to multitask again."
+                          index={2}
+                          accentColor={ACCENT_COLOR}
+                        />
+                        <FeatureCard
+                          icon="⭐️"
+                          title="Presets for Your Workflows"
+                          description="Save your favorite grid configurations as Presets—perfect for repeatable tasks like research, dashboards, or content monitoring. Reload them instantly whenever you need them."
+                          index={3}
+                          accentColor={ACCENT_COLOR}
+                        />
+                        <FeatureCard
+                          icon="☁️"
+                          title="Cloud Sync with SwiftData + CloudKit"
+                          description="Your presets and layouts sync securely across your iPads, so your favorite setups are always right where you left them."
+                          index={4}
+                          accentColor={ACCENT_COLOR}
+                        />
+                        <FeatureCard
+                          icon="⚡️"
+                          title="Built for iPadOS 26"
+                          description="Powered by Apple's new WebView API for speed, security, and compatibility—enhanced with Liquid Glass visuals to make every grid feel polished and modern."
+                          index={5}
+                          accentColor={ACCENT_COLOR}
+                        />
                       </div>
                     </div>
                   </div>
@@ -221,8 +201,14 @@ export default function Waffle() {
               </div>
             </div>
           </section>
+          <DownloadCTA
+            appName="Waffle"
+            appStoreUrl="https://apps.apple.com/us/app/waffle-browser/id6751783473"
+            accentColor={ACCENT_COLOR}
+          />
         </div>
       </section>
+      <ScrollToTop accentColor={ACCENT_COLOR} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

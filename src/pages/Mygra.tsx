@@ -15,14 +15,18 @@ import screen11 from '../assets/mygra/screen11.png';
 import screen12 from '../assets/mygra/screen12.png';
 import screen13 from '../assets/mygra/screen13.png';
 import screen14 from '../assets/mygra/screen14.png';
+import screen15 from '../assets/mygra/screen15.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import FeatureCard from '../components/FeatureCard';
+import ScrollToTop from '../components/ScrollToTop';
+import DownloadCTA from '../components/DownloadCTA';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
 // Official brand color: Mygra Purple
 const ACCENT_COLOR = '#6E60FF';
 
 export default function Mygra() {
-  const slides: string[] = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14];
+  const slides: string[] = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15];
 
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
@@ -52,12 +56,12 @@ export default function Mygra() {
         border-radius: 6px;
       }
     `}</style>
-    <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+    <section>
       <Hero
         heading="Mygra"
         description="Your Intelligent Migraine Journal."
         imageSrc={mygraicon}
-        buttonHref="https://apps.apple.com/us/app/mygra/id6747298583"
+        appStoreHref="https://apps.apple.com/us/app/mygra/id6747298583"
         systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 10.6+"]}
       />
     </section>
@@ -137,87 +141,60 @@ export default function Mygra() {
                     </div>
                   </div>
 
-                  <div className="mt-4 lg:mt-0">
+                  <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
                     <h3 className="text-xl sm:text-2xl font-semibold text-white">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📝</span>
-                          <span>Fast, Detailed Migraine Logging</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Log migraine episodes in seconds—capture date, time, severity, duration, and important context like
-                          triggers, foods, medications, and treatments so nothing gets lost.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📍</span>
-                          <span>Pinned &amp; Important Episodes</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Pin significant migraines for quick access and focused review—perfect for tracking breakthrough pain
-                          or episodes you want to discuss with your care team.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🤖</span>
-                          <span>Migraine Assistant with On‑Device AI</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Apple Intelligence helps identify potential sources of your migraines using your own history, with all
-                          analysis performed privately on your device.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🌦️</span>
-                          <span>Weather Correlations</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          See how changes in pressure, humidity, temperature, and more correlate with your migraine episodes,
-                          helping you anticipate and prepare for trouble days.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">❤️</span>
-                          <span>Apple Health Integration</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Connect with Apple Health (HealthKit) to compare migraines with factors like sleep quality, exercise,
-                          and other health metrics for a more complete picture.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🔍</span>
-                          <span>Advanced Filters &amp; Views</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Filter by severity, trigger type, time range, and more to zoom in on specific groups of migraines and
-                          understand patterns across your history.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">☁️</span>
-                          <span>iCloud Sync Across Devices</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Keep your migraine journal in sync across iPhone and iPad with secure iCloud support, so your history
-                          is always available when you need it.
-                        </p>
-                      </div>
+                      <FeatureCard
+                        icon="📝"
+                        title="Fast, Detailed Migraine Logging"
+                        description="Log migraine episodes in seconds—capture date, time, severity, duration, and important context like triggers, foods, medications, and treatments so nothing gets lost."
+                        index={0}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="📍"
+                        title="Pinned & Important Episodes"
+                        description="Pin significant migraines for quick access and focused review—perfect for tracking breakthrough pain or episodes you want to discuss with your care team."
+                        index={1}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🤖"
+                        title="Migraine Assistant with On-Device AI"
+                        description="Apple Intelligence helps identify potential sources of your migraines using your own history, with all analysis performed privately on your device."
+                        index={2}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🌦️"
+                        title="Weather Correlations"
+                        description="See how changes in pressure, humidity, temperature, and more correlate with your migraine episodes, helping you anticipate and prepare for trouble days."
+                        index={3}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="❤️"
+                        title="Apple Health Integration"
+                        description="Connect with Apple Health (HealthKit) to compare migraines with factors like sleep quality, exercise, and other health metrics for a more complete picture."
+                        index={4}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🔍"
+                        title="Advanced Filters & Views"
+                        description="Filter by severity, trigger type, time range, and more to zoom in on specific groups of migraines and understand patterns across your history."
+                        index={5}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="☁️"
+                        title="iCloud Sync Across Devices"
+                        description="Keep your migraine journal in sync across iPhone and iPad with secure iCloud support, so your history is always available when you need it."
+                        index={6}
+                        accentColor={ACCENT_COLOR}
+                      />
                     </div>
                   </div>
                 </div>
@@ -229,8 +206,14 @@ export default function Mygra() {
             </div>
           </div>
         </section>
+        <DownloadCTA
+          appName="Mygra"
+          appStoreUrl="https://apps.apple.com/us/app/mygra/id6747298583"
+          accentColor={ACCENT_COLOR}
+        />
         </div>
       </section>
+      <ScrollToTop accentColor={ACCENT_COLOR} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

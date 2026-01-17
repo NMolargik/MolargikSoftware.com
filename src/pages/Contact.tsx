@@ -1,10 +1,27 @@
 // src/pages/Contact.tsx
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { motion } from 'framer-motion';
+import { Mail } from 'lucide-react';
 import emailjs from '@emailjs/browser';
+import ScrollToTop from '../components/ScrollToTop';
+
+const ACCENT_COLOR = '#FF6C00';
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  useEffect(() => {
+    document.title = 'Contact – Nick Molargik | Molargik Software LLC';
+    const desc = 'Get in touch with Nick Molargik for collaborations, questions, or project inquiries.';
+    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
+    if (!meta) {
+      meta = document.createElement('meta');
+      meta.name = 'description';
+      document.head.appendChild(meta);
+    }
+    meta.content = desc;
+  }, []);
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -35,43 +52,83 @@ export default function Contact() {
   }
 
   return (
-    <section
-      className="relative isolate overflow-hidden text-white min-h-screen"
-      style={{ backgroundColor: 'rgb(36,36,36)' }}
-    >
-      {/* Decorative background */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
+    <>
+      <style>{`
+        :root { --accent: ${ACCENT_COLOR}; }
+        header nav a:hover, nav a:hover, .nav-link:hover {
+          color: var(--accent) !important;
+        }
+        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
+          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
+          outline-offset: 2px;
+          border-radius: 6px;
+        }
+      `}</style>
+      <section
+        className="relative isolate overflow-hidden text-white min-h-screen"
+        style={{ backgroundColor: 'rgb(36,36,36)' }}
       >
-        <div className="absolute inset-0 bg-gradient-to-b from-brandPurple/15 dark:from-brandPurple/25 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(40rem_20rem_at_50%_-5%,theme(colors.brandPurple/20)_0%,transparent_60%)] dark:bg-[radial-gradient(40rem_20rem_at_50%_-5%,theme(colors.brandPurple/30)_0%,transparent_60%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(60rem_30rem_at_110%_10%,white_0%,transparent_60%)] opacity-20 dark:opacity-30 mix-blend-overlay" />
-      </div>
+        {/* Decorative background */}
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 -z-10"
+        >
+          <div className="absolute inset-0 bg-gradient-to-b from-brandOrange/15 via-transparent to-transparent" />
+          <div className="absolute inset-0 bg-[radial-gradient(40rem_20rem_at_50%_-5%,theme(colors.brandOrange/20)_0%,transparent_60%)]" />
+        </div>
 
-      <div className="mx-auto max-w-3xl px-6 py-20 sm:py-24 lg:py-28">
-        <header className="mb-10 text-center text-white">
-          <p className="mb-2 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur">
-            <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
-            Available for new projects
-          </p>
-          <h2 className="mt-4 text-pretty text-4xl font-extrabold tracking-tight sm:text-5xl text-white">
-            Let’s Connect
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-balance text-base text-white/80">
-            Have a question, an idea, or a project in mind? Send a message and I’ll get back to you.
-          </p>
-        </header>
+        <div className="mx-auto max-w-3xl px-6 py-20 sm:py-24 lg:py-28">
+          <header className="mb-10 text-center text-white flex flex-col items-center">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5 }}
+              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20"
+            >
+              <Mail size={40} className="text-[#FF6C00]" />
+            </motion.div>
+            <motion.p
+              className="mt-4 mb-6 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1 text-xs font-medium tracking-wide text-white/90 backdrop-blur"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+            >
+              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              Available for new projects
+            </motion.p>
+            <motion.h1
+              className="mt-4 text-pretty text-4xl font-extrabold tracking-tight sm:text-5xl text-white"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              Let's Connect
+            </motion.h1>
+            <motion.p
+              className="mx-auto mt-3 max-w-2xl text-balance text-base text-white/80"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+            >
+              Have a question, an idea, or a project in mind? Send a message and I'll get back to you.
+            </motion.p>
+          </header>
 
-        <form
+        <motion.form
           ref={formRef}
           onSubmit={handleSubmit}
-          className="relative space-y-8 rounded-3xl border border-white/15 bg-white/10 dark:bg-white/5 p-8 shadow-2xl backdrop-blur-xl sm:p-10"
+          className="relative space-y-8 rounded-3xl border border-white/10 bg-white/5 p-8 shadow-[0_18px_45px_rgba(0,0,0,0.7)] backdrop-blur-xl sm:p-10"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.4 }}
         >
           <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
           <input type="hidden" name="ts" value={String(Date.now())} />
-          {/* Subtle card highlight */}
-          <div className="pointer-events-none absolute -inset-px -z-10 rounded-[1.6rem] bg-gradient-to-br from-white/20 via-transparent to-brandPurple/20 opacity-60" />
+          {/* Accent line at top */}
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#FF6C00] to-transparent opacity-80"
+          />
 
           {/* Name & Email */}
           <div className="grid gap-6 md:grid-cols-2">
@@ -82,7 +139,7 @@ export default function Contact() {
               <input
                 id="contact-name"
                 name="name"
-                className="w-full rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-white placeholder-white/60 shadow-inner outline-none transition focus:border-brandPurple/60 focus:bg-white/20 focus:ring-4 focus:ring-brandPurple/20"
+                className="w-full rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-white placeholder-white/60 shadow-inner outline-none transition focus:border-brandOrange/60 focus:bg-white/20 focus:ring-4 focus:ring-brandOrange/20"
                 placeholder="Jane Doe"
                 required
                 autoComplete="name"
@@ -98,7 +155,7 @@ export default function Contact() {
                 id="contact-email"
                 name="email"
                 type="email"
-                className="w-full rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-white placeholder-white/60 shadow-inner outline-none transition focus:border-brandPurple/60 focus:bg-white/20 focus:ring-4 focus:ring-brandPurple/20"
+                className="w-full rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-white placeholder-white/60 shadow-inner outline-none transition focus:border-brandOrange/60 focus:bg-white/20 focus:ring-4 focus:ring-brandOrange/20"
                 placeholder="you@example.com"
                 required
                 autoComplete="email"
@@ -116,7 +173,7 @@ export default function Contact() {
               id="contact-message"
               name="message"
               rows={7}
-              className="w-full resize-y rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-white placeholder-white/60 shadow-inner outline-none transition focus:border-brandPurple/60 focus:bg-white/20 focus:ring-4 focus:ring-brandPurple/20"
+              className="w-full resize-y rounded-xl border border-white/10 bg-white/15 px-4 py-3 text-base text-white placeholder-white/60 shadow-inner outline-none transition focus:border-brandOrange/60 focus:bg-white/20 focus:ring-4 focus:ring-brandOrange/20"
               placeholder="How can I help?"
               required
               disabled={state === 'sending'}
@@ -178,8 +235,10 @@ export default function Contact() {
               </p>
             )}
           </div>
-        </form>
+        </motion.form>
       </div>
     </section>
+    <ScrollToTop accentColor={ACCENT_COLOR} />
+    </>
   );
 }

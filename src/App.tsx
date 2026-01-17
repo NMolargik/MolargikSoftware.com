@@ -17,11 +17,6 @@ const Opalite = lazy(() => import('./pages/Opalite'));
 const SwiftTrain = lazy(() => import('./pages/SwiftTrain'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
-// Opalite Web (CloudKit-connected color viewer)
-const OpaliteWebPortfolio = lazy(() => import('./pages/opalite-web/OpaliteWebPortfolio'));
-const OpaliteWebColorDetail = lazy(() => import('./pages/opalite-web/OpaliteWebColorDetail'));
-const OpaliteWebPaletteDetail = lazy(() => import('./pages/opalite-web/OpaliteWebPaletteDetail'));
-
 function PageLoader() {
   return (
     <div className="flex items-center justify-center min-h-[50vh]">
@@ -60,9 +55,6 @@ function AppShell() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/opalite" element={<Opalite />} />
-            <Route path="/opalite-web" element={<OpaliteWebPortfolio />} />
-            <Route path="/opalite-web/color/:id" element={<OpaliteWebColorDetail />} />
-            <Route path="/opalite-web/palette/:id" element={<OpaliteWebPaletteDetail />} />
             <Route path="/swifttrain" element={<SwiftTrain />} />
             <Route path="/setdeck" element={<SetDeck />} />
             <Route path="/mygra" element={<Mygra />} />

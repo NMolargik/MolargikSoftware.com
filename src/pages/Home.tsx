@@ -1,13 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
-import HomeHero from '../components/HomeHero';
+import Hero from '../components/Hero';
+import logo from '../assets/whitelogo.png';
+import resumePDF from '../assets/nickmolargikresume.pdf';
 import opaliteIcon from '../assets/opalite/opaliteicon.png'
 import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import opaliteBackground from '../assets/opalite/cardBackground.png';
-import mygraBackground from '../assets/mygra/cardBackground.jpg';
+import mygraBackground from '../assets/mygra/cardBackground.png';
 import storkBackground from '../assets/stork/cardBackground.jpg';
 import waffleBackground from '../assets/waffle/cardBackground.png';
 import setDeckBackground from '../assets/setdeck/cardBackground.png';
@@ -60,9 +63,10 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "🧇 This Week", title: "Waffle 1.3", description: "Major visual cleanup, UX improvements", gradient: 'linear-gradient(135deg, #DFA656)'},
-    { date: "🏋 This Week", title: "SetDeck 2.2", description: "Apple Watch App and AI-driven muscle group tracking", gradient: 'linear-gradient(135deg, #65DA92)'},
-    { date: "☃️ Coming 1/26!", title: "Opalite", description: "The ultimate color manager.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🧇 Available Now", title: "Waffle 1.3", description: "Major visual cleanup, UX improvements", gradient: 'linear-gradient(135deg, #DFA656)'},
+    { date: "🏋 Available Now", title: "SetDeck 2.2", description: "Apple Watch App and AI-driven muscle group tracking", gradient: 'linear-gradient(135deg, #65DA92)'},
+    { date: "🧠 Available Now", title: "Mygra 1.6", description: "Calendar, Tags, Intensity Tracking, So Much More!", gradient: 'linear-gradient(135deg, #3b82f6)'},
+    { date: "🟦 Coming 1/26!", title: "Opalite", description: "The ultimate color manager.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
     { date: "🚂 2026", title: "SwiftTrain", description: "Ready to learn app development?", color: "#f97316" },
   ];
 
@@ -95,7 +99,18 @@ export default function Home() {
       pointer-events: none;
     }
       `}</style>
-      <HomeHero />
+      <Hero
+        variant="home"
+        heading="Indie Mobile App Development"
+        description="Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. Leveraging the latest Apple frameworks to build utilities for medical, fitness, and general use."
+        imageSrc={logo}
+        platforms={['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS', 'tvOS']}
+        actionButtons={[
+          { label: 'Download Résumé', href: resumePDF, variant: 'primary', download: true },
+          { label: 'GitHub', href: 'https://github.com/NMolargik', variant: 'github' },
+          { label: 'LinkedIn', href: 'https://linkedin.com/in/nicholas-molargik', variant: 'linkedin' },
+        ]}
+      />
 
       {/* Timeline + projects with snowfall */}
       <div
@@ -114,14 +129,18 @@ export default function Home() {
         <section className="mx-auto mt-16 w-full max-w-7xl px-6">
           <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Roadmap</h2>
           <div className="mt-6">
-            <ol className="relative flex flex-col md:flex-row md:justify-between border-s-4 border-red-500 md:border-s-0 md:border-t-4 border-red-500 dark:border-red-700 dark:md:border-red-700">
+            {/* Desktop: horizontal timeline */}
+            <ol
+              className="relative hidden md:flex md:justify-between border-t-4 border-red-500 dark:border-red-700"
+              aria-label="Product roadmap timeline"
+            >
               {roadmap.map((item, idx) => (
-                <li key={idx} className="relative flex-1 md:flex-initial md:w-auto ps-6 md:ps-0 py-4 md:py-0">
+                <li key={idx} className="relative flex-1" aria-label={`${item.title}: ${item.description || item.date}`}>
                   <span
-                    className="absolute left-[-0.4rem] top-1/2 md:left-1/2 md:top-0 -translate-y-1/2 md:-translate-x-1/2 md:-translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
+                    className="absolute left-1/2 -top-[2px] -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
                     style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
                   />
-                  <div className="flex flex-col items-start md:items-center text-center md:text-center gap-1 mt-2 md:mt-6">
+                  <div className="flex flex-col items-center text-center gap-1 mt-6">
                     <div className="text-sm font-semibold uppercase tracking-wide text-white">
                       {item.date}
                     </div>
@@ -129,7 +148,7 @@ export default function Home() {
                       {item.title}
                     </div>
                     {item.description && (
-                      <p className="text-white max-w-48 text-sm leading-snug">
+                      <p className="text-white max-w-48 text-sm leading-snug text-center">
                         {item.description}
                       </p>
                     )}
@@ -137,58 +156,160 @@ export default function Home() {
                 </li>
               ))}
             </ol>
+            {/* Mobile: 2 columns if >3 items, bottom-aligned */}
+            <div className={`md:hidden ${roadmap.length > 3 ? 'grid grid-cols-2 gap-x-6 items-end' : ''}`} role="region" aria-label="Product roadmap">
+              {roadmap.length > 3 ? (
+                <>
+                  {/* Left column - first half, max 3 */}
+                  <ol className="relative flex flex-col border-s-4 border-red-500 dark:border-red-700" aria-label="Current releases">
+                    {roadmap.slice(0, Math.min(3, Math.ceil(roadmap.length / 2))).map((item, idx) => (
+                      <li key={idx} className="relative ps-6 py-4" aria-label={`${item.title}: ${item.description || item.date}`}>
+                        <span
+                          className="absolute left-[-0.5rem] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
+                          style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
+                        />
+                        <div className="flex flex-col items-start text-start gap-1">
+                          <div className="text-sm font-semibold uppercase tracking-wide text-white">
+                            {item.date}
+                          </div>
+                          <div className="text-lg font-bold text-white">
+                            {item.title}
+                          </div>
+                          {item.description && (
+                            <p className="text-white text-sm leading-snug">
+                              {item.description}
+                            </p>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                  {/* Right column - second half, max 3 */}
+                  <ol className="relative flex flex-col border-s-4 border-red-500 dark:border-red-700" aria-label="Upcoming releases">
+                    {roadmap.slice(Math.min(3, Math.ceil(roadmap.length / 2)), Math.min(3, Math.ceil(roadmap.length / 2)) + 3).map((item, idx) => (
+                      <li key={idx} className="relative ps-6 py-4" aria-label={`${item.title}: ${item.description || item.date}`}>
+                        <span
+                          className="absolute left-[-0.5rem] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
+                          style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
+                        />
+                        <div className="flex flex-col items-start text-start gap-1">
+                          <div className="text-sm font-semibold uppercase tracking-wide text-white">
+                            {item.date}
+                          </div>
+                          <div className="text-lg font-bold text-white">
+                            {item.title}
+                          </div>
+                          {item.description && (
+                            <p className="text-white text-sm leading-snug">
+                              {item.description}
+                            </p>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ol>
+                </>
+              ) : (
+                <ol className="relative flex flex-col border-s-4 border-red-500 dark:border-red-700" aria-label="Product roadmap timeline">
+                  {roadmap.map((item, idx) => (
+                    <li key={idx} className="relative ps-6 py-4" aria-label={`${item.title}: ${item.description || item.date}`}>
+                      <span
+                        className="absolute left-[-0.5rem] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
+                        style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
+                      />
+                      <div className="flex flex-col items-start text-start gap-1">
+                        <div className="text-sm font-semibold uppercase tracking-wide text-white">
+                          {item.date}
+                        </div>
+                        <div className="text-lg font-bold text-white">
+                          {item.title}
+                        </div>
+                        {item.description && (
+                          <p className="text-white text-sm leading-snug">
+                            {item.description}
+                          </p>
+                        )}
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              )}
+            </div>
           </div>
         </section>
 
         {/* Latest Projects section */}
-        <section className="mx-auto mt-16 w-full max-w-7xl px-6 pb-24">
-          {/* Responsive list: mobile = horizontal carousel, md+ = 2-column grid */}
-          <div className="relative md:static">
-            {/* Responsive grid: small = 1 column list, md+ = 2 columns */}
-            <div className="transition-all duration-300">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
-                <ProjectCard
-                  title="Opalite - Coming 1/26"
-                  tagline="The ultimate color manager for designers, developers, and digital artists."
-                  image={opaliteIcon}
-                  background={opaliteBackground}
-                  path="/opalite"
-                  fitMode="contain"
-                />
-                <ProjectCard
-                  title="SetDeck"
-                  tagline="A gym companion to track & smash workout routines. Every Set Counts!"
-                  image={setDeckIcon}
-                  background={setDeckBackground}
-                  path="/setdeck"
-                  fitMode="contain"
-                />
-                <ProjectCard
-                  title="Mygra"
-                  tagline="Migraine insights powered by on-device AI."
-                  image={mygraIcon}
-                  background={mygraBackground}
-                  path="/mygra"
-                  fitMode="contain"
-                />
-                <ProjectCard
-                  title="Waffle"
-                  tagline="Webpage multitasking, managed, on iPad."
-                  image={waffleIcon}
-                  background={waffleBackground}
-                  path="/waffle"
-                  fitMode="contain"
-                />
-                <ProjectCard
-                  title="Stork"
-                  tagline="Journal and statistics for labor & delivery nurses."
-                  image={storkIcon}
-                  background={storkBackground}
-                  path="/stork"
-                  fitMode="contain"
-                />
-              </div>
-            </div>
+        <section className="mx-auto mt-16 w-full max-w-7xl px-6 pb-12">
+          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Latest Projects</h2>
+          {/* Responsive grid: small = 1 column list, md+ = 2 columns */}
+          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
+            <ProjectCard
+              title="Opalite - Coming 1/26"
+              tagline="The ultimate color manager for designers, developers, and digital artists."
+              image={opaliteIcon}
+              background={opaliteBackground}
+              path="/opalite"
+              fitMode="contain"
+              index={0}
+            />
+            <ProjectCard
+              title="SetDeck"
+              tagline="A gym companion to track & smash workout routines. Every Set Counts!"
+              image={setDeckIcon}
+              background={setDeckBackground}
+              path="/setdeck"
+              fitMode="contain"
+              index={1}
+            />
+            <ProjectCard
+              title="Mygra"
+              tagline="Migraine insights powered by on-device AI."
+              image={mygraIcon}
+              background={mygraBackground}
+              path="/mygra"
+              fitMode="contain"
+              index={2}
+            />
+            <ProjectCard
+              title="Waffle"
+              tagline="Webpage multitasking, managed, on iPad."
+              image={waffleIcon}
+              background={waffleBackground}
+              path="/waffle"
+              fitMode="contain"
+              index={3}
+            />
+            <ProjectCard
+              title="Stork"
+              tagline="Journal and statistics for labor & delivery nurses."
+              image={storkIcon}
+              background={storkBackground}
+              path="/stork"
+              fitMode="contain"
+              index={4}
+            />
+          </div>
+        </section>
+
+        {/* Call-to-action section */}
+        <section className="mx-auto w-full max-w-7xl px-6 pb-24">
+          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-sky-900/40 to-purple-900/40 px-6 py-12 sm:px-12 sm:py-16 text-center">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-60"
+            />
+            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
+              Have an app idea?
+            </h2>
+            <p className="mt-3 text-base sm:text-lg text-white/80 max-w-xl mx-auto">
+              Let's bring your vision to life with native Apple development.
+            </p>
+            <Link
+              to="/contact"
+              className="mt-6 inline-flex items-center justify-center rounded-lg bg-orange-500 hover:bg-orange-600 px-6 py-3 text-white font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
+            >
+              Get in Touch
+            </Link>
           </div>
         </section>
       </div>

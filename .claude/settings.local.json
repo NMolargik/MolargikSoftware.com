@@ -11,7 +11,10 @@
       "Bash(cd /Users/nickmolargik/Developer/Molargik\\\\ Software\\\\ LLC/MolargikSoftware && grep:*)",
       "Bash(cd /Users/nickmolargik/Developer/Molargik\\\\ Software\\\\ LLC/MolargikSoftware:*)",
       "Bash(brew install:*)",
-      "Bash(ffmpeg:*)"
+      "Bash(ffmpeg:*)",
+      "Bash(sips:*)",
+      "Bash(chmod:*)",
+      "Bash(./scripts/optimize-images.sh:*)"
     ]
   }
 }

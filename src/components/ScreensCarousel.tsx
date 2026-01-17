@@ -141,7 +141,14 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                 className="relative flex-none h-96 w-auto snap-start cursor-zoom-in focus:outline-none focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-lg p-0 m-0 bg-transparent border-none shadow-none"
                 aria-label={`View ${altPrefix} screenshot ${idx + 1} fullscreen`}
               >
-                {!loaded[globalIndex] && <LoadingSpinner />}
+                {!loaded[globalIndex] && (
+                  <div className="absolute inset-0 h-96 w-44 rounded-lg bg-neutral-800 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-pulse" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <LoadingSpinner />
+                    </div>
+                  </div>
+                )}
                 <img
                   src={src}
                   alt={`${altPrefix} screenshot ${idx + 1}`}
@@ -175,7 +182,14 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                 className="relative flex-none h-80 w-auto snap-start cursor-zoom-in focus:outline-none focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-lg p-0 m-0 bg-transparent border-none shadow-none"
                 aria-label={`View ${altPrefix} screenshot ${idx + 1} fullscreen`}
               >
-                {!loaded[globalIndex] && <LoadingSpinner />}
+                {!loaded[globalIndex] && (
+                  <div className="absolute inset-0 h-80 w-36 rounded-lg bg-neutral-800 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-pulse" />
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <LoadingSpinner />
+                    </div>
+                  </div>
+                )}
                 <img
                   src={src}
                   alt={`${altPrefix} screenshot ${idx + 1}`}

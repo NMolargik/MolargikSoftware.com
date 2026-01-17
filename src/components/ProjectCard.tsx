@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { motion } from 'framer-motion';
 
 export interface ProjectCardProps {
   title: string;
@@ -8,31 +9,50 @@ export interface ProjectCardProps {
   background: string;
   path: string;
   fitMode?: 'cover' | 'contain';
+  index?: number;
 }
+
+const MotionLink = motion.create(Link);
 
 /**
  * Project card that uses a large background image, places the existing image
  * in the bottom-right, and shows title + tagline in the bottom-left.
  */
-export default function ProjectCard({ title, tagline, image, background, path, fitMode = 'cover' }: ProjectCardProps) {
-  const bgFitClass = fitMode === 'contain' ? 'bg-contain' : 'bg-cover';
+export default function ProjectCard({ title, tagline, image, background, path, fitMode = 'cover', index = 0 }: ProjectCardProps) {
+  const imgFitClass = fitMode === 'contain' ? 'object-contain' : 'object-cover';
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [bgLoaded, setBgLoaded] = useState(false);
+
   return (
-    <Link
+    <MotionLink
       to={path}
       data-snow-card="true"
-      className="group relative block w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40 motion-safe:transition-transform motion-safe:duration-300 hover:-translate-y-0.5 focus-visible:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple shrink-0 snap-start"
+      className="group relative block w-full overflow-hidden rounded-3xl border border-white/10 shadow-2xl shadow-black/40 shrink-0 snap-start focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
       style={{ aspectRatio: '16 / 9' }}
       aria-label={`${title} — ${tagline}`}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.4, delay: index * 0.08, ease: [0.25, 0.1, 0.25, 1] }}
+      whileHover={{ scale: 1.02, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}
+      whileFocus={{ scale: 1.02, boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.5)" }}
     >
-      {/* Fallback solid background */}
-      <div className="absolute inset-0 bg-neutral-900" aria-hidden />
+      {/* Skeleton placeholder while background loads */}
+      <div className={`absolute inset-0 bg-neutral-800 transition-opacity duration-500 ${bgLoaded ? 'opacity-0' : 'opacity-100'}`} aria-hidden>
+        <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-pulse" />
+      </div>
       {/* Background image */}
       <div
-        className={`absolute inset-0 ${bgFitClass} bg-center bg-no-repeat`}
-        style={{ backgroundImage: `url(${background || image})` }}
+        className={`absolute inset-0 transition-opacity duration-500 ${bgLoaded ? 'opacity-100' : 'opacity-0'}`}
         aria-hidden
-      />
+      >
+        <img
+          src={background || image}
+          alt=""
+          className={`w-full h-full ${imgFitClass}`}
+          onLoad={() => setBgLoaded(true)}
+          loading="lazy"
+        />
+      </div>
       {/* Dark gradient for legibility */}
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/35 to-transparent transition-opacity duration-300 group-hover:opacity-70" />
       {/* Bottom overlay: text at left, image at right */}
@@ -62,6 +82,6 @@ export default function ProjectCard({ title, tagline, image, background, path, f
           </div>
         </div>
       </div>
-    </Link>
+    </MotionLink>
   );
 }

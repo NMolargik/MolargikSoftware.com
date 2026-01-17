@@ -4,10 +4,12 @@ export default function Footer() {
   return (
     <footer className="border-t border-white/10 bg-slate-950 px-6 py-8 text-center text-sm text-gray-300">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-4 sm:flex-row sm:justify-between">
-        <span>© 2025 Molargik Software LLC</span>
+        <span>© 2026 Molargik Software LLC</span>
 
-        <span aria-live="polite" className="text-gray-400">
-          "Doing stuff in the pursuit of things."
+        <span aria-live="polite" className="italic text-gray-400/80 tracking-wide">
+          <span className="text-gray-500">&mdash;</span>
+          {" "}Doing stuff in the pursuit of things{" "}
+          <span className="text-gray-500">&mdash;</span>
         </span>
 
         <div className="flex gap-6">

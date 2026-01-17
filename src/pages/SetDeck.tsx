@@ -15,6 +15,9 @@ import screen11 from '../assets/setdeck/screen11.png';
 import screen12 from '../assets/setdeck/screen12.png';
 import screen13 from '../assets/setdeck/screen13.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import FeatureCard from '../components/FeatureCard';
+import ScrollToTop from '../components/ScrollToTop';
+import DownloadCTA from '../components/DownloadCTA';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
 // Official brand color: SetDeck Green Start
@@ -50,12 +53,12 @@ export default function SetDeck() {
           border-radius: 6px;
         }
       `}</style>
-      <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+      <section>
         <Hero
           heading="SetDeck"
           description="Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals. Now also available on iPad!"
           imageSrc={setDeckIcon}
-          buttonHref="https://apps.apple.com/us/app/setdeck/id6484503374"
+          appStoreHref="https://apps.apple.com/us/app/setdeck/id6484503374"
           systemRequirements={["iOS 18+", "iPadOS 18+", "visionOS 2+", "watchOS 11+"]}
         />
       </section>
@@ -124,6 +127,18 @@ export default function SetDeck() {
 
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Build Your Ideal Training Week
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        Create custom routines in seconds and shape your ideal training week. Add SetDeck widgets to your
+                        Home Screen to instantly see today's water intake and calorie consumption at a glance. View your
+                        patterns for hydration, calories, and strength performance across exercises and sets with insightful
+                        trends and analytics.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
                         Start Building a Stronger You
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
@@ -132,104 +147,65 @@ export default function SetDeck() {
                     </div>
                   </div>
 
-                  <div className="mt-4 lg:mt-0">
+                  <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
                     <h3 className="text-xl sm:text-2xl font-semibold text-white">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📅</span>
-                          <span>Daily Routines, Clearly Organized</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Create or customize your weekly workout routine with up to seven distinct training days. Each day holds
-                          its own list of exercises to keep your sessions focused and intentional.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🏋️</span>
-                          <span>Set-By-Set Workout Flow</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Every exercise includes one or more sets—with reps, weight, RPE, or duration. As you train, log your
-                          actual results to track true progress.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📈</span>
-                          <span>Automatic Set History &amp; Strength Progression</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          SetDeck saves a history entry every time you complete a set. Over weeks and months, your stats reveal
-                          patterns, trends, and areas of growth—helping you outlift your past self every session.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">💧🔥</span>
-                          <span>Water &amp; Energy Tracking</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Swipe to log water consumed or calories taken in. See your hydration and intake trends over time to
-                          ensure you’re fueling properly for your training.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📊</span>
-                          <span>Insightful Trends &amp; Analytics</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          View your patterns for hydration, calories, and—new with SetDeck—your strength performance across
-                          exercises and sets.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🔧</span>
-                          <span>Custom Routine Builder</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Build new routines in seconds and shape your ideal training week.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📱</span>
-                          <span>Home Screen Widgets</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Add SetDeck widgets to your Home Screen to instantly see today's water intake and calorie consumption at a glance.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🤖</span>
-                          <span>AI-Powered Muscle Group Tracking</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          SetDeck uses Foundation Models to automatically associate muscle groups with your exercises—no manual tagging required. It tracks your muscle group and push/pull distribution over time, helping you identify imbalances and find muscle groups that need more attention in your training.
-                        </p>
-                      </div>
+                      <FeatureCard
+                        icon="📅"
+                        title="Daily Routines, Clearly Organized"
+                        description="Create or customize your weekly workout routine with up to seven distinct training days. Each day holds its own list of exercises to keep your sessions focused and intentional."
+                        index={0}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🏋️"
+                        title="Set-By-Set Workout Flow"
+                        description="Every exercise includes one or more sets—with reps, weight, RPE, or duration. As you train, log your actual results to track true progress."
+                        index={1}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="📈"
+                        title="Automatic Set History & Strength Progression"
+                        description="SetDeck saves a history entry every time you complete a set. Over weeks and months, your stats reveal patterns, trends, and areas of growth—helping you outlift your past self every session."
+                        index={2}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="💧🔥"
+                        title="Water & Energy Tracking"
+                        description="Swipe to log water consumed or calories taken in. See your hydration and intake trends over time to ensure you're fueling properly for your training."
+                        index={3}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🤖"
+                        title="AI-Powered Muscle Group Tracking"
+                        description="SetDeck uses Foundation Models to automatically associate muscle groups with your exercises—no manual tagging required. It tracks your muscle group and push/pull distribution over time, helping you identify imbalances and find muscle groups that need more attention in your training."
+                        index={4}
+                        accentColor={ACCENT_COLOR}
+                      />
                     </div>
                   </div>
                 </div>
+
+                <p className="mt-4 text-sm italic text-white/70">
+                  Some of SetDeck's features require iOS 26 and iPadOS 26. Others require access to Apple Intelligence.
+                </p>
               </div>
             </div>
           </div>
         </section>
+        <DownloadCTA
+          appName="SetDeck"
+          appStoreUrl="https://apps.apple.com/us/app/setdeck/id6484503374"
+          accentColor={ACCENT_COLOR}
+        />
         </div>
       </section>
+      <ScrollToTop accentColor={ACCENT_COLOR} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

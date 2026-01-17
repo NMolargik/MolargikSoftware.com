@@ -5,7 +5,7 @@ import Logo from '../assets/logolong.png'; // vite can import SVG as React compo
 
 // Official brand colors from Opalite Portfolio
 const links = [
-  { label: 'Opalite', path: '/opalite', color: '#9F95AF' },   // Opalite Purple
+  { label: 'Opalite', path: '/opalite', color: '#BBEBFC' },   // Opalite Blue
   { label: 'SetDeck', path: '/setdeck', color: '#65DA92' },   // SetDeck Green Start
   { label: 'Mygra', path: '/mygra', color: '#6E60FF' },       // Mygra Purple
   { label: 'Stork', path: '/stork', color: '#E8672B' },       // Stork Orange
@@ -22,6 +22,7 @@ export default function Navbar() {
       <style>{`
         header a.nav-link:hover {
           color: var(--link-accent) !important;
+          text-shadow: none !important;
         }
         header nav a.nav-link:focus-visible {
           outline: 2px solid color-mix(in oklab, var(--link-accent), white 25%);
@@ -45,7 +46,10 @@ export default function Navbar() {
                     end={path === '/'}
                     className={base}
                     style={({ isActive }) => ({
-                      ...(isActive ? { color } : {}),
+                      ...(isActive ? {
+                        color,
+                        textShadow: '0 0 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)'
+                      } : {}),
                       '--link-accent': color
                     } as React.CSSProperties)}
                   >
@@ -81,7 +85,10 @@ export default function Navbar() {
                   end={path === '/'}
                   className={`${base} block w-full`}
                   style={({ isActive }) => ({
-                    ...(isActive ? { color } : {}),
+                    ...(isActive ? {
+                      color,
+                      textShadow: '0 0 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)'
+                    } : {}),
                     '--link-accent': color
                   } as React.CSSProperties)}
                   onClick={() => setOpen(false)}

@@ -11,6 +11,9 @@ import screen7 from '../assets/stork/screen7.png';
 import screen8 from '../assets/stork/screen8.png';
 import screen9 from '../assets/stork/screen9.png';
 import ScreensCarousel from '../components/ScreensCarousel';
+import FeatureCard from '../components/FeatureCard';
+import ScrollToTop from '../components/ScrollToTop';
+import DownloadCTA from '../components/DownloadCTA';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
 // Official brand color: Stork Orange
@@ -46,12 +49,12 @@ export default function Stork() {
           border-radius: 6px;
         }
       `}</style>
-      <section className="bg-white/10 backdrop-blur-xl ring-1 ring-white/15 rounded-3xl">
+      <section>
         <Hero
           heading="Stork - Delivery Stats"
           description="Journal and statistics for labor & delivery nurses."
           imageSrc={storkicon}
-          buttonHref="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
+          appStoreHref="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
           systemRequirements={["iOS 18+", "iPadOS 18+"]}
         />
       </section>
@@ -141,65 +144,46 @@ export default function Stork() {
                     </div>
                   </div>
 
-                  <div className="mt-4 lg:mt-0">
+                  <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
                     <h3 className="text-xl sm:text-2xl font-semibold text-white">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🍼</span>
-                          <span>Track Every Delivery</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Record detailed information for each baby delivery — including gender, birth date, hospital, and
-                          delivery notes. Each entry adds to your Marble Jar, a beautiful visualization of weekly delivery trends.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🏥</span>
-                          <span>Explore Hospital Data</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Search hospitals with active delivery departments, view facility details, and set your default hospital
-                          to keep logs consistent and accurate.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📊</span>
-                          <span>View Trends &amp; Statistics</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          See your work come to life with charts and summaries that highlight delivery counts, baby gender ratios,
-                          and other helpful insights over time.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">📱</span>
-                          <span>Built for iOS &amp; iPadOS</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Powered by Swift and SwiftUI for a smooth, responsive experience on iPhone and iPad. Stork supports iOS
-                          and iPadOS 18+, and is designed to feel at home on every Apple device.
-                        </p>
-                      </div>
-
-                      <div className="rounded-2xl border border-white/10 bg-black/30 p-4 sm:p-5 shadow-inner">
-                        <h4 className="text-base sm:text-lg font-semibold text-white flex items-center gap-2">
-                          <span className="text-lg">🔔</span>
-                          <span>Home Screen Widget</span>
-                        </h4>
-                        <p className="mt-2 text-sm sm:text-base leading-relaxed text-white/75">
-                          Quickly check how many deliveries you&apos;ve logged this week—right from your Home Screen, without
-                          opening the app.
-                        </p>
-                      </div>
+                      <FeatureCard
+                        icon="🍼"
+                        title="Track Every Delivery"
+                        description="Record detailed information for each baby delivery — including gender, birth date, hospital, and delivery notes. Each entry adds to your Marble Jar, a beautiful visualization of weekly delivery trends."
+                        index={0}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🏥"
+                        title="Explore Hospital Data"
+                        description="Search hospitals with active delivery departments, view facility details, and set your default hospital to keep logs consistent and accurate."
+                        index={1}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="📊"
+                        title="View Trends & Statistics"
+                        description="See your work come to life with charts and summaries that highlight delivery counts, baby gender ratios, and other helpful insights over time."
+                        index={2}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="📱"
+                        title="Built for iOS & iPadOS"
+                        description="Powered by Swift and SwiftUI for a smooth, responsive experience on iPhone and iPad. Stork supports iOS and iPadOS 18+, and is designed to feel at home on every Apple device."
+                        index={3}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🔔"
+                        title="Home Screen Widget"
+                        description="Quickly check how many deliveries you've logged this week—right from your Home Screen, without opening the app."
+                        index={4}
+                        accentColor={ACCENT_COLOR}
+                      />
                     </div>
                   </div>
                 </div>
@@ -207,8 +191,14 @@ export default function Stork() {
             </div>
           </div>
         </section>
+        <DownloadCTA
+          appName="Stork"
+          appStoreUrl="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
+          accentColor={ACCENT_COLOR}
+        />
         </div>
       </section>
+      <ScrollToTop accentColor={ACCENT_COLOR} />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

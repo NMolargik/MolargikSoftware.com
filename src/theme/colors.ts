@@ -23,7 +23,7 @@ export const appColors = {
     purple: '#9F95AF',
     tan: '#DCD5CF',
     // Primary accent for UI
-    accent: '#9F95AF',
+    accent: '#BBEBFC',
   },
   setdeck: {
     blueEnd: '#113054',
