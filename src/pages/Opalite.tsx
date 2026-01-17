@@ -19,7 +19,7 @@ import screen15 from '../assets/opalite/screen15.png';
 import screen16 from '../assets/opalite/screen16.png';
 import screen17 from '../assets/opalite/screen17.png';
 import screen18 from '../assets/opalite/screen18.png';
-import opaliteDemo from '../assets/opalite/opaliteDemo.mp4';
+import opaliteDemo from '../assets/opalite/opaliteWorkflowDemo.mp4';
 import ScreensCarousel from '../components/ScreensCarousel';
 import FeatureCard from '../components/FeatureCard';
 import ScrollToTop from '../components/ScrollToTop';
