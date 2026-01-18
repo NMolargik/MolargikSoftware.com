@@ -11,7 +11,7 @@ import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import opaliteBackground from '../assets/opalite/cardBackground.png';
 import mygraBackground from '../assets/mygra/cardBackground.png';
-import storkBackground from '../assets/stork/cardBackground.jpg';
+import storkBackground from '../assets/stork/cardBackground.png';
 import waffleBackground from '../assets/waffle/cardBackground.png';
 import setDeckBackground from '../assets/setdeck/cardBackground.png';
 
@@ -253,13 +253,22 @@ export default function Home() {
               index={0}
             />
             <ProjectCard
+              title="Stork"
+              tagline="Tracking and statistics for Labor & Delivery nurses."
+              image={storkIcon}
+              background={storkBackground}
+              path="/stork"
+              fitMode="contain"
+              index={1}
+            />
+            <ProjectCard
               title="SetDeck"
               tagline="A gym companion to track & smash workout routines. Every Set Counts!"
               image={setDeckIcon}
               background={setDeckBackground}
               path="/setdeck"
               fitMode="contain"
-              index={1}
+              index={2}
             />
             <ProjectCard
               title="Mygra"
@@ -268,7 +277,7 @@ export default function Home() {
               background={mygraBackground}
               path="/mygra"
               fitMode="contain"
-              index={2}
+              index={3}
             />
             <ProjectCard
               title="Waffle"
@@ -276,15 +285,6 @@ export default function Home() {
               image={waffleIcon}
               background={waffleBackground}
               path="/waffle"
-              fitMode="contain"
-              index={3}
-            />
-            <ProjectCard
-              title="Stork"
-              tagline="Journal and statistics for labor & delivery nurses."
-              image={storkIcon}
-              background={storkBackground}
-              path="/stork"
               fitMode="contain"
               index={4}
             />

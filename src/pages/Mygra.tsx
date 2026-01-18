@@ -62,7 +62,7 @@ export default function Mygra() {
         description="Your Intelligent Migraine Journal."
         imageSrc={mygraicon}
         appStoreHref="https://apps.apple.com/us/app/mygra/id6747298583"
-        systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 10.6+"]}
+        systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 10.6+", "visionOS 2.0+"]}
       />
     </section>
       {/* Responsive screenshots section */}
@@ -135,8 +135,20 @@ export default function Mygra() {
                         Powerful Filters &amp; Organization
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        With flexible filtering and pinned episodes, Mygra makes it easy to zoom in on your most important
-                        migraines—by severity, time period, trigger type, and more—so you can focus on the events that matter most.
+                        With flexible filtering, pinned episodes, and custom tags, Mygra makes it easy to zoom in on your most important
+                        migraines—by severity, time period, trigger type, and more. Create your own tags to categorize episodes your way,
+                        tracking personal triggers or patterns that matter to you.
+                      </p>
+                    </div>
+
+                    <div>
+                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                        Visualize Your History
+                      </h3>
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                        See your migraine history come to life with an interactive calendar view and intensity charts. Spot patterns
+                        at a glance, track how your severity changes over weeks and months, and identify whether treatments are working
+                        with clear visual trends.
                       </p>
                     </div>
                   </div>
@@ -182,17 +194,10 @@ export default function Mygra() {
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
-                        icon="🔍"
-                        title="Advanced Filters & Views"
-                        description="Filter by severity, trigger type, time range, and more to zoom in on specific groups of migraines and understand patterns across your history."
-                        index={5}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
                         icon="☁️"
                         title="iCloud Sync Across Devices"
                         description="Keep your migraine journal in sync across iPhone and iPad with secure iCloud support, so your history is always available when you need it."
-                        index={6}
+                        index={5}
                         accentColor={ACCENT_COLOR}
                       />
                     </div>

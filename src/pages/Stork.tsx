@@ -10,6 +10,11 @@ import screen6 from '../assets/stork/screen6.png';
 import screen7 from '../assets/stork/screen7.png';
 import screen8 from '../assets/stork/screen8.png';
 import screen9 from '../assets/stork/screen9.png';
+import screen10 from '../assets/stork/screen10.png';
+import screen11 from '../assets/stork/screen11.png';
+import screen12 from '../assets/stork/screen12.png';
+import screen13 from '../assets/stork/screen13.png';
+import screen14 from '../assets/stork/screen14.png';
 import ScreensCarousel from '../components/ScreensCarousel';
 import FeatureCard from '../components/FeatureCard';
 import ScrollToTop from '../components/ScrollToTop';
@@ -20,7 +25,7 @@ import { usePageMeta, useScrollToStart } from '../hooks';
 const ACCENT_COLOR = '#E8672B';
 
 export default function Stork() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9];
+  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
@@ -55,7 +60,7 @@ export default function Stork() {
           description="Journal and statistics for labor & delivery nurses."
           imageSrc={storkicon}
           appStoreHref="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
-          systemRequirements={["iOS 18+", "iPadOS 18+"]}
+          systemRequirements={["iOS 18+", "iPadOS 18+", "macOS 15+", "visionOS 2+", "watchOS 11+"]}
         />
       </section>
       {/* Responsive screenshots section */}
@@ -91,7 +96,7 @@ export default function Stork() {
                 <p className="text-base sm:text-lg leading-relaxed text-white/80">
                   Stork helps medical professionals track baby deliveries, visualize trends, and celebrate every birth.
                   Designed for Labor &amp; Delivery nurses, midwives, and OB-GYNs, Stork makes it simple to record, review,
-                  and analyze delivery data — all in one intuitive iOS app.
+                  and analyze delivery data — across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro.
                 </p>
 
                 <hr className="my-6 border-white/10" />
@@ -104,8 +109,8 @@ export default function Stork() {
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
                         Stork is a focused companion for Labor &amp; Delivery professionals who want a clear picture of their work.
-                        Log every delivery with important context, track your impact over weeks and months, and bring real numbers
-                        into conversations with peers and leadership.
+                        Log every delivery with important context, organize with custom Tags, and view your history in a Calendar view.
+                        Track your impact over weeks and months, and bring real numbers into conversations with peers and leadership.
                       </p>
                     </div>
 
@@ -116,9 +121,9 @@ export default function Stork() {
                         Designed for Busy L&amp;D Teams
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        Stork is built for fast, repeatable entries that fit naturally into your shift. Instead of juggling
-                        scattered notes and spreadsheets, you can rely on a single, well-organized app that keeps your delivery
-                        history at your fingertips.
+                        Stork is built for fast, repeatable entries that fit naturally into your shift. Log deliveries quickly
+                        from your Apple Watch, check stats from Home Screen widgets, or dive deeper on your iPhone, iPad, or Mac.
+                        Your delivery history stays organized and at your fingertips.
                       </p>
                     </div>
 
@@ -152,14 +157,14 @@ export default function Stork() {
                       <FeatureCard
                         icon="🍼"
                         title="Track Every Delivery"
-                        description="Record detailed information for each baby delivery — including gender, birth date, hospital, and delivery notes. Each entry adds to your Marble Jar, a beautiful visualization of weekly delivery trends."
+                        description="Record detailed information for each baby delivery — including gender, birth date, and delivery notes. Each entry adds to your Marble Jar, a beautiful visualization of weekly delivery trends."
                         index={0}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
-                        icon="🏥"
-                        title="Explore Hospital Data"
-                        description="Search hospitals with active delivery departments, view facility details, and set your default hospital to keep logs consistent and accurate."
+                        icon="📅"
+                        title="Calendar & Tags"
+                        description="View your deliveries over the last month in a Calendar view, or organize them with custom Tags. Filter and sort your history to find exactly what you're looking for."
                         index={1}
                         accentColor={ACCENT_COLOR}
                       />
@@ -172,16 +177,23 @@ export default function Stork() {
                       />
                       <FeatureCard
                         icon="📱"
-                        title="Built for iOS & iPadOS"
-                        description="Powered by Swift and SwiftUI for a smooth, responsive experience on iPhone and iPad. Stork supports iOS and iPadOS 18+, and is designed to feel at home on every Apple device."
+                        title="On All Your Devices"
+                        description="Powered by Swift and SwiftUI for a smooth, native experience on iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro. Requires iOS 18+, iPadOS 18+, macOS 15+, watchOS 11+, or visionOS 2+."
                         index={3}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
                         icon="🔔"
-                        title="Home Screen Widget"
+                        title="Home Screen Widgets"
                         description="Quickly check how many deliveries you've logged this week—right from your Home Screen, without opening the app."
                         index={4}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="⌚"
+                        title="Apple Watch App"
+                        description="View daily stats, quickly log a new delivery, and track your steps with the built-in pedometer—all from your wrist."
+                        index={5}
                         accentColor={ACCENT_COLOR}
                       />
                     </div>
@@ -207,7 +219,7 @@ export default function Stork() {
             "@type": "SoftwareApplication",
             "name": "Stork – Delivery Stats",
             "applicationCategory": "MedicalApplication",
-            "operatingSystem": "iOS",
+            "operatingSystem": "iOS, iPadOS, macOS, watchOS, visionOS",
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
             "url": "https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
           })

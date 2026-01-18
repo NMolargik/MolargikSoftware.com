@@ -19,6 +19,9 @@ import screen15 from '../assets/opalite/screen15.png';
 import screen16 from '../assets/opalite/screen16.png';
 import screen17 from '../assets/opalite/screen17.png';
 import screen18 from '../assets/opalite/screen18.png';
+import screen19 from '../assets/opalite/screen19.png';
+import screen20 from '../assets/opalite/screen20.png';
+import screen21 from '../assets/opalite/screen21.png';
 import opaliteDemo from '../assets/opalite/opaliteWorkflowDemo.mp4';
 import ScreensCarousel from '../components/ScreensCarousel';
 import FeatureCard from '../components/FeatureCard';
@@ -30,7 +33,7 @@ import { usePageMeta, useScrollToStart } from '../hooks';
 const ACCENT_COLOR = '#BBEBFC';
 
 export default function Opalite() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18];
+  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18, screen19, screen20, screen21];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
@@ -65,7 +68,7 @@ export default function Opalite() {
           description="The ultimate color manager for designers, developers, and digital artists. Create colors using various tools, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools."
           imageSrc={opaliteIcon}
           appStoreHref="https://apps.apple.com/us/app/opalite-color-studio/id6755093664"
-          systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 9+", "macOS 15+", "visionOS 2+"]}
+          systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 9+", "macOS 15+", "visionOS 2+", "tvOS 18+"]}
         />
       </section>
       {/* Responsive screenshots section */}
