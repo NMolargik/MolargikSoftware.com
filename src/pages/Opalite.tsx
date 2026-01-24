@@ -22,6 +22,8 @@ import screen18 from '../assets/opalite/screen18.png';
 import screen19 from '../assets/opalite/screen19.png';
 import screen20 from '../assets/opalite/screen20.png';
 import screen21 from '../assets/opalite/screen21.png';
+import screen22 from '../assets/opalite/screen22.png';
+import screen23 from '../assets/opalite/screen23.png';
 import opaliteDemo from '../assets/opalite/opaliteWorkflowDemo.mp4';
 import ScreensCarousel from '../components/ScreensCarousel';
 import FeatureCard from '../components/FeatureCard';
@@ -33,7 +35,7 @@ import { usePageMeta, useScrollToStart } from '../hooks';
 const ACCENT_COLOR = '#BBEBFC';
 
 export default function Opalite() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18, screen19, screen20, screen21];
+  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18, screen19, screen20, screen21, screen22, screen23];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
@@ -62,12 +64,17 @@ export default function Opalite() {
           border-radius: 6px;
         }
       `}</style>
-      <section>
+      <section className="relative overflow-hidden">
+        {/* Now Available banner */}
+        <div className="absolute top-6 -right-11 z-20 rotate-45 bg-red-600 text-white text-xs font-bold uppercase tracking-wider py-3 pl-14 pr-8 shadow-lg">
+          Now Available
+        </div>
         <Hero
           heading="Opalite - Color Studio"
           description="The ultimate color manager for designers, developers, and digital artists. Create colors using various tools, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools."
           imageSrc={opaliteIcon}
           appStoreHref="https://apps.apple.com/us/app/opalite-color-studio/id6755093664"
+          githubHref="https://github.com/NMolargik/Opalite"
           systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 9+", "macOS 15+", "visionOS 2+", "tvOS 18+"]}
         />
       </section>
@@ -120,7 +127,7 @@ export default function Opalite() {
                   Opalite — The Ultimate Color Manager
                 </h2>
                 <p className="text-base sm:text-lg leading-relaxed text-white/80">
-                  Whether you're designing interfaces, creating digital art, or building apps, Opalite gives you professional-grade color tools in a beautifully crafted native experience. Built for iPhone, iPad, Mac, and Vision Pro.
+                  Whether you're designing interfaces, creating digital art, or building apps, Opalite gives you professional-grade color tools in a beautifully crafted native experience. Built for iPhone, iPad, Mac, Apple Watch, and Vision Pro.
                 </p>
 
                 <hr className="my-6 border-white/10" />
@@ -133,7 +140,7 @@ export default function Opalite() {
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
                         Opalite is the ultimate color manager for designers, developers, and digital artists. Pick colors
-                        five different ways, organize with smart palettes, draw on a full-featured canvas, test accessibility,
+                        six different ways, organize with smart palettes, contribute to a growing community of colors and palettes, draw on a full-featured canvas, test accessibility,
                         and export to your favorite tools—all from one beautifully designed app.
                       </p>
                     </div>
@@ -199,16 +206,6 @@ export default function Opalite() {
 
                     <div>
                       <h3 className="text-xl sm:text-2xl font-semibold text-white">
-                        Pricing
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        <strong className="text-white">Free:</strong> Unlimited colors, 5 palettes, all picking tools, contrast checker, and more!<br />
-                        <strong className="text-white">Onyx ($4.99/year or $19.99/lifetime):</strong> Unlimited palettes, Canvas drawing experience, import/export capabilities.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
                         Start Creating with Color
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
@@ -224,8 +221,15 @@ export default function Opalite() {
                     <div className="mt-4 grid gap-4">
                       <FeatureCard
                         icon="🎨"
-                        title="Five Color Pickers"
-                        description="Grid swatches, spectrum slider, RGB/HSL sliders, direct code entry, and camera/photo sampling—pick colors however feels natural."
+                        title="Six Color Pickers"
+                        description="Grid swatches, spectrum slider, Shuffle, RGB/HSL sliders, direct code entry, and camera/photo sampling—pick colors however feels natural."
+                        index={0}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🌎"
+                        title="Contribute to the Community"
+                        description="Browse and contribute to a growing library of user-submitted colors and palettes. Share your creations with designers worldwide."
                         index={0}
                         accentColor={ACCENT_COLOR}
                       />
@@ -260,8 +264,15 @@ export default function Opalite() {
                       <FeatureCard
                         icon="☁️"
                         title="iCloud Sync"
-                        description="Your colors and palettes stay in perfect harmony across iPhone, iPad, Mac, and Vision Pro."
+                        description="Your colors and palettes stay in perfect harmony across iPhone, iPad, Mac, Apple Watch, and Vision Pro."
                         index={5}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="💎"
+                        title="Onyx Subscription"
+                        description="Free: Unlimited colors, 5 palettes, all picking tools, contrast checker, and more! Onyx ($4.99/year or $19.99 lifetime): Unlimited palettes, Canvas drawing, downloads from the Community, and advanced import/export capabilities."
+                        index={6}
                         accentColor={ACCENT_COLOR}
                       />
                     </div>

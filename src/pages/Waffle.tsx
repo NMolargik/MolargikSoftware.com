@@ -52,6 +52,7 @@ export default function Waffle() {
           description="Webpage multitasking made easy on iPad."
           imageSrc={waffleicon}
           appStoreHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
+          githubHref="https://github.com/NMolargik/Waffle"
           systemRequirements={["iPadOS 26+", "macOS 26+", "visionOS 26+"]}
         />
       </section>

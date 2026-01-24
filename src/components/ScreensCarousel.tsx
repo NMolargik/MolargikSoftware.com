@@ -129,7 +129,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
       <div className={`hidden md:block px-4 ${desktopWrapperClassName ?? ''}`}>
         <div
           ref={desktopRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-3 justify-start"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-3 justify-center"
         >
           {slides.map((src, idx) => {
             const globalIndex = offset + idx;
@@ -170,7 +170,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
       <div className={`md:hidden mt-2 ${mobileWrapperClassName ?? ''}`}>
         <div
           ref={mobileRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-3 justify-start"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-3 justify-center"
         >
           {slides.map((src, idx) => {
             const globalIndex = offset + idx;

@@ -14,7 +14,10 @@
       "Bash(ffmpeg:*)",
       "Bash(sips:*)",
       "Bash(chmod:*)",
-      "Bash(./scripts/optimize-images.sh:*)"
+      "Bash(./scripts/optimize-images.sh:*)",
+      "Bash(git stash pop)",
+      "Bash(git stash drop)",
+      "Bash(git push --force origin main)"
     ]
   }
 }

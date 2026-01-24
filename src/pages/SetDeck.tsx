@@ -59,6 +59,7 @@ export default function SetDeck() {
           description="Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals. Now also available on iPad!"
           imageSrc={setDeckIcon}
           appStoreHref="https://apps.apple.com/us/app/setdeck/id6484503374"
+          githubHref="https://github.com/NMolargik/SetDeck"
           systemRequirements={["iOS 18+", "iPadOS 18+", "visionOS 2+", "watchOS 11+"]}
         />
       </section>

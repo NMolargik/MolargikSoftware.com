@@ -63,11 +63,8 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "🧇 Available Now", title: "Waffle 1.3", description: "Major visual cleanup, UX improvements", gradient: 'linear-gradient(135deg, #DFA656)'},
-    { date: "🏋 Available Now", title: "SetDeck 2.2", description: "Apple Watch App and AI-driven muscle group tracking", gradient: 'linear-gradient(135deg, #65DA92)'},
-    { date: "🧠 Available Now", title: "Mygra 1.6", description: "Calendar, Tags, Intensity Tracking, So Much More!", gradient: 'linear-gradient(135deg, #3b82f6)'},
-    { date: "🟦 Coming 1/26!", title: "Opalite", description: "The ultimate color manager.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
-    { date: "🚂 2026", title: "SwiftTrain", description: "Ready to learn app development?", color: "#f97316" },
+    { date: "🟦 Now Available!", title: "Opalite", description: "The ultimate color manager. Create colors, group into palettes, use on a canvas, upload to the community, share, export, compare, contrast. Your colors. Whatever you want to do with them.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🚂 Coming Mid-2026", title: "SwiftTrain", description: "Ready to learn iOS app development? All aboard!", color: "#f97316" },
   ];
 
   const snowContainerRef = useRef<HTMLDivElement | null>(null);
@@ -148,7 +145,7 @@ export default function Home() {
                       {item.title}
                     </div>
                     {item.description && (
-                      <p className="text-white max-w-48 text-sm leading-snug text-center">
+                      <p className="text-white max-w-sm text-sm leading-snug text-center">
                         {item.description}
                       </p>
                     )}
@@ -244,7 +241,7 @@ export default function Home() {
           {/* Responsive grid: small = 1 column list, md+ = 2 columns */}
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
             <ProjectCard
-              title="Opalite - Coming 1/26"
+              title="Opalite"
               tagline="The ultimate color manager for designers, developers, and digital artists."
               image={opaliteIcon}
               background={opaliteBackground}

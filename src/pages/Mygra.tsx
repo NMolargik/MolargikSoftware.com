@@ -62,6 +62,7 @@ export default function Mygra() {
         description="Your Intelligent Migraine Journal."
         imageSrc={mygraicon}
         appStoreHref="https://apps.apple.com/us/app/mygra/id6747298583"
+        githubHref="https://github.com/NMolargik/Mygra"
         systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 10.6+", "visionOS 2.0+"]}
       />
     </section>
