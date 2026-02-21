@@ -63,7 +63,8 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "🟦 Now Available!", title: "Opalite", description: "The ultimate color manager. Create colors, group into palettes, use on a canvas, upload to the community, share, export, compare, contrast. Your colors. Whatever you want to do with them.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🟦 Now Available!", title: "Opalite 1.2", description: "The ultimate color manager. Create colors, group into palettes, sketch on a canvas, upload to the community, share, export, compare, contrast, and even immerse yourself in color on Apple Vision Pro. Your colors, wherever you go.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "✨ Updates Rolling Out", title: "Stork 2.3 & SetDeck 2.3", description: "Stork: View historical delivery jars and weekly step count trends. SetDeck: Acheivements keep users working towards their goals.", color: "#1173C6" },
     { date: "🚂 Coming Mid-2026", title: "SwiftTrain", description: "Ready to learn iOS app development? All aboard!", color: "#f97316" },
   ];
 
@@ -99,7 +100,7 @@ export default function Home() {
       <Hero
         variant="home"
         heading="Indie Mobile App Development"
-        description="Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. Leveraging the latest Apple frameworks to build utilities for medical, fitness, and general use."
+        description="Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. Leveraging the latest Apple frameworks to build utilities for medical professionals, graphic designers, and for general use."
         imageSrc={logo}
         platforms={['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS', 'tvOS']}
         actionButtons={[
@@ -128,7 +129,7 @@ export default function Home() {
           <div className="mt-6">
             {/* Desktop: horizontal timeline */}
             <ol
-              className="relative hidden md:flex md:justify-between border-t-4 border-red-500 dark:border-red-700"
+              className="relative hidden md:flex md:justify-between gap-x-12 border-t-4 border-red-500 dark:border-red-700"
               aria-label="Product roadmap timeline"
             >
               {roadmap.map((item, idx) => (
@@ -299,7 +300,7 @@ export default function Home() {
               Have an app idea?
             </h2>
             <p className="mt-3 text-base sm:text-lg text-white/80 max-w-xl mx-auto">
-              Let's bring your vision to life with native Apple development.
+              Let's bring your vision to life with native mobile development.
             </p>
             <Link
               to="/contact"

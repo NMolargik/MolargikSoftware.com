@@ -75,7 +75,7 @@ export default function Opalite() {
           imageSrc={opaliteIcon}
           appStoreHref="https://apps.apple.com/us/app/opalite-color-studio/id6755093664"
           githubHref="https://github.com/NMolargik/Opalite"
-          systemRequirements={["iOS 18+", "iPadOS 18+", "watchOS 9+", "macOS 15+", "visionOS 2+", "tvOS 18+"]}
+          systemRequirements={["iOS 18.4+", "iPadOS 18.4+", "watchOS 10+", "macOS 15+", "visionOS 26.2+", "tvOS 18+"]}
         />
       </section>
       {/* Responsive screenshots section */}
@@ -290,7 +290,7 @@ export default function Opalite() {
           appName="Opalite"
           appStoreUrl="https://apps.apple.com/us/app/opalite-color-studio/id6755093664"
           accentColor={ACCENT_COLOR}
-          preorder={true}
+          preorder={false}
         />
         </div>
       </section>

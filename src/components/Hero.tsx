@@ -1,4 +1,4 @@
-import { motion } from "framer-motion";
+import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { useState } from "react";
 import appStoreBadge from "../assets/appStore.svg";
 import LoadingSpinner from "./LoadingSpinner";
@@ -27,8 +27,8 @@ interface HeroProps {
   gradientHeading?: boolean;
 }
 
-// 3D tilt animation for images with dynamic drop shadow
-const tiltAnimation = {
+// Automatic 3D tilt for mobile (no cursor)
+const mobileTiltAnimation = {
   animate: {
     rotateX: [0, 6, 0, -6, 0],
     rotateY: [0, -6, 0, 6, 0],
@@ -74,6 +74,35 @@ export default function Hero({
   const pills = isHome ? platforms : systemRequirements;
   const HeadingTag = isHome ? 'h1' : 'h2';
 
+  // Cursor-tracking 3D tilt for desktop
+  const rotateX = useMotionValue(0);
+  const rotateY = useMotionValue(0);
+  const springConfig = { stiffness: 150, damping: 20 };
+  const springRotateX = useSpring(rotateX, springConfig);
+  const springRotateY = useSpring(rotateY, springConfig);
+  const cursorFilter = useTransform(
+    [springRotateX, springRotateY],
+    ([rx, ry]) => {
+      const sx = -(ry as number) * 0.8;
+      const sy = 8 + (rx as number) * 0.5;
+      return `drop-shadow(${sx}px ${sy}px 12px rgba(0, 0, 0, 0.45))`;
+    }
+  );
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const offsetX = (e.clientX - (rect.left + rect.width / 2)) / (rect.width / 2);
+    const offsetY = (e.clientY - (rect.top + rect.height / 2)) / (rect.height / 2);
+    const maxTilt = 15;
+    rotateY.set(offsetX * maxTilt);
+    rotateX.set(-offsetY * maxTilt);
+  };
+
+  const handleMouseLeave = () => {
+    rotateX.set(0);
+    rotateY.set(0);
+  };
+
   return (
     <section className="relative w-full overflow-hidden">
       {/* Background */}
@@ -99,8 +128,8 @@ export default function Hero({
                   alt={`${heading} Icon`}
                   className={`w-20 h-20 rounded-lg ${cropImage ? "object-cover" : "object-contain"} transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
                   onLoad={() => setImageLoaded(true)}
-                  animate={tiltAnimation.animate}
-                  transition={tiltAnimation.transition}
+                  animate={mobileTiltAnimation.animate}
+                  transition={mobileTiltAnimation.transition}
                   style={{ transformStyle: "preserve-3d" }}
                 />
               </div>
@@ -202,10 +231,12 @@ export default function Hero({
             )}
           </div>
 
-          {/* Image - Desktop */}
+          {/* Image - Desktop (cursor-tracking 3D tilt) */}
           <div
             className={`hidden md:flex justify-center flex-shrink-0 ${isHome ? 'w-full md:w-auto' : 'flex-1 max-w-[22rem]'}`}
             style={{ perspective: "800px" }}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
           >
             {!imageLoaded && !isHome && <LoadingSpinner size="lg" />}
             <motion.img
@@ -213,9 +244,12 @@ export default function Hero({
               alt={heading}
               className={`w-full ${isHome ? 'max-w-[18rem] md:max-w-[22rem]' : 'h-full max-w-[22rem]'} rounded-xl ${cropImage ? "object-cover" : "object-contain"} transition-opacity duration-300 ${imageLoaded ? "opacity-100" : "opacity-0"}`}
               onLoad={() => setImageLoaded(true)}
-              animate={tiltAnimation.animate}
-              transition={tiltAnimation.transition}
-              style={{ transformStyle: "preserve-3d" }}
+              style={{
+                transformStyle: "preserve-3d",
+                rotateX: springRotateX,
+                rotateY: springRotateY,
+                filter: cursorFilter,
+              }}
             />
           </div>
         </div>

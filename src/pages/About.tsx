@@ -127,28 +127,31 @@ export default function About() {
                       <span className="block leading-tight">Present</span>
                     </div>
                     {/* Single-line (md+) */}
-                    <div className="hidden md:flex items-center justify-center gap-1 px-2 whitespace-nowrap">
-                      <span>2024</span>
-                      <span className="text-xs opacity-80">to</span>
-                      <span>Present</span>
+                    <div className="hidden md:flex flex-col items-center justify-center gap-0.5 px-2 whitespace-nowrap">
+                      <div className="flex items-center gap-1">
+                        <span>2024</span>
+                        <span className="text-xs opacity-80">to</span>
+                        <span>Present</span>
+                      </div>
+                      <span className="text-[0.65rem] opacity-60">Contractor → Engineer → Senior</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex-1 md:order-1">
-                  <h3 className="text-2xl font-semibold mb-2 text-white">Software Engineer</h3>
+                  <h3 className="text-2xl font-semibold mb-2 text-white">Senior Mobile Software Engineer</h3>
                   <h4 className="text-xl text-white/60 mb-4">V1 Sports</h4>
                   <div className="space-y-3 text-white/80 leading-relaxed">
                     <p>
-                      Transitioned from contractor to full-time, leading mobile development for V1's flagship apps (Coach, Golf, Baseball). Utilized <strong className="text-white">Kotlin Multiplatform</strong> to unify video analysis and camera systems across iOS/Android, reducing code duplication while maintaining native performance.
+                      Built a custom <strong className="text-white">golf ball tracer</strong> from scratch—training a YOLO-based detection model on 28,000 images, converting it to <strong className="text-white">CoreML</strong> for on-device inference, and designing a multi-phase tracking algorithm with trajectory-based detection gating and cluster rejection using Apple's <strong className="text-white">Vision framework</strong>.
                     </p>
                     <p>
-                      Engineered a custom <strong className="text-white">C library</strong> interfacing with SensorEdge pressure mats, processing biomechanical data into real-time Swift heat map visualizations for golf swing analysis—enabling coaches to provide precise stance feedback to athletes.
+                      Delivered a production <strong className="text-white">video pipeline</strong> processing frames at 120 FPS with real-time shot trace rendering. Developed cross-platform video composition using <strong className="text-white">Kotlin Multiplatform</strong>, AVFoundation, and FFmpeg, improving playback and stitching on iOS and Android.
                     </p>
                     <p>
-                      Developed <strong className="text-white">Flutter Native Plugins</strong> bridging camera capture between Flutter and native iOS/Android implementations. Led the creation of <strong className="text-white">Developer QA Sessions</strong>, establishing peer review processes that improved code quality without formal QA resources.
+                      Built camera capture features in Swift and AVFoundation, packaged as a <strong className="text-white">Flutter Native Plugin</strong> with Codemagic CI/CD. Integrated a pressure mat device via custom <strong className="text-white">C library</strong>, generating real-time heat maps and biomechanics feedback.
                     </p>
                     <p className="text-sm font-medium text-white/50 italic">
-                      <strong className="text-white/70">Impact:</strong> Enhanced video analysis tools used by thousands of coaches/athletes; delivered hardware integration enabling new revenue streams through advanced analytics.
+                      <strong className="text-white/70">Impact:</strong> Authored system architecture documentation enabling rapid onboarding; led cross-functional discussions and architectural refactors that accelerated feature deployment.
                     </p>
                   </div>
                 </div>

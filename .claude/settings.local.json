@@ -17,7 +17,10 @@
       "Bash(./scripts/optimize-images.sh:*)",
       "Bash(git stash pop)",
       "Bash(git stash drop)",
-      "Bash(git push --force origin main)"
+      "Bash(git push --force origin main)",
+      "WebFetch(domain:www.cityoffortwayne.in.gov)",
+      "WebFetch(domain:policeactivitylog.acfw.net)",
+      "WebSearch"
     ]
   }
 }

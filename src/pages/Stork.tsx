@@ -61,7 +61,7 @@ export default function Stork() {
           imageSrc={storkicon}
           appStoreHref="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
           githubHref="https://github.com/NMolargik/Stork"
-          systemRequirements={["iOS 18+", "iPadOS 18+", "macOS 15+", "visionOS 2+", "watchOS 11+"]}
+          systemRequirements={["iOS 18+", "iPadOS 18+", "macOS 15+", "visionOS 26+", "watchOS 11.6+"]}
         />
       </section>
       {/* Responsive screenshots section */}
