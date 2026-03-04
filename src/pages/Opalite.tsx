@@ -24,6 +24,11 @@ import screen20 from '../assets/opalite/screen20.png';
 import screen21 from '../assets/opalite/screen21.png';
 import screen22 from '../assets/opalite/screen22.png';
 import screen23 from '../assets/opalite/screen23.png';
+import screen24 from '../assets/opalite/screen24.png';
+import screen25 from '../assets/opalite/screen25.png';
+import screen26 from '../assets/opalite/screen26.png';
+import screen27 from '../assets/opalite/screen27.png';
+import screen28 from '../assets/opalite/screen28.png';
 import opaliteDemo from '../assets/opalite/opaliteWorkflowDemo.mp4';
 import ScreensCarousel from '../components/ScreensCarousel';
 import FeatureCard from '../components/FeatureCard';
@@ -35,7 +40,7 @@ import { usePageMeta, useScrollToStart } from '../hooks';
 const ACCENT_COLOR = '#BBEBFC';
 
 export default function Opalite() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18, screen19, screen20, screen21, screen22, screen23];
+  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18, screen19, screen20, screen21, screen22, screen23, screen24, screen25, screen26, screen27, screen28];
   const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 

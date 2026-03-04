@@ -63,7 +63,7 @@ export default function Home() {
   }, []);
 
   const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "🟦 Now Available!", title: "Opalite 1.2", description: "The ultimate color manager. Create colors, group into palettes, sketch on a canvas, upload to the community, share, export, compare, contrast, and even immerse yourself in color on Apple Vision Pro. Your colors, wherever you go.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
+    { date: "🟦 Now Available!", title: "Opalite 1.3", description: "The ultimate color manager. Create colors, group into palettes, sketch on a canvas, upload to the community, share, export, compare, contrast, and even immerse yourself in color on Apple Vision Pro. Your colors, wherever you go.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
     { date: "✨ Updates Rolling Out", title: "Stork 2.3 & SetDeck 2.3", description: "Stork: View historical delivery jars and weekly step count trends. SetDeck: Acheivements keep users working towards their goals.", color: "#1173C6" },
     { date: "🚂 Coming Mid-2026", title: "SwiftTrain", description: "Ready to learn iOS app development? All aboard!", color: "#f97316" },
   ];
