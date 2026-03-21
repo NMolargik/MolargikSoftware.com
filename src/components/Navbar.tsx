@@ -1,114 +1,127 @@
 import { Menu, X } from 'lucide-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
-import Logo from '../assets/logolong.png'; // vite can import SVG as React component
+import { motion, AnimatePresence } from 'framer-motion';
+import Logo from '../assets/logoLong.png';
 
-// Official brand colors from Opalite Portfolio
 const links = [
-  { label: 'Opalite', path: '/opalite', color: '#BBEBFC' },   // Opalite Blue
-  { label: 'SetDeck', path: '/setdeck', color: '#65DA92' },   // SetDeck Green Start
-  { label: 'Mygra', path: '/mygra', color: '#6E60FF' },       // Mygra Purple
-  { label: 'Stork', path: '/stork', color: '#E8672B' },       // Stork Orange
-  { label: 'Waffle', path: '/waffle', color: '#DFA656' },     // Waffle Secondary
-  { label: 'About', path: '/about', color: '#3B82F6' },
+  { label: 'Opalite', path: '/opalite' },
+  { label: 'SetDeck', path: '/setdeck' },
+  { label: 'Mygra', path: '/mygra' },
+  { label: 'Stork', path: '/stork' },
+  { label: 'Waffle', path: '/waffle' },
+  { label: 'V1 Sports', path: '/v1sports' },
+  { label: 'About', path: '/about' },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
-  const base = 'nav-link px-3 py-2 rounded-md font-semibold text-gray-700/90 hover:bg-gray-100 hover:text-[var(--link-accent)] transition';
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 50);
+    window.addEventListener('scroll', handler, { passive: true });
+    return () => window.removeEventListener('scroll', handler);
+  }, []);
+
+  const linkClass =
+    'px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-brandOrange hover:bg-orange-50/80 transition-all duration-200';
+  const activeLinkClass =
+    'px-3 py-2 rounded-lg text-sm font-semibold text-gray-900 bg-gray-100/60';
 
   return (
-    <>
-      <style>{`
-        header a.nav-link:hover {
-          color: var(--link-accent) !important;
-          text-shadow: none !important;
-        }
-        header nav a.nav-link:focus-visible {
-          outline: 2px solid color-mix(in oklab, var(--link-accent), white 25%);
-          outline-offset: 2px;
-          border-radius: 6px;
-        }
-      `}</style>
-      <header className="sticky top-0 z-50 bg-white/80 border-b border-black/5 backdrop-blur shadow-sm">
-        <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
-          {/* logo */}
-          <Link to="/" className="w-auto flex items-center gap-2">
-            <img src={Logo} alt="Logo" className="max-w-[280px] object-contain" />
-          </Link>
-          {/* desktop links */}
-          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-            <ul className="hidden gap-1 lg:flex items-center">
-              {links.map(({ label, path, color }) => (
+    <header
+      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-white/90 backdrop-blur-xl shadow-sm'
+          : 'bg-transparent'
+      }`}
+    >
+      {/* Subtle orange accent line */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-[1.5px] transition-opacity duration-300"
+        style={{
+          background: 'linear-gradient(90deg, transparent, #FF6C00 30%, #FF6C00 70%, transparent)',
+          opacity: scrolled ? 0.35 : 0,
+        }}
+      />
+      <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
+        {/* Logo */}
+        <Link to="/" className="flex items-center gap-2">
+          <img src={Logo} alt="Molargik Software" className="h-6 w-auto" />
+        </Link>
+
+        {/* Desktop links — absolutely centered */}
+        <ul className="hidden gap-1 lg:flex items-center list-none absolute left-1/2 -translate-x-1/2">
+          {links.map(({ label, path }) => (
+            <li key={path}>
+              <NavLink
+                to={path}
+                end={path === '/'}
+                className={({ isActive }) => (isActive ? activeLinkClass : linkClass)}
+              >
+                {label}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        {/* Contact button */}
+        <Link
+          to="/contact"
+          className="hidden lg:inline-block rounded-full bg-brandPurple px-5 py-2 text-sm font-medium text-white hover:bg-brandPurple/90 transition-colors"
+        >
+          Contact
+        </Link>
+
+        {/* Hamburger */}
+        <button
+          onClick={() => setOpen(!open)}
+          className="lg:hidden text-gray-700 p-1"
+          aria-label="Toggle navigation"
+        >
+          {open ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </nav>
+
+      {/* Mobile menu */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden overflow-hidden bg-white border-b border-gray-200"
+          >
+            <ul className="space-y-1 px-6 pb-4 pt-2 list-none">
+              {links.map(({ label, path }) => (
                 <li key={path}>
                   <NavLink
                     to={path}
                     end={path === '/'}
-                    className={base}
-                    style={({ isActive }) => ({
-                      ...(isActive ? {
-                        color,
-                        textShadow: '0 0 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)'
-                      } : {}),
-                      '--link-accent': color
-                    } as React.CSSProperties)}
+                    className={({ isActive }) =>
+                      `block w-full ${isActive ? activeLinkClass : linkClass}`
+                    }
+                    onClick={() => setOpen(false)}
                   >
                     {label}
                   </NavLink>
                 </li>
               ))}
-            </ul>
-          </div>
-          {/* contact button */}
-          <Link
-            to="/contact"
-            className="hidden rounded-md bg-[#f97316] px-4 py-2 text-sm font-semibold text-white hover:bg-[#fb923c] lg:inline-block hover:text-white"
-          >
-            Contact
-          </Link>
-          {/* hamburger */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="lg:hidden"
-            aria-label="Toggle navigation"
-          >
-            {open ? <X size={24} /> : <Menu size={24} />}
-          </button>
-        </nav>
-        {/* mobile menu */}
-        {open && (
-          <ul className="space-y-1 border-t bg-white px-6 pb-4 pt-3 lg:hidden">
-            {links.map(({ label, path, color }) => (
-              <li key={path}>
-                <NavLink
-                  to={path}
-                  end={path === '/'}
-                  className={`${base} block w-full`}
-                  style={({ isActive }) => ({
-                    ...(isActive ? {
-                      color,
-                      textShadow: '0 0 8px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2)'
-                    } : {}),
-                    '--link-accent': color
-                  } as React.CSSProperties)}
+              <li>
+                <Link
+                  to="/contact"
+                  className="mt-2 block rounded-full bg-brandPurple px-5 py-2 text-sm font-medium text-white text-center hover:bg-brandPurple/90 transition-colors"
                   onClick={() => setOpen(false)}
                 >
-                  {label}
-                </NavLink>
+                  Contact
+                </Link>
               </li>
-            ))}
-            <li>
-              <Link
-                to="/contact"
-                className="mt-1 block rounded-md bg-[#f97316] px-4 py-2 text-sm font-semibold text-white hover:bg-[#fb923c]"
-                onClick={() => setOpen(false)}
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
+            </ul>
+          </motion.div>
         )}
-      </header>
-    </>
+      </AnimatePresence>
+    </header>
   );
 }

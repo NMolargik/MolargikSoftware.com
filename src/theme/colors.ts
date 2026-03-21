@@ -19,11 +19,11 @@ export const appColors = {
     accent: '#6E60FF',
   },
   opalite: {
-    blue: '#BBEBFC',
+    blue: '#CAC0E8',
     purple: '#9F95AF',
     tan: '#DCD5CF',
     // Primary accent for UI
-    accent: '#BBEBFC',
+    accent: '#CAC0E8',
   },
   setdeck: {
     blueEnd: '#113054',

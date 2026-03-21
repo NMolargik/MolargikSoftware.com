@@ -1,56 +1,51 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import Hero from '../components/Hero';
-import logo from '../assets/whitelogo.png';
+import logo from '../assets/logo.svg';
+import headshot from '../assets/nickheadshot2.jpeg';
 import resumePDF from '../assets/nickmolargikresume.pdf';
-import opaliteIcon from '../assets/opalite/opaliteicon.png'
+import opaliteIcon from '../assets/opalite/opaliteicon.png';
 import storkIcon from '../assets/stork/storkicon.png';
 import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
-import opaliteBackground from '../assets/opalite/cardBackground.png';
-import mygraBackground from '../assets/mygra/cardBackground.png';
-import storkBackground from '../assets/stork/cardBackground.png';
-import waffleBackground from '../assets/waffle/cardBackground.png';
-import setDeckBackground from '../assets/setdeck/cardBackground.png';
+import v1SportsIcon from '../assets/v1sports/V1Sports.jpg';
+import { staggerContainer, staggerChild, fadeUp } from '../utils/animations';
 
-// Automatically enable snowfall + accumulation from Nov 1 through Jan 10
-const isChristmasSeason = (): boolean => {
-  const now = new Date();
-  const month = now.getMonth(); // 0-indexed: 0 = Jan, 10 = Nov, 11 = Dec
-  const day = now.getDate();
-  // Nov 1 - Dec 31 (months 10, 11) or Jan 1-10 (month 0, day <= 10)
-  return month >= 10 || (month === 0 && day <= 10);
-};
-const CHRISTMAS_CHEER = isChristmasSeason();
+const projects = [
+  { title: 'Opalite', tagline: 'The ultimate color manager for designers, developers, and digital artists.', image: opaliteIcon, path: '/opalite', accentColor: '#CAC0E8' },
+  { title: 'Stork', tagline: 'Tracking and statistics for Labor & Delivery nurses.', image: storkIcon, path: '/stork', accentColor: '#E8672B' },
+  { title: 'SetDeck', tagline: 'A gym companion to track & smash workout routines.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
+  { title: 'Mygra', tagline: 'Migraine insights powered by on-device AI.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
+  { title: 'Waffle', tagline: 'Webpage multitasking, managed, on iPad.', image: waffleIcon, path: '/waffle', accentColor: '#DFA656' },
+  { title: 'V1 Sports', tagline: 'Empowering golfers to improve their game. Supporting coaches in growing their business.', image: v1SportsIcon, path: '/v1sports', accentColor: '#C84640', ctaLabel: 'View Employment' },
+];
 
-// Hook to detect prefers-reduced-motion
-function usePrefersReducedMotion() {
-  const [prefersReducedMotion, setPrefersReducedMotion] = useState(() => {
-    if (typeof window === 'undefined') return false;
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  });
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handler = (event: MediaQueryListEvent) => {
-      setPrefersReducedMotion(event.matches);
-    };
-    mediaQuery.addEventListener('change', handler);
-    return () => mediaQuery.removeEventListener('change', handler);
-  }, []);
-
-  return prefersReducedMotion;
-}
+const skills = [
+  {
+    category: 'Mobile Development',
+    color: 'bg-blue-50 text-blue-700',
+    items: ['SwiftUI', 'Swift', 'Kotlin Multiplatform', 'Flutter', 'Jetpack Compose'],
+  },
+  {
+    category: 'Apple Ecosystem',
+    color: 'bg-green-50 text-green-700',
+    items: ['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API'],
+  },
+  {
+    category: 'Systems Engineering',
+    color: 'bg-purple-50 text-purple-700',
+    items: ['C Libraries', 'MATLAB', 'Python', 'GitLab CI/CD', 'Hardware Integration'],
+  },
+];
 
 export default function Home() {
-  const prefersReducedMotion = usePrefersReducedMotion();
-  const showSnow = CHRISTMAS_CHEER && !prefersReducedMotion;
   useEffect(() => {
     document.title = 'Molargik Software LLC - Indie Mobile App Development';
     const desc =
-      'Molargik Software LLC - Indie Mobile App Development. Expert iOS engineer specializing in Swift & SwiftUI. I build high‑performance apps for iPhone, iPad, Apple Watch, and Mac using Swift, SwiftData, Combine, SwiftData/Core Data, CloudKit, HealthKit, AVFoundation, Core ML and more.';
+      'Molargik Software LLC - Indie Mobile App Development. Expert iOS engineer specializing in Swift & SwiftUI.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -58,600 +53,98 @@ export default function Home() {
       document.head.appendChild(meta);
     }
     meta.content = desc;
-    // Set accent color for navbar hover on Home
-    document.documentElement.style.setProperty('--accent', '#38bdf8'); // sky-400
   }, []);
-
-  const roadmap: { date: string; title: string; description?: string; color?: string; gradient?: string }[] = [
-    { date: "🟦 Now Available!", title: "Opalite 1.3", description: "The ultimate color manager. Create colors, group into palettes, sketch on a canvas, upload to the community, share, export, compare, contrast, and even immerse yourself in color on Apple Vision Pro. Your colors, wherever you go.", gradient: 'linear-gradient(135deg, #f97316, #facc15, #22c55e, #3b82f6, #a855f7, #ec4899)' },
-    { date: "✨ Updates Rolling Out", title: "Stork 2.3 & SetDeck 2.3", description: "Stork: View historical delivery jars and weekly step count trends. SetDeck: Acheivements keep users working towards their goals.", color: "#1173C6" },
-    { date: "🚂 Coming Mid-2026", title: "SwiftTrain", description: "Ready to learn iOS app development? All aboard!", color: "#f97316" },
-  ];
-
-  const snowContainerRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <>
-      <style>{`
-        :root { --accent: #38bdf8; }
-        header nav a:hover, nav a:hover, .nav-link:hover {
-          color: var(--accent) !important;
-        }
-        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
-          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
-          outline-offset: 2px;
-          border-radius: 6px;
-        }
-
-    .snow-overlay-back {
-      position: absolute;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-    }
-
-    .snow-overlay-front {
-      position: absolute;
-      inset: 0;
-      z-index: 2;
-      pointer-events: none;
-    }
-      `}</style>
       <Hero
         variant="home"
-        heading="Indie Mobile App Development"
-        description="Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, and SwiftData. Leveraging the latest Apple frameworks to build utilities for medical professionals, graphic designers, and for general use."
+        heading="Crafting Elegant Mobile Experiences"
+        description="Senior Mobile Software Engineer building high-performance apps with Swift, SwiftUI, SwiftData, Flutter, and Kotlin Multiplatform — from concept to App Store."
         imageSrc={logo}
-        platforms={['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS', 'tvOS']}
+        headshotSrc={headshot}
+        platforms={['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS', 'tvOS', 'Flutter']}
         actionButtons={[
-          { label: 'Download Résumé', href: resumePDF, variant: 'primary', download: true },
+          { label: 'View My Work', href: '#apps', variant: 'primary' },
+          { label: 'Download Résumé', href: resumePDF, variant: 'secondary', download: true },
           { label: 'GitHub', href: 'https://github.com/NMolargik', variant: 'github' },
           { label: 'LinkedIn', href: 'https://linkedin.com/in/nicholas-molargik', variant: 'linkedin' },
         ]}
       />
 
-      {/* Timeline + projects with snowfall */}
-      <div
-        ref={snowContainerRef}
-        className="relative overflow-hidden text-white"
-        style={{ backgroundColor: 'rgb(36,36,36)' }}
-      >
-        {showSnow && (
-          <>
-            <SnowCanvas containerRef={snowContainerRef} />
-            <SnowCapsCanvas containerRef={snowContainerRef} />
-          </>
-        )}
-
-        {/* New roadmap view */}
-        <section className="mx-auto mt-16 w-full max-w-7xl px-6">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Roadmap</h2>
-          <div className="mt-6">
-            {/* Desktop: horizontal timeline */}
-            <ol
-              className="relative hidden md:flex md:justify-between gap-x-12 border-t-4 border-red-500 dark:border-red-700"
-              aria-label="Product roadmap timeline"
-            >
-              {roadmap.map((item, idx) => (
-                <li key={idx} className="relative flex-1" aria-label={`${item.title}: ${item.description || item.date}`}>
-                  <span
-                    className="absolute left-1/2 -top-[2px] -translate-x-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
-                    style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
-                  />
-                  <div className="flex flex-col items-center text-center gap-1 mt-6">
-                    <div className="text-sm font-semibold uppercase tracking-wide text-white">
-                      {item.date}
-                    </div>
-                    <div className="text-lg md:text-xl font-bold text-white">
-                      {item.title}
-                    </div>
-                    {item.description && (
-                      <p className="text-white max-w-sm text-sm leading-snug text-center">
-                        {item.description}
-                      </p>
-                    )}
-                  </div>
-                </li>
-              ))}
-            </ol>
-            {/* Mobile: 2 columns if >3 items, bottom-aligned */}
-            <div className={`md:hidden ${roadmap.length > 3 ? 'grid grid-cols-2 gap-x-6 items-end' : ''}`} role="region" aria-label="Product roadmap">
-              {roadmap.length > 3 ? (
-                <>
-                  {/* Left column - first half, max 3 */}
-                  <ol className="relative flex flex-col border-s-4 border-red-500 dark:border-red-700" aria-label="Current releases">
-                    {roadmap.slice(0, Math.min(3, Math.ceil(roadmap.length / 2))).map((item, idx) => (
-                      <li key={idx} className="relative ps-6 py-4" aria-label={`${item.title}: ${item.description || item.date}`}>
-                        <span
-                          className="absolute left-[-0.5rem] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
-                          style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
-                        />
-                        <div className="flex flex-col items-start text-start gap-1">
-                          <div className="text-sm font-semibold uppercase tracking-wide text-white">
-                            {item.date}
-                          </div>
-                          <div className="text-lg font-bold text-white">
-                            {item.title}
-                          </div>
-                          {item.description && (
-                            <p className="text-white text-sm leading-snug">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                  {/* Right column - second half, max 3 */}
-                  <ol className="relative flex flex-col border-s-4 border-red-500 dark:border-red-700" aria-label="Upcoming releases">
-                    {roadmap.slice(Math.min(3, Math.ceil(roadmap.length / 2)), Math.min(3, Math.ceil(roadmap.length / 2)) + 3).map((item, idx) => (
-                      <li key={idx} className="relative ps-6 py-4" aria-label={`${item.title}: ${item.description || item.date}`}>
-                        <span
-                          className="absolute left-[-0.5rem] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
-                          style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
-                        />
-                        <div className="flex flex-col items-start text-start gap-1">
-                          <div className="text-sm font-semibold uppercase tracking-wide text-white">
-                            {item.date}
-                          </div>
-                          <div className="text-lg font-bold text-white">
-                            {item.title}
-                          </div>
-                          {item.description && (
-                            <p className="text-white text-sm leading-snug">
-                              {item.description}
-                            </p>
-                          )}
-                        </div>
-                      </li>
-                    ))}
-                  </ol>
-                </>
-              ) : (
-                <ol className="relative flex flex-col border-s-4 border-red-500 dark:border-red-700" aria-label="Product roadmap timeline">
-                  {roadmap.map((item, idx) => (
-                    <li key={idx} className="relative ps-6 py-4" aria-label={`${item.title}: ${item.description || item.date}`}>
-                      <span
-                        className="absolute left-[-0.5rem] top-1/2 -translate-y-1/2 h-3 w-3 rounded-full ring-4 ring-white dark:ring-slate-900"
-                        style={item.gradient ? { background: item.gradient } : { backgroundColor: item.color || 'var(--accent)' }}
-                      />
-                      <div className="flex flex-col items-start text-start gap-1">
-                        <div className="text-sm font-semibold uppercase tracking-wide text-white">
-                          {item.date}
-                        </div>
-                        <div className="text-lg font-bold text-white">
-                          {item.title}
-                        </div>
-                        {item.description && (
-                          <p className="text-white text-sm leading-snug">
-                            {item.description}
-                          </p>
-                        )}
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              )}
-            </div>
-          </div>
-        </section>
-
-        {/* Latest Projects section */}
-        <section className="mx-auto mt-16 w-full max-w-7xl px-6 pb-12">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight [text-wrap:balance]">Latest Projects</h2>
-          {/* Responsive grid: small = 1 column list, md+ = 2 columns */}
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-14 lg:gap-y-16 py-4">
-            <ProjectCard
-              title="Opalite"
-              tagline="The ultimate color manager for designers, developers, and digital artists."
-              image={opaliteIcon}
-              background={opaliteBackground}
-              path="/opalite"
-              fitMode="contain"
-              index={0}
-            />
-            <ProjectCard
-              title="Stork"
-              tagline="Tracking and statistics for Labor & Delivery nurses."
-              image={storkIcon}
-              background={storkBackground}
-              path="/stork"
-              fitMode="contain"
-              index={1}
-            />
-            <ProjectCard
-              title="SetDeck"
-              tagline="A gym companion to track & smash workout routines. Every Set Counts!"
-              image={setDeckIcon}
-              background={setDeckBackground}
-              path="/setdeck"
-              fitMode="contain"
-              index={2}
-            />
-            <ProjectCard
-              title="Mygra"
-              tagline="Migraine insights powered by on-device AI."
-              image={mygraIcon}
-              background={mygraBackground}
-              path="/mygra"
-              fitMode="contain"
-              index={3}
-            />
-            <ProjectCard
-              title="Waffle"
-              tagline="Webpage multitasking, managed, on iPad."
-              image={waffleIcon}
-              background={waffleBackground}
-              path="/waffle"
-              fitMode="contain"
-              index={4}
-            />
-          </div>
-        </section>
-
-        {/* Call-to-action section */}
-        <section className="mx-auto w-full max-w-7xl px-6 pb-24">
-          <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-br from-sky-900/40 to-purple-900/40 px-6 py-12 sm:px-12 sm:py-16 text-center">
-            <div
-              aria-hidden="true"
-              className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-orange-400 to-transparent opacity-60"
-            />
-            <h2 className="text-2xl sm:text-3xl font-bold tracking-tight text-white">
-              Have an app idea?
-            </h2>
-            <p className="mt-3 text-base sm:text-lg text-white/80 max-w-xl mx-auto">
-              Let's bring your vision to life with native mobile development.
+      {/* Apps Section */}
+      <section id="apps" className="bg-white py-12 md:py-16 scroll-mt-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div className="text-center mb-8" {...fadeUp}>
+            <h2 className="text-headline text-gray-900">Creations and Contributions</h2>
+            <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+              Published apps and professional contributions serving designers, nurses, athletes, and everyday users.
             </p>
-            <Link
-              to="/contact"
-              className="mt-6 inline-flex items-center justify-center rounded-lg bg-orange-500 hover:bg-orange-600 px-6 py-3 text-white font-semibold transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
-            >
-              Get in Touch
-            </Link>
+          </motion.div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {projects.map((project, idx) => (
+              <ProjectCard key={project.path} {...project} index={idx} />
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
+
+      {/* Technologies Section */}
+      <section className="bg-surface py-12 md:py-16">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div className="text-center mb-8" {...fadeUp}>
+            <h2 className="text-headline text-gray-900">Technologies</h2>
+            <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+              Deep expertise across mobile platforms and Apple frameworks.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-8"
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+          >
+            {skills.map((group) => (
+              <motion.div
+                key={group.category}
+                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6"
+                variants={staggerChild}
+              >
+                <h3 className="text-lg font-semibold text-gray-900 mb-4">{group.category}</h3>
+                <div className="flex flex-wrap gap-2">
+                  {group.items.map((skill) => (
+                    <span
+                      key={skill}
+                      className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${group.color}`}
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Contact CTA */}
+      <section className="bg-white py-12 md:py-16">
+        <motion.div className="max-w-4xl mx-auto px-6 text-center" {...fadeUp}>
+          <h2 className="text-headline text-gray-900">Have an idea? Let's build it.</h2>
+          <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
+            Whether it's a new app concept or a collaboration opportunity, I'd love to hear from you.
+          </p>
+          <Link
+            to="/contact"
+            className="mt-8 inline-flex items-center justify-center rounded-full bg-brandPurple hover:bg-brandPurple/90 px-8 py-3 text-white font-medium transition-colors"
+          >
+            Get in Touch
+          </Link>
+        </motion.div>
+      </section>
     </>
   );
-}
-
-type SnowCanvasProps = {
-  containerRef: { current: HTMLDivElement | null };
-};
-
-function SnowCanvas({ containerRef }: SnowCanvasProps) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const parent = containerRef.current;
-    if (!canvas || !parent) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const FLAKE_COUNT = 260;
-    const SEGMENTS = 80;
-
-    // Bitmap garland texture across the top edge
-    let garlandImage: HTMLImageElement | null = null;
-    let garlandPattern: CanvasPattern | null = null;
-
-    const initGarland = () => {
-      garlandImage = new Image();
-      // Place a seamless garland texture in public/christmas-garland.png
-      garlandImage.src = '/assets/christmas-garland.png';
-      garlandImage.onload = () => {
-        garlandPattern = ctx.createPattern(garlandImage as HTMLImageElement, 'repeat-x');
-      };
-    };
-
-    initGarland();
-
-    type Flake = {
-      x: number;
-      y: number;
-      r: number;
-      vy: number;
-      vx: number;
-      driftPhase: number;
-    };
-
-    let width = 0;
-    let height = 0;
-    let flakes: Flake[] = [];
-    let groundHeights: number[] = [];
-    let maxGroundHeight = 0;
-    let animationFrameId: number;
-
-    const setupScene = () => {
-      if (!parent) return;
-      width = parent.clientWidth;
-      height = parent.clientHeight || 400;
-
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      groundHeights = new Array(SEGMENTS).fill(0);
-      maxGroundHeight = height * 0.25;
-
-      flakes = new Array(FLAKE_COUNT).fill(null).map(() => ({
-        x: Math.random() * width,
-        y: Math.random() * height - height,
-        r: 1 + Math.random() * 2.2,
-        vy: 0.8 + Math.random() * 0.9,
-        vx: -0.3 + Math.random() * 0.6,
-        driftPhase: Math.random() * Math.PI * 2,
-      }));
-    };
-
-    setupScene();
-
-    const handleResize = () => {
-      setupScene();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-      const segWidth = width / SEGMENTS;
-
-      // update flakes
-      flakes.forEach((flake) => {
-        flake.driftPhase += 0.01;
-        const drift = Math.sin(flake.driftPhase) * 0.25;
-
-        flake.x += flake.vx + drift;
-        flake.y += flake.vy;
-
-        // wrap horizontally
-        if (flake.x < -20) flake.x = width + 20;
-        if (flake.x > width + 20) flake.x = -20;
-
-        const idx = Math.max(0, Math.min(SEGMENTS - 1, Math.floor(flake.x / segWidth)));
-        const colHeight = groundHeights[idx];
-
-        if (flake.y + flake.r >= height - colHeight) {
-          if (colHeight < maxGroundHeight) {
-            const added = flake.r * 0.9;
-            groundHeights[idx] = colHeight + added;
-
-            // very light smoothing so the pile looks natural
-            if (idx > 0) {
-              groundHeights[idx - 1] = Math.max(groundHeights[idx - 1], groundHeights[idx] - 4);
-            }
-            if (idx < SEGMENTS - 1) {
-              groundHeights[idx + 1] = Math.max(groundHeights[idx + 1], groundHeights[idx] - 4);
-            }
-          }
-
-          // respawn flake near the top
-          flake.x = Math.random() * width;
-          flake.y = -Math.random() * 40;
-          flake.vy = 0.8 + Math.random() * 0.9;
-          flake.vx = -0.3 + Math.random() * 0.6;
-        }
-      });
-
-      // draw flakes
-      ctx.fillStyle = 'rgba(255,255,255,0.9)';
-      flakes.forEach((flake) => {
-        ctx.beginPath();
-        ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // draw accumulated snow pile at bottom
-      ctx.fillStyle = 'rgba(255,255,255,0.96)';
-      ctx.beginPath();
-      ctx.moveTo(0, height);
-      for (let i = 0; i < SEGMENTS; i++) {
-        const x = (i / (SEGMENTS - 1)) * width;
-        const topY = height - groundHeights[i];
-        ctx.lineTo(x, topY);
-      }
-      ctx.lineTo(width, height);
-      ctx.closePath();
-      ctx.fill();
-
-      // draw garland bitmap across the top edge of the snowfall region
-      if (garlandPattern && garlandImage) {
-        const maxGarlandHeight = Math.min(garlandImage.height, height * 0.25);
-        ctx.save();
-        ctx.fillStyle = garlandPattern;
-        ctx.translate(0, 0);
-        ctx.fillRect(0, 0, width, maxGarlandHeight);
-        ctx.restore();
-      }
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    animationFrameId = requestAnimationFrame(render);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-      ctx.clearRect(0, 0, width, height);
-    };
-  }, [containerRef]);
-
-  return <canvas ref={canvasRef} className="snow-overlay-back" />;
-}
-
-type SnowCapsCanvasProps = {
-  containerRef: { current: HTMLDivElement | null };
-};
-
-function SnowCapsCanvas({ containerRef }: SnowCapsCanvasProps) {
-  const canvasRef = useRef<HTMLCanvasElement | null>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    const parent = containerRef.current;
-    if (!canvas || !parent) return;
-
-    const ctx = canvas.getContext('2d');
-    if (!ctx) return;
-
-    const dpr = window.devicePixelRatio || 1;
-    const FLAKE_COUNT = 260;
-    const CORNER_INSET = 24; // pixels to avoid drawing snow on rounded card corners
-
-    type Flake = {
-      x: number;
-      y: number;
-      r: number;
-      vy: number;
-      vx: number;
-      driftPhase: number;
-    };
-
-    type SettledFlake = {
-      x: number;
-      r: number;
-    };
-
-    type CardLedge = {
-      left: number;
-      right: number;
-      top: number;
-      settled: SettledFlake[];
-      maxSettled: number;
-    };
-
-    let width = 0;
-    let height = 0;
-    let flakes: Flake[] = [];
-    let ledges: CardLedge[] = [];
-    let animationFrameId: number;
-
-    const setupScene = () => {
-      if (!parent) return;
-      const containerRect = parent.getBoundingClientRect();
-
-      width = parent.clientWidth;
-      height = parent.clientHeight || 400;
-
-      canvas.width = width * dpr;
-      canvas.height = height * dpr;
-      canvas.style.width = `${width}px`;
-      canvas.style.height = `${height}px`;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-      // Find project cards to accumulate on
-      const nodes = parent.querySelectorAll('[data-snow-card="true"]') as NodeListOf<HTMLElement>;
-      ledges = Array.from(nodes).map((el) => {
-        const r = el.getBoundingClientRect();
-        return {
-          left: r.left - containerRect.left,
-          right: r.right - containerRect.left,
-          top: r.top - containerRect.top,
-          settled: [],
-          maxSettled: 80,
-        };
-      });
-
-      flakes = new Array(FLAKE_COUNT).fill(null).map(() => ({
-        x: Math.random() * width,
-        y: Math.random() * height - height,
-        r: 1 + Math.random() * 2,
-        vy: 0.7 + Math.random() * 0.9,
-        vx: -0.25 + Math.random() * 0.5,
-        driftPhase: Math.random() * Math.PI * 2,
-      }));
-    };
-
-    setupScene();
-
-    const handleResize = () => {
-      setupScene();
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    const render = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      // update flakes
-      flakes.forEach((flake) => {
-        flake.driftPhase += 0.012;
-        const drift = Math.sin(flake.driftPhase) * 0.25;
-        flake.x += flake.vx + drift;
-        flake.y += flake.vy;
-
-        if (flake.x < -20) flake.x = width + 20;
-        if (flake.x > width + 20) flake.x = -20;
-
-        // collisions with card tops: let flakes "stick" to the top edge
-        for (let i = 0; i < ledges.length; i++) {
-          const ledge = ledges[i];
-          const innerLeft = ledge.left + CORNER_INSET;
-          const innerRight = ledge.right - CORNER_INSET;
-          if (
-            innerRight > innerLeft &&
-            flake.x >= innerLeft &&
-            flake.x <= innerRight &&
-            flake.y + flake.r >= ledge.top
-          ) {
-            if (ledge.settled.length < ledge.maxSettled) {
-              ledge.settled.push({
-                x: flake.x,
-                r: flake.r * 1.3,
-              });
-            }
-            // respawn flake somewhere above
-            flake.x = Math.random() * width;
-            flake.y = -Math.random() * 40;
-            flake.vy = 0.7 + Math.random() * 0.9;
-            flake.vx = -0.25 + Math.random() * 0.5;
-            break;
-          }
-        }
-      });
-
-      // draw flakes (foreground)
-      ctx.fillStyle = 'rgba(255,255,255,0.96)';
-      flakes.forEach((flake) => {
-        ctx.beginPath();
-        ctx.arc(flake.x, flake.y, flake.r, 0, Math.PI * 2);
-        ctx.fill();
-      });
-
-      // draw settled flakes sitting on the top edge of each card
-      ledges.forEach((ledge) => {
-        if (!ledge.settled.length) return;
-
-        ctx.fillStyle = 'rgba(255,255,255,0.98)';
-        ledge.settled.forEach((sf) => {
-          const innerLeft = ledge.left + CORNER_INSET;
-          const innerRight = ledge.right - CORNER_INSET;
-          if (innerRight <= innerLeft) return;
-
-          const clampedX = Math.max(innerLeft + sf.r, Math.min(innerRight - sf.r, sf.x));
-          const y = ledge.top - sf.r * 0.8;
-          ctx.beginPath();
-          ctx.arc(clampedX, y, sf.r, Math.PI, 0, false); // half-circle sitting on the edge
-          ctx.fill();
-        });
-      });
-
-      animationFrameId = requestAnimationFrame(render);
-    };
-
-    animationFrameId = requestAnimationFrame(render);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-      ctx.clearRect(0, 0, width, height);
-    };
-  }, [containerRef]);
-
-  return <canvas ref={canvasRef} className="snow-overlay-front" />;
 }

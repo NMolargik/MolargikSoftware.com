@@ -1,21 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 import ScrollToTop from '../components/ScrollToTop';
 
-/**
- * Loads the static HTML privacy policy that lives in src/assets/privacy.html.
- * The `?raw` suffix tells Vite to import the file as a plain string at build time.
- */
 import privacyHtml from '../assets/privacy.html?raw';
 
-const ACCENT_COLOR = '#6E60FF';
-
 export default function Privacy() {
-  // Ensure the page starts at the top when navigated to.
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
   useEffect(() => {
     document.title = 'Privacy Policy – Molargik Software LLC';
     const desc = 'Privacy policy for Molargik Software LLC apps and website.';
@@ -28,40 +22,29 @@ export default function Privacy() {
     meta.content = desc;
   }, []);
 
+  // Strip the <style> tag from the Termly HTML — it applies globally and
+  // conflicts with Tailwind styles / the rest of the page.
+  const cleanHtml = useMemo(
+    () => privacyHtml.replace(/<style[\s\S]*?<\/style>/gi, ''),
+    [],
+  );
+
   return (
     <>
-      <style>{`
-        :root { --accent: ${ACCENT_COLOR}; }
-        header nav a:hover, nav a:hover, .nav-link:hover {
-          color: var(--accent) !important;
-        }
-        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
-          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
-          outline-offset: 2px;
-          border-radius: 6px;
-        }
-      `}</style>
-      <main className="min-h-screen">
-        {/* Hero Section */}
-        <section
-          className="relative py-20 text-white overflow-hidden"
-          style={{ backgroundColor: 'rgb(36,36,36)' }}
-        >
-          <div
-            aria-hidden="true"
-            className="pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-[#6E60FF] to-transparent opacity-60"
-          />
-          <div className="max-w-4xl mx-auto px-4 text-center">
+      <main className="min-h-screen bg-white">
+        {/* Hero */}
+        <section className="pt-28 pb-12">
+          <div className="max-w-4xl mx-auto px-6 text-center">
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center justify-center w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 mb-6"
+              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brandPurple/10 mb-6"
             >
-              <Shield size={40} className="text-[#6E60FF]" />
+              <Shield size={32} className="text-brandPurple" />
             </motion.div>
             <motion.h1
-              className="text-4xl sm:text-5xl font-bold tracking-tight"
+              className="text-headline text-gray-900"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -69,7 +52,7 @@ export default function Privacy() {
               Privacy Policy
             </motion.h1>
             <motion.p
-              className="mt-4 text-lg text-white/70 max-w-2xl mx-auto"
+              className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -79,38 +62,31 @@ export default function Privacy() {
           </div>
         </section>
 
-        {/* Privacy Promise Banner */}
-        <section
-          className="py-8"
-          style={{ backgroundColor: 'rgb(36,36,36)' }}
-        >
+        {/* Privacy Promise */}
+        <section className="pb-8">
           <motion.div
-            className="mx-auto max-w-4xl px-4"
-            initial={{ opacity: 0, y: 20 }}
+            className="mx-auto max-w-4xl px-6"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="rounded-2xl bg-gradient-to-r from-[#6E60FF]/20 to-[#8B7FFF]/20 border border-[#6E60FF]/30 px-6 py-5 text-center">
-              <p className="text-white text-lg font-medium">
+            <div className="rounded-2xl bg-brandPurple/5 border border-brandPurple/10 px-6 py-5 text-center">
+              <p className="text-gray-700 text-base leading-relaxed">
                 Your privacy matters to us. Thus far, we do not collect, sell, or otherwise abuse your information in any of our apps. All data stays with you, on device, or privately in your iCloud account. Statistical data is collected, but unique contents or details are not visible to Molargik Software LLC.
               </p>
             </div>
           </motion.div>
         </section>
 
-        {/* Content Section */}
-        <section
-          className="pb-16"
-          style={{ backgroundColor: 'rgb(36,36,36)' }}
-        >
+        {/* Content */}
+        <section className="pb-16">
           <motion.div
-            className="mx-auto max-w-4xl px-4"
-            initial={{ opacity: 0, y: 20 }}
+            className="mx-auto max-w-4xl px-6"
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="relative overflow-hidden rounded-3xl bg-white px-6 py-10 sm:px-10 shadow-[0_18px_45px_rgba(0,0,0,0.3)]">
-              {/* Inject the raw HTML with styled wrapper */}
+            <div className="rounded-3xl bg-white border border-gray-200 px-6 py-10 sm:px-10 shadow-sm">
               <div
                 className="privacy-content prose max-w-none
                   [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2
@@ -119,19 +95,18 @@ export default function Privacy() {
                   [&_p]:text-gray-700 [&_p]:leading-relaxed [&_p]:mb-4
                   [&_ul]:text-gray-700 [&_ul]:mb-4 [&_ul]:list-disc [&_ul]:pl-6
                   [&_li]:mb-2
-                  [&_a]:text-[#6E60FF] [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-[#5248CC]
+                  [&_a]:text-brandPurple [&_a]:underline [&_a]:underline-offset-2 hover:[&_a]:text-brandPurple/80
                   [&_strong]:text-gray-900 [&_strong]:font-semibold
                   [&_em]:italic
-                  [&_.termly-styles-root]:hidden
                   [&_img]:hidden
                 "
-                dangerouslySetInnerHTML={{ __html: privacyHtml }}
+                dangerouslySetInnerHTML={{ __html: cleanHtml }}
               />
             </div>
           </motion.div>
         </section>
       </main>
-      <ScrollToTop accentColor={ACCENT_COLOR} />
+      <ScrollToTop />
     </>
   );
 }

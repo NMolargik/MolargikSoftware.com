@@ -1,5 +1,5 @@
-import { lazy, Suspense } from 'react';
-import { BrowserRouter, HashRouter, Routes, Route } from 'react-router-dom';
+import { lazy, Suspense, useEffect } from 'react';
+import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -14,7 +14,7 @@ const SetDeck = lazy(() => import('./pages/SetDeck'));
 const Privacy = lazy(() => import('./pages/Privacy'));
 const Waffle = lazy(() => import('./pages/Waffle'));
 const Opalite = lazy(() => import('./pages/Opalite'));
-const SwiftTrain = lazy(() => import('./pages/SwiftTrain'));
+const V1Sports = lazy(() => import('./pages/V1Sports'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function PageLoader() {
@@ -37,9 +37,17 @@ export default function App() {
   );
 }
 
+function ScrollToTopOnNav() {
+  const { pathname } = useLocation();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+  return null;
+}
+
 function AppShell() {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-white text-gray-900">
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"
@@ -47,19 +55,19 @@ function AppShell() {
       >
         Skip to main content
       </a>
-      <>
-        <Navbar />
-      </>
+      <ScrollToTopOnNav />
+      <Navbar />
       <main id="main-content" className="flex-1">
         <Suspense fallback={<PageLoader />}>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/opalite" element={<Opalite />} />
-            <Route path="/swifttrain" element={<SwiftTrain />} />
+
             <Route path="/setdeck" element={<SetDeck />} />
             <Route path="/mygra" element={<Mygra />} />
             <Route path="/stork" element={<Stork />} />
             <Route path="/waffle" element={<Waffle />} />
+            <Route path="/v1sports" element={<V1Sports />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />

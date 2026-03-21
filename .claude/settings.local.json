@@ -20,7 +20,11 @@
       "Bash(git push --force origin main)",
       "WebFetch(domain:www.cityoffortwayne.in.gov)",
       "WebFetch(domain:policeactivitylog.acfw.net)",
-      "WebSearch"
+      "WebSearch",
+      "WebFetch(domain:www.v1sports.com)",
+      "Bash(find:*)",
+      "Bash(which pngquant:*)",
+      "Bash(du:*)"
     ]
   }
 }

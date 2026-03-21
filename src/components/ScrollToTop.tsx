@@ -2,16 +2,11 @@ import { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ChevronUp } from 'lucide-react';
 
-interface ScrollToTopProps {
-  accentColor?: string;
-}
-
-export default function ScrollToTop({ accentColor = '#6E60FF' }: ScrollToTopProps) {
+export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const toggleVisibility = () => {
-      // Show button when page is scrolled down 400px
       setIsVisible(window.scrollY > 400);
     };
 
@@ -20,10 +15,7 @@ export default function ScrollToTop({ accentColor = '#6E60FF' }: ScrollToTopProp
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth'
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
@@ -35,16 +27,11 @@ export default function ScrollToTop({ accentColor = '#6E60FF' }: ScrollToTopProp
           exit={{ opacity: 0, scale: 0.8 }}
           transition={{ duration: 0.2 }}
           onClick={scrollToTop}
-          className="fixed bottom-16 right-6 z-50 p-3 rounded-full shadow-lg transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-900"
-          style={{
-            backgroundColor: accentColor,
-            // @ts-expect-error CSS custom property for focus ring
-            '--tw-ring-color': accentColor
-          }}
+          className="fixed bottom-8 right-6 z-50 p-3 rounded-full bg-white shadow-lg border border-gray-200 text-gray-600 hover:text-brandPurple hover:shadow-xl transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple"
           aria-label="Scroll to top"
           type="button"
         >
-          <ChevronUp className="w-5 h-5 text-white" />
+          <ChevronUp className="w-5 h-5" />
         </motion.button>
       )}
     </AnimatePresence>

@@ -1,91 +1,98 @@
-#!/bin/bash
+#!/usr/bin/env bash
+# optimize-images.sh
+# Resizes oversized screenshots then runs pngquant lossy compression on all PNGs.
+# Safe to re-run — skips files that are already small enough.
 
-# Image optimization script for Molargik Software website
-# Uses macOS sips to resize images for web use
+set -euo pipefail
 
-ASSETS_DIR="src/assets"
+ASSETS="$(cd "$(dirname "$0")/.." && pwd)/src/assets"
+MAX_HEIGHT=1200   # px — 2× retina for h-96 (384px) carousel display
+QUALITY="65-85"   # pngquant quality range (good visual quality, big savings)
 
-echo "Starting image optimization..."
+command -v ffmpeg   >/dev/null 2>&1 || { echo "❌  ffmpeg not found"; exit 1; }
+command -v pngquant >/dev/null 2>&1 || { echo "❌  pngquant not found — run: brew install pngquant"; exit 1; }
 
-# Function to resize image if it exceeds max dimension
-resize_if_needed() {
-    local file="$1"
-    local max_width="$2"
-    local max_height="$3"
+total_before=0
+total_after=0
+resized=0
+compressed=0
 
-    # Get current dimensions
-    local width=$(sips -g pixelWidth "$file" 2>/dev/null | tail -1 | awk '{print $2}')
-    local height=$(sips -g pixelHeight "$file" 2>/dev/null | tail -1 | awk '{print $2}')
+echo "📁  Assets dir: $ASSETS"
+echo "🔧  Max height: ${MAX_HEIGHT}px  |  pngquant quality: ${QUALITY}"
+echo ""
 
-    if [ -z "$width" ] || [ -z "$height" ]; then
-        return
+while IFS= read -r -d '' file; do
+  before=$(stat -f%z "$file")
+  total_before=$((total_before + before))
+
+  # --- Step 1: resize if taller than MAX_HEIGHT ---
+  height=$(ffprobe -v error -select_streams v:0 -show_entries stream=height -of csv=p=0 "$file" 2>/dev/null || echo 0)
+  if [ "${height:-0}" -gt "$MAX_HEIGHT" ]; then
+    tmp="${file}.tmp_resize.png"
+    ffmpeg -y -i "$file" -vf "scale=-2:${MAX_HEIGHT}" -compression_level 6 "$tmp" -loglevel error
+    mv "$tmp" "$file"
+    resized=$((resized + 1))
+  fi
+
+  # --- Step 2: pngquant lossy compression ---
+  tmp_q="${file%.png}-opt.png"
+  if pngquant --quality="$QUALITY" --speed 1 --strip --force --output "$tmp_q" "$file" 2>/dev/null; then
+    after=$(stat -f%z "$tmp_q")
+    if [ "$after" -lt "$before" ]; then
+      mv "$tmp_q" "$file"
+      compressed=$((compressed + 1))
+    else
+      rm -f "$tmp_q"
+      after=$before
     fi
+  else
+    rm -f "$tmp_q"
+    after=$(stat -f%z "$file")
+  fi
 
-    local needs_resize=false
+  total_after=$((total_after + after))
 
-    if [ "$width" -gt "$max_width" ]; then
-        needs_resize=true
-    fi
+  saved=$((before - after))
+  if [ "$saved" -gt 0 ]; then
+    pct=$(( saved * 100 / before ))
+    printf "  ✅  %-60s  %4d KB → %4d KB  (-%d%%)\n" \
+      "$(basename "$(dirname "$file")")/$(basename "$file")" \
+      $((before / 1024)) $((after / 1024)) "$pct"
+  fi
 
-    if [ "$height" -gt "$max_height" ]; then
-        needs_resize=true
-    fi
+done < <(find "$ASSETS" -type f -iname "*.png" -print0)
 
-    if [ "$needs_resize" = true ]; then
-        local orig_size=$(ls -lh "$file" | awk '{print $5}')
+# --- JPEGs via ffmpeg ---
+while IFS= read -r -d '' file; do
+  before=$(stat -f%z "$file")
+  total_before=$((total_before + before))
 
-        # Calculate new dimensions maintaining aspect ratio
-        if [ "$width" -gt "$height" ]; then
-            # Landscape - constrain by width
-            sips --resampleWidth "$max_width" "$file" >/dev/null 2>&1
-        else
-            # Portrait - constrain by height
-            sips --resampleHeight "$max_height" "$file" >/dev/null 2>&1
-        fi
+  tmp="${file}.tmp_jpg"
+  ffmpeg -y -i "$file" -q:v 4 "$tmp" -loglevel error 2>/dev/null
+  after=$(stat -f%z "$tmp")
+  if [ "$after" -lt "$before" ]; then
+    mv "$tmp" "$file"
+    compressed=$((compressed + 1))
+    saved=$((before - after))
+    pct=$(( saved * 100 / before ))
+    printf "  ✅  %-60s  %4d KB → %4d KB  (-%d%%)\n" \
+      "$(basename "$(dirname "$file")")/$(basename "$file")" \
+      $((before / 1024)) $((after / 1024)) "$pct"
+  else
+    rm -f "$tmp"
+    after=$before
+  fi
+  total_after=$((total_after + after))
 
-        local new_size=$(ls -lh "$file" | awk '{print $5}')
-        echo "  Resized: $(basename "$file") ($orig_size -> $new_size)"
-    fi
-}
-
-# Optimize card backgrounds (max 1600px wide)
-echo ""
-echo "Optimizing card backgrounds..."
-find "$ASSETS_DIR" -name "cardBackground.*" -type f | while read file; do
-    resize_if_needed "$file" 1600 1200
-done
-
-# Optimize screenshot images (max 800px wide for phone screenshots)
-echo ""
-echo "Optimizing screenshots..."
-for dir in setdeck mygra waffle stork opalite; do
-    if [ -d "$ASSETS_DIR/$dir" ]; then
-        find "$ASSETS_DIR/$dir" -name "screen*" -type f | while read file; do
-            resize_if_needed "$file" 800 1400
-        done
-    fi
-done
-
-# Optimize headshot (max 800px)
-echo ""
-echo "Optimizing headshot..."
-if [ -f "$ASSETS_DIR/nickheadshot.jpeg" ]; then
-    resize_if_needed "$ASSETS_DIR/nickheadshot.jpeg" 800 800
-fi
-
-# Optimize icons (max 512px)
-echo ""
-echo "Optimizing icons..."
-find "$ASSETS_DIR" -name "*icon*" -type f | while read file; do
-    resize_if_needed "$file" 512 512
-done
-
-# Optimize logos
-echo ""
-echo "Optimizing logos..."
-find "$ASSETS_DIR" -name "*logo*" -type f | while read file; do
-    resize_if_needed "$file" 400 400
-done
+done < <(find "$ASSETS" -type f \( -iname "*.jpg" -o -iname "*.jpeg" \) -print0)
 
 echo ""
-echo "Image optimization complete!"
+echo "──────────────────────────────────────────────"
+saved_total=$((total_before - total_after))
+pct_total=$(( saved_total * 100 / total_before ))
+echo "  Resized:    $resized files"
+echo "  Compressed: $compressed files"
+printf "  Before:     %d MB\n" $((total_before / 1024 / 1024))
+printf "  After:      %d MB\n" $((total_after / 1024 / 1024))
+printf "  Saved:      %d MB  (-%d%%)\n" $((saved_total / 1024 / 1024)) "$pct_total"
+echo "──────────────────────────────────────────────"

@@ -30,19 +30,16 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
   const touchStartX = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
 
-  // Open lightbox
   const openLightbox = useCallback((index: number) => {
     setLightboxIndex(index);
     setLightboxLoaded(false);
   }, []);
 
-  // Close lightbox
   const closeLightbox = useCallback(() => {
     setLightboxIndex(null);
     setLightboxLoaded(false);
   }, []);
 
-  // Navigate to previous image
   const goToPrevious = useCallback(() => {
     if (lightboxIndex === null) return;
     const newIndex = lightboxIndex === 0 ? slides.length - 1 : lightboxIndex - 1;
@@ -50,7 +47,6 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
     setLightboxLoaded(false);
   }, [lightboxIndex, slides.length]);
 
-  // Navigate to next image
   const goToNext = useCallback(() => {
     if (lightboxIndex === null) return;
     const newIndex = lightboxIndex === slides.length - 1 ? 0 : lightboxIndex + 1;
@@ -58,7 +54,6 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
     setLightboxLoaded(false);
   }, [lightboxIndex, slides.length]);
 
-  // Handle keyboard navigation
   useEffect(() => {
     if (lightboxIndex === null) return;
 
@@ -76,7 +71,6 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
       }
     };
 
-    // Prevent body scroll when lightbox is open
     document.body.style.overflow = 'hidden';
     window.addEventListener('keydown', handleKeyDown);
 
@@ -86,7 +80,6 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
     };
   }, [lightboxIndex, closeLightbox, goToPrevious, goToNext]);
 
-  // Touch handlers for swipe gestures
   const handleTouchStart = (e: React.TouchEvent) => {
     touchStartX.current = e.touches[0].clientX;
     touchEndX.current = null;
@@ -98,38 +91,27 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
 
   const handleTouchEnd = () => {
     if (touchStartX.current === null || touchEndX.current === null) return;
-
     const diff = touchStartX.current - touchEndX.current;
-    const threshold = 50; // Minimum swipe distance
-
+    const threshold = 50;
     if (Math.abs(diff) > threshold) {
-      if (diff > 0) {
-        // Swiped left -> next
-        goToNext();
-      } else {
-        // Swiped right -> previous
-        goToPrevious();
-      }
+      if (diff > 0) goToNext();
+      else goToPrevious();
     }
-
     touchStartX.current = null;
     touchEndX.current = null;
   };
 
-  // Handle backdrop click (close if clicking outside image)
   const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      closeLightbox();
-    }
+    if (e.target === e.currentTarget) closeLightbox();
   };
 
   return (
     <>
-      {/* Desktop & large screens: horizontally scrollable images */}
+      {/* Desktop */}
       <div className={`hidden md:block px-4 ${desktopWrapperClassName ?? ''}`}>
         <div
           ref={desktopRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-3 justify-center"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-4"
         >
           {slides.map((src, idx) => {
             const globalIndex = offset + idx;
@@ -138,12 +120,12 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                 key={idx}
                 type="button"
                 onClick={() => openLightbox(idx)}
-                className="relative flex-none h-96 w-auto snap-start cursor-zoom-in focus:outline-none focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-lg p-0 m-0 bg-transparent border-none shadow-none"
+                className="relative flex-none h-96 w-auto snap-start cursor-zoom-in focus:outline-none focus-visible:outline-2 focus-visible:outline-brandPurple focus-visible:outline-offset-2 rounded-2xl p-0 m-0 bg-transparent border-none"
                 aria-label={`View ${altPrefix} screenshot ${idx + 1} fullscreen`}
               >
                 {!loaded[globalIndex] && (
-                  <div className="absolute inset-0 h-96 w-44 rounded-lg bg-neutral-800 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-pulse" />
+                  <div className="absolute inset-0 h-96 w-44 rounded-2xl bg-gray-100 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 animate-pulse" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <LoadingSpinner />
                     </div>
@@ -154,8 +136,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                   alt={`${altPrefix} screenshot ${idx + 1}`}
                   width={1170}
                   height={2532}
-                  loading="lazy"
-                  className={`h-96 w-auto object-contain transition-opacity duration-300 rounded-lg ${
+                  className={`h-96 w-auto object-contain transition-opacity duration-300 rounded-2xl shadow-lg ${
                     loaded[globalIndex] ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoad={() => markLoaded(globalIndex)}
@@ -166,11 +147,11 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
         </div>
       </div>
 
-      {/* Small screens: seamless horizontal banner */}
+      {/* Mobile */}
       <div className={`md:hidden mt-2 ${mobileWrapperClassName ?? ''}`}>
         <div
           ref={mobileRef}
-          className="flex overflow-x-auto snap-x snap-mandatory gap-3 justify-center"
+          className="flex overflow-x-auto snap-x snap-mandatory gap-3"
         >
           {slides.map((src, idx) => {
             const globalIndex = offset + idx;
@@ -179,12 +160,12 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                 key={idx}
                 type="button"
                 onClick={() => openLightbox(idx)}
-                className="relative flex-none h-80 w-auto snap-start cursor-zoom-in focus:outline-none focus-visible:outline-2 focus-visible:outline-white focus-visible:outline-offset-2 rounded-lg p-0 m-0 bg-transparent border-none shadow-none"
+                className="relative flex-none h-80 w-auto snap-start cursor-zoom-in focus:outline-none focus-visible:outline-2 focus-visible:outline-brandPurple focus-visible:outline-offset-2 rounded-2xl p-0 m-0 bg-transparent border-none"
                 aria-label={`View ${altPrefix} screenshot ${idx + 1} fullscreen`}
               >
                 {!loaded[globalIndex] && (
-                  <div className="absolute inset-0 h-80 w-36 rounded-lg bg-neutral-800 overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-r from-neutral-800 via-neutral-700 to-neutral-800 animate-pulse" />
+                  <div className="absolute inset-0 h-80 w-36 rounded-2xl bg-gray-100 overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 animate-pulse" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <LoadingSpinner />
                     </div>
@@ -195,8 +176,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                   alt={`${altPrefix} screenshot ${idx + 1}`}
                   width={1170}
                   height={2532}
-                  loading="lazy"
-                  className={`h-80 w-auto object-contain transition-opacity duration-300 rounded-lg ${
+                  className={`h-80 w-auto object-contain transition-opacity duration-300 rounded-2xl shadow-lg ${
                     loaded[globalIndex] ? 'opacity-100' : 'opacity-0'
                   }`}
                   onLoad={() => markLoaded(globalIndex)}
@@ -213,13 +193,12 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
           role="dialog"
           aria-modal="true"
           aria-label={`${altPrefix} screenshot ${lightboxIndex + 1} of ${slides.length}`}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/95 backdrop-blur-sm"
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-sm"
           onClick={handleBackdropClick}
           onTouchStart={handleTouchStart}
           onTouchMove={handleTouchMove}
           onTouchEnd={handleTouchEnd}
         >
-          {/* Close button */}
           <button
             type="button"
             onClick={closeLightbox}
@@ -229,38 +208,28 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
             <X size={24} />
           </button>
 
-          {/* Image counter */}
           <div className="absolute top-4 left-4 z-10 px-3 py-1.5 rounded-full bg-white/10 text-white text-sm font-medium">
             {lightboxIndex + 1} / {slides.length}
           </div>
 
-          {/* Previous button */}
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goToPrevious();
-            }}
+            onClick={(e) => { e.stopPropagation(); goToPrevious(); }}
             className="absolute left-2 sm:left-4 z-10 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Previous screenshot"
           >
             <ChevronLeft size={24} className="sm:w-8 sm:h-8" />
           </button>
 
-          {/* Next button */}
           <button
             type="button"
-            onClick={(e) => {
-              e.stopPropagation();
-              goToNext();
-            }}
+            onClick={(e) => { e.stopPropagation(); goToNext(); }}
             className="absolute right-2 sm:right-4 z-10 p-2 sm:p-3 rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-white"
             aria-label="Next screenshot"
           >
             <ChevronRight size={24} className="sm:w-8 sm:h-8" />
           </button>
 
-          {/* Main image */}
           <div className="relative max-h-[85vh] max-w-[90vw] flex items-center justify-center">
             {!lightboxLoaded && (
               <div className="absolute inset-0 flex items-center justify-center">
@@ -278,10 +247,9 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
             />
           </div>
 
-          {/* Keyboard hint (hidden on mobile) */}
           <div className="hidden sm:block absolute bottom-4 left-1/2 -translate-x-1/2 px-4 py-2 rounded-full bg-white/10 text-white/70 text-sm">
-            Use <kbd className="px-1.5 py-0.5 mx-1 rounded bg-white/20 font-mono text-xs">←</kbd>
-            <kbd className="px-1.5 py-0.5 mx-1 rounded bg-white/20 font-mono text-xs">→</kbd> to navigate,
+            Use <kbd className="px-1.5 py-0.5 mx-1 rounded bg-white/20 font-mono text-xs">&larr;</kbd>
+            <kbd className="px-1.5 py-0.5 mx-1 rounded bg-white/20 font-mono text-xs">&rarr;</kbd> to navigate,
             <kbd className="px-1.5 py-0.5 mx-1 rounded bg-white/20 font-mono text-xs">Esc</kbd> to close
           </div>
         </div>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import opaliteIcon from '../assets/opalite/opaliteicon.png';
 import Hero from '../components/Hero';
 import screen1 from '../assets/opalite/screen1.png';
@@ -36,8 +37,8 @@ import ScrollToTop from '../components/ScrollToTop';
 import DownloadCTA from '../components/DownloadCTA';
 import { usePageMeta, useScrollToStart } from '../hooks';
 
-// Official brand color: Opalite Blue
-const ACCENT_COLOR = '#BBEBFC';
+// Official brand color: Opalite Lavender
+const ACCENT_COLOR = '#CAC0E8';
 
 export default function Opalite() {
   const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18, screen19, screen20, screen21, screen22, screen23, screen24, screen25, screen26, screen27, screen28];
@@ -45,6 +46,8 @@ export default function Opalite() {
   const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
 
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
+  const [videoOpen, setVideoOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
   const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
 
   usePageMeta({
@@ -58,25 +61,10 @@ export default function Opalite() {
 
   return (
     <>
-      <style>{`
-        :root { --accent: ${ACCENT_COLOR}; }
-        header nav a:hover, nav a:hover, .nav-link:hover {
-          color: var(--accent) !important;
-        }
-        header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
-          outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
-          outline-offset: 2px;
-          border-radius: 6px;
-        }
-      `}</style>
-      <section className="relative overflow-hidden">
-        {/* Now Available banner */}
-        <div className="absolute top-6 -right-11 z-20 rotate-45 bg-red-600 text-white text-xs font-bold uppercase tracking-wider py-3 pl-14 pr-8 shadow-lg">
-          Now Available
-        </div>
+      <section>
         <Hero
           heading="Opalite - Color Studio"
-          description="The ultimate color manager for designers, developers, and digital artists. Create colors using various tools, organize with palettes, draw on a canvas, test accessibility, and export to your favorite tools."
+          description="The ultimate color manager for designers, developers, and digital artists."
           imageSrc={opaliteIcon}
           appStoreHref="https://apps.apple.com/us/app/opalite-color-studio/id6755093664"
           githubHref="https://github.com/NMolargik/Opalite"
@@ -84,11 +72,8 @@ export default function Opalite() {
         />
       </section>
       {/* Responsive screenshots section */}
-      <section
-        className="pb-24 text-white"
-        style={{ backgroundColor: 'rgb(36,36,36)' }}
-      >
-        <div className="pt-12">
+      <section className="bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50 pt-6 pb-16">
+        <div>
         <ScreensCarousel
           slides={slides}
           loaded={loaded}
@@ -98,22 +83,66 @@ export default function Opalite() {
           mobileRef={carouselRefMobile}
           altPrefix="Opalite"
         />
-        {/* Demo video */}
+        {/* Demo video — collapsible */}
         <div className="mt-12 px-4">
           <div className="mx-auto max-w-5xl">
-            <div className="relative rounded-2xl overflow-hidden shadow-lg">
-              <video
-                src={opaliteDemo}
-                controls
-                playsInline
-                className="w-full"
+            <button
+              onClick={() => {
+                setVideoOpen(prev => {
+                  if (prev && videoRef.current) {
+                    videoRef.current.pause();
+                  }
+                  return !prev;
+                });
+              }}
+              className="w-full flex items-center justify-between gap-3 rounded-2xl bg-white border border-gray-200 px-6 py-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <span className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600">
+                  <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </span>
+                <span className="text-base font-medium text-gray-900">Example Workflow</span>
+              </div>
+              <motion.svg
+                className="w-5 h-5 text-gray-400"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                strokeWidth={2}
+                animate={{ rotate: videoOpen ? 180 : 0 }}
+                transition={{ duration: 0.25 }}
               >
-                Your browser does not support the video tag.
-              </video>
-              <span className="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white text-xs font-medium px-2 py-1 rounded-lg">
-                Example Workflow
-              </span>
-            </div>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </motion.svg>
+            </button>
+
+            <AnimatePresence initial={false}>
+              {videoOpen && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: 'auto', opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.25, 0.1, 0.25, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="pt-4">
+                    <div className="relative rounded-2xl overflow-hidden shadow-lg">
+                      <video
+                        ref={videoRef}
+                        src={opaliteDemo}
+                        controls
+                        playsInline
+                        className="w-full"
+                      >
+                        Your browser does not support the video tag.
+                      </video>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
         {/* Large text area below images */}
@@ -122,41 +151,41 @@ export default function Opalite() {
           className="mt-8 px-4"
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_18px_45px_rgba(0,0,0,0.7)] sm:px-10">
+            <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-100 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#BBEBFC] to-transparent opacity-80"
+                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#CAC0E8] to-transparent opacity-40"
               />
               <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
                   Opalite — The Ultimate Color Manager
                 </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-white/80">
+                <p className="text-base sm:text-lg leading-relaxed text-gray-600">
                   Whether you're designing interfaces, creating digital art, or building apps, Opalite gives you professional-grade color tools in a beautifully crafted native experience. Built for iPhone, iPad, Mac, Apple Watch, and Vision Pro.
                 </p>
 
-                <hr className="my-6 border-white/10" />
+                <hr className="my-6 border-gray-200" />
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         What is Opalite?
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         Opalite is the ultimate color manager for designers, developers, and digital artists. Pick colors
                         six different ways, organize with smart palettes, contribute to a growing community of colors and palettes, draw on a full-featured canvas, test accessibility,
                         and export to your favorite tools—all from one beautifully designed app.
                       </p>
                     </div>
 
-                    <hr className="my-6 border-white/10 lg:hidden" />
+                    <hr className="my-6 border-gray-200 lg:hidden" />
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Pick Colors Your Way
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         Opalite offers five intuitive ways to find your perfect color: a grid picker with preset swatches,
                         a spectrum slider for precise hues, RGB/HSL channel sliders for fine-tuning, direct hex/RGB/HSL code entry,
                         and the ability to sample colors from any photo or your camera.
@@ -164,10 +193,10 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Stay Organized
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         Create unlimited colors for free and group them into smart palettes with names, notes, and tags.
                         Drag and drop to rearrange, search across your entire color library instantly, and let iCloud sync
                         keep everything in perfect harmony across all your devices.
@@ -175,10 +204,10 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Design with Confidence
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         Built-in WCAG contrast checker ensures AA & AAA compliance. Simulate color blindness (Protanopia,
                         Deuteranopia, Tritanopia) to verify your designs work for everyone. Auto-generated color harmonies
                         (complementary, triadic, analogous & more) and AI-powered color name suggestions help you create
@@ -187,22 +216,22 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Draw & Create
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        <span className="text-black font-medium" style={{ textShadow: '0 0 8px rgba(255,255,255,0.8), 0 0 16px rgba(255,255,255,0.5)' }}>Requires Onyx</span> — Unlock a full PencilKit canvas with
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        <span className="text-brandPurple font-medium">Requires Onyx</span> — Unlock a full PencilKit canvas with
                         Apple Pencil support. Use shape tools for squares, circles, triangles, lines, and arrows. Pan, zoom,
                         and rotate with precision, and save unlimited canvas projects to bring your color palettes to life.
                       </p>
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Export Everywhere
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        <span className="text-black font-medium" style={{ textShadow: '0 0 8px rgba(255,255,255,0.8), 0 0 16px rgba(255,255,255,0.5)' }}>Requires Onyx</span> — Take your colors anywhere: Adobe Swatch
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        <span className="text-brandPurple font-medium">Requires Onyx</span> — Take your colors anywhere: Adobe Swatch
                         Exchange (ASE) for Photoshop and Illustrator, Procreate Swatches for iPad artists, GIMP/GPL for open-source
                         tools, CSS custom properties for web developers, SwiftUI code for iOS developers, and PDF portfolios of
                         your entire collection.
@@ -210,17 +239,17 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Start Creating with Color
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         From the solo developer at Molargik Software LLC—download Opalite and discover a better way to work with color.
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
@@ -284,7 +313,7 @@ export default function Opalite() {
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm italic text-white/70">
+                <p className="mt-4 text-sm text-gray-500 italic">
                   Some of Opalite's features require iOS 26 and iPadOS 26. Others require access to Apple Intelligence.
                 </p>
               </div>
@@ -299,7 +328,7 @@ export default function Opalite() {
         />
         </div>
       </section>
-      <ScrollToTop accentColor={ACCENT_COLOR} />
+      <ScrollToTop />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

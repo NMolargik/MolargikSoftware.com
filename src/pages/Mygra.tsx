@@ -36,7 +36,7 @@ export default function Mygra() {
 
   usePageMeta({
     title: 'Mygra – Intelligent Migraine Journal | Nick Molargik',
-    description: 'Log migraines fast, get on‑device AI insights, see weather correlations, and integrate with Apple Health. Private by default.',
+    description: 'Log migraines fast, get on\u2011device AI insights, see weather correlations, and integrate with Apple Health. Private by default.',
     accentColor: ACCENT_COLOR,
     preloadImage: mygraicon,
   });
@@ -45,17 +45,6 @@ export default function Mygra() {
 
   return (
     <>
-    <style>{`
-      :root { --accent: ${ACCENT_COLOR}; }
-      header nav a:hover, nav a:hover, .nav-link:hover {
-        color: var(--accent) !important;
-      }
-      header nav a:focus-visible, nav a:focus-visible, .nav-link:focus-visible {
-        outline: 2px solid color-mix(in oklab, var(--accent), white 25%);
-        outline-offset: 2px;
-        border-radius: 6px;
-      }
-    `}</style>
     <section>
       <Hero
         heading="Mygra"
@@ -67,11 +56,8 @@ export default function Mygra() {
       />
     </section>
       {/* Responsive screenshots section */}
-      <section
-        className="pb-24 text-white"
-        style={{ backgroundColor: 'rgb(36,36,36)' }}
-      >
-        <div className="pt-12">
+      <section className="bg-gradient-to-b from-purple-50/30 to-[#FAFAFA] pt-6 pb-16">
+        <div>
         <ScreensCarousel
           slides={slides}
           loaded={loaded}
@@ -84,58 +70,58 @@ export default function Mygra() {
         {/* Large text area below images */}
         <section
           aria-label="About Mygra"
-          className="mt-16 px-4"
+          className="mt-16 px-4 py-28"
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 px-6 py-10 shadow-[0_18px_45px_rgba(0,0,0,0.7)] sm:px-10">
+            <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-100 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
               <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#6E60FF] to-transparent opacity-80"
+                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#6E60FF] to-transparent opacity-40"
               />
               <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-white">
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
                   Mygra — Your Intelligent Migraine Journal.
                 </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-white/80">
+                <p className="text-base sm:text-lg leading-relaxed text-gray-600">
                   Take control of your migraines with Mygra – a supportive, intelligent migraine companion that helps you
-                  uncover patterns, avoid triggers, and find relief. Log each headache in seconds, harness private on‑device
+                  uncover patterns, avoid triggers, and find relief. Log each headache in seconds, harness private on&#x2011;device
                   AI for personal insights, and discover what truly helps you feel better. Plus, Mygra syncs securely via
-                  iCloud across your Apple devices and integrates with Apple Health for a 360° view of your well‑being.
+                  iCloud across your Apple devices and integrates with Apple Health for a 360° view of your well&#x2011;being.
                 </p>
 
-                <hr className="my-6 border-white/10" />
+                <hr className="my-6 border-gray-200" />
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         What is Mygra?
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         Mygra is a modern migraine journal designed to help you understand what&apos;s really going on with your
                         headaches. Capture rich details about each episode, connect the dots across your history, and bring clear,
                         organized data to your next doctor visit or personal review.
                       </p>
                     </div>
 
-                    <hr className="my-6 border-white/10 lg:hidden" />
+                    <hr className="my-6 border-gray-200 lg:hidden" />
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
-                        Smarter Insights with On‑Device AI
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                        Smarter Insights with On&#x2011;Device AI
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
-                        Mygra uses Apple&apos;s on‑device intelligence to power the Migraine Assistant, surfacing patterns and
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        Mygra uses Apple&apos;s on&#x2011;device intelligence to power the Migraine Assistant, surfacing patterns and
                         potential triggers from your data—all while keeping your information private on your device. Over time,
                         you&apos;ll see clearer trends in frequency, severity, and what might be contributing to your pain.
                       </p>
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Powerful Filters &amp; Organization
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         With flexible filtering, pinned episodes, and custom tags, Mygra makes it easy to zoom in on your most important
                         migraines—by severity, time period, trigger type, and more. Create your own tags to categorize episodes your way,
                         tracking personal triggers or patterns that matter to you.
@@ -143,10 +129,10 @@ export default function Mygra() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                         Visualize Your History
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-white/80">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
                         See your migraine history come to life with an interactive calendar view and intensity charts. Spot patterns
                         at a glance, track how your severity changes over weeks and months, and identify whether treatments are working
                         with clear visual trends.
@@ -155,7 +141,7 @@ export default function Mygra() {
                   </div>
 
                   <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-white">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
@@ -205,7 +191,7 @@ export default function Mygra() {
                   </div>
                 </div>
 
-                <p className="mt-8 text-sm italic text-white/70">
+                <p className="mt-8 text-sm text-gray-500 italic">
                   Some of Mygra&apos;s features require iOS 26 and iPadOS 26. Others require access to Apple Intelligence.
                 </p>
               </div>
@@ -219,7 +205,7 @@ export default function Mygra() {
         />
         </div>
       </section>
-      <ScrollToTop accentColor={ACCENT_COLOR} />
+      <ScrollToTop />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
