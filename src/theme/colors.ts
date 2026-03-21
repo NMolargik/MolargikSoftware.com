@@ -58,6 +58,7 @@ export const appColors = {
 export const pageAccents = {
   home: '#38bdf8', // sky-400
   opalite: appColors.opalite.accent,
+  'opalite-web': appColors.opalite.accent,
   setdeck: appColors.setdeck.accent,
   mygra: appColors.mygra.accent,
   stork: appColors.stork.accent,

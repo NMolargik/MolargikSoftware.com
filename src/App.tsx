@@ -15,6 +15,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Waffle = lazy(() => import('./pages/Waffle'));
 const Opalite = lazy(() => import('./pages/Opalite'));
 const V1Sports = lazy(() => import('./pages/V1Sports'));
+const OpaliteWeb = lazy(() => import('./pages/OpaliteWeb'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function PageLoader() {
@@ -45,7 +46,14 @@ function ScrollToTopOnNav() {
   return null;
 }
 
+/** Returns true when the page is served from opalite.molargiksoftware.com */
+function isOpaliteSubdomain() {
+  return window.location.hostname.startsWith('opalite.');
+}
+
 function AppShell() {
+  const opaliteSub = isOpaliteSubdomain();
+
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-900">
       {/* Skip to main content link for accessibility */}
@@ -56,12 +64,13 @@ function AppShell() {
         Skip to main content
       </a>
       <ScrollToTopOnNav />
-      <Navbar />
+      {!opaliteSub && <Navbar />}
       <main id="main-content" className="flex-1">
         <Suspense fallback={<PageLoader />}>
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={opaliteSub ? <OpaliteWeb /> : <Home />} />
             <Route path="/opalite" element={<Opalite />} />
+            <Route path="/opalite-web" element={<OpaliteWeb />} />
 
             <Route path="/setdeck" element={<SetDeck />} />
             <Route path="/mygra" element={<Mygra />} />
