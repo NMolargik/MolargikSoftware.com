@@ -1,15 +1,15 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 import type { OpaliteColor } from '../types/opalite';
 
 interface ColorSwatchProps {
   color: OpaliteColor;
+  onClick?: (color: OpaliteColor) => void;
 }
 
 /** Convert 0-1 sRGB to hex string. */
 function toHex(r: number, g: number, b: number): string {
   const clamp = (v: number) => Math.max(0, Math.min(255, Math.round(v * 255)));
-  return `#${[r, g, b].map((c) => clamp(c).toString(16).padStart(2, '0')).join('')}`;
+  return `#${[r, g, b].map((c) => clamp(c).toString(16).toUpperCase().padStart(2, '0')).join('')}`;
 }
 
 /** WCAG relative luminance. */
@@ -29,20 +29,14 @@ function darkerHex(r: number, g: number, b: number): string {
   return toHex(r * factor, g * factor, b * factor);
 }
 
-export default function ColorSwatch({ color }: ColorSwatchProps) {
-  const [copied, setCopied] = useState(false);
+
+export default function ColorSwatch({ color, onClick }: ColorSwatchProps) {
   const hex = toHex(color.red, color.green, color.blue);
   const borderColor = darkerHex(color.red, color.green, color.blue);
   const textColor = idealTextColor(color.red, color.green, color.blue);
 
-  const handleClick = async () => {
-    try {
-      await navigator.clipboard.writeText(hex);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 1500);
-    } catch {
-      // Clipboard not available
-    }
+  const handleClick = () => {
+    onClick?.(color);
   };
 
   return (
@@ -50,21 +44,21 @@ export default function ColorSwatch({ color }: ColorSwatchProps) {
       onClick={handleClick}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.97 }}
-      className="flex-shrink-0 flex flex-col items-center justify-end rounded-2xl cursor-pointer transition-shadow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+      className="flex-shrink-0 flex flex-col items-center justify-end rounded-2xl cursor-pointer transition-shadow hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 select-none"
       style={{
         backgroundColor: hex,
         border: `3px solid ${borderColor}`,
         width: 80,
         height: 80,
       }}
-      title={`${color.name || hex} — click to copy`}
-      aria-label={`Color ${color.name || hex}, click to copy hex code`}
+      title={`${color.name || hex} — click for details, drag to move`}
+      aria-label={`Color ${color.name || hex}, click for details, drag to move between palettes`}
     >
       <span
         className="text-[10px] font-semibold pb-1.5 select-none"
         style={{ color: textColor }}
       >
-        {copied ? 'Copied!' : color.name || hex}
+        {color.name || hex.toUpperCase()}
       </span>
     </motion.button>
   );

@@ -68,6 +68,7 @@ export default function Opalite() {
           imageSrc={opaliteIcon}
           appStoreHref="https://apps.apple.com/us/app/opalite-color-studio/id6755093664"
           githubHref="https://github.com/NMolargik/Opalite"
+          webHref="/opalite-web"
           systemRequirements={["iOS 18.4+", "iPadOS 18.4+", "watchOS 10+", "macOS 15+", "visionOS 26.2+", "tvOS 18+"]}
         />
       </section>

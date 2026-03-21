@@ -149,6 +149,7 @@ export interface CloudKitFetchResponse {
 export interface CloudKitRecord {
   recordName: string;
   recordType: string;
+  recordChangeTag?: string;
   fields: Record<string, CloudKitRecordField>;
   created?: { timestamp: number };
   modified?: { timestamp: number };

@@ -1,5 +1,5 @@
 /**
- * CloudKit JS service for authenticating users and fetching
+ * CloudKit JS service for authenticating users and fetching/saving
  * their private Opalite data (colors & palettes).
  */
 
@@ -14,6 +14,11 @@ import type {
 const CK_ZONE = 'com.apple.coredata.cloudkit.zone';
 
 let container: CloudKitContainer | null = null;
+
+// Raw CloudKit records keyed by CD_id — needed for saving modifications
+const colorRecordMap = new Map<string, CloudKitRecord>();
+// Palette recordName keyed by CD_id — needed for setting CD_palette references
+const paletteRecordNameMap = new Map<string, string>();
 
 /** Waits for the CloudKit JS SDK to load, then configures the container. */
 function getContainer(): Promise<CloudKitContainer> {
@@ -43,10 +48,8 @@ function getContainer(): Promise<CloudKitContainer> {
       }
     };
 
-    // Timeout after 10 seconds
     const timeout = setTimeout(() => reject(new Error('CloudKit JS failed to load')), 10_000);
     check();
-    // Clear timeout on success (check resolves synchronously if already loaded)
     void Promise.resolve().then(() => clearTimeout(timeout));
   });
 }
@@ -159,14 +162,11 @@ async function queryPrivateRecords(recordType: string): Promise<CloudKitRecord[]
       zoneID: { zoneName: CK_ZONE },
     };
 
-    let response;
     if (continuationMarker) {
-      // For pagination, pass continuation marker in options
       zoneOptions.continuationMarker = continuationMarker;
-      response = await performQuery({ recordType }, zoneOptions);
-    } else {
-      response = await performQuery({ recordType }, zoneOptions);
     }
+
+    const response = await performQuery({ recordType }, zoneOptions);
 
     if (response.records) {
       allRecords.push(...response.records);
@@ -187,8 +187,11 @@ export async function fetchPortfolio(): Promise<{
     queryPrivateRecords('CD_OpaliteColor'),
   ]);
 
+  // Clear and rebuild record maps
+  colorRecordMap.clear();
+  paletteRecordNameMap.clear();
+
   // Parse palettes (exclude archived)
-  // Keep a mapping from recordName → palette, since colors reference palettes by recordName
   const palettes: OpalitePalette[] = [];
   const paletteMap = new Map<string, OpalitePalette>();
 
@@ -196,7 +199,10 @@ export async function fetchPortfolio(): Promise<{
     if (fieldValue(record, 'CD_isArchived', 0)) continue;
     const palette = parsePalette(record);
     palettes.push(palette);
+    // Map by recordName (what colors reference via CD_palette)
     paletteMap.set(record.recordName, palette);
+    // Map CD_id → recordName for when we need to set CD_palette on a color
+    paletteRecordNameMap.set(palette.id, record.recordName);
   }
 
   // Parse colors and assign to palettes
@@ -204,6 +210,9 @@ export async function fetchPortfolio(): Promise<{
 
   for (const record of colorRecords) {
     const color = parseColor(record);
+
+    // Store raw record keyed by CD_id for later saves
+    colorRecordMap.set(color.id, record);
 
     // CD_palette is a string matching the palette's CloudKit recordName
     const paletteIdField = record.fields['CD_palette'];
@@ -235,4 +244,142 @@ export async function fetchPortfolio(): Promise<{
   );
 
   return { palettes, looseColors };
+}
+
+// ─── Record saving ───────────────────────────────────────────────
+
+/**
+ * Reassign a color to a different palette (or make it loose).
+ * @param colorId - The CD_id of the color to move
+ * @param targetPaletteId - The CD_id of the target palette, or null to detach
+ */
+export async function saveColorPaletteAssignment(
+  colorId: string,
+  targetPaletteId: string | null
+): Promise<void> {
+  const record = colorRecordMap.get(colorId);
+  if (!record) throw new Error('Color record not found in cache');
+
+  const c = await getContainer();
+  const db = c.privateCloudDatabase;
+
+  // Build the palette reference value
+  // CD_palette stores the palette's CloudKit recordName, or null for loose colors.
+  // IMPORTANT: Never set CD_palette to an empty string — CoreData interprets it as
+  // a reference with an empty recordName, which crashes the import on Apple devices.
+  let paletteRecordName: string | null = null;
+  if (targetPaletteId) {
+    const rn = paletteRecordNameMap.get(targetPaletteId);
+    if (!rn) throw new Error('Palette record not found in cache');
+    paletteRecordName = rn;
+  }
+
+  const now = Date.now();
+
+  // Build fields — spread existing, override what changed, remove CD_palette if loose
+  const fields = { ...record.fields };
+  if (paletteRecordName) {
+    fields.CD_palette = { value: paletteRecordName, type: 'STRING' };
+  } else {
+    delete fields.CD_palette;
+  }
+  fields.CD_updatedAt = { value: now, type: 'TIMESTAMP' };
+  fields.CD_updatedOnDeviceName = { value: 'Opalite Web', type: 'STRING' };
+
+  const recordToSave = {
+    recordType: 'CD_OpaliteColor',
+    recordName: record.recordName,
+    recordChangeTag: record.recordChangeTag,
+    fields,
+  };
+
+  const saveRecords = (db as unknown as {
+    saveRecords(
+      records: Record<string, unknown>[],
+      options?: Record<string, unknown>
+    ): Promise<{ records: CloudKitRecord[] }>;
+  }).saveRecords.bind(db);
+
+  console.log('[OpaliteWeb] Saving record:', record.recordName, '→ palette:', paletteRecordName || '(loose)');
+
+  const response = await saveRecords(
+    [recordToSave],
+    { zoneID: { zoneName: CK_ZONE } }
+  );
+
+  console.log('[OpaliteWeb] Save response:', response);
+
+  // Update our cached record with the new recordChangeTag
+  if (response.records?.[0]) {
+    colorRecordMap.set(colorId, response.records[0]);
+  }
+}
+
+/**
+ * Create a new loose color from a hex string.
+ * Returns the parsed OpaliteColor for optimistic UI.
+ */
+export async function createColorFromHex(hex: string): Promise<OpaliteColor> {
+  // Parse hex
+  const clean = hex.replace(/^#/, '');
+  if (!/^[0-9a-fA-F]{6}$/.test(clean)) throw new Error('Invalid hex color');
+  const r = parseInt(clean.slice(0, 2), 16) / 255;
+  const g = parseInt(clean.slice(2, 4), 16) / 255;
+  const b = parseInt(clean.slice(4, 6), 16) / 255;
+
+  const now = Date.now();
+  const colorId = crypto.randomUUID().toUpperCase();
+
+  const c = await getContainer();
+  const db = c.privateCloudDatabase;
+
+  const recordToSave = {
+    recordType: 'CD_OpaliteColor',
+    fields: {
+      CD_id: { value: colorId, type: 'STRING' },
+      CD_red: { value: r, type: 'DOUBLE' },
+      CD_green: { value: g, type: 'DOUBLE' },
+      CD_blue: { value: b, type: 'DOUBLE' },
+      CD_alpha: { value: 1, type: 'DOUBLE' },
+      CD_createdAt: { value: now, type: 'TIMESTAMP' },
+      CD_updatedAt: { value: now, type: 'TIMESTAMP' },
+      CD_createdOnDeviceName: { value: 'Opalite Web', type: 'STRING' },
+      CD_updatedOnDeviceName: { value: 'Opalite Web', type: 'STRING' },
+      CD_createdByDisplayName: { value: 'User', type: 'STRING' },
+      CD_entityName: { value: 'OpaliteColor', type: 'STRING' },
+    },
+  };
+
+  const saveRecords = (db as unknown as {
+    saveRecords(
+      records: Record<string, unknown>[],
+      options?: Record<string, unknown>
+    ): Promise<{ records: CloudKitRecord[] }>;
+  }).saveRecords.bind(db);
+
+  const response = await saveRecords(
+    [recordToSave],
+    { zoneID: { zoneName: CK_ZONE } }
+  );
+
+  // Cache the new record
+  if (response.records?.[0]) {
+    colorRecordMap.set(colorId, response.records[0]);
+  }
+
+  return {
+    id: colorId,
+    name: undefined,
+    notes: undefined,
+    red: r,
+    green: g,
+    blue: b,
+    alpha: 1,
+    createdAt: new Date(now),
+    updatedAt: new Date(now),
+    createdByDisplayName: 'User',
+    createdOnDeviceName: 'Opalite Web',
+    updatedOnDeviceName: 'Opalite Web',
+    paletteId: undefined,
+  };
 }
