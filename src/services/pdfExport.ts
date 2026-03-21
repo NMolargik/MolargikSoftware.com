@@ -36,7 +36,6 @@ function toHslStr(r: number, g: number, b: number): string {
 const PAGE_W = 612;
 const PAGE_H = 792;
 const MARGIN = 40;
-const CONTENT_W = PAGE_W - MARGIN * 2;
 const SWATCH_SIZE = 36;
 const ROW_HEIGHT = 55;
 

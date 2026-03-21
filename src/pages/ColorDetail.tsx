@@ -1,6 +1,5 @@
 import { useState, useMemo } from 'react';
 import { motion } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
 import { usePageMeta } from '../hooks/usePageMeta';
 import { appColors } from '../theme/colors';
 import type { OpaliteColor } from '../types/opalite';
@@ -123,7 +122,6 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
   const rgb = toRgbString(red, green, blue);
   const hsl = toHslString(red, green, blue);
   const textColor = idealTextColor(red, green, blue);
-  const borderColor = darkerHex(red, green, blue);
 
   const [harmonyType, setHarmonyType] = useState<HarmonyType>('complementary');
   const [copiedField, setCopiedField] = useState<string | null>(null);

@@ -7,7 +7,7 @@ import ColorSwatch from '../components/ColorSwatch';
 import ColorDetail from './ColorDetail';
 import LoadingSpinner from '../components/LoadingSpinner';
 import { exportPortfolioPDF } from '../services/pdfExport';
-import type { OpaliteColor, OpalitePalette } from '../types/opalite';
+import type { OpaliteColor } from '../types/opalite';
 
 // Simple fade-in on mount — no scroll dependency
 const appear = {
