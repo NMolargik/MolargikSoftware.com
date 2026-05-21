@@ -2,6 +2,7 @@ import { Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { trackLiquidGlassCursor } from '../utils/liquidGlass';
 import Logo from '../assets/logoLong.png';
 
 const links = [
@@ -31,18 +32,19 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-        scrolled
-          ? 'bg-white/90 backdrop-blur-xl shadow-sm'
-          : 'bg-transparent'
+      onMouseMove={trackLiquidGlassCursor}
+      className={`fixed top-0 w-full z-50 transition-all duration-300 liquid-glass ${
+        scrolled ? 'shadow-sm' : ''
       }`}
+      style={{ borderRadius: 0, border: 'none', borderBottom: '1px solid rgba(255,255,255,0.4)' }}
     >
       {/* Subtle orange accent line */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-[1.5px] transition-opacity duration-300"
+        className="absolute bottom-0 left-0 right-0 h-[1.5px] transition-opacity duration-300 pointer-events-none"
         style={{
           background: 'linear-gradient(90deg, transparent, #FF6C00 30%, #FF6C00 70%, transparent)',
           opacity: scrolled ? 0.35 : 0,
+          zIndex: 2,
         }}
       />
       <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
@@ -92,7 +94,8 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.2 }}
-            className="lg:hidden overflow-hidden bg-white border-b border-gray-200"
+            className="lg:hidden overflow-hidden liquid-glass liquid-glass-card"
+            style={{ borderRadius: 0, border: 'none', borderTop: '1px solid rgba(255,255,255,0.4)' }}
           >
             <ul className="space-y-1 px-6 pb-4 pt-2 list-none">
               {links.map(({ label, path }) => (

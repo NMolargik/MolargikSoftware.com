@@ -71,43 +71,43 @@ export default function Stork() {
           className="mt-16 px-4"
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-100 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
+            <div className="relative overflow-hidden bg-white dark:bg-[#0a0a0c] rounded-3xl border border-gray-100 dark:border-gray-800 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#E8672B] to-transparent opacity-40"
               />
               <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
                   Stork — Labor &amp; Delivery Companion
                 </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+                <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   Stork helps medical professionals track baby deliveries, visualize trends, and celebrate every birth.
                   Designed for Labor &amp; Delivery nurses, midwives, and OB-GYNs, Stork makes it simple to record, review,
                   and analyze delivery data — across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro.
                 </p>
 
-                <hr className="my-6 border-gray-200" />
+                <hr className="my-6 border-gray-200 dark:border-gray-800" />
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         What is Stork?
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Stork is a focused companion for Labor &amp; Delivery professionals who want a clear picture of their work.
                         Log every delivery with important context, organize with custom Tags, and view your history in a Calendar view.
                         Track your impact over weeks and months, and bring real numbers into conversations with peers and leadership.
                       </p>
                     </div>
 
-                    <hr className="my-6 border-gray-200 lg:hidden" />
+                    <hr className="my-6 border-gray-200 dark:border-gray-800 lg:hidden" />
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Designed for Busy L&amp;D Teams
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Stork is built for fast, repeatable entries that fit naturally into your shift. Log deliveries quickly
                         from your Apple Watch, check stats from Home Screen widgets, or dive deeper on your iPhone, iPad, or Mac.
                         Your delivery history stays organized and at your fingertips.
@@ -115,21 +115,21 @@ export default function Stork() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Celebrate Every Birth
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         With the Marble Jar and visual stats, Stork turns your delivery history into something you can see and be
                         proud of—a tangible reminder of the lives you&apos;ve helped bring into the world.
                       </p>
                     </div>
 
                     <div className="mt-8 space-y-3">
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         <span className="font-semibold">Perfect for:</span> Labor &amp; Delivery nurses, midwives, OB-GYNs, and
                         maternity unit staff.
                       </h3>
-                      <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Whether you&apos;re tracking your own deliveries or analyzing department trends, Stork streamlines your
                         workflow, helps visualize your impact, and keeps every birth beautifully organized.
                       </p>
@@ -137,7 +137,7 @@ export default function Stork() {
                   </div>
 
                   <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">

@@ -1,6 +1,7 @@
 import { motion, useMotionValue, useSpring, useTransform, type MotionValue } from 'framer-motion';
 import { useState, useRef, useCallback, type ReactNode } from 'react';
 import { Link } from 'react-router-dom';
+import { trackLiquidGlassCursor } from '../utils/liquidGlass';
 
 interface TiltProps { rotateX: MotionValue<number>; rotateY: MotionValue<number>; boxShadow: MotionValue<string>; }
 
@@ -127,7 +128,25 @@ export default function Hero({
 
   if (isHome) {
     return (
-      <section className="relative w-full min-h-[90vh] flex items-center justify-center bg-gradient-to-b from-white to-gray-50 pt-20">
+      <section className="relative w-full min-h-[90vh] flex items-center justify-center bg-gradient-to-b from-white to-gray-50 pt-20 overflow-hidden">
+        {/* Ambient color orbs — give the glass surfaces something
+            colorful to refract. Position roughly under the navbar
+            and at the lower edge so cards + nav both pick up tint. */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -top-24 -left-24 w-[420px] h-[420px] rounded-full opacity-60 blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(109, 0, 255, 0.45) 0%, rgba(109, 0, 255, 0) 70%)' }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-32 -right-16 w-[500px] h-[500px] rounded-full opacity-60 blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(255, 108, 0, 0.4) 0%, rgba(255, 108, 0, 0) 70%)' }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-1/3 right-1/4 w-[280px] h-[280px] rounded-full opacity-40 blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(64, 169, 255, 0.45) 0%, rgba(64, 169, 255, 0) 70%)' }}
+        />
         <div className="max-w-4xl mx-auto px-6 text-center relative">
           {/* Logo + Headshot — overlapping, behind text */}
           <motion.div
@@ -198,7 +217,8 @@ export default function Hero({
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.4 + idx * 0.05, duration: 0.3 }}
-                  className="inline-flex items-center rounded-full bg-gray-100 px-4 py-1.5 text-sm font-medium text-gray-700"
+                  onMouseMove={trackLiquidGlassCursor}
+                  className="liquid-glass liquid-glass-pill liquid-glass-interactive inline-flex items-center rounded-full px-4 py-1.5 text-sm font-medium text-gray-700"
                 >
                   {pill}
                 </motion.span>
@@ -323,7 +343,8 @@ export default function Hero({
             {pills.map((pill, idx) => (
               <span
                 key={idx}
-                className="inline-flex items-center rounded-full bg-gray-100 px-3 py-1 text-sm font-medium text-gray-600"
+                onMouseMove={trackLiquidGlassCursor}
+                className="liquid-glass liquid-glass-pill liquid-glass-interactive inline-flex items-center rounded-full px-3 py-1 text-sm font-medium text-gray-600"
               >
                 {pill}
               </span>

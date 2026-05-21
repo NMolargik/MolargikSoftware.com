@@ -46,7 +46,7 @@ export default function Waffle() {
         />
       </section>
       {/* Responsive screenshots section */}
-      <section className="bg-surface pt-6 pb-16">
+      <section className="bg-surface dark:bg-[#0c0c10] pt-6 pb-16">
         <div>
           <ScreensCarousel
             slides={slides}
@@ -63,44 +63,44 @@ export default function Waffle() {
             className="mt-16 px-4 bg-[linear-gradient(to_right,_#DFA65608_1px,_transparent_1px),linear-gradient(to_bottom,_#DFA65608_1px,_transparent_1px)] bg-[size:40px_40px]"
           >
             <div className="mx-auto max-w-5xl">
-              <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-100 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
+              <div className="relative overflow-hidden bg-white dark:bg-[#0a0a0c] rounded-3xl border border-gray-100 dark:border-gray-800 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
                 <div
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#DFA656] to-transparent opacity-40"
                 />
                 <div className="relative space-y-6">
-                  <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
+                  <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
                     Waffle — A New Way to Browse on iPad
                   </h2>
-                  <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+                  <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                     Discover Waffle, a browser experience crafted exclusively for iPad. Say goodbye to tab juggling and hello to a
                     customizable grid of webpages, letting you browse multiple sites side by side in any layout you choose, up to
                     a 4x4 grid. Whether you're researching, comparing, or multitasking, Waffle transforms your iPad into a powerful
                     multi-site workspace.
                   </p>
 
-                  <hr className="my-6 border-gray-200" />
+                  <hr className="my-6 border-gray-200 dark:border-gray-800" />
 
                   <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                     <div className="space-y-6">
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                           What is Waffle?
                         </h3>
-                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                           Waffle is a grid-based browser for iPad that gives you full control over how you view the web. Arrange
                           sites in rows and columns, save presets for workflows you reuse, and snap layouts back exactly how you
                           like them—no more constantly rearranging windows.
                         </p>
                       </div>
 
-                      <hr className="my-6 border-gray-200 lg:hidden" />
+                      <hr className="my-6 border-gray-200 dark:border-gray-800 lg:hidden" />
 
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                           Built for Power Users &amp; Multitaskers
                         </h3>
-                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                           Whether you're comparing products, monitoring dashboards, following along with documentation, or keeping
                           multiple research sources open at once, Waffle helps you stay organized and in flow without losing track
                           of your tabs.
@@ -108,20 +108,20 @@ export default function Waffle() {
                       </div>
 
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                           iPad-First, Through and Through
                         </h3>
-                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                           Waffle is built for iPadOS 26 with Apple&apos;s latest WebView APIs, multi-window support, and CloudKit
                           sync—so your browsing workspace feels fast, fluid, and native on every supported iPad.
                         </p>
                       </div>
 
                       <div>
-                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                        <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                           Designed for power users, researchers, and serious multitaskers
                         </h3>
-                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                        <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                           Waffle is perfect for anyone who wants to
                           unlock the full potential of their iPad. From following rocket launches across multiple sites to managing
                           complex workflows, Waffle makes it effortless to work across multiple pages at once.
@@ -130,7 +130,7 @@ export default function Waffle() {
                     </div>
 
                     <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Key Features
                       </h3>
                       <div className="mt-4 grid gap-4">
@@ -180,7 +180,7 @@ export default function Waffle() {
                     </div>
                   </div>
 
-                  <p className="mt-4 text-sm text-gray-500 italic">
+                  <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 italic">
                     Waffle is available for devices running iPadOS 26 or later. Some features require access to Apple&apos;s latest
                     APIs.
                   </p>

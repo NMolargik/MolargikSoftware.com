@@ -174,7 +174,7 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         exit={{ opacity: 0, y: 40, scale: 0.95 }}
         transition={{ duration: 0.3 }}
-        className="bg-white rounded-3xl shadow-2xl max-w-xl w-full overflow-hidden"
+        className="bg-white dark:bg-[#0a0a0c] rounded-3xl shadow-2xl max-w-xl w-full overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Hero swatch */}
@@ -225,7 +225,7 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
               link.href = canvas.toDataURL('image/png');
               link.click();
             }}
-            className="w-full flex items-center justify-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-sm font-medium py-2.5 rounded-xl transition-colors"
+            className="w-full flex items-center justify-center gap-2 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-gray-700 dark:text-gray-200 text-sm font-medium py-2.5 rounded-xl transition-colors"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -266,7 +266,7 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
 
           {/* Color Harmonies */}
           <div>
-            <h3 className="text-sm font-semibold text-gray-900 mb-3">Color Harmonies</h3>
+            <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-3">Color Harmonies</h3>
 
             {/* Harmony type selector */}
             <div className="flex flex-wrap gap-2 mb-4">
@@ -277,7 +277,7 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
                   className={`text-xs font-medium px-3 py-1.5 rounded-full transition-colors ${
                     harmonyType === type
                       ? 'bg-gray-900 text-white'
-                      : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                      : 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 hover:bg-gray-200'
                   }`}
                 >
                   {harmonyLabels[type]}
@@ -286,7 +286,7 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
             </div>
 
             {/* Description */}
-            <p className="text-xs text-gray-400 mb-3">{harmonyDescriptions[harmonyType]}</p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mb-3">{harmonyDescriptions[harmonyType]}</p>
 
             {/* Harmony swatches */}
             <div className="flex gap-2">
@@ -301,8 +301,8 @@ export default function ColorDetail({ color, onClose }: ColorDetailProps) {
           {/* Notes */}
           {color.notes && (
             <div>
-              <h3 className="text-sm font-semibold text-gray-900 mb-2">Notes</h3>
-              <p className="text-sm text-gray-600 bg-gray-50 rounded-xl p-4 whitespace-pre-wrap">
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-2">Notes</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300 bg-gray-50 dark:bg-[#0a0a0c] rounded-xl p-4 whitespace-pre-wrap">
                 {color.notes}
               </p>
             </div>
@@ -329,10 +329,10 @@ function CopyTile({
   return (
     <button
       onClick={onCopy}
-      className="bg-gray-50 hover:bg-gray-100 rounded-xl p-3 text-left transition-colors group"
+      className="bg-gray-50 dark:bg-[#0a0a0c] hover:bg-gray-100 rounded-xl p-3 text-left transition-colors group"
     >
-      <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">{label}</p>
-      <p className="text-sm font-mono font-medium text-gray-900 mt-0.5 truncate">
+      <p className="text-[10px] font-semibold text-gray-400 dark:text-gray-500 uppercase tracking-wider">{label}</p>
+      <p className="text-sm font-mono font-medium text-gray-900 dark:text-white mt-0.5 truncate">
         {copied ? 'Copied!' : value}
       </p>
     </button>
@@ -349,12 +349,12 @@ function InfoTile({
   value: string;
 }) {
   return (
-    <div className="bg-gray-50 rounded-xl p-3">
-      <div className="flex items-center gap-1.5 text-gray-400 mb-1">
+    <div className="bg-gray-50 dark:bg-[#0a0a0c] rounded-xl p-3">
+      <div className="flex items-center gap-1.5 text-gray-400 dark:text-gray-500 mb-1">
         {icon}
         <p className="text-[10px] font-semibold uppercase tracking-wider">{label}</p>
       </div>
-      <p className="text-sm font-medium text-gray-900 truncate">{value}</p>
+      <p className="text-sm font-medium text-gray-900 dark:text-white truncate">{value}</p>
     </div>
   );
 }

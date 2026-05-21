@@ -70,28 +70,28 @@ export default function SetDeck() {
           className="mt-16 px-4"
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-100 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
+            <div className="relative overflow-hidden bg-white dark:bg-[#0a0a0c] rounded-3xl border border-gray-100 dark:border-gray-800 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#65DA92] to-transparent opacity-40"
               />
               <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
                   SetDeck — Your Complete Workout Routine Companion
                 </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+                <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals—all in one beautifully streamlined app.
                 </p>
 
-                <hr className="my-6 border-gray-200" />
+                <hr className="my-6 border-gray-200 dark:border-gray-800" />
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         What is SetDeck?
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         SetDeck is a modern fitness companion built for people who want structure, progression, and clarity.
                         Whether you're following a weekly routine or building your own from scratch, SetDeck guides you through
                         every exercise set by set while automatically tracking your performance over time. Plus: quickly log
@@ -99,13 +99,13 @@ export default function SetDeck() {
                       </p>
                     </div>
 
-                    <hr className="my-6 border-gray-200 lg:hidden" />
+                    <hr className="my-6 border-gray-200 dark:border-gray-800 lg:hidden" />
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Why Choose SetDeck?
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         SetDeck is built for lifters, athletes, and anyone who wants a structured, measurable path toward real
                         progress. With a clean UI designed around clarity and speed, every workout becomes easier to follow—and
                         every metric becomes easier to track.
@@ -113,10 +113,10 @@ export default function SetDeck() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Build Your Ideal Training Week
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Create custom routines in seconds and shape your ideal training week. Add SetDeck widgets to your
                         Home Screen to instantly see today's water intake and calorie consumption at a glance. View your
                         patterns for hydration, calories, and strength performance across exercises and sets with insightful
@@ -125,17 +125,17 @@ export default function SetDeck() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Start Building a Stronger You
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Download SetDeck today and take control of your training—one set at a time.
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
@@ -178,7 +178,7 @@ export default function SetDeck() {
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm text-gray-500 italic">
+                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 italic">
                   Some of SetDeck's features require iOS 26 and iPadOS 26. Others require access to Apple Intelligence.
                 </p>
               </div>

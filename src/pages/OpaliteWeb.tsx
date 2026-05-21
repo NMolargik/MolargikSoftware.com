@@ -81,11 +81,11 @@ export default function OpaliteWeb() {
       {/* Header */}
       <motion.div {...appear} className="flex items-baseline justify-between mb-4">
         <div>
-          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 dark:text-white tracking-tight">
             Opalite
           </h1>
-          <p className="mt-2 text-lg text-gray-500">Your color portfolio on the web</p>
-          <p className="mt-2 text-lg text-gray-800">Changes take time to sync between devices</p>
+          <p className="mt-2 text-lg text-gray-500 dark:text-gray-400">Your color portfolio on the web</p>
+          <p className="mt-2 text-lg text-gray-800 dark:text-gray-100">Changes take time to sync between devices</p>
         </div>
         {auth.isAuthenticated && (
           <div className="flex items-center gap-3">
@@ -112,7 +112,7 @@ export default function OpaliteWeb() {
             <button
               onClick={refresh}
               disabled={isLoading}
-              className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 flex items-center justify-center transition-colors disabled:opacity-50"
+              className="w-8 h-8 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-600 dark:text-gray-300 flex items-center justify-center transition-colors disabled:opacity-50"
               aria-label="Refresh portfolio"
               title="Refresh"
             >
@@ -143,8 +143,8 @@ export default function OpaliteWeb() {
             exit={{ opacity: 0, height: 0 }}
             className="overflow-hidden mb-4"
           >
-            <div className="flex items-center gap-2 bg-gray-50 rounded-xl p-3">
-              <span className="text-gray-400 font-mono text-sm">#</span>
+            <div className="flex items-center gap-2 bg-gray-50 dark:bg-[#0a0a0c] rounded-xl p-3">
+              <span className="text-gray-400 dark:text-gray-500 font-mono text-sm">#</span>
               <input
                 type="text"
                 value={hexValue}
@@ -156,11 +156,11 @@ export default function OpaliteWeb() {
                 placeholder="FF5733"
                 maxLength={7}
                 autoFocus
-                className="flex-1 bg-transparent font-mono text-sm text-gray-900 placeholder-gray-300 outline-none"
+                className="flex-1 bg-transparent font-mono text-sm text-gray-900 dark:text-white placeholder-gray-300 outline-none"
               />
               {hexValue.length === 6 && (
                 <div
-                  className="w-8 h-8 rounded-lg border border-gray-200 flex-shrink-0"
+                  className="w-8 h-8 rounded-lg border border-gray-200 dark:border-gray-800 flex-shrink-0"
                   style={{ backgroundColor: `#${hexValue}` }}
                 />
               )}
@@ -173,7 +173,7 @@ export default function OpaliteWeb() {
               </button>
               <button
                 onClick={() => { setShowHexInput(false); setHexValue(''); setHexError(null); }}
-                className="text-sm text-gray-400 hover:text-gray-600 transition-colors"
+                className="text-sm text-gray-400 dark:text-gray-500 hover:text-gray-600 transition-colors"
               >
                 Cancel
               </button>
@@ -203,41 +203,41 @@ export default function OpaliteWeb() {
         <motion.div {...appear} className="max-w-2xl mx-auto mt-8">
           {/* Feature highlights */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-10">
-            <div className="bg-gray-50 rounded-2xl p-5 text-center">
+            <div className="bg-gray-50 dark:bg-[#0a0a0c] rounded-2xl p-5 text-center">
               <svg className="w-8 h-8 mx-auto text-blue-500 mb-3" fill="currentColor" viewBox="0 0 24 24">
                 <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10a2.5 2.5 0 0 0 2.5-2.5c0-.61-.23-1.21-.64-1.67a.528.528 0 0 1-.13-.33c0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zM6.5 13a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
               </svg>
-              <h3 className="text-sm font-semibold text-gray-900 mb-1">View Your Portfolio</h3>
-              <p className="text-xs text-gray-500">Browse all your colors and palettes synced from the Opalite app.</p>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">View Your Portfolio</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Browse all your colors and palettes synced from the Opalite app.</p>
             </div>
-            <div className="bg-gray-50 rounded-2xl p-5 text-center">
+            <div className="bg-gray-50 dark:bg-[#0a0a0c] rounded-2xl p-5 text-center">
               <svg className="w-8 h-8 mx-auto text-purple-500 mb-3" viewBox="0 0 24 24" fill="none">
                 <rect x="3" y="3" width="7" height="7" rx="1.5" fill="#A855F7"/>
                 <rect x="14" y="3" width="7" height="7" rx="1.5" fill="#3B82F6"/>
                 <rect x="3" y="14" width="7" height="7" rx="1.5" fill="#F97316"/>
                 <rect x="14" y="14" width="7" height="7" rx="1.5" fill="#EF4444"/>
               </svg>
-              <h3 className="text-sm font-semibold text-gray-900 mb-1">Browse Palettes</h3>
-              <p className="text-xs text-gray-500">View all your palettes and the colors within them.</p>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Browse Palettes</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">View all your palettes and the colors within them.</p>
             </div>
-            <div className="bg-gray-50 rounded-2xl p-5 text-center">
+            <div className="bg-gray-50 dark:bg-[#0a0a0c] rounded-2xl p-5 text-center">
               <svg className="w-8 h-8 mx-auto text-green-500 mb-3" fill="none" stroke="currentColor" strokeWidth={1.5} viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15.666 3.888A2.25 2.25 0 0013.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 01-.75.75H9.334a.75.75 0 01-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 01-2.25 2.25H6.75A2.25 2.25 0 014.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 011.927-.184" />
               </svg>
-              <h3 className="text-sm font-semibold text-gray-900 mb-1">Copy & Sample</h3>
-              <p className="text-xs text-gray-500">Copy hex, RGB, and HSL values directly from your portfolio.</p>
+              <h3 className="text-sm font-semibold text-gray-900 dark:text-white mb-1">Copy & Sample</h3>
+              <p className="text-xs text-gray-500 dark:text-gray-400">Copy hex, RGB, and HSL values directly from your portfolio.</p>
             </div>
           </div>
 
           {/* Sign in card */}
-          <div className="rounded-2xl bg-gray-50 border border-gray-200 p-10 text-center">
-            <svg className="w-10 h-10 mx-auto text-gray-800 mb-4" fill="currentColor" viewBox="0 0 24 24">
+          <div className="rounded-2xl bg-gray-50 dark:bg-[#0a0a0c] border border-gray-200 dark:border-gray-800 p-10 text-center">
+            <svg className="w-10 h-10 mx-auto text-gray-800 dark:text-gray-100 mb-4" fill="currentColor" viewBox="0 0 24 24">
               <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
             </svg>
-            <h2 className="text-xl font-semibold text-gray-900 mb-2">
+            <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">
               Sign in with your Apple Account
             </h2>
-            <p className="text-gray-500 text-sm mb-6">
+            <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">
               Your Opalite data is stored securely in iCloud. Sign in to access it here.
             </p>
             <button
@@ -261,7 +261,7 @@ export default function OpaliteWeb() {
       {auth.isAuthenticated && (
         <>
           {/* Summary */}
-          <p className="text-sm text-gray-400 mb-6">
+          <p className="text-sm text-gray-400 dark:text-gray-500 mb-6">
             {totalColors} {totalColors === 1 ? 'color' : 'colors'} &middot;{' '}
             {palettes.length} {palettes.length === 1 ? 'palette' : 'palettes'}
           </p>
@@ -315,7 +315,7 @@ export default function OpaliteWeb() {
                     <svg className="w-6 h-6 text-blue-500" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2C6.49 2 2 6.49 2 12s4.49 10 10 10a2.5 2.5 0 0 0 2.5-2.5c0-.61-.23-1.21-.64-1.67a.528.528 0 0 1-.13-.33c0-.28.22-.5.5-.5H16c3.31 0 6-2.69 6-6 0-4.96-4.49-9-10-9zM6.5 13a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3-4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm3 4a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
                     </svg>
-                    <h2 className="text-xl font-semibold text-gray-900">Colors</h2>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Colors</h2>
                   </div>
                   <SwatchRow colors={looseColors} onColorClick={setSelectedColor} />
                 </motion.div>
@@ -331,14 +331,14 @@ export default function OpaliteWeb() {
                       <rect x="2" y="14" width="8" height="8" rx="2" fill="#F97316"/>
                       <rect x="14" y="14" width="8" height="8" rx="2" fill="#EF4444"/>
                     </svg>
-                    <h2 className="text-xl font-semibold text-gray-900">Palettes</h2>
+                    <h2 className="text-xl font-semibold text-gray-900 dark:text-white">Palettes</h2>
                   </motion.div>
 
                   {palettes.map((palette) => (
                     <motion.div key={palette.id} {...appear}>
                       <div className="flex items-center gap-2 mb-3">
-                        <h3 className="text-lg font-semibold text-gray-900">{palette.name}</h3>
-                        <span className="text-sm text-gray-400">
+                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{palette.name}</h3>
+                        <span className="text-sm text-gray-400 dark:text-gray-500">
                           {palette.colors.length === 0
                             ? 'Empty palette'
                             : `${palette.colors.length} ${palette.colors.length === 1 ? 'color' : 'colors'}`}
@@ -347,7 +347,7 @@ export default function OpaliteWeb() {
                       {palette.colors.length > 0 ? (
                         <SwatchRow colors={palette.colors} onColorClick={setSelectedColor} />
                       ) : (
-                        <p className="text-sm text-gray-400 italic pl-1">No colors yet</p>
+                        <p className="text-sm text-gray-400 dark:text-gray-500 italic pl-1">No colors yet</p>
                       )}
                     </motion.div>
                   ))}
@@ -358,10 +358,10 @@ export default function OpaliteWeb() {
               {looseColors.length === 0 && palettes.length === 0 && (
                 <motion.div
                   {...appear}
-                  className="rounded-2xl bg-gray-50 border border-gray-200 p-10 text-center"
+                  className="rounded-2xl bg-gray-50 dark:bg-[#0a0a0c] border border-gray-200 dark:border-gray-800 p-10 text-center"
                 >
-                  <p className="text-gray-500 text-lg">Your portfolio is empty</p>
-                  <p className="text-gray-400 text-sm mt-1">
+                  <p className="text-gray-500 dark:text-gray-400 text-lg">Your portfolio is empty</p>
+                  <p className="text-gray-400 dark:text-gray-500 text-sm mt-1">
                     Create colors and palettes in the Opalite app to see them here.
                   </p>
                 </motion.div>
@@ -395,15 +395,15 @@ export default function OpaliteWeb() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center"
+              className="bg-white dark:bg-[#0a0a0c] rounded-2xl shadow-2xl p-6 max-w-sm w-full text-center"
               onClick={(e) => e.stopPropagation()}
             >
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Sign out?</h3>
-              <p className="text-sm text-gray-500 mb-6">You'll need to sign in again to view your portfolio.</p>
+              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">Sign out?</h3>
+              <p className="text-sm text-gray-500 dark:text-gray-400 mb-6">You'll need to sign in again to view your portfolio.</p>
               <div className="flex gap-3">
                 <button
                   onClick={() => setShowSignOutConfirm(false)}
-                  className="flex-1 px-4 py-2.5 rounded-xl bg-gray-100 hover:bg-gray-200 text-sm font-medium text-gray-700 transition-colors"
+                  className="flex-1 px-4 py-2.5 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 text-sm font-medium text-gray-700 dark:text-gray-200 transition-colors"
                 >
                   Cancel
                 </button>

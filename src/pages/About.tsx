@@ -36,7 +36,7 @@ export default function About() {
   return (
     <>
       {/* Personal Hero Section */}
-      <section className="pt-28 pb-10 bg-white">
+      <section className="pt-28 pb-10 bg-white dark:bg-[#0a0a0c]">
         <div className="max-w-3xl mx-auto px-4 text-center">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -48,9 +48,9 @@ export default function About() {
               alt="Nick Molargik"
               className="w-40 h-40 rounded-full object-cover mx-auto shadow-lg mb-6"
             />
-            <h1 className="text-headline text-gray-900 mb-2">Nick Molargik</h1>
-            <p className="text-xl text-gray-500 mb-6">Senior Mobile Software Engineer & Indie Developer</p>
-            <p className="text-gray-600 leading-relaxed max-w-2xl mx-auto">
+            <h1 className="text-headline text-gray-900 dark:text-white mb-2">Nick Molargik</h1>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mb-6">Senior Mobile Software Engineer & Indie Developer</p>
+            <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
               Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Flutter, Kotlin Multiplatform, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living life in Indiana.
             </p>
           </motion.div>
@@ -58,7 +58,7 @@ export default function About() {
       </section>
 
       {/* Company Section */}
-      <section className="py-10 bg-surface">
+      <section className="py-10 bg-surface dark:bg-[#0c0c10]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.div
             className="text-center mb-8"
@@ -67,58 +67,58 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
             <img src={logo} alt="Molargik Software LLC" className="mx-auto h-16 w-auto mb-4 rounded-md" />
-            <h2 className="text-3xl font-bold text-gray-900">Molargik Software LLC</h2>
-            <p className="text-xl text-gray-600 mt-4">
+            <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Molargik Software LLC</h2>
+            <p className="text-xl text-gray-600 dark:text-gray-300 mt-4">
               Founded in 2025 to transform personal pain points into innovative solutions. Specializing in privacy-first development with iOS 26+, Apple Intelligence, HealthKit, WeatherKit, and more for native experiences.
             </p>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-8">
             <motion.div
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8"
+              className="bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8"
               {...fadeUp}
             >
-              <h3 className="text-2xl font-semibold mb-4 text-gray-900">Mission</h3>
-              <p className="text-gray-600">
+              <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Mission</h3>
+              <p className="text-gray-600 dark:text-gray-300">
                 Create intuitive, impactful apps born from real user needs—whether tracking migraines with AI, revolutionizing iPad browsing, or empowering L&D nurses. Every project prioritizes privacy, performance, and meaningful problem-solving.
               </p>
             </motion.div>
             <motion.div
-              className="bg-white rounded-2xl border border-gray-100 shadow-sm p-8"
+              className="bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8"
               {...fadeUp}
             >
-              <h3 className="text-2xl font-semibold mb-4 text-gray-900">Core Technologies</h3>
-              <ul className="space-y-2 text-gray-600">
+              <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Core Technologies</h3>
+              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
                 <li>SwiftUI + Apple Intelligence (iOS 26+)</li>
                 <li>SwiftData + CloudKit cross-device sync</li>
                 <li>HealthKit, WeatherKit, WebView API</li>
               </ul>
             </motion.div>
           </div>
-          <motion.div className="mt-8 text-center text-gray-500 text-sm" {...fadeUp}>
+          <motion.div className="mt-8 text-center text-gray-500 dark:text-gray-400 text-sm" {...fadeUp}>
             <p>
-              Built with <span className="text-gray-900 font-medium">React</span>, <span className="text-gray-900 font-medium">Vite</span>, and <span className="text-gray-900 font-medium">Tailwind CSS</span>. Web dev supports my mobile passion—but is certainly not my expertise.
+              Built with <span className="text-gray-900 dark:text-white font-medium">React</span>, <span className="text-gray-900 dark:text-white font-medium">Vite</span>, and <span className="text-gray-900 dark:text-white font-medium">Tailwind CSS</span>. Web dev supports my mobile passion—but is certainly not my expertise.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* Professional Journey Section */}
-      <section className="py-10 bg-white">
+      <section className="py-10 bg-white dark:bg-[#0a0a0c]">
         <div className="max-w-5xl mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-center mb-8 text-gray-900"
+            className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white"
             {...fadeUp}
           >
             Professional Journey
           </motion.h2>
           <div className="relative">
             {/* Timeline connector line */}
-            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 border-l-2 border-gray-200 hidden md:block" />
+            <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 border-l-2 border-gray-200 dark:border-gray-800 hidden md:block" />
 
             <div className="space-y-8">
               {/* V1 Sports */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white rounded-2xl border border-gray-100 shadow-sm p-8 md:ml-12 relative"
+                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
                 {...fadeUp}
               >
                 <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-red-500 rounded-full border-4 border-white hidden md:block" />
@@ -140,20 +140,20 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex-1 md:order-1">
-                  <h3 className="text-2xl font-semibold mb-2 text-gray-900">Senior Mobile Software Engineer</h3>
-                  <h4 className="text-xl text-gray-500 mb-4">V1 Sports</h4>
-                  <div className="space-y-3 text-gray-600 leading-relaxed">
+                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Senior Mobile Software Engineer</h3>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">V1 Sports</h4>
+                  <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
-                      Built a custom <strong className="text-gray-900 font-semibold">golf ball tracer</strong> from scratch—training a YOLO-based detection model on 28,000 images, converting it to <strong className="text-gray-900 font-semibold">CoreML</strong> for on-device inference, and designing a multi-phase tracking algorithm with trajectory-based detection gating and cluster rejection using Apple's <strong className="text-gray-900 font-semibold">Vision framework</strong>.
+                      Built a custom <strong className="text-gray-900 dark:text-white font-semibold">golf ball tracer</strong> from scratch—training a YOLO-based detection model on 28,000 images, converting it to <strong className="text-gray-900 dark:text-white font-semibold">CoreML</strong> for on-device inference, and designing a multi-phase tracking algorithm with trajectory-based detection gating and cluster rejection using Apple's <strong className="text-gray-900 dark:text-white font-semibold">Vision framework</strong>.
                     </p>
                     <p>
-                      Delivered a production <strong className="text-gray-900 font-semibold">video pipeline</strong> processing frames at 120 FPS with real-time shot trace rendering. Developed cross-platform video composition using <strong className="text-gray-900 font-semibold">Kotlin Multiplatform</strong>, AVFoundation, and FFmpeg, improving playback and stitching on iOS and Android.
+                      Delivered a production <strong className="text-gray-900 dark:text-white font-semibold">video pipeline</strong> processing frames at 120 FPS with real-time shot trace rendering. Developed cross-platform video composition using <strong className="text-gray-900 dark:text-white font-semibold">Kotlin Multiplatform</strong>, AVFoundation, and FFmpeg, improving playback and stitching on iOS and Android.
                     </p>
                     <p>
-                      Built camera capture features in Swift and AVFoundation, packaged as a <strong className="text-gray-900 font-semibold">Flutter Native Plugin</strong> with Codemagic CI/CD. Integrated a pressure mat device via custom <strong className="text-gray-900 font-semibold">C library</strong>, generating real-time heat maps and biomechanics feedback.
+                      Built camera capture features in Swift and AVFoundation, packaged as a <strong className="text-gray-900 dark:text-white font-semibold">Flutter Native Plugin</strong> with Codemagic CI/CD. Integrated a pressure mat device via custom <strong className="text-gray-900 dark:text-white font-semibold">C library</strong>, generating real-time heat maps and biomechanics feedback.
                     </p>
-                    <p className="text-sm font-medium text-gray-500 italic">
-                      <strong className="text-gray-900 font-semibold">Impact:</strong> Authored system architecture documentation enabling rapid onboarding; led cross-functional discussions and architectural refactors that accelerated feature deployment.
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
+                      <strong className="text-gray-900 dark:text-white font-semibold">Impact:</strong> Authored system architecture documentation enabling rapid onboarding; led cross-functional discussions and architectural refactors that accelerated feature deployment.
                     </p>
                   </div>
                 </div>
@@ -161,7 +161,7 @@ export default function About() {
 
               {/* Molargik Software */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white rounded-2xl border border-gray-100 shadow-sm p-8 md:ml-12 relative"
+                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
                 {...fadeUp}
               >
                 <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-purple-500 rounded-full border-4 border-white hidden md:block" />
@@ -180,17 +180,17 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex-1 md:order-1">
-                  <h3 className="text-2xl font-semibold mb-2 text-gray-900">Founder & Developer</h3>
-                  <h4 className="text-xl text-gray-500 mb-4">Molargik Software LLC</h4>
-                  <div className="space-y-3 text-gray-600 leading-relaxed">
+                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Founder & Developer</h3>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">Molargik Software LLC</h4>
+                  <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
                       Founded to build Apple apps from real user needs identified through friends, family, and professional networks. Solo-developing full lifecycle—from user interviews and SwiftUI prototyping to App Store deployment and iteration.
                     </p>
                     <p>
-                      Launched four apps in first year: <strong className="text-gray-900 font-semibold">Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong className="text-gray-900 font-semibold">Waffle</strong> (iPadOS 26 grid browser), <strong className="text-gray-900 font-semibold">Stork</strong> (L&D delivery tracker), and <strong className="text-gray-900 font-semibold">SetDeck</strong> (Fitness companion, workout tracker), followed by <strong className="text-gray-900 font-semibold">Opalite</strong> (color palette manager with iCloud sync, canvas, and more) in year two.
+                      Launched four apps in first year: <strong className="text-gray-900 dark:text-white font-semibold">Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong className="text-gray-900 dark:text-white font-semibold">Waffle</strong> (iPadOS 26 grid browser), <strong className="text-gray-900 dark:text-white font-semibold">Stork</strong> (L&D delivery tracker), and <strong className="text-gray-900 dark:text-white font-semibold">SetDeck</strong> (Fitness companion, workout tracker), followed by <strong className="text-gray-900 dark:text-white font-semibold">Opalite</strong> (color palette manager with iCloud sync, canvas, and more) in year two.
                     </p>
-                    <p className="text-sm font-medium text-gray-500 italic">
-                      <strong className="text-gray-900 font-semibold">Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user frustration transformed into intuitive solutions.
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
+                      <strong className="text-gray-900 dark:text-white font-semibold">Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user frustration transformed into intuitive solutions.
                     </p>
                   </div>
                 </div>
@@ -198,7 +198,7 @@ export default function About() {
 
               {/* Sweetwater */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white rounded-2xl border border-gray-100 shadow-sm p-8 md:ml-12 relative"
+                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
                 {...fadeUp}
               >
                 <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-blue-500 rounded-full border-4 border-white hidden md:block" />
@@ -217,20 +217,20 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex-1 md:order-1">
-                  <h3 className="text-2xl font-semibold mb-2 text-gray-900">Mobile & Desktop Applications Engineer</h3>
-                  <h4 className="text-xl text-gray-500 mb-4">Sweetwater Sound</h4>
-                  <div className="space-y-3 text-gray-600 leading-relaxed">
+                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Mobile & Desktop Applications Engineer</h3>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">Sweetwater Sound</h4>
+                  <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
-                      Spearheaded the complete <strong className="text-gray-900 font-semibold">mobile app revival</strong>, transforming a failed Flutter implementation (user-advised to avoid) into world-class native apps using <strong className="text-gray-900 font-semibold">SwiftUI</strong> for iOS and <strong className="text-gray-900 font-semibold">Jetpack Compose</strong> for Android.
+                      Spearheaded the complete <strong className="text-gray-900 dark:text-white font-semibold">mobile app revival</strong>, transforming a failed Flutter implementation (user-advised to avoid) into world-class native apps using <strong className="text-gray-900 dark:text-white font-semibold">SwiftUI</strong> for iOS and <strong className="text-gray-900 dark:text-white font-semibold">Jetpack Compose</strong> for Android.
                     </p>
                     <p>
                       Results were transformative: native apps surpassed the website in discovery-to-sales conversion, driving significant revenue growth. Rapidly expanded from 4D database maintenance to leading mobile development after proving capabilities through bug fixes and feature delivery.
                     </p>
                     <p>
-                      Architected <strong className="text-gray-900 font-semibold">GitLab CI/CD pipelines</strong> accelerating deployment cycles. Maintained legacy <strong className="text-gray-900 font-semibold">Objective-C/Swift desktop applications</strong> and enterprise 4D systems managing full business operations—sales, inventory, payments, logistics, and customer engagement.
+                      Architected <strong className="text-gray-900 dark:text-white font-semibold">GitLab CI/CD pipelines</strong> accelerating deployment cycles. Maintained legacy <strong className="text-gray-900 dark:text-white font-semibold">Objective-C/Swift desktop applications</strong> and enterprise 4D systems managing full business operations—sales, inventory, payments, logistics, and customer engagement.
                     </p>
-                    <p className="text-sm font-medium text-gray-500 italic">
-                      <strong className="text-gray-900 font-semibold">Key Achievement:</strong> Proved cross-platform expertise by quickly mastering Android development while maintaining iOS excellence, positioning mobile as Sweetwater's premier retail channel.
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
+                      <strong className="text-gray-900 dark:text-white font-semibold">Key Achievement:</strong> Proved cross-platform expertise by quickly mastering Android development while maintaining iOS excellence, positioning mobile as Sweetwater's premier retail channel.
                     </p>
                   </div>
                 </div>
@@ -238,7 +238,7 @@ export default function About() {
 
               {/* Raytheon */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white rounded-2xl border border-gray-100 shadow-sm p-8 md:ml-12 relative"
+                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
                 {...fadeUp}
               >
                 <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-orange-500 rounded-full border-4 border-white hidden md:block" />
@@ -257,20 +257,20 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex-1 md:order-1">
-                  <h3 className="text-2xl font-semibold mb-2 text-gray-900">Electrical Engineer</h3>
-                  <h4 className="text-xl text-gray-500 mb-4">Raytheon Technologies</h4>
-                  <div className="space-y-3 text-gray-600 leading-relaxed">
+                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Electrical Engineer</h3>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">Raytheon Technologies</h4>
+                  <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
-                      Developed comprehensive <strong className="text-gray-900 font-semibold">automated testing frameworks</strong> using MATLAB and Python for radar system Unit Under Test (UUT) validation, dramatically reducing manual testing time and improving test coverage for critical defense hardware.
+                      Developed comprehensive <strong className="text-gray-900 dark:text-white font-semibold">automated testing frameworks</strong> using MATLAB and Python for radar system Unit Under Test (UUT) validation, dramatically reducing manual testing time and improving test coverage for critical defense hardware.
                     </p>
                     <p>
-                      Performed <strong className="text-gray-900 font-semibold">schematic capture and PCB rework</strong> for radar components, collaborating with RF engineers to integrate digital control systems with analog RF frontends. Held <strong className="text-gray-900 font-semibold">active Secret Clearance</strong> and contributed to classified system documentation.
+                      Performed <strong className="text-gray-900 dark:text-white font-semibold">schematic capture and PCB rework</strong> for radar components, collaborating with RF engineers to integrate digital control systems with analog RF frontends. Held <strong className="text-gray-900 dark:text-white font-semibold">active Secret Clearance</strong> and contributed to classified system documentation.
                     </p>
                     <p>
                       Executed full lifecycle testing including design verification, environmental testing, and performance characterization. Modified electrical schematics to resolve design flaws and enhance system reliability in mission-critical applications.
                     </p>
-                    <p className="text-sm font-medium text-gray-500 italic">
-                      <strong className="text-gray-900 font-semibold">Defense Expertise:</strong> Gained deep understanding of radar systems, signal processing, and DoD compliance—skills informing modern hardware-software integration approaches in indie development.
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
+                      <strong className="text-gray-900 dark:text-white font-semibold">Defense Expertise:</strong> Gained deep understanding of radar systems, signal processing, and DoD compliance—skills informing modern hardware-software integration approaches in indie development.
                     </p>
                   </div>
                 </div>
@@ -278,7 +278,7 @@ export default function About() {
 
               {/* Early Career Summary */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white rounded-2xl border border-gray-100 shadow-sm p-8 md:ml-12 relative"
+                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
                 {...fadeUp}
               >
                 <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-gray-500 rounded-full border-4 border-white hidden md:block" />
@@ -297,22 +297,22 @@ export default function About() {
                   </div>
                 </div>
                 <div className="flex-1 md:order-1">
-                  <h3 className="text-2xl font-semibold mb-4 text-gray-900">Early Foundation</h3>
-                  <div className="flex flex-col gap-4 text-gray-600">
+                  <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Early Foundation</h3>
+                  <div className="flex flex-col gap-4 text-gray-600 dark:text-gray-300">
                     <div>
-                      <h4 className="font-medium mb-1 text-gray-900">NAVSEA Crane Intern</h4>
+                      <h4 className="font-medium mb-1 text-gray-900 dark:text-white">NAVSEA Crane Intern</h4>
                       <p className="text-sm">Developed Python automation for radar system upgrades (Secret Clearance). Signal analysis with MATLAB.</p>
                     </div>
                     <div>
-                      <h4 className="font-medium mb-1 text-gray-900">Purdue School of Engineering & Technology @ IUPUI - 3D Printing Lab</h4>
+                      <h4 className="font-medium mb-1 text-gray-900 dark:text-white">Purdue School of Engineering & Technology @ IUPUI - 3D Printing Lab</h4>
                       <p className="text-sm">Managed printer fleet, trained students, end-to-end print workflow for engineering projects.</p>
                     </div>
                     <div>
-                      <h4 className="font-medium mb-1 text-gray-900">Molargik Woodworking Inc. - Laborer, CNC Operator, Delivery, IT</h4>
+                      <h4 className="font-medium mb-1 text-gray-900 dark:text-white">Molargik Woodworking Inc. - Laborer, CNC Operator, Delivery, IT</h4>
                       <p className="text-sm">Cabinet component preparation and assembly, delivery to job sites, customer interaction, CNC machinery operation, and one-man IT support.</p>
                     </div>
                     <div>
-                      <h4 className="font-medium mb-1 text-gray-900">BS Electrical Engineering, IUPUI</h4>
+                      <h4 className="font-medium mb-1 text-gray-900 dark:text-white">BS Electrical Engineering, IUPUI</h4>
                       <p className="text-sm">3.72 GPA, Mathematics minor, focus on electric motors and power systems / transmission / conversion</p>
                     </div>
                   </div>
@@ -324,17 +324,17 @@ export default function About() {
       </section>
 
       {/* Skills Section */}
-      <section className="py-10 bg-surface">
+      <section className="py-10 bg-surface dark:bg-[#0c0c10]">
         <div className="max-w-4xl mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-center mb-8 text-gray-900"
+            className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white"
             {...fadeUp}
           >
             Technical Expertise
           </motion.h2>
           <div className="grid md:grid-cols-3 gap-6">
             <motion.div {...fadeUp}>
-              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900">Mobile Development</h3>
+              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">Mobile Development</h3>
               <div className="flex flex-wrap justify-center gap-2">
                 {['SwiftUI', 'Swift', 'Kotlin Multiplatform', 'Flutter + BLoC', 'Jetpack Compose'].map((skill, i) => (
                   <motion.span
@@ -352,7 +352,7 @@ export default function About() {
               </div>
             </motion.div>
             <motion.div {...fadeUp}>
-              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900">Apple Ecosystem</h3>
+              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">Apple Ecosystem</h3>
               <div className="flex flex-wrap justify-center gap-2">
                 {['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API'].map((skill, i) => (
                   <motion.span
@@ -370,7 +370,7 @@ export default function About() {
               </div>
             </motion.div>
             <motion.div {...fadeUp}>
-              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900">Systems Engineering</h3>
+              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">Systems Engineering</h3>
               <div className="flex flex-wrap justify-center gap-2">
                 {['C Libraries', 'MATLAB', 'Python Automation', 'GitLab CI/CD', 'Hardware Integration'].map((skill, i) => (
                   <motion.span
@@ -392,10 +392,10 @@ export default function About() {
       </section>
 
       {/* Featured Projects Section */}
-      <section className="py-10 bg-white">
+      <section className="py-10 bg-white dark:bg-[#0a0a0c]">
         <div className="max-w-6xl mx-auto px-4">
           <motion.h2
-            className="text-3xl font-bold text-center mb-8 text-gray-900"
+            className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white"
             {...fadeUp}
           >
             Featured Projects
@@ -412,21 +412,21 @@ export default function About() {
             ))}
           </motion.div>
           <motion.div className="text-center mt-8" {...fadeUp}>
-            <p className="text-gray-600">
-              All apps available on the <strong className="text-gray-900 font-semibold">App Store</strong>. Built solo from conceptualization to launch. Some graphic design has been outsourced to (much more talented) artists.
+            <p className="text-gray-600 dark:text-gray-300">
+              All apps available on the <strong className="text-gray-900 dark:text-white font-semibold">App Store</strong>. Built solo from conceptualization to launch. Some graphic design has been outsourced to (much more talented) artists.
             </p>
           </motion.div>
         </div>
       </section>
 
       {/* GitHub Contributions Section */}
-      <section className="py-10 bg-surface">
+      <section className="py-10 bg-surface dark:bg-[#0c0c10]">
         <div className="max-w-5xl mx-auto px-4">
-          <motion.h2 className="text-3xl font-bold text-center mb-8 text-gray-900" {...fadeUp}>
+          <motion.h2 className="text-3xl font-bold text-center mb-8 text-gray-900 dark:text-white" {...fadeUp}>
             GitHub Contributions
           </motion.h2>
 
-          <motion.div className="rounded-2xl border border-gray-100 bg-white shadow-sm p-4" {...fadeUp}>
+          <motion.div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-[#0a0a0c] shadow-sm p-4" {...fadeUp}>
             <a
               href="https://github.com/NMolargik"
               aria-label="View Nick Molargik on GitHub"
@@ -440,7 +440,7 @@ export default function About() {
               />
             </a>
 
-            <p className="text-center text-sm text-gray-500 mt-3">
+            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-3">
               Data updates automatically from GitHub. Click the graph to visit my profile.
             </p>
           </motion.div>
@@ -448,16 +448,16 @@ export default function About() {
       </section>
 
       {/* Contact Section */}
-      <section className="py-10 bg-white">
+      <section className="py-10 bg-white dark:bg-[#0a0a0c]">
         <div className="max-w-4xl mx-auto px-4 text-center">
           <motion.h2
-            className="text-3xl font-bold mb-6 text-gray-900"
+            className="text-3xl font-bold mb-6 text-gray-900 dark:text-white"
             {...fadeUp}
           >
             Let's Build Together
           </motion.h2>
           <motion.p
-            className="text-lg text-gray-600 mb-8"
+            className="text-lg text-gray-600 dark:text-gray-300 mb-8"
             {...fadeUp}
           >
             Open to collaborations on Apple platform development or IoT projects. From data-driven solutions to indie apps — let's solve challenging problems together!

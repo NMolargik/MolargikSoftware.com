@@ -31,7 +31,7 @@ export default function Privacy() {
 
   return (
     <>
-      <main className="min-h-screen bg-white">
+      <main className="min-h-screen bg-white dark:bg-[#0a0a0c]">
         {/* Hero */}
         <section className="pt-28 pb-12">
           <div className="max-w-4xl mx-auto px-6 text-center">
@@ -44,7 +44,7 @@ export default function Privacy() {
               <Shield size={32} className="text-brandPurple" />
             </motion.div>
             <motion.h1
-              className="text-headline text-gray-900"
+              className="text-headline text-gray-900 dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
@@ -52,7 +52,7 @@ export default function Privacy() {
               Privacy Policy
             </motion.h1>
             <motion.p
-              className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto"
+              className="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -71,7 +71,7 @@ export default function Privacy() {
             transition={{ duration: 0.6, delay: 0.3 }}
           >
             <div className="rounded-2xl bg-brandPurple/5 border border-brandPurple/10 px-6 py-5 text-center">
-              <p className="text-gray-700 text-base leading-relaxed">
+              <p className="text-gray-700 dark:text-gray-200 text-base leading-relaxed">
                 Your privacy matters to us. Thus far, we do not collect, sell, or otherwise abuse your information in any of our apps. All data stays with you, on device, or privately in your iCloud account. Statistical data is collected, but unique contents or details are not visible to Molargik Software LLC.
               </p>
             </div>
@@ -86,7 +86,7 @@ export default function Privacy() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="rounded-3xl bg-white border border-gray-200 px-6 py-10 sm:px-10 shadow-sm">
+            <div className="rounded-3xl bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-gray-800 px-6 py-10 sm:px-10 shadow-sm">
               <div
                 className="privacy-content prose max-w-none
                   [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2

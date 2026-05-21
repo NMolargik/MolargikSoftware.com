@@ -50,7 +50,7 @@ export default function Contact() {
 
   return (
     <>
-      <section className="relative min-h-screen bg-white pt-28 pb-16">
+      <section className="relative min-h-screen bg-white dark:bg-[#0a0a0c] pt-28 pb-16">
         <div className="mx-auto max-w-3xl px-6">
           <header className="mb-10 text-center flex flex-col items-center">
             <motion.div
@@ -73,7 +73,7 @@ export default function Contact() {
             </motion.p>
 
             <motion.h1
-              className="mt-2 text-headline text-gray-900"
+              className="mt-2 text-headline text-gray-900 dark:text-white"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
@@ -82,7 +82,7 @@ export default function Contact() {
             </motion.h1>
 
             <motion.p
-              className="mx-auto mt-3 max-w-2xl text-balance text-base text-gray-500"
+              className="mx-auto mt-3 max-w-2xl text-balance text-base text-gray-500 dark:text-gray-400"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
@@ -94,7 +94,7 @@ export default function Contact() {
           <motion.form
             ref={formRef}
             onSubmit={handleSubmit}
-            className="relative space-y-8 rounded-3xl border border-gray-200 bg-white p-8 shadow-sm sm:p-10"
+            className="relative space-y-8 rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0a0a0c] p-8 shadow-sm sm:p-10"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
@@ -111,13 +111,13 @@ export default function Contact() {
             {/* Name & Email */}
             <div className="grid gap-6 md:grid-cols-2">
               <div>
-                <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-gray-700">
+                <label htmlFor="contact-name" className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Your name
                 </label>
                 <input
                   id="contact-name"
                   name="name"
-                  className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base text-gray-900 placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
+                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0a0a0c] px-4 py-3 text-base text-gray-900 dark:text-white placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
                   placeholder="Jane Doe"
                   required
                   autoComplete="name"
@@ -125,14 +125,14 @@ export default function Contact() {
                 />
               </div>
               <div>
-                <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-gray-700">
+                <label htmlFor="contact-email" className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
                   Email address
                 </label>
                 <input
                   id="contact-email"
                   name="email"
                   type="email"
-                  className="w-full rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base text-gray-900 placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
+                  className="w-full rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0a0a0c] px-4 py-3 text-base text-gray-900 dark:text-white placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
                   placeholder="you@example.com"
                   required
                   autoComplete="email"
@@ -143,19 +143,19 @@ export default function Contact() {
 
             {/* Message */}
             <div>
-              <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-gray-700">
+              <label htmlFor="contact-message" className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-200">
                 Message
               </label>
               <textarea
                 id="contact-message"
                 name="message"
                 rows={7}
-                className="w-full resize-y rounded-xl border border-gray-200 bg-gray-50 px-4 py-3 text-base text-gray-900 placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
+                className="w-full resize-y rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0a0a0c] px-4 py-3 text-base text-gray-900 dark:text-white placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
                 placeholder="How can I help?"
                 required
                 disabled={state === 'sending'}
               />
-              <p className="mt-2 text-xs text-gray-400">
+              <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">
                 I typically respond within 1–2 business days.
               </p>
             </div>
@@ -164,7 +164,7 @@ export default function Contact() {
 
             {/* Actions */}
             <div className="flex items-center justify-between gap-4">
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-gray-400 dark:text-gray-500">
                 By sending, you agree to be contacted about your inquiry.
               </p>
               <button

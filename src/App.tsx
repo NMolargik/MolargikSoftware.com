@@ -2,6 +2,7 @@ import { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import LiquidGlassFilters from './components/LiquidGlassFilters';
 import LoadingSpinner from './components/LoadingSpinner';
 
 // Lazy load all page components for code splitting
@@ -56,6 +57,7 @@ function AppShell() {
 
   return (
     <div className="flex flex-col min-h-screen bg-white text-gray-900">
+      <LiquidGlassFilters />
       {/* Skip to main content link for accessibility */}
       <a
         href="#main-content"

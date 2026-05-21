@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
+import { trackLiquidGlassCursor } from '../utils/liquidGlass';
 
 export interface ProjectCardProps {
   title: string;
@@ -30,8 +31,9 @@ export default function ProjectCard({
   return (
     <MotionLink
       to={path}
-      className="group block h-full rounded-3xl bg-white border border-gray-100 border-t-2 shadow-sm hover:shadow-lg transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple focus-visible:ring-offset-2"
-      style={{ borderTopColor: accentColor }}
+      onMouseMove={trackLiquidGlassCursor}
+      className="group block h-full rounded-3xl liquid-glass liquid-glass-card transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple focus-visible:ring-offset-2"
+      style={{ borderTop: `2px solid ${accentColor}` }}
       aria-label={`${title} — ${tagline}`}
       initial={{ y: 16 }}
       whileInView={{ y: 0 }}

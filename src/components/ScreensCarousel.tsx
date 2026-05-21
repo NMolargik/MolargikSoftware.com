@@ -124,7 +124,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                 aria-label={`View ${altPrefix} screenshot ${idx + 1} fullscreen`}
               >
                 {!loaded[globalIndex] && (
-                  <div className="absolute inset-0 h-96 w-44 rounded-2xl bg-gray-100 overflow-hidden">
+                  <div className="absolute inset-0 h-96 w-44 rounded-2xl bg-gray-100 dark:bg-gray-800 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 animate-pulse" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <LoadingSpinner />
@@ -164,7 +164,7 @@ const ScreensCarousel: React.FC<ScreensCarouselProps> = ({
                 aria-label={`View ${altPrefix} screenshot ${idx + 1} fullscreen`}
               >
                 {!loaded[globalIndex] && (
-                  <div className="absolute inset-0 h-80 w-36 rounded-2xl bg-gray-100 overflow-hidden">
+                  <div className="absolute inset-0 h-80 w-36 rounded-2xl bg-gray-100 dark:bg-gray-800 overflow-hidden">
                     <div className="absolute inset-0 bg-gradient-to-r from-gray-100 via-gray-50 to-gray-100 animate-pulse" />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <LoadingSpinner />

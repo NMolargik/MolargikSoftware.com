@@ -73,8 +73,19 @@ export default function Home() {
       />
 
       {/* Apps Section */}
-      <section id="apps" className="bg-white py-12 md:py-16 scroll-mt-20">
-        <div className="max-w-6xl mx-auto px-6">
+      <section id="apps" className="relative bg-white py-12 md:py-16 scroll-mt-20 overflow-hidden">
+        {/* Ambient orbs so the glass cards read as refractive */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute top-10 left-1/4 w-[420px] h-[420px] rounded-full opacity-40 blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(109, 0, 255, 0.4) 0%, rgba(109, 0, 255, 0) 70%)' }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute bottom-10 right-1/5 w-[460px] h-[460px] rounded-full opacity-40 blur-3xl"
+          style={{ background: 'radial-gradient(circle, rgba(255, 108, 0, 0.4) 0%, rgba(255, 108, 0, 0) 70%)' }}
+        />
+        <div className="relative max-w-6xl mx-auto px-6">
           <motion.div className="text-center mb-8" {...fadeUp}>
             <h2 className="text-headline text-gray-900">Creations and Contributions</h2>
             <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">

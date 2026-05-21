@@ -14,7 +14,7 @@ export default function NotFound() {
         404
       </motion.h1>
       <motion.h2
-        className="text-2xl md:text-3xl font-semibold text-gray-900 mb-4"
+        className="text-2xl md:text-3xl font-semibold text-gray-900 dark:text-white mb-4"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.1 }}
@@ -22,7 +22,7 @@ export default function NotFound() {
         Page Not Found
       </motion.h2>
       <motion.p
-        className="text-gray-500 max-w-md mb-8"
+        className="text-gray-500 dark:text-gray-400 max-w-md mb-8"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: 0.2 }}
@@ -45,7 +45,7 @@ export default function NotFound() {
         </Link>
         <button
           onClick={() => window.history.back()}
-          className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 bg-white px-6 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 transition"
+          className="inline-flex items-center justify-center gap-2 rounded-full border border-gray-300 dark:border-gray-700 bg-white dark:bg-[#0a0a0c] px-6 py-3 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 transition"
         >
           <ArrowLeft size={18} />
           Go Back

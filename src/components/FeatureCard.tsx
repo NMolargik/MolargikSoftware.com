@@ -17,7 +17,7 @@ export default function FeatureCard({
 }: FeatureCardProps) {
   return (
     <motion.div
-      className="rounded-2xl bg-white border border-gray-100 shadow-sm p-6 hover:shadow-md hover:border-gray-200 transition-all duration-300"
+      className="rounded-2xl bg-white dark:bg-[#0a0a0c] border border-gray-100 dark:border-gray-800 shadow-sm p-6 hover:shadow-md hover:border-gray-200 transition-all duration-300"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -38,8 +38,8 @@ export default function FeatureCard({
         {icon}
       </div>
 
-      <h4 className="text-lg font-semibold text-gray-900">{title}</h4>
-      <p className="mt-2 text-sm leading-relaxed text-gray-500">{description}</p>
+      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h4>
+      <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">{description}</p>
     </motion.div>
   );
 }

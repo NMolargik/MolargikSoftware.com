@@ -93,18 +93,18 @@ export default function Opalite() {
                   return !prev;
                 });
               }}
-              className="w-full flex items-center justify-between gap-3 rounded-2xl bg-white border border-gray-200 px-6 py-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
+              className="w-full flex items-center justify-between gap-3 rounded-2xl bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-gray-800 px-6 py-4 shadow-sm hover:shadow-md transition-shadow cursor-pointer"
             >
               <div className="flex items-center gap-3">
-                <span className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 text-gray-600">
+                <span className="flex items-center justify-center w-9 h-9 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300">
                   <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M8 5v14l11-7z" />
                   </svg>
                 </span>
-                <span className="text-base font-medium text-gray-900">Example Workflow</span>
+                <span className="text-base font-medium text-gray-900 dark:text-white">Example Workflow</span>
               </div>
               <motion.svg
-                className="w-5 h-5 text-gray-400"
+                className="w-5 h-5 text-gray-400 dark:text-gray-500"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -149,41 +149,41 @@ export default function Opalite() {
           className="mt-8 px-4"
         >
           <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden bg-white rounded-3xl border border-gray-100 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
+            <div className="relative overflow-hidden bg-white dark:bg-[#0a0a0c] rounded-3xl border border-gray-100 dark:border-gray-800 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
               <div
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#CAC0E8] to-transparent opacity-40"
               />
               <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900">
+                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
                   Opalite — The Ultimate Color Manager
                 </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-gray-600">
+                <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                   Whether you're designing interfaces, creating digital art, or building apps, Opalite gives you professional-grade color tools in a beautifully crafted native experience. Built for iPhone, iPad, Mac, Apple Watch, and Vision Pro.
                 </p>
 
-                <hr className="my-6 border-gray-200" />
+                <hr className="my-6 border-gray-200 dark:border-gray-800" />
 
                 <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
                   <div className="space-y-6">
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         What is Opalite?
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Opalite is the ultimate color manager for designers, developers, and digital artists. Pick colors
                         six different ways, organize with smart palettes, contribute to a growing community of colors and palettes, draw on a full-featured canvas, test accessibility,
                         and export to your favorite tools—all from one beautifully designed app.
                       </p>
                     </div>
 
-                    <hr className="my-6 border-gray-200 lg:hidden" />
+                    <hr className="my-6 border-gray-200 dark:border-gray-800 lg:hidden" />
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Pick Colors Your Way
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Opalite offers five intuitive ways to find your perfect color: a grid picker with preset swatches,
                         a spectrum slider for precise hues, RGB/HSL channel sliders for fine-tuning, direct hex/RGB/HSL code entry,
                         and the ability to sample colors from any photo or your camera.
@@ -191,10 +191,10 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Stay Organized
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Create unlimited colors for free and group them into smart palettes with names, notes, and tags.
                         Drag and drop to rearrange, search across your entire color library instantly, and let iCloud sync
                         keep everything in perfect harmony across all your devices.
@@ -202,10 +202,10 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Design with Confidence
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Built-in WCAG contrast checker ensures AA & AAA compliance. Simulate color blindness (Protanopia,
                         Deuteranopia, Tritanopia) to verify your designs work for everyone. Auto-generated color harmonies
                         (complementary, triadic, analogous & more) and AI-powered color name suggestions help you create
@@ -214,10 +214,10 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Draw & Create
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         <span className="text-brandPurple font-medium">Requires Onyx</span> — Unlock a full PencilKit canvas with
                         Apple Pencil support. Use shape tools for squares, circles, triangles, lines, and arrows. Pan, zoom,
                         and rotate with precision, and save unlimited canvas projects to bring your color palettes to life.
@@ -225,10 +225,10 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Export Everywhere
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         <span className="text-brandPurple font-medium">Requires Onyx</span> — Take your colors anywhere: Adobe Swatch
                         Exchange (ASE) for Photoshop and Illustrator, Procreate Swatches for iPad artists, GIMP/GPL for open-source
                         tools, CSS custom properties for web developers, SwiftUI code for iOS developers, and PDF portfolios of
@@ -237,17 +237,17 @@ export default function Opalite() {
                     </div>
 
                     <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                         Start Creating with Color
                       </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600">
+                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         From the solo developer at Molargik Software LLC—download Opalite and discover a better way to work with color.
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900">
+                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
                       Key Features
                     </h3>
                     <div className="mt-4 grid gap-4">
@@ -311,7 +311,7 @@ export default function Opalite() {
                   </div>
                 </div>
 
-                <p className="mt-4 text-sm text-gray-500 italic">
+                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 italic">
                   Some of Opalite's features require iOS 26 and iPadOS 26. Others require access to Apple Intelligence.
                 </p>
               </div>
