@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import Hero from '../components/Hero';
 import logo from '../assets/logo.svg';
-import headshot from '../assets/nickheadshot2.jpeg';
+import headshot from '../assets/nickheadshot.jpg';
 import resumePDF from '../assets/nickmolargikresume.pdf';
 import opaliteIcon from '../assets/opalite/opaliteicon.png';
 import storkIcon from '../assets/stork/storkicon.png';

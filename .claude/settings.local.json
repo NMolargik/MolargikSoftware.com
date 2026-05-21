@@ -24,7 +24,8 @@
       "WebFetch(domain:www.v1sports.com)",
       "Bash(find:*)",
       "Bash(which pngquant:*)",
-      "Bash(du:*)"
+      "Bash(du:*)",
+      "Bash(python3 generate_flutter_guide.py)"
     ]
   }
 }

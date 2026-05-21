@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import { staggerContainer } from '../utils/animations';
-import nickheadshot from '../assets/nickheadshot.jpeg';
+import familyshot from '../assets/familyshot.jpg';
 import logo from '../assets/logo.svg';
 import ScrollToTop from '../components/ScrollToTop';
 import opaliteIcon from '../assets/opalite/opaliteicon.png';
@@ -44,7 +44,7 @@ export default function About() {
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
             <img
-              src={nickheadshot}
+              src={familyshot}
               alt="Nick Molargik"
               className="w-40 h-40 rounded-full object-cover mx-auto shadow-lg mb-6"
             />
