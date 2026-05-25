@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
 import Hero from '../components/Hero';
+import GlassButton from '../components/GlassButton';
+import LiquidGlass from '../components/LiquidGlass';
+import { hexToRgbTriple, trackLiquidGlassCursor } from '../utils/liquidGlass';
+import type { CSSProperties } from 'react';
 import logo from '../assets/logo.svg';
 import headshot from '../assets/nickheadshot.jpg';
 import resumePDF from '../assets/nickmolargikresume.pdf';
@@ -26,18 +29,18 @@ const projects = [
 const skills = [
   {
     category: 'Mobile Development',
-    color: 'bg-blue-50 text-blue-700',
+    accent: '#2563EB',
     items: ['SwiftUI', 'Swift', 'Kotlin Multiplatform', 'Flutter', 'Jetpack Compose'],
   },
   {
     category: 'Apple Ecosystem',
-    color: 'bg-green-50 text-green-700',
-    items: ['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API'],
+    accent: '#16A34A',
+    items: ['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API', 'CoreML', 'AVFoundation'],
   },
   {
     category: 'Systems Engineering',
-    color: 'bg-purple-50 text-purple-700',
-    items: ['C Libraries', 'MATLAB', 'Python', 'GitLab CI/CD', 'Hardware Integration'],
+    accent: '#7C3AED',
+    items: ['C Libraries', 'MATLAB', 'Python', 'GitLab CI/CD', 'Hardware Integration', 'Arduino', '3D Printing'],
   },
 ];
 
@@ -118,25 +121,40 @@ export default function Home() {
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
           >
-            {skills.map((group) => (
-              <motion.div
-                key={group.category}
-                className="bg-white rounded-2xl border border-gray-100 shadow-sm p-6"
-                variants={staggerChild}
-              >
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">{group.category}</h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.items.map((skill) => (
-                    <span
-                      key={skill}
-                      className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium ${group.color}`}
+            {skills.map((group) => {
+              const pillRgb = hexToRgbTriple(group.accent);
+              const pillStyle: CSSProperties = pillRgb
+                ? ({ '--lg-accent': pillRgb, color: group.accent } as CSSProperties)
+                : { color: group.accent };
+              return (
+                <motion.div key={group.category} variants={staggerChild}>
+                  <LiquidGlass
+                    variant="card"
+                    accentColor={group.accent}
+                    className="rounded-2xl p-6 h-full"
+                  >
+                    <h3
+                      className="text-lg font-semibold mb-4"
+                      style={{ color: group.accent }}
                     >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
+                      {group.category}
+                    </h3>
+                    <div className="flex flex-wrap gap-2">
+                      {group.items.map((skill) => (
+                        <span
+                          key={skill}
+                          onMouseMove={trackLiquidGlassCursor}
+                          className="liquid-glass liquid-glass-pill inline-flex items-center rounded-full px-3 py-1 text-sm font-medium"
+                          style={pillStyle}
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </LiquidGlass>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -148,12 +166,11 @@ export default function Home() {
           <p className="mt-4 text-lg text-gray-500 max-w-xl mx-auto">
             Whether it's a new app concept or a collaboration opportunity, I'd love to hear from you.
           </p>
-          <Link
-            to="/contact"
-            className="mt-8 inline-flex items-center justify-center rounded-full bg-brandPurple hover:bg-brandPurple/90 px-8 py-3 text-white font-medium transition-colors"
-          >
-            Get in Touch
-          </Link>
+          <div className="mt-8">
+            <GlassButton to="/contact" accentColor="#6D00FF" size="lg">
+              Get in Touch
+            </GlassButton>
+          </div>
         </motion.div>
       </section>
     </>

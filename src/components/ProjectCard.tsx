@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { trackLiquidGlassCursor } from '../utils/liquidGlass';
+import { trackLiquidGlassCursor, hexToRgbTriple } from '../utils/liquidGlass';
 
 export interface ProjectCardProps {
   title: string;
@@ -28,12 +28,16 @@ export default function ProjectCard({
 }: ProjectCardProps) {
   const [imageLoaded, setImageLoaded] = useState(false);
 
+  const accentRgb = hexToRgbTriple(accentColor);
+  const cardStyle: CSSProperties = { borderTop: `2px solid ${accentColor}` };
+  if (accentRgb) (cardStyle as Record<string, string>)['--lg-accent'] = accentRgb;
+
   return (
     <MotionLink
       to={path}
       onMouseMove={trackLiquidGlassCursor}
-      className="group block h-full rounded-3xl liquid-glass liquid-glass-card transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple focus-visible:ring-offset-2"
-      style={{ borderTop: `2px solid ${accentColor}` }}
+      className="group block h-full rounded-3xl liquid-glass liquid-glass-card liquid-glass-interactive transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brandPurple focus-visible:ring-offset-2"
+      style={cardStyle}
       aria-label={`${title} — ${tagline}`}
       initial={{ y: 16 }}
       whileInView={{ y: 0 }}

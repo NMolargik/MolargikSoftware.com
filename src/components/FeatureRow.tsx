@@ -1,5 +1,6 @@
 // src/components/FeatureRow.tsx
 import clsx from 'clsx';
+import LiquidGlass from './LiquidGlass';
 
 export interface FeatureRowProps {
   /** Feature heading. */
@@ -12,11 +13,13 @@ export interface FeatureRowProps {
   screenshotSrc: string;
   /** If true, puts text on the right and screenshot on the left (mirrors layout). */
   reverse?: boolean;
+  /** Optional per-page accent — tints the glass body. */
+  accentColor?: string;
 }
 
 /**
  * Marketing-style feature row:
- * – Rounded white text box with drop-shadow and an overlapping icon.
+ * – Liquid glass text box with overlapping icon.
  * – Screenshot image alongside.
  * – `reverse` prop swaps the order on ≥md screens.
  */
@@ -26,6 +29,7 @@ export default function FeatureRow({
   iconSrc = null,
   screenshotSrc,
   reverse = false,
+  accentColor,
 }: FeatureRowProps) {
   return (
     <section
@@ -35,17 +39,23 @@ export default function FeatureRow({
       )}
     >
       {/* Text box */}
-      <div className="relative flex-1 min-w-[220px] max-w-lg rounded-3xl bg-white dark:bg-[#0a0a0c] px-8 py-10 shadow-lg">
-        {iconSrc !== null && (
-          <img
-            src={iconSrc}
-            alt=""
-            className="absolute top-0 left-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 object-contain"
-          />
-        )}
+      <div className="relative flex-1 min-w-[220px] max-w-lg">
+        <LiquidGlass
+          variant="card"
+          accentColor={accentColor}
+          className="rounded-3xl px-8 py-10"
+        >
+          {iconSrc !== null && (
+            <img
+              src={iconSrc}
+              alt=""
+              className="absolute top-0 left-1/2 h-20 w-20 -translate-x-1/2 -translate-y-1/2 object-contain"
+            />
+          )}
 
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white">{title}</h3>
-        <p className="mt-3 leading-relaxed text-gray-700 dark:text-gray-200">{description}</p>
+          <h3 className="text-2xl font-bold text-gray-900">{title}</h3>
+          <p className="mt-3 leading-relaxed text-gray-700">{description}</p>
+        </LiquidGlass>
       </div>
 
       {/* Screenshot */}

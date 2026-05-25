@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Mail } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import ScrollToTop from '../components/ScrollToTop';
+import LiquidGlass from '../components/LiquidGlass';
+import GlassButton from '../components/GlassButton';
 
 
 export default function Contact() {
@@ -62,15 +64,22 @@ export default function Contact() {
               <Mail size={32} className="text-brandOrange" />
             </motion.div>
 
-            <motion.p
-              className="mt-4 mb-4 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-3 py-1 text-xs font-medium tracking-wide text-green-700"
+            <motion.div
+              className="mt-4 mb-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
             >
-              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
-              Available for new projects
-            </motion.p>
+              <LiquidGlass
+                variant="pill"
+                accentColor="#16A34A"
+                className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium tracking-wide"
+                style={{ color: '#15803D' }}
+              >
+                <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
+                Available for new projects
+              </LiquidGlass>
+            </motion.div>
 
             <motion.h1
               className="mt-2 text-headline text-gray-900 dark:text-white"
@@ -91,21 +100,28 @@ export default function Contact() {
             </motion.p>
           </header>
 
-          <motion.form
-            ref={formRef}
-            onSubmit={handleSubmit}
-            className="relative space-y-8 rounded-3xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-[#0a0a0c] p-8 shadow-sm sm:p-10"
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.35 }}
           >
+            <LiquidGlass
+              variant="card"
+              accentColor="#FF6C00"
+              className="rounded-3xl p-8 sm:p-10"
+            >
+            <form
+              ref={formRef}
+              onSubmit={handleSubmit}
+              className="relative space-y-8"
+            >
             <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
             <input type="hidden" name="ts" value={String(Date.now())} />
 
             {/* Accent line */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-brandOrange to-transparent opacity-40"
+              className="pointer-events-none absolute -inset-x-2 -top-2 h-px bg-gradient-to-r from-transparent via-brandOrange to-transparent opacity-40"
             />
 
             {/* Name & Email */}
@@ -164,12 +180,13 @@ export default function Contact() {
 
             {/* Actions */}
             <div className="flex items-center justify-between gap-4">
-              <p className="text-xs text-gray-400 dark:text-gray-500">
+              <p className="text-xs text-gray-500">
                 By sending, you agree to be contacted about your inquiry.
               </p>
-              <button
+              <GlassButton
                 type="submit"
-                className="inline-flex items-center gap-2 rounded-xl bg-brandOrange px-6 py-3 text-sm font-semibold text-white shadow-sm hover:bg-brandOrange/90 transition active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+                accentColor="#FF6C00"
+                size="md"
                 disabled={state === 'sending'}
               >
                 {state === 'sending' ? (
@@ -183,29 +200,41 @@ export default function Contact() {
                 ) : (
                   'Send Message'
                 )}
-              </button>
+              </GlassButton>
             </div>
 
             {/* Status banners */}
             <div aria-live="polite" className="space-y-3">
               {state === 'sent' && (
-                <p className="flex items-center gap-2 rounded-lg border border-green-200 bg-green-50 px-4 py-3 text-sm text-green-700">
+                <LiquidGlass
+                  variant="card"
+                  accentColor="#16A34A"
+                  className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm"
+                  style={{ color: '#15803D' }}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
                     <path fillRule="evenodd" d="M16.704 5.29a1 1 0 00-1.408-1.418L8 11.168 4.704 7.87A1 1 0 103.296 9.29l4 4a1 1 0 001.408 0l8-8z" clipRule="evenodd" />
                   </svg>
                   Message sent! I'll reply soon.
-                </p>
+                </LiquidGlass>
               )}
               {state === 'error' && (
-                <p className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                <LiquidGlass
+                  variant="card"
+                  accentColor="#DC2626"
+                  className="flex items-center gap-2 rounded-lg px-4 py-3 text-sm"
+                  style={{ color: '#B91C1C' }}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
                     <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.721-1.36 3.486 0l6.518 11.585c.74 1.316-.213 2.966-1.743 2.966H3.482c-1.53 0-2.483-1.65-1.743-2.966L8.257 3.1zM11 14a1 1 0 10-2 0 1 1 0 002 0zm-1-2a1 1 0 01-1-1V8a1 1 0 112 0v3a1 1 0 01-1 1z" clipRule="evenodd" />
                   </svg>
                   Oops — something went wrong. Please try again.
-                </p>
+                </LiquidGlass>
               )}
             </div>
-          </motion.form>
+            </form>
+            </LiquidGlass>
+          </motion.div>
         </div>
       </section>
       <ScrollToTop />

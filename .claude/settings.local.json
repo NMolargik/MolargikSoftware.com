@@ -25,7 +25,16 @@
       "Bash(find:*)",
       "Bash(which pngquant:*)",
       "Bash(du:*)",
-      "Bash(python3 generate_flutter_guide.py)"
+      "Bash(python3 generate_flutter_guide.py)",
+      "WebFetch(domain:x.com)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:www.npmjs.com)",
+      "Bash(npm view *)",
+      "Bash(tar -tzf liquid-dom-react-*.tgz)",
+      "Read(//private/tmp/liquid-dom-inspect/**)",
+      "Bash(tar -xzf liquid-dom-react-*.tgz)",
+      "Bash(npm run *)",
+      "Bash(curl *)"
     ]
   }
 }

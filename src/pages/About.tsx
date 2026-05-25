@@ -1,7 +1,10 @@
-import { useEffect } from 'react';
+import { useEffect, type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
 import ProjectCard from '../components/ProjectCard';
+import LiquidGlass from '../components/LiquidGlass';
+import GlassButton from '../components/GlassButton';
 import { staggerContainer } from '../utils/animations';
+import { hexToRgbTriple, trackLiquidGlassCursor } from '../utils/liquidGlass';
 import familyshot from '../assets/familyshot.jpg';
 import logo from '../assets/logo.svg';
 import ScrollToTop from '../components/ScrollToTop';
@@ -11,6 +14,40 @@ import waffleIcon from '../assets/waffle/waffleicon.png';
 import storkIcon from '../assets/stork/storkicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import { fadeUp } from '../utils/animations';
+
+const SKILL_GROUPS = [
+  {
+    category: 'Mobile Development',
+    accent: '#2563EB',
+    items: ['SwiftUI', 'Swift', 'Kotlin Multiplatform', 'Flutter + BLoC', 'Jetpack Compose'],
+  },
+  {
+    category: 'Apple Ecosystem',
+    accent: '#16A34A',
+    items: ['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API'],
+  },
+  {
+    category: 'Systems Engineering',
+    accent: '#7C3AED',
+    items: ['C Libraries', 'MATLAB', 'Python Automation', 'GitLab CI/CD', 'Hardware Integration'],
+  },
+];
+
+function GlassSkillPill({ skill, accent }: { skill: string; accent: string }) {
+  const rgb = hexToRgbTriple(accent);
+  const style: CSSProperties = rgb
+    ? ({ '--lg-accent': rgb, color: accent } as CSSProperties)
+    : { color: accent };
+  return (
+    <span
+      onMouseMove={trackLiquidGlassCursor}
+      className="liquid-glass liquid-glass-pill inline-flex items-center rounded-full px-3 py-1 text-sm font-medium"
+      style={style}
+    >
+      {skill}
+    </span>
+  );
+}
 
 export default function About() {
   useEffect(() => {
@@ -73,25 +110,31 @@ export default function About() {
             </p>
           </motion.div>
           <div className="grid md:grid-cols-2 gap-8">
-            <motion.div
-              className="bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8"
-              {...fadeUp}
-            >
-              <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Mission</h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Create intuitive, impactful apps born from real user needs—whether tracking migraines with AI, revolutionizing iPad browsing, or empowering L&D nurses. Every project prioritizes privacy, performance, and meaningful problem-solving.
-              </p>
+            <motion.div {...fadeUp}>
+              <LiquidGlass
+                variant="card"
+                accentColor="#6D00FF"
+                className="rounded-2xl p-8 h-full"
+              >
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">Mission</h3>
+                <p className="text-gray-700">
+                  Create intuitive, impactful apps born from real user needs—whether tracking migraines with AI, revolutionizing iPad browsing, or empowering L&D nurses. Every project prioritizes privacy, performance, and meaningful problem-solving.
+                </p>
+              </LiquidGlass>
             </motion.div>
-            <motion.div
-              className="bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8"
-              {...fadeUp}
-            >
-              <h3 className="text-2xl font-semibold mb-4 text-gray-900 dark:text-white">Core Technologies</h3>
-              <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                <li>SwiftUI + Apple Intelligence (iOS 26+)</li>
-                <li>SwiftData + CloudKit cross-device sync</li>
-                <li>HealthKit, WeatherKit, WebView API</li>
-              </ul>
+            <motion.div {...fadeUp}>
+              <LiquidGlass
+                variant="card"
+                accentColor="#FF6C00"
+                className="rounded-2xl p-8 h-full"
+              >
+                <h3 className="text-2xl font-semibold mb-4 text-gray-900">Core Technologies</h3>
+                <ul className="space-y-2 text-gray-700">
+                  <li>SwiftUI + Apple Intelligence (iOS 26+)</li>
+                  <li>SwiftData + CloudKit cross-device sync</li>
+                  <li>HealthKit, WeatherKit, WebView API</li>
+                </ul>
+              </LiquidGlass>
             </motion.div>
           </div>
           <motion.div className="mt-8 text-center text-gray-500 dark:text-gray-400 text-sm" {...fadeUp}>
@@ -118,10 +161,11 @@ export default function About() {
             <div className="space-y-8">
               {/* V1 Sports */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
+                className="md:ml-12 relative"
                 {...fadeUp}
               >
-                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-red-500 rounded-full border-4 border-white hidden md:block" />
+                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-red-500 rounded-full border-4 border-white hidden md:block z-10" />
+                <LiquidGlass variant="card" accentColor="#ef4444" className="flex flex-col md:flex-row gap-6 items-start rounded-2xl p-8">
                 <div className="md:w-auto text-center md:order-2">
                   <div className="w-20 md:w-auto h-16 md:h-auto bg-red-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
                     <div className="md:hidden text-center">
@@ -157,14 +201,16 @@ export default function About() {
                     </p>
                   </div>
                 </div>
+                </LiquidGlass>
               </motion.div>
 
               {/* Molargik Software */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
+                className="md:ml-12 relative"
                 {...fadeUp}
               >
-                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-purple-500 rounded-full border-4 border-white hidden md:block" />
+                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-purple-500 rounded-full border-4 border-white hidden md:block z-10" />
+                <LiquidGlass variant="card" accentColor="#a855f7" className="flex flex-col md:flex-row gap-6 items-start rounded-2xl p-8">
                 <div className="md:w-auto text-center md:order-2">
                   <div className="w-20 md:w-auto h-16 md:h-auto bg-purple-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
                     <div className="md:hidden text-center">
@@ -194,14 +240,16 @@ export default function About() {
                     </p>
                   </div>
                 </div>
+                </LiquidGlass>
               </motion.div>
 
               {/* Sweetwater */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
+                className="md:ml-12 relative"
                 {...fadeUp}
               >
-                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-blue-500 rounded-full border-4 border-white hidden md:block" />
+                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-blue-500 rounded-full border-4 border-white hidden md:block z-10" />
+                <LiquidGlass variant="card" accentColor="#3b82f6" className="flex flex-col md:flex-row gap-6 items-start rounded-2xl p-8">
                 <div className="md:w-auto text-center md:order-2">
                   <div className="w-20 md:w-auto h-16 md:h-auto bg-blue-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
                     <div className="md:hidden text-center">
@@ -234,14 +282,16 @@ export default function About() {
                     </p>
                   </div>
                 </div>
+                </LiquidGlass>
               </motion.div>
 
               {/* Raytheon */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
+                className="md:ml-12 relative"
                 {...fadeUp}
               >
-                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-orange-500 rounded-full border-4 border-white hidden md:block" />
+                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-orange-500 rounded-full border-4 border-white hidden md:block z-10" />
+                <LiquidGlass variant="card" accentColor="#f97316" className="flex flex-col md:flex-row gap-6 items-start rounded-2xl p-8">
                 <div className="md:w-auto text-center md:order-2">
                   <div className="w-20 md:w-auto h-16 md:h-auto bg-orange-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
                     <div className="md:hidden text-center">
@@ -274,14 +324,16 @@ export default function About() {
                     </p>
                   </div>
                 </div>
+                </LiquidGlass>
               </motion.div>
 
               {/* Early Career Summary */}
               <motion.div
-                className="flex flex-col md:flex-row gap-6 items-start bg-white dark:bg-[#0a0a0c] rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm p-8 md:ml-12 relative"
+                className="md:ml-12 relative"
                 {...fadeUp}
               >
-                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-gray-500 rounded-full border-4 border-white hidden md:block" />
+                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 bg-gray-500 rounded-full border-4 border-white hidden md:block z-10" />
+                <LiquidGlass variant="card" accentColor="#6b7280" className="flex flex-col md:flex-row gap-6 items-start rounded-2xl p-8">
                 <div className="md:w-auto text-center md:order-2">
                   <div className="w-20 md:w-auto h-16 md:h-auto bg-gray-500 rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2">
                     <div className="md:hidden text-center">
@@ -317,6 +369,7 @@ export default function About() {
                     </div>
                   </div>
                 </div>
+                </LiquidGlass>
               </motion.div>
             </div>
           </div>
@@ -333,60 +386,36 @@ export default function About() {
             Technical Expertise
           </motion.h2>
           <div className="grid md:grid-cols-3 gap-6">
-            <motion.div {...fadeUp}>
-              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">Mobile Development</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['SwiftUI', 'Swift', 'Kotlin Multiplatform', 'Flutter + BLoC', 'Jetpack Compose'].map((skill, i) => (
-                  <motion.span
-                    key={skill}
-                    className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
+            {SKILL_GROUPS.map((group) => (
+              <motion.div key={group.category} {...fadeUp}>
+                <LiquidGlass
+                  variant="card"
+                  accentColor={group.accent}
+                  className="rounded-2xl p-6 h-full"
+                >
+                  <h3
+                    className="text-xl font-semibold mb-4 text-center"
+                    style={{ color: group.accent }}
                   >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div {...fadeUp}>
-              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">Apple Ecosystem</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API'].map((skill, i) => (
-                  <motion.span
-                    key={skill}
-                    className="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
-            <motion.div {...fadeUp}>
-              <h3 className="text-xl font-semibold mb-4 text-center text-gray-900 dark:text-white">Systems Engineering</h3>
-              <div className="flex flex-wrap justify-center gap-2">
-                {['C Libraries', 'MATLAB', 'Python Automation', 'GitLab CI/CD', 'Hardware Integration'].map((skill, i) => (
-                  <motion.span
-                    key={skill}
-                    className="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm"
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.3, delay: i * 0.05 }}
-                    whileHover={{ scale: 1.05 }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </motion.div>
+                    {group.category}
+                  </h3>
+                  <div className="flex flex-wrap justify-center gap-2">
+                    {group.items.map((skill, i) => (
+                      <motion.div
+                        key={skill}
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.3, delay: i * 0.05 }}
+                        whileHover={{ scale: 1.05 }}
+                      >
+                        <GlassSkillPill skill={skill} accent={group.accent} />
+                      </motion.div>
+                    ))}
+                  </div>
+                </LiquidGlass>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -426,23 +455,29 @@ export default function About() {
             GitHub Contributions
           </motion.h2>
 
-          <motion.div className="rounded-2xl border border-gray-100 dark:border-gray-800 bg-white dark:bg-[#0a0a0c] shadow-sm p-4" {...fadeUp}>
-            <a
-              href="https://github.com/NMolargik"
-              aria-label="View Nick Molargik on GitHub"
-              className="block"
+          <motion.div {...fadeUp}>
+            <LiquidGlass
+              variant="card"
+              accentColor="#24292f"
+              className="rounded-2xl p-4"
             >
-              <img
-                src="https://ghchart.rshah.org/NMolargik"
-                alt="GitHub contribution graph for NMolargik"
-                loading="lazy"
-                className="w-full max-w-[820px] mx-auto"
-              />
-            </a>
+              <a
+                href="https://github.com/NMolargik"
+                aria-label="View Nick Molargik on GitHub"
+                className="block"
+              >
+                <img
+                  src="https://ghchart.rshah.org/NMolargik"
+                  alt="GitHub contribution graph for NMolargik"
+                  loading="lazy"
+                  className="w-full max-w-[820px] mx-auto"
+                />
+              </a>
 
-            <p className="text-center text-sm text-gray-500 dark:text-gray-400 mt-3">
-              Data updates automatically from GitHub. Click the graph to visit my profile.
-            </p>
+              <p className="text-center text-sm text-gray-700 mt-3">
+                Data updates automatically from GitHub. Click the graph to visit my profile.
+              </p>
+            </LiquidGlass>
           </motion.div>
         </div>
       </section>
@@ -466,18 +501,37 @@ export default function About() {
             className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap"
             {...fadeUp}
           >
-            <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="bg-brandOrange hover:bg-brandOrange/90 text-white px-6 py-3 rounded-full font-medium transition-colors">
+            <GlassButton
+              href="/resume.pdf"
+              target="_blank"
+              accentColor="#FF6C00"
+              size="lg"
+            >
               Download Resume
-            </a>
-            <a href="mailto:nick@molargiksoftware.com" className="bg-brandPurple hover:bg-brandPurple/90 text-white px-6 py-3 rounded-full font-medium transition-colors">
+            </GlassButton>
+            <GlassButton
+              href="mailto:nick@molargiksoftware.com"
+              accentColor="#6D00FF"
+              size="lg"
+            >
               Email Me
-            </a>
-            <a href="https://www.linkedin.com/in/nicholas-molargik/" target="_blank" rel="noopener noreferrer" className="bg-[#0A66C2] hover:bg-[#004182] text-white px-6 py-3 rounded-full font-medium transition-colors">
+            </GlassButton>
+            <GlassButton
+              href="https://www.linkedin.com/in/nicholas-molargik/"
+              target="_blank"
+              accentColor="#0A66C2"
+              size="lg"
+            >
               LinkedIn
-            </a>
-            <a href="https://github.com/nmolargik" target="_blank" rel="noopener noreferrer" className="bg-[#24292f] hover:bg-[#1b1f23] text-white px-6 py-3 rounded-full font-medium transition-colors">
+            </GlassButton>
+            <GlassButton
+              href="https://github.com/nmolargik"
+              target="_blank"
+              accentColor="#24292f"
+              size="lg"
+            >
               GitHub
-            </a>
+            </GlassButton>
           </motion.div>
         </div>
       </section>

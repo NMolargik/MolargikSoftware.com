@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion';
+import LiquidGlass from './LiquidGlass';
 
 export interface FeatureCardProps {
   icon: string;
@@ -17,7 +18,6 @@ export default function FeatureCard({
 }: FeatureCardProps) {
   return (
     <motion.div
-      className="rounded-2xl bg-white dark:bg-[#0a0a0c] border border-gray-100 dark:border-gray-800 shadow-sm p-6 hover:shadow-md hover:border-gray-200 transition-all duration-300"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{
@@ -26,20 +26,26 @@ export default function FeatureCard({
         ease: [0.25, 0.1, 0.25, 1],
       }}
       whileHover={{ y: -4 }}
-      role="article"
-      aria-label={`${title} feature`}
     >
-      {/* Icon badge */}
-      <div
-        className="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-4"
-        style={{ backgroundColor: `${accentColor}15` }}
-        aria-hidden="true"
+      <LiquidGlass
+        variant="card"
+        interactive
+        accentColor={accentColor}
+        className="block rounded-2xl p-6 h-full"
+        role="article"
+        aria-label={`${title} feature`}
       >
-        {icon}
-      </div>
+        <div
+          className="w-10 h-10 rounded-xl flex items-center justify-center text-lg mb-4"
+          style={{ backgroundColor: `${accentColor}24` }}
+          aria-hidden="true"
+        >
+          {icon}
+        </div>
 
-      <h4 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h4>
-      <p className="mt-2 text-sm leading-relaxed text-gray-500 dark:text-gray-400">{description}</p>
+        <h4 className="text-lg font-semibold text-gray-900">{title}</h4>
+        <p className="mt-2 text-sm leading-relaxed text-gray-600">{description}</p>
+      </LiquidGlass>
     </motion.div>
   );
 }

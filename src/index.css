@@ -55,45 +55,71 @@ body {
    ============================================================
    Translucent material that reads as a refractive lens over the
    background. Layers, from back to front:
-     1. backdrop-filter — blur + saturate (+ SVG displacement on
-        Chromium) on the content behind the element.
-     2. Body — a subtle white linear gradient that gives the
-        material thickness.
-     3. ::before — specular sheen, anchored to the cursor via
-        --lg-mx / --lg-my CSS vars set by <LiquidGlass />.
+     1. backdrop-filter — blur + saturate (+ SVG dispersion on
+        Chromium) on the content behind the element. The SVG
+        filter splits R/G/B channels, displaces each at slightly
+        different scales, and recombines — producing chromatic
+        fringe at high-bend regions (Apple's Liquid Glass look).
+     2. Body — adaptive linear-gradient tint that mixes with the
+        per-surface --lg-accent so the pane picks up its context.
+     3. ::before — dual specular: primary hot-spot follows the
+        cursor (--lg-mx / --lg-my), secondary cool reflection
+        sits opposite (driven by --lg-light-angle).
      4. ::after — vignette/tint to seat the surface in its
         surroundings.
      5. Inset box-shadows — edge lensing (bright top/left,
         darker bottom/right) that mimics light bending around a
         convex pane.
+     6. corner-shape: squircle — iOS-style continuous corners on
+        browsers that support it; falls back gracefully to the
+        regular border-radius elsewhere.
 
-   Drives off CSS variables so each variant can tune blur depth,
-   tint strength, sheen intensity, and refraction filter without
-   redefining the whole stack. */
+   Borrows from Andrew Prifer's Liquid DOM (dispersion, squircle,
+   adaptive tint, dual specular) but implemented with stock CSS
+   and SVG so it works without WebGPU. */
 
 :root {
   --lg-blur: 18px;
   --lg-saturate: 180%;
+  --lg-accent: 255, 255, 255;
+  --lg-accent-strength: 12%;
+  --lg-accent-strength-2: 4%;
   --lg-tint: rgba(255, 255, 255, 0.55);
   --lg-tint-2: rgba(255, 255, 255, 0.18);
-  --lg-sheen: rgba(255, 255, 255, 0.65);
+  --lg-sheen: rgba(255, 255, 255, 0.7);
   --lg-sheen-size: 60%;
+  --lg-cool-sheen: rgba(200, 220, 255, 0.35);
+  --lg-cool-sheen-size: 70%;
   --lg-edge-top: rgba(255, 255, 255, 0.95);
   --lg-edge-side: rgba(255, 255, 255, 0.45);
   --lg-edge-bottom: rgba(0, 0, 0, 0.06);
+  --lg-ring: rgba(255, 255, 255, 0.6);
   --lg-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
   --lg-filter: url(#liquid-glass-distortion);
+  --lg-corner-smoothing: 0.6;
+  --lg-light-angle: 215deg;
 }
 
 .liquid-glass {
   position: relative;
   isolation: isolate;
-  background: linear-gradient(135deg, var(--lg-tint) 0%, var(--lg-tint-2) 100%);
-  /* Chromium honors the url() filter and gives us real refraction;
-     Safari/Firefox ignore the url() and fall through to blur+saturate. */
+  /* Adaptive tint: blend the per-surface accent into the white
+     base so each page's accent colors gently bleed through the
+     glass. --lg-accent-strength controls how strongly the accent
+     dominates — low for cards (subtle tint), high for buttons
+     (the accent is the body). */
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklab, rgb(var(--lg-accent)) var(--lg-accent-strength), var(--lg-tint)) 0%,
+      color-mix(in oklab, rgb(var(--lg-accent)) var(--lg-accent-strength-2), var(--lg-tint-2)) 100%
+    );
+  /* Chromium honors the url() filter and gives us real refraction
+     + chromatic dispersion. Safari/Firefox ignore the url() and
+     fall through to blur+saturate. */
   backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate)) var(--lg-filter);
   -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
-  border: 1px solid rgba(255, 255, 255, 0.5);
+  border: 1px solid var(--lg-ring);
   box-shadow:
     inset 0 1px 0 var(--lg-edge-top),
     inset 1px 0 0 var(--lg-edge-side),
@@ -103,39 +129,62 @@ body {
   overflow: hidden;
   transition:
     transform 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
-    box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1);
+    box-shadow 240ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    backdrop-filter 240ms ease;
+  /* iOS-style squircle. Chrome 138+ / Safari 18.2+ honor this;
+     older browsers fall back to the underlying border-radius. */
+  corner-shape: squircle;
+  --tw-corner-smoothing: var(--lg-corner-smoothing);
 }
 
-/* Specular sheen — radial highlight that follows the cursor
-   (vars set by <LiquidGlass />). Defaults place it near the top
-   so the surface still looks lit when the cursor is elsewhere. */
+/* Dual specular: primary hot-spot follows the cursor; secondary
+   cool reflection sits opposite to suggest a light source from
+   --lg-light-angle. Both anchored to the inherited radius. */
 .liquid-glass::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: radial-gradient(
-    circle at var(--lg-mx, 30%) var(--lg-my, 0%),
-    var(--lg-sheen) 0%,
-    rgba(255, 255, 255, 0) var(--lg-sheen-size)
-  );
+  background:
+    radial-gradient(
+      circle at var(--lg-mx, 30%) var(--lg-my, 0%),
+      var(--lg-sheen) 0%,
+      rgba(255, 255, 255, 0) var(--lg-sheen-size)
+    ),
+    radial-gradient(
+      circle at
+        calc(100% - var(--lg-mx, 30%))
+        calc(100% - var(--lg-my, 0%)),
+      var(--lg-cool-sheen) 0%,
+      rgba(255, 255, 255, 0) var(--lg-cool-sheen-size)
+    ),
+    linear-gradient(
+      var(--lg-light-angle),
+      rgba(255, 255, 255, 0.35) 0%,
+      rgba(255, 255, 255, 0) 35%,
+      rgba(255, 255, 255, 0) 65%,
+      rgba(0, 0, 0, 0.04) 100%
+    );
   pointer-events: none;
   border-radius: inherit;
+  corner-shape: inherit;
   z-index: 0;
   mix-blend-mode: screen;
-  opacity: 0.85;
+  opacity: 0.9;
   transition: opacity 240ms ease;
 }
 
-/* Vignette — slight darkening at the bottom and tint at the top
-   so the pane reads as a 3D object rather than a flat overlay. */
+/* Vignette + faint hairline ring that traces the inner border —
+   gives the pane a thicker, more dimensional rim. */
 .liquid-glass::after {
   content: '';
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.06) 0%, rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0.05) 100%);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 30%, rgba(0, 0, 0, 0.06) 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.18);
   pointer-events: none;
   border-radius: inherit;
+  corner-shape: inherit;
   z-index: 0;
 }
 
@@ -149,10 +198,11 @@ body {
 .liquid-glass-pill {
   --lg-blur: 12px;
   --lg-saturate: 160%;
-  --lg-tint: rgba(255, 255, 255, 0.4);
-  --lg-tint-2: rgba(255, 255, 255, 0.12);
-  --lg-sheen: rgba(255, 255, 255, 0.5);
+  --lg-tint: rgba(255, 255, 255, 0.42);
+  --lg-tint-2: rgba(255, 255, 255, 0.14);
+  --lg-sheen: rgba(255, 255, 255, 0.55);
   --lg-sheen-size: 75%;
+  --lg-cool-sheen: rgba(200, 220, 255, 0.25);
   --lg-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
   --lg-filter: url(#liquid-glass-distortion-soft);
 }
@@ -166,21 +216,88 @@ body {
   --lg-shadow: 0 14px 40px rgba(15, 23, 42, 0.1);
 }
 
-/* Lens — hero / showcase surface. Heavy refraction; do not
-   place small text directly on this. */
+/* Lens — hero / showcase surface. Heavy refraction with strong
+   dispersion; do not place small text directly on this. */
 .liquid-glass-lens {
   --lg-blur: 28px;
   --lg-saturate: 220%;
   --lg-tint: rgba(255, 255, 255, 0.45);
   --lg-tint-2: rgba(255, 255, 255, 0.08);
-  --lg-sheen: rgba(255, 255, 255, 0.75);
+  --lg-sheen: rgba(255, 255, 255, 0.8);
   --lg-sheen-size: 55%;
+  --lg-cool-sheen: rgba(180, 210, 255, 0.42);
   --lg-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
   --lg-filter: url(#liquid-glass-lens);
 }
 
-/* Press / hover micro-interactions — Liquid Glass on Apple
-   platforms compresses and brightens under touch. */
+/* Button — solid tinted glass: the accent dominates the body
+   while the dispersion filter, specular sheen, and bezel ring
+   still read on top. Use accent-strength 88/72 so the brand
+   color is unmistakable. Pair with .liquid-glass-interactive. */
+.liquid-glass-button {
+  --lg-blur: 14px;
+  --lg-saturate: 170%;
+  --lg-accent-strength: 88%;
+  --lg-accent-strength-2: 72%;
+  --lg-tint: rgba(255, 255, 255, 0.2);
+  --lg-tint-2: rgba(255, 255, 255, 0.08);
+  --lg-sheen: rgba(255, 255, 255, 0.32);
+  --lg-sheen-size: 85%;
+  --lg-cool-sheen: rgba(255, 255, 255, 0.08);
+  --lg-ring: rgba(255, 255, 255, 0.3);
+  --lg-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
+  --lg-filter: url(#liquid-glass-distortion-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid var(--lg-ring);
+}
+
+/* Slightly soften the dual-specular overlay on buttons so the
+   tinted body reads more cleanly. Cards/pills keep the full sheen. */
+.liquid-glass-button::before {
+  opacity: 0.65;
+}
+
+/* Ghost — transparent button (subtle accent bleed only). Good
+   for secondary actions in a busy hero. */
+.liquid-glass-button.is-ghost {
+  --lg-accent-strength: 18%;
+  --lg-accent-strength-2: 8%;
+  --lg-tint: rgba(255, 255, 255, 0.5);
+  --lg-tint-2: rgba(255, 255, 255, 0.18);
+}
+
+.liquid-glass-button-sm {
+  font-size: 0.875rem;
+  padding: 0.5rem 1rem;
+}
+.liquid-glass-button-md {
+  font-size: 0.95rem;
+  padding: 0.625rem 1.5rem;
+}
+.liquid-glass-button-lg {
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+}
+
+/* Pill is the default shape; rect is for App Store / GitHub /
+   composite badges that need a specific rectangular silhouette
+   and supply their own width/height via className. */
+.liquid-glass-button.is-pill {
+  border-radius: 9999px;
+}
+.liquid-glass-button.is-rect {
+  border-radius: 0.5rem;
+}
+
+/* Press / hover micro-interactions — on Apple platforms Liquid
+   Glass compresses, brightens, and the bezel pulls harder. */
 .liquid-glass-interactive {
   cursor: pointer;
 }
@@ -189,6 +306,10 @@ body {
 }
 .liquid-glass-interactive:hover {
   transform: translateY(-1px);
+  backdrop-filter:
+    blur(calc(var(--lg-blur) + 2px))
+    saturate(calc(var(--lg-saturate) + 20%))
+    url(#liquid-glass-bezel);
   box-shadow:
     inset 0 1px 0 var(--lg-edge-top),
     inset 1px 0 0 var(--lg-edge-side),
@@ -198,6 +319,10 @@ body {
 }
 .liquid-glass-interactive:active {
   transform: translateY(0) scale(0.985);
+  backdrop-filter:
+    blur(calc(var(--lg-blur) + 4px))
+    saturate(calc(var(--lg-saturate) + 30%))
+    url(#liquid-glass-bezel);
 }
 
 /* Honor user prefs — refraction filters and animated sheen can
@@ -207,8 +332,10 @@ body {
     transition: none;
     --lg-filter: none;
   }
-  .liquid-glass-interactive:hover {
+  .liquid-glass-interactive:hover,
+  .liquid-glass-interactive:active {
     transform: none;
+    backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
   }
 }
 

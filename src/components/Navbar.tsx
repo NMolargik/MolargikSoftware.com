@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { trackLiquidGlassCursor } from '../utils/liquidGlass';
+import GlassButton from './GlassButton';
 import Logo from '../assets/logoLong.png';
 
 const links = [
@@ -68,13 +69,12 @@ export default function Navbar() {
           ))}
         </ul>
 
-        {/* Contact button */}
-        <Link
-          to="/contact"
-          className="hidden lg:inline-block rounded-full bg-brandPurple px-5 py-2 text-sm font-medium text-white hover:bg-brandPurple/90 transition-colors"
-        >
-          Contact
-        </Link>
+        {/* Contact button (desktop only — mobile gets one inside the menu) */}
+        <div className="hidden lg:block">
+          <GlassButton to="/contact" accentColor="#6D00FF" size="sm">
+            Contact
+          </GlassButton>
+        </div>
 
         {/* Hamburger */}
         <button
@@ -112,14 +112,16 @@ export default function Navbar() {
                   </NavLink>
                 </li>
               ))}
-              <li>
-                <Link
+              <li className="mt-2">
+                <GlassButton
                   to="/contact"
-                  className="mt-2 block rounded-full bg-brandPurple px-5 py-2 text-sm font-medium text-white text-center hover:bg-brandPurple/90 transition-colors"
+                  accentColor="#6D00FF"
+                  size="sm"
+                  className="w-full"
                   onClick={() => setOpen(false)}
                 >
                   Contact
-                </Link>
+                </GlassButton>
               </li>
             </ul>
           </motion.div>

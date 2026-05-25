@@ -2,6 +2,7 @@ import { useEffect, useMemo } from 'react';
 import { motion } from 'framer-motion';
 import { Shield } from 'lucide-react';
 import ScrollToTop from '../components/ScrollToTop';
+import LiquidGlass from '../components/LiquidGlass';
 
 import privacyHtml from '../assets/privacy.html?raw';
 
@@ -39,9 +40,15 @@ export default function Privacy() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-brandPurple/10 mb-6"
+              className="mb-6"
             >
-              <Shield size={32} className="text-brandPurple" />
+              <LiquidGlass
+                variant="card"
+                accentColor="#6D00FF"
+                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl"
+              >
+                <Shield size={32} className="text-brandPurple" />
+              </LiquidGlass>
             </motion.div>
             <motion.h1
               className="text-headline text-gray-900 dark:text-white"
@@ -70,11 +77,15 @@ export default function Privacy() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <div className="rounded-2xl bg-brandPurple/5 border border-brandPurple/10 px-6 py-5 text-center">
-              <p className="text-gray-700 dark:text-gray-200 text-base leading-relaxed">
+            <LiquidGlass
+              variant="card"
+              accentColor="#6D00FF"
+              className="rounded-2xl px-6 py-5 text-center"
+            >
+              <p className="text-gray-700 text-base leading-relaxed">
                 Your privacy matters to us. Thus far, we do not collect, sell, or otherwise abuse your information in any of our apps. All data stays with you, on device, or privately in your iCloud account. Statistical data is collected, but unique contents or details are not visible to Molargik Software LLC.
               </p>
-            </div>
+            </LiquidGlass>
           </motion.div>
         </section>
 
@@ -86,7 +97,11 @@ export default function Privacy() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <div className="rounded-3xl bg-white dark:bg-[#0a0a0c] border border-gray-200 dark:border-gray-800 px-6 py-10 sm:px-10 shadow-sm">
+            <LiquidGlass
+              variant="card"
+              accentColor="#6D00FF"
+              className="rounded-3xl px-6 py-10 sm:px-10"
+            >
               <div
                 className="privacy-content prose max-w-none
                   [&_h1]:text-2xl [&_h1]:font-bold [&_h1]:text-gray-900 [&_h1]:mb-2
@@ -102,7 +117,7 @@ export default function Privacy() {
                 "
                 dangerouslySetInnerHTML={{ __html: cleanHtml }}
               />
-            </div>
+            </LiquidGlass>
           </motion.div>
         </section>
       </main>
