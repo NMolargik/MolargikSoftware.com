@@ -52,7 +52,7 @@ function GlassSkillPill({ skill, accent }: { skill: string; accent: string }) {
 export default function About() {
   useEffect(() => {
     document.title = 'About – Nick Molargik | Molargik Software LLC';
-    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, SwiftData, Kotlin Multiplatform, and Flutter. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports, now also developing useful, Apple-centric tools like SetDeck, Mygra, Waffle, and Stork.';
+    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, SwiftData, Kotlin Multiplatform, and Flutter. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports and infrastructure intelligence at StreetIQ, now also developing useful, Apple-centric tools like SetDeck, Mygra, Waffle, and Stork.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -86,7 +86,7 @@ export default function About() {
               className="w-40 h-40 rounded-full object-cover mx-auto shadow-lg mb-6"
             />
             <h1 className="text-headline text-gray-900 dark:text-white mb-2">Nick Molargik</h1>
-            <p className="text-xl text-gray-500 dark:text-gray-400 mb-6">Senior Mobile Software Engineer & Indie Developer</p>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mb-6">Senior Software Engineer & Indie Developer</p>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
               Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Flutter, Kotlin Multiplatform, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living life in Indiana.
             </p>
@@ -159,6 +159,45 @@ export default function About() {
             <div className="absolute left-4 md:left-8 top-0 bottom-0 w-0.5 border-l-2 border-gray-200 dark:border-gray-800 hidden md:block" />
 
             <div className="space-y-8">
+              {/* StreetIQ */}
+              <motion.div
+                className="md:ml-12 relative"
+                {...fadeUp}
+              >
+                <div className="absolute -left-[3.25rem] top-8 w-4 h-4 rounded-full border-4 border-white hidden md:block z-10" style={{ backgroundColor: '#3FA8BC' }} />
+                <LiquidGlass variant="card" accentColor="#3FA8BC" className="flex flex-col md:flex-row gap-6 items-start rounded-2xl p-8">
+                <div className="md:w-auto text-center md:order-2">
+                  <div className="w-20 md:w-auto h-16 md:h-auto rounded-lg inline-flex items-center justify-center text-white font-bold text-sm mx-auto px-2 md:px-3 md:py-2" style={{ backgroundColor: '#3FA8BC' }}>
+                    <div className="md:hidden text-center">
+                      <span className="block leading-tight">2026</span>
+                      <span className="block leading-tight text-xs opacity-80">to</span>
+                      <span className="block leading-tight">Present</span>
+                    </div>
+                    <div className="hidden md:flex items-center justify-center gap-1 px-2 whitespace-nowrap">
+                      <span>2026</span>
+                      <span className="text-xs opacity-80">to</span>
+                      <span>Present</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex-1 md:order-1">
+                  <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Senior Software Engineer</h3>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">StreetIQ</h4>
+                  <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
+                    <p>
+                      Joined the Indianapolis-based infrastructure intelligence startup to build their <strong className="text-gray-900 dark:text-white font-semibold">native iOS application</strong> from the ground up in <strong className="text-gray-900 dark:text-white font-semibold">Swift</strong> and <strong className="text-gray-900 dark:text-white font-semibold">SwiftUI</strong>, replacing cross-platform tooling to improve performance and reliability in the field.
+                    </p>
+                    <p>
+                      Focused on a seamless <strong className="text-gray-900 dark:text-white font-semibold">data collection and analysis</strong> experience for the public-works teams capturing street-level road conditions that power StreetIQ's AI pavement scoring and reporting platform.
+                    </p>
+                    <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
+                      <strong className="text-gray-900 dark:text-white font-semibold">Note:</strong> Newly started role — contributions are in progress and will be detailed as the work ships.
+                    </p>
+                  </div>
+                </div>
+                </LiquidGlass>
+              </motion.div>
+
               {/* V1 Sports */}
               <motion.div
                 className="md:ml-12 relative"
@@ -171,13 +210,13 @@ export default function About() {
                     <div className="md:hidden text-center">
                       <span className="block leading-tight">2024</span>
                       <span className="block leading-tight text-xs opacity-80">to</span>
-                      <span className="block leading-tight">Present</span>
+                      <span className="block leading-tight">2026</span>
                     </div>
                     <div className="hidden md:flex flex-col items-center justify-center gap-0.5 px-2 whitespace-nowrap">
                       <div className="flex items-center gap-1">
                         <span>2024</span>
                         <span className="text-xs opacity-80">to</span>
-                        <span>Present</span>
+                        <span>2026</span>
                       </div>
                       <span className="text-[0.65rem] opacity-60">Contractor &rarr; Engineer &rarr; Senior</span>
                     </div>
@@ -194,7 +233,7 @@ export default function About() {
                       Delivered a production <strong className="text-gray-900 dark:text-white font-semibold">video pipeline</strong> processing frames at 120 FPS with real-time shot trace rendering. Developed cross-platform video composition using <strong className="text-gray-900 dark:text-white font-semibold">Kotlin Multiplatform</strong>, AVFoundation, and FFmpeg, improving playback and stitching on iOS and Android.
                     </p>
                     <p>
-                      Built camera capture features in Swift and AVFoundation, packaged as a <strong className="text-gray-900 dark:text-white font-semibold">Flutter Native Plugin</strong> with Codemagic CI/CD. Integrated a pressure mat device via custom <strong className="text-gray-900 dark:text-white font-semibold">C library</strong>, generating real-time heat maps and biomechanics feedback.
+                      Built camera capture features in Swift and AVFoundation, packaged as a <strong className="text-gray-900 dark:text-white font-semibold">Flutter Native Plugin</strong> with Codemagic CI/CD. Designed and shipped <strong className="text-gray-900 dark:text-white font-semibold">multi-device camera sync</strong> — letting multiple iOS devices discover one another over the local network, clock-sync, and record in lockstep for synchronized multi-angle capture. Integrated a pressure mat device via custom <strong className="text-gray-900 dark:text-white font-semibold">C library</strong>, generating real-time heat maps and biomechanics feedback.
                     </p>
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
                       <strong className="text-gray-900 dark:text-white font-semibold">Impact:</strong> Authored system architecture documentation enabling rapid onboarding; led cross-functional discussions and architectural refactors that accelerated feature deployment.

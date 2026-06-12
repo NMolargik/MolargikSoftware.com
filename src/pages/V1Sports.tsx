@@ -39,7 +39,7 @@ export default function V1Sports() {
 
   usePageMeta({
     title: 'V1 Sports | Nick Molargik',
-    description: 'V1 Sports – coming soon.',
+    description: 'Nick Molargik\'s work as Senior Mobile Software Engineer at V1 Sports (2024–2026): native camera, shot tracing, multi-device camera sync, and cross-platform video analysis.',
     accentColor: ACCENT_COLOR,
   });
 
@@ -47,7 +47,7 @@ export default function V1Sports() {
     <>
       {/* Affiliation disclaimer */}
       <div className="w-full bg-red-600 text-white text-sm text-center px-4 py-2 pt-16">
-        <strong>Disclaimer:</strong> Molargik Software LLC is not affiliated with V1 Sports. Nicholas Molargik is employed as a Senior Mobile Software Engineer at V1 Sports.
+        <strong>Disclaimer:</strong> Molargik Software LLC is not affiliated with V1 Sports. Nicholas Molargik was employed as a Senior Mobile Software Engineer at V1 Sports from 2024 to 2026.
       </div>
 
       <section>
@@ -128,7 +128,7 @@ export default function V1Sports() {
                           Built on a Cross-Platform Stack
                         </h3>
                         <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                          The apps are built on Flutter, with native plugins handling performance-critical work. NativeCamera wraps iOS AVCapture and Android Camera2 APIs in Swift and Kotlin to deliver frame-accurate, high-speed video recording. NativeShotTracer uses CoreML and ML Kit for on-device pose detection and ball trajectory rendering. The video analysis engine — NativeAnalyzer — is built with Kotlin Multiplatform and Jetpack Compose, with direct C interop to FFmpeg for frame-level audio and video processing across iOS and Android.
+                          The apps are built on Flutter, with native plugins handling performance-critical work. NativeCamera wraps iOS AVCapture and Android Camera2 APIs in Swift and Kotlin to deliver frame-accurate, high-speed video recording — including a peer-to-peer mode that links multiple iOS devices over the local network to capture synchronized, multi-angle footage. NativeShotTracer uses CoreML and ML Kit for on-device pose detection and ball trajectory rendering. The video analysis engine — NativeAnalyzer — is built with Kotlin Multiplatform and Jetpack Compose, with direct C interop to FFmpeg for frame-level audio and video processing across iOS and Android.
                         </p>
                       </div>
                     </div>
@@ -153,24 +153,31 @@ export default function V1Sports() {
                           accentColor={ACCENT_HEX}
                         />
                         <FeatureCard
+                          icon="🔗"
+                          title="Multi-Device Camera Sync"
+                          description="Designed and shipped peer-to-peer camera synchronization for iOS. Devices discover each other over the local network with Apple's Network framework, perform NTP-style clock sync, and start and stop recording in lockstep — with the follower's footage transferred back to the lead device automatically."
+                          index={2}
+                          accentColor={ACCENT_HEX}
+                        />
+                        <FeatureCard
                           icon="🎯"
                           title="NativeShotTracer"
                           description="Primary Developer / Maintainer of the shot tracing plugin. Uses CoreML and ML Kit for on-device pose detection and ball trajectory rendering, delivered as a Flutter plugin with native iOS and Android implementations."
-                          index={2}
+                          index={3}
                           accentColor={ACCENT_HEX}
                         />
                         <FeatureCard
                           icon="🎬"
                           title="NativeAnalyzer"
                           description="Primary Developer / Maintainer of the video analysis engine. Built with Kotlin Multiplatform and Jetpack Compose, with direct C interop to FFmpeg for frame-level video processing across iOS and Android."
-                          index={3}
+                          index={4}
                           accentColor={ACCENT_HEX}
                         />
                         <FeatureCard
                           icon="🦶"
                           title="Pressure Mat Integration"
                           description="Maintainer of the portable C library powering ground pressure mat hardware integration. Handles wireless UDP communication with the Sensor Edge device, foot biomechanics analysis, center-of-pressure tracking, and heatmap rendering — deployed to iOS."
-                          index={4}
+                          index={5}
                           accentColor={ACCENT_HEX}
                         />
                       </div>

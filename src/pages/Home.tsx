@@ -15,6 +15,7 @@ import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import v1SportsIcon from '../assets/v1sports/V1Sports.jpg';
+import streetIQIcon from '../assets/streetiq/streetiqicon.webp';
 import { staggerContainer, staggerChild, fadeUp } from '../utils/animations';
 
 const projects = [
@@ -23,6 +24,7 @@ const projects = [
   { title: 'SetDeck', tagline: 'A gym companion to track & smash workout routines.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
   { title: 'Mygra', tagline: 'Migraine insights powered by on-device AI.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
   { title: 'Waffle', tagline: 'Webpage multitasking, managed, on iPad.', image: waffleIcon, path: '/waffle', accentColor: '#DFA656' },
+  { title: 'StreetIQ', tagline: 'AI-powered pavement intelligence helping cities assess roads and plan budgets. Building their native iOS app.', image: streetIQIcon, path: '/streetiq', accentColor: '#3FA8BC', ctaLabel: 'View Employment' },
   { title: 'V1 Sports', tagline: 'Empowering golfers to improve their game. Supporting coaches in growing their business.', image: v1SportsIcon, path: '/v1sports', accentColor: '#C84640', ctaLabel: 'View Employment' },
 ];
 
@@ -63,7 +65,7 @@ export default function Home() {
       <Hero
         variant="home"
         heading="Crafting Elegant Mobile Experiences"
-        description="Senior Mobile Software Engineer building high-performance apps with Swift, SwiftUI, SwiftData, Flutter, and Kotlin Multiplatform — from concept to App Store."
+        description="Senior Software Engineer building high-performance apps with Swift, SwiftUI, SwiftData, Flutter, and Kotlin Multiplatform — from concept to App Store."
         imageSrc={logo}
         headshotSrc={headshot}
         platforms={['iOS', 'iPadOS', 'macOS', 'watchOS', 'visionOS', 'tvOS', 'Flutter']}

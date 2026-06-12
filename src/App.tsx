@@ -16,6 +16,7 @@ const Privacy = lazy(() => import('./pages/Privacy'));
 const Waffle = lazy(() => import('./pages/Waffle'));
 const Opalite = lazy(() => import('./pages/Opalite'));
 const V1Sports = lazy(() => import('./pages/V1Sports'));
+const StreetIQ = lazy(() => import('./pages/StreetIQ'));
 const OpaliteWeb = lazy(() => import('./pages/OpaliteWeb'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -79,6 +80,7 @@ function AppShell() {
             <Route path="/stork" element={<Stork />} />
             <Route path="/waffle" element={<Waffle />} />
             <Route path="/v1sports" element={<V1Sports />} />
+            <Route path="/streetiq" element={<StreetIQ />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/privacy" element={<Privacy />} />
