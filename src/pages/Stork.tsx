@@ -34,7 +34,7 @@ export default function Stork() {
 
   usePageMeta({
     title: 'Stork – Delivery Stats for L&D Nurses | Nick Molargik',
-    description: 'Track baby deliveries and trends with Stork. Log details, analyze stats, collaborate with peers. Built with Swift & SwiftUI.',
+    description: 'Track the deliveries you perform, visualize trends, and celebrate every birth with Stork — the privacy-first companion for L&D nurses. Built with Swift & SwiftUI.',
     accentColor: ACCENT_COLOR,
     preloadImage: storkicon,
   });
@@ -50,7 +50,7 @@ export default function Stork() {
           imageSrc={storkicon}
           appStoreHref="https://apps.apple.com/us/app/stork-delivery-stats/id6740038476"
           githubHref="https://github.com/NMolargik/Stork"
-          systemRequirements={["iOS 18+", "iPadOS 18+", "macOS 15+", "visionOS 26+", "watchOS 11.6+"]}
+          systemRequirements={["iOS 26+", "iPadOS 26+", "macOS 26+", "visionOS 26+", "watchOS 26+"]}
         />
       </section>
       {/* Responsive screenshots section */}
@@ -81,9 +81,9 @@ export default function Stork() {
                   Stork — Labor &amp; Delivery Companion
                 </h2>
                 <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  Stork helps medical professionals track baby deliveries, visualize trends, and celebrate every birth.
+                  Stork helps medical professionals track the deliveries they perform, visualize trends, and celebrate every birth.
                   Designed for Labor &amp; Delivery nurses, midwives, and OB-GYNs, Stork makes it simple to record, review,
-                  and analyze delivery data — across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro.
+                  and analyze your delivery stats — across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro.
                 </p>
 
                 <hr className="my-6 border-gray-200 dark:border-gray-800" />
@@ -96,8 +96,9 @@ export default function Stork() {
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Stork is a focused companion for Labor &amp; Delivery professionals who want a clear picture of their work.
-                        Log every delivery with important context, organize with custom Tags, and view your history in a Calendar view.
-                        Track your impact over weeks and months, and bring real numbers into conversations with peers and leadership.
+                        Log every delivery with important context, organize with custom Tags, search and filter your entire history,
+                        and browse it month by month in a Calendar view. Track your impact over weeks and years, and bring real
+                        numbers into conversations with peers and leadership.
                       </p>
                     </div>
 
@@ -109,8 +110,9 @@ export default function Stork() {
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
                         Stork is built for fast, repeatable entries that fit naturally into your shift. Log deliveries quickly
-                        from your Apple Watch, check stats from Home Screen widgets, or dive deeper on your iPhone, iPad, or Mac.
-                        Your delivery history stays organized and at your fingertips.
+                        from your Apple Watch or hands-free with Siri, check your week from Home Screen and Lock Screen widgets,
+                        or dive deeper on your iPhone, iPad, or Mac. Your delivery history stays organized, synced privately
+                        through iCloud, and at your fingertips.
                       </p>
                     </div>
 
@@ -119,8 +121,9 @@ export default function Stork() {
                         Celebrate Every Birth
                       </h3>
                       <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        With the Marble Jar and visual stats, Stork turns your delivery history into something you can see and be
-                        proud of—a tangible reminder of the lives you&apos;ve helped bring into the world.
+                        With the Delivery Jar, milestone celebrations, and shareable stat cards, Stork turns your delivery history
+                        into something you can see and be proud of—a tangible reminder of the lives you&apos;ve helped bring into
+                        the world.
                       </p>
                     </div>
 
@@ -144,43 +147,57 @@ export default function Stork() {
                       <FeatureCard
                         icon="🍼"
                         title="Track Every Delivery"
-                        description="Record detailed information for each baby delivery — including gender, birth date, and delivery notes. Each entry adds to your Marble Jar, a beautiful visualization of weekly delivery trends."
+                        description="Log each delivery in seconds: babies and their measurements, delivery method, epidural use, NICU stays, nurse catches, tags, and notes. Each entry adds a marble to your Delivery Jar — a playful visualization of every miracle."
                         index={0}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
-                        icon="📅"
-                        title="Calendar & Tags"
-                        description="View your deliveries over the last month in a Calendar view, or organize them with custom Tags. Filter and sort your history to find exactly what you're looking for."
+                        icon="🔍"
+                        title="Find Any Delivery Fast"
+                        description="Search your entire delivery log by notes, tags, or method, filter by date range and more, or browse month by month in the Calendar view."
                         index={1}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
                         icon="📊"
                         title="View Trends & Statistics"
-                        description="See your work come to life with charts and summaries that highlight delivery counts, baby gender ratios, and other helpful insights over time."
+                        description="A customizable dashboard brings your work to life: delivery counts, sex distribution, delivery methods, time-of-day and day-of-week patterns, year-over-year growth, and personal bests."
                         index={2}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🎉"
+                        title="Milestones, Share Cards & Export"
+                        description="Stork celebrates career milestones as you reach them, turns your favorite stats into shareable cards, and exports polished PDF reports or CSV data for portfolios and reviews."
+                        index={3}
+                        accentColor={ACCENT_COLOR}
+                      />
+                      <FeatureCard
+                        icon="🔒"
+                        title="Private by Design"
+                        description="HIPAA-conscious from the ground up: no patient information and no facility tracking — only your personal stats, synced securely through your private iCloud."
+                        index={4}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
                         icon="📱"
                         title="On All Your Devices"
-                        description="Powered by Swift and SwiftUI for a smooth, native experience on iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro. Requires iOS 18+, iPadOS 18+, macOS 15+, watchOS 11+, or visionOS 2+."
-                        index={3}
+                        description="Designed for the latest Apple platforms with a smooth, native experience on iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro. Available in English, Spanish, French (Canada), and Japanese."
+                        index={5}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
                         icon="🔔"
-                        title="Home Screen Widgets"
-                        description="Quickly check how many deliveries you've logged this week—right from your Home Screen, without opening the app."
-                        index={4}
+                        title="Widgets, Siri & Shortcuts"
+                        description="Check your week from Home Screen and Lock Screen widgets, log deliveries hands-free with Siri, and find past deliveries right from Spotlight."
+                        index={6}
                         accentColor={ACCENT_COLOR}
                       />
                       <FeatureCard
                         icon="⌚"
                         title="Apple Watch App"
                         description="View daily stats, quickly log a new delivery, and track your steps with the built-in pedometer—all from your wrist."
-                        index={5}
+                        index={7}
                         accentColor={ACCENT_COLOR}
                       />
                     </div>

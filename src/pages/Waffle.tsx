@@ -26,7 +26,7 @@ export default function Waffle() {
 
   usePageMeta({
     title: 'Waffle – Grid Browser for iPad | Nick Molargik',
-    description: 'Waffle lets you browse multiple sites side-by-side in a customizable grid on iPad. Presets, multi-window, CloudKit sync.',
+    description: 'Waffle turns your iPad into a grid of live webpages. Browse sites side by side in a split-screen grid, save preset layouts, pop cells into their own windows, and sync with iCloud.',
     accentColor: ACCENT_COLOR,
     preloadImage: waffleicon,
   });
@@ -38,7 +38,7 @@ export default function Waffle() {
       <section>
         <Hero
           heading="Waffle"
-          description="Webpage multitasking made easy on iPad."
+          description="Browse the web in a grid, not in tabs."
           imageSrc={waffleicon}
           appStoreHref="https://apps.apple.com/us/app/waffle-browser/id6751783473"
           githubHref="https://github.com/NMolargik/Waffle"
@@ -70,13 +70,12 @@ export default function Waffle() {
                 />
                 <div className="relative space-y-6">
                   <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                    Waffle — A New Way to Browse on iPad
+                    Waffle — Your iPad, a Grid of Live Webpages
                   </h2>
                   <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                    Discover Waffle, a browser experience crafted exclusively for iPad. Say goodbye to tab juggling and hello to a
-                    customizable grid of webpages, letting you browse multiple sites side by side in any layout you choose, up to
-                    a 4x4 grid. Whether you're researching, comparing, or multitasking, Waffle transforms your iPad into a powerful
-                    multi-site workspace.
+                    Tabs make you choose. Waffle doesn&apos;t. Arrange multiple websites into a clean, customizable grid — up to
+                    4x4 — and keep your mail, news, dashboards, and video on screen at the same time. No clutter. No app
+                    switching. Just a smarter workspace.
                   </p>
 
                   <hr className="my-6 border-gray-200 dark:border-gray-800" />
@@ -85,12 +84,12 @@ export default function Waffle() {
                     <div className="space-y-6">
                       <div>
                         <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                          What is Waffle?
+                          How It Works
                         </h3>
                         <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                          Waffle is a grid-based browser for iPad that gives you full control over how you view the web. Arrange
-                          sites in rows and columns, save presets for workflows you reuse, and snap layouts back exactly how you
-                          like them—no more constantly rearranging windows.
+                          Every cell in the grid is a full browser. Tap a cell to select it — the address bar, back, forward,
+                          and reload all control that cell. Type a web address or just search, then resize your grid with a
+                          tap: add or remove rows and columns anytime.
                         </p>
                       </div>
 
@@ -98,12 +97,12 @@ export default function Waffle() {
 
                       <div>
                         <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                          Built for Power Users &amp; Multitaskers
+                          Perfect For
                         </h3>
                         <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                          Whether you're comparing products, monitoring dashboards, following along with documentation, or keeping
-                          multiple research sources open at once, Waffle helps you stay organized and in flow without losing track
-                          of your tabs.
+                          Students juggling research, notes, and lectures. Traders and analysts watching live data. Streamers
+                          tracking chat, feeds, and tools. Sports fans following every game at once. Anyone who wants a tidy,
+                          efficient iPad workspace.
                         </p>
                       </div>
 
@@ -112,19 +111,21 @@ export default function Waffle() {
                           iPad-First, Through and Through
                         </h3>
                         <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                          Waffle is built for iPadOS 26 with Apple&apos;s latest WebView APIs, multi-window support, and CloudKit
-                          sync—so your browsing workspace feels fast, fluid, and native on every supported iPad.
+                          Waffle is built for iPadOS 26 with Apple&apos;s latest WebView APIs, Liquid Glass design, multi-window
+                          support, and CloudKit sync. Full hardware keyboard support, drag-and-drop bookmarks, and Siri,
+                          Shortcuts, and Spotlight integration make it feel native everywhere — in English, Spanish, French
+                          (Canada), and Japanese.
                         </p>
                       </div>
 
                       <div>
                         <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                          Designed for power users, researchers, and serious multitaskers
+                          Go Deluxe with Syrup
                         </h3>
                         <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                          Waffle is perfect for anyone who wants to
-                          unlock the full potential of their iPad. From following rocket launches across multiple sites to managing
-                          complex workflows, Waffle makes it effortless to work across multiple pages at once.
+                          Waffle is free to use in a 2x2 grid. A one-time Syrup purchase — no subscription — unlocks everything
+                          else: grids up to 4x4, rearranging, pop-out windows, fullscreen focus, and saved Presets. Family
+                          Sharing included, so one purchase covers your whole family.
                         </p>
                       </div>
                     </div>
@@ -137,42 +138,42 @@ export default function Waffle() {
                         <FeatureCard
                           icon="🔳"
                           title="Adjustable Grid Layout"
-                          description="Dynamically add or remove rows and columns to build the perfect grid for your workflow—up to a 4x4 layout of webpages on screen at once."
+                          description="Add or remove rows and columns with a tap to build the perfect grid for your workflow—up to a 4x4 layout of live webpages on screen at once."
                           index={0}
+                          accentColor={ACCENT_COLOR}
+                        />
+                        <FeatureCard
+                          icon="🔀"
+                          title="Rearrange on the Fly"
+                          description="Reshape your grid without reloading a thing—drag cells into a new order, or tap two cells to swap them. Every tile shows the page's title and icon so you always know what's moving."
+                          index={1}
                           accentColor={ACCENT_COLOR}
                         />
                         <FeatureCard
                           icon="🪟"
                           title="Pop-Out Windows"
-                          description="Detach any grid cell into its own window using iPadOS multi-window, giving you even more flexibility when you need a page to stand alone."
-                          index={1}
+                          description="Detach any grid cell into its own window using iPadOS multi-window, then pop it right back into the grid when you're done."
+                          index={2}
                           accentColor={ACCENT_COLOR}
                         />
                         <FeatureCard
                           icon="⤢"
-                          title="Maximize When You Need Focus"
+                          title="Fullscreen When You Need Focus"
                           description="Bring any site front and center with a tap, then drop it back into the grid when you're ready to multitask again."
-                          index={2}
+                          index={3}
                           accentColor={ACCENT_COLOR}
                         />
                         <FeatureCard
                           icon="⭐️"
                           title="Presets for Your Workflows"
-                          description="Save your favorite grid configurations as Presets—perfect for repeatable tasks like research, dashboards, or content monitoring. Reload them instantly whenever you need them."
-                          index={3}
-                          accentColor={ACCENT_COLOR}
-                        />
-                        <FeatureCard
-                          icon="☁️"
-                          title="Cloud Sync with SwiftData + CloudKit"
-                          description="Your presets and layouts sync securely across your iPads, so your favorite setups are always right where you left them."
+                          description="Save an entire grid—size and every page in it—as a Preset, and bring it back in one tap. A morning news grid, a work grid, a game-day grid."
                           index={4}
                           accentColor={ACCENT_COLOR}
                         />
                         <FeatureCard
-                          icon="⚡️"
-                          title="Built for iPadOS 26"
-                          description="Powered by Apple's new WebView API for speed, security, and compatibility—enhanced with Liquid Glass visuals to make every grid feel polished and modern."
+                          icon="☁️"
+                          title="Cloud Sync with iCloud"
+                          description="Bookmarks and Presets sync securely across your iPads with CloudKit, so your favorite setups are always right where you left them."
                           index={5}
                           accentColor={ACCENT_COLOR}
                         />
@@ -181,8 +182,8 @@ export default function Waffle() {
                   </div>
 
                   <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 italic">
-                    Waffle is available for devices running iPadOS 26 or later. Some features require access to Apple&apos;s latest
-                    APIs.
+                    Waffle is free to download for devices running iPadOS 26 or later, and is available in English, Spanish,
+                    French (Canada), and Japanese. Syrup is a one-time purchase with Family Sharing — no subscription.
                   </p>
                 </div>
               </div>
@@ -205,6 +206,7 @@ export default function Waffle() {
             "name": "Waffle",
             "applicationCategory": "BrowserApplication",
             "operatingSystem": "iPadOS",
+            "inLanguage": ["en", "es", "fr-CA", "ja"],
             "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
             "url": "https://apps.apple.com/us/app/waffle-browser/id6751783473"
           })
