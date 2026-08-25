@@ -1,0 +1,21 @@
+name = "maestro-counter"
+main = "src/index.js"
+compatibility_date = "2026-08-01"
+
+# Attach the custom domain after the first deploy:
+# Cloudflare dash -> Workers & Pages -> maestro-counter -> Settings ->
+# Domains & Routes -> Add -> Custom domain -> api.molargiksoftware.com
+# (The app and the website both point at api.molargiksoftware.com/maestro/*.)
+
+# Custom domain: Cloudflare creates the DNS record + certificate itself.
+routes = [
+  { pattern = "api.molargiksoftware.com", custom_domain = true }
+]
+
+[[durable_objects.bindings]]
+name = "COUNTER"
+class_name = "Counter"
+
+[[migrations]]
+tag = "v1"
+new_sqlite_classes = ["Counter"]

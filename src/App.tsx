@@ -17,6 +17,7 @@ const Waffle = lazy(() => import('./pages/Waffle'));
 const Opalite = lazy(() => import('./pages/Opalite'));
 const V1Sports = lazy(() => import('./pages/V1Sports'));
 const StreetIQ = lazy(() => import('./pages/StreetIQ'));
+const Maestro = lazy(() => import('./pages/Maestro'));
 const OpaliteWeb = lazy(() => import('./pages/OpaliteWeb'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -75,6 +76,7 @@ function AppShell() {
             <Route path="/opalite" element={<Opalite />} />
             <Route path="/opalite-web" element={<OpaliteWeb />} />
 
+            <Route path="/maestro" element={<Maestro />} />
             <Route path="/setdeck" element={<SetDeck />} />
             <Route path="/mygra" element={<Mygra />} />
             <Route path="/stork" element={<Stork />} />

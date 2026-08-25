@@ -7,13 +7,13 @@ import GlassButton from './GlassButton';
 import Logo from '../assets/logoLong.png';
 
 const links = [
+  { label: 'Maestro', path: '/maestro' },
   { label: 'Opalite', path: '/opalite' },
   { label: 'SetDeck', path: '/setdeck' },
   { label: 'Mygra', path: '/mygra' },
   { label: 'Stork', path: '/stork' },
   { label: 'Waffle', path: '/waffle' },
   { label: 'StreetIQ', path: '/streetiq' },
-  { label: 'V1 Sports', path: '/v1sports' },
   { label: 'About', path: '/about' },
 ];
 

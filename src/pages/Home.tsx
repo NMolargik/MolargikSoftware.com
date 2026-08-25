@@ -16,9 +16,11 @@ import waffleIcon from '../assets/waffle/waffleicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
 import v1SportsIcon from '../assets/v1sports/V1Sports.jpg';
 import streetIQIcon from '../assets/streetiq/streetiqicon.webp';
+import maestroIcon from '../assets/maestro/maestroicon.png';
 import { staggerContainer, staggerChild, fadeUp } from '../utils/animations';
 
 const projects = [
+  { title: 'Maestro', tagline: 'Turn any song into a Tesla light show, choreographed on your Mac.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
   { title: 'Opalite', tagline: 'The ultimate color manager for designers, developers, and digital artists.', image: opaliteIcon, path: '/opalite', accentColor: '#CAC0E8' },
   { title: 'Stork', tagline: 'Tracking and statistics for Labor & Delivery nurses.', image: storkIcon, path: '/stork', accentColor: '#E8672B' },
   { title: 'SetDeck', tagline: 'A gym companion to track & smash workout routines.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },

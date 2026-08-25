@@ -1,0 +1,16 @@
+{
+  "name": "maestro-counter",
+  "version": "1.0.0",
+  "description": "One Cloudflare Worker + one Durable Object. The Mac app POSTs after each successful export; the website polls the count every 30 seconds.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "wrangler": "^4.125.0"
+  }
+}

@@ -13,6 +13,7 @@ import mygraIcon from '../assets/mygra/mygraicon.png';
 import waffleIcon from '../assets/waffle/waffleicon.png';
 import storkIcon from '../assets/stork/storkicon.png';
 import setDeckIcon from '../assets/setdeck/setdeckicon.png';
+import maestroIcon from '../assets/maestro/maestroicon.png';
 import { fadeUp } from '../utils/animations';
 
 const SKILL_GROUPS = [
@@ -52,7 +53,7 @@ function GlassSkillPill({ skill, accent }: { skill: string; accent: string }) {
 export default function About() {
   useEffect(() => {
     document.title = 'About – Nick Molargik | Molargik Software LLC';
-    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, SwiftData, Kotlin Multiplatform, and Flutter. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports and infrastructure intelligence at StreetIQ, now also developing useful, Apple-centric tools like SetDeck, Mygra, Waffle, and Stork.';
+    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, SwiftData, Kotlin Multiplatform, and Flutter. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports and infrastructure intelligence at StreetIQ, now also developing useful, Apple-centric tools like Maestro, SetDeck, Mygra, Waffle, and Stork.';
     let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
     if (!meta) {
       meta = document.createElement('meta');
@@ -63,6 +64,7 @@ export default function About() {
   }, []);
 
   const projects = [
+    { title: 'Maestro', tagline: 'macOS studio that turns any song into a Tesla light show: on-device signal processing, channel-level sequence editor, USB-ready exports.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
     { title: 'Opalite', tagline: 'The ultimate color manager: create, organize, and share palettes with AI-generated names, contrast checking, and seamless iCloud sync.', image: opaliteIcon, path: '/opalite', accentColor: '#CAC0E8' },
     { title: 'SetDeck', tagline: 'Workout tracker with HealthKit sync and set-by-set progress statistics.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
     { title: 'Mygra', tagline: 'AI-powered migraine tracker with WeatherKit alerts, HealthKit correlations, and Apple Intelligence insights. iOS 26+.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
@@ -272,7 +274,7 @@ export default function About() {
                       Founded to build Apple apps from real user needs identified through friends, family, and professional networks. Solo-developing full lifecycle—from user interviews and SwiftUI prototyping to App Store deployment and iteration.
                     </p>
                     <p>
-                      Launched four apps in first year: <strong className="text-gray-900 dark:text-white font-semibold">Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong className="text-gray-900 dark:text-white font-semibold">Waffle</strong> (iPadOS 26 grid browser), <strong className="text-gray-900 dark:text-white font-semibold">Stork</strong> (L&D delivery tracker), and <strong className="text-gray-900 dark:text-white font-semibold">SetDeck</strong> (Fitness companion, workout tracker), followed by <strong className="text-gray-900 dark:text-white font-semibold">Opalite</strong> (color palette manager with iCloud sync, canvas, and more) in year two.
+                      Launched four apps in first year: <strong className="text-gray-900 dark:text-white font-semibold">Mygra</strong> (AI migraine tracker with WeatherKit/HealthKit), <strong className="text-gray-900 dark:text-white font-semibold">Waffle</strong> (iPadOS 26 grid browser), <strong className="text-gray-900 dark:text-white font-semibold">Stork</strong> (L&D delivery tracker), and <strong className="text-gray-900 dark:text-white font-semibold">SetDeck</strong> (Fitness companion, workout tracker), followed by <strong className="text-gray-900 dark:text-white font-semibold">Opalite</strong> (color palette manager with iCloud sync, canvas, and more) and <strong className="text-gray-900 dark:text-white font-semibold">Maestro</strong> (Tesla light show studio for macOS) in year two.
                     </p>
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
                       <strong className="text-gray-900 dark:text-white font-semibold">Philosophy:</strong> Bootstrap lean, iterate fast, solve niche problems with enterprise-grade polish. Every app tells a story of user frustration transformed into intuitive solutions.
