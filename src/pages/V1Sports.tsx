@@ -1,36 +1,22 @@
 import v1Golf from '../assets/v1sports/V1Golf.png';
 import v1Coach from '../assets/v1sports/V1Coach.png';
 import v1Baseball from '../assets/v1sports/V1Baseball.png';
-import screen1 from '../assets/v1sports/screen1.png';
-import screen2 from '../assets/v1sports/screen2.png';
-import screen3 from '../assets/v1sports/screen3.png';
-import screen4 from '../assets/v1sports/screen4.png';
-import screen5 from '../assets/v1sports/screen5.png';
-import screen6 from '../assets/v1sports/screen6.png';
-import screen7 from '../assets/v1sports/screen7.png';
-import screen8 from '../assets/v1sports/screen8.png';
-import screen9 from '../assets/v1sports/screen9.png';
-import screen10 from '../assets/v1sports/screen10.png';
-import screen11 from '../assets/v1sports/screen11.png';
-import screen12 from '../assets/v1sports/screen12.png';
-import screen13 from '../assets/v1sports/screen13.png';
-import screen14 from '../assets/v1sports/screen14.png';
-import screen15 from '../assets/v1sports/screen15.png';
-import screen16 from '../assets/v1sports/screen16.png';
-import screen17 from '../assets/v1sports/screen17.png';
-import screen18 from '../assets/v1sports/screen18.png';
 import Hero from '../components/Hero';
 import FeatureCard from '../components/FeatureCard';
 import ScreensCarousel from '../components/ScreensCarousel';
 import ScrollToTop from '../components/ScrollToTop';
 import { useState, useRef } from 'react';
 import { usePageMeta, useScrollToStart } from '../hooks';
+import { screensFromGlob } from '../utils/screens';
 
 const ACCENT_COLOR = 'rgb(200, 70, 64)';
 const ACCENT_HEX = '#C84640';
 
+const slides = screensFromGlob(
+  import.meta.glob('../assets/v1sports/screens/*', { eager: true, import: 'default' })
+);
+
 export default function V1Sports() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13, screen14, screen15, screen16, screen17, screen18];
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const carouselRefDesktop = useRef<HTMLDivElement>(null);
   const carouselRefMobile = useRef<HTMLDivElement>(null);

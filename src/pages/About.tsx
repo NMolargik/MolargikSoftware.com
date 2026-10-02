@@ -8,12 +8,12 @@ import { hexToRgbTriple, trackLiquidGlassCursor } from '../utils/liquidGlass';
 import familyshot from '../assets/familyshot.jpg';
 import logo from '../assets/logo.svg';
 import ScrollToTop from '../components/ScrollToTop';
-import opaliteIcon from '../assets/opalite/opaliteicon.png';
-import mygraIcon from '../assets/mygra/mygraicon.png';
-import waffleIcon from '../assets/waffle/waffleicon.png';
-import storkIcon from '../assets/stork/storkicon.png';
-import setDeckIcon from '../assets/setdeck/setdeckicon.png';
-import maestroIcon from '../assets/maestro/maestroicon.png';
+import opaliteIcon from '../assets/opalite/icon.png';
+import mygraIcon from '../assets/mygra/icon.png';
+import waffleIcon from '../assets/waffle/icon.png';
+import storkIcon from '../assets/stork/icon.png';
+import setDeckIcon from '../assets/setdeck/icon.png';
+import maestroIcon from '../assets/maestro/icon.png';
 import { fadeUp } from '../utils/animations';
 
 const SKILL_GROUPS = [
@@ -64,12 +64,12 @@ export default function About() {
   }, []);
 
   const projects = [
-    { title: 'Maestro', tagline: 'macOS studio that turns any song into a Tesla light show: on-device signal processing, channel-level sequence editor, USB-ready exports.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
-    { title: 'Opalite', tagline: 'The ultimate color manager: create, organize, and share palettes with AI-generated names, contrast checking, and seamless iCloud sync.', image: opaliteIcon, path: '/opalite', accentColor: '#CAC0E8' },
-    { title: 'SetDeck', tagline: 'Workout tracker with HealthKit sync and set-by-set progress statistics.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
-    { title: 'Mygra', tagline: 'AI-powered migraine tracker with WeatherKit alerts, HealthKit correlations, and Apple Intelligence insights. iOS 26+.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
-    { title: 'Stork', tagline: 'L&D delivery tracker with marble jar, lifelong statistics, and a built-in hospital database.', image: storkIcon, path: '/stork', accentColor: '#E8672B' },
-    { title: 'Waffle', tagline: 'iPadOS 26 grid browser with 4x4 layouts, pop-out windows, WebView API, and Liquid Glass effects.', image: waffleIcon, path: '/waffle', accentColor: '#DFA656' },
+    { title: 'Maestro', tagline: 'Turns any song into a Tesla light show on iPhone, iPad, and Mac: on-device signal processing, a hardware-accurate fleet preview, a Sequence Editor, and USB-ready exports.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
+    { title: 'Opalite', tagline: 'The ultimate color manager: six pickers, smart palettes, WCAG and color-blindness checks, a canvas, a community, and export to Procreate, Adobe, SwiftUI, and CSS.', image: opaliteIcon, path: '/opalite', accentColor: '#CAC0E8' },
+    { title: 'SetDeck', tagline: 'Strength training companion: weekly routines, set-by-set logging, stats and achievements, hydration and calories, Apple Watch and Siri.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
+    { title: 'Mygra', tagline: 'Intelligent migraine journal with on-device Apple Intelligence insights, weather correlations, Apple Health, and iCloud sync.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
+    { title: 'Stork', tagline: 'L&D companion with a Delivery Jar, career stats, milestones, share cards, and PDF/CSV export. HIPAA-conscious by design.', image: storkIcon, path: '/stork', accentColor: '#E8672B' },
+    { title: 'Waffle', tagline: 'iPad grid browser with layouts up to 4x4, pop-out windows, presets, and iCloud sync.', image: waffleIcon, path: '/waffle', accentColor: '#DFA656' },
   ];
 
   return (
@@ -187,13 +187,13 @@ export default function About() {
                   <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">StreetIQ</h4>
                   <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
-                      Joined the Indianapolis-based infrastructure intelligence startup to build their <strong className="text-gray-900 dark:text-white font-semibold">native iOS application</strong> from the ground up in <strong className="text-gray-900 dark:text-white font-semibold">Swift</strong> and <strong className="text-gray-900 dark:text-white font-semibold">SwiftUI</strong>, replacing cross-platform tooling to improve performance and reliability in the field.
+                      Joined the Indianapolis-based infrastructure intelligence company to rebuild its field app natively, and shipped <strong className="text-gray-900 dark:text-white font-semibold">SCOUT</strong>: a ground-up <strong className="text-gray-900 dark:text-white font-semibold">Swift 6.2 / SwiftUI</strong> app on a layered Swift Package, replacing the original Flutter implementation with ~1,150 tests behind it.
                     </p>
                     <p>
-                      Focused on a seamless <strong className="text-gray-900 dark:text-white font-semibold">data collection and analysis</strong> experience for the public-works teams capturing street-level road conditions that power StreetIQ's AI pavement scoring and reporting platform.
+                      Built the <strong className="text-gray-900 dark:text-white font-semibold">distance-based capture pipeline</strong> (dead-reckoned between GPS fixes, speed-adaptive camera streaming, thermal governance), the on-device <strong className="text-gray-900 dark:text-white font-semibold">live coverage engine</strong> that fires the shutter only where pavement is still owed, <strong className="text-gray-900 dark:text-white font-semibold">offline Mapbox maps</strong>, turn-by-turn navigation, GoPro companion cameras over Bluetooth, and background uploads with Live Activities.
                     </p>
                     <p className="text-sm font-medium text-gray-500 dark:text-gray-400 italic">
-                      <strong className="text-gray-900 dark:text-white font-semibold">Note:</strong> Newly started role — contributions are in progress and will be detailed as the work ships.
+                      <strong className="text-gray-900 dark:text-white font-semibold">Delivery:</strong> Xcode Cloud CI/CD across four environments, each with its own TestFlight product, plus MetricKit crash diagnostics and structured in-app logging — no third-party analytics SDKs.
                     </p>
                   </div>
                 </div>

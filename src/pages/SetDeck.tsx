@@ -1,213 +1,111 @@
-import React, { useState } from 'react';
-import setDeckIcon from '../assets/setdeck/setdeckicon.png';
-import Hero from '../components/Hero';
-import screen1 from '../assets/setdeck/screen1.png';
-import screen2 from '../assets/setdeck/screen2.png';
-import screen3 from '../assets/setdeck/screen3.png';
-import screen4 from '../assets/setdeck/screen4.png';
-import screen5 from '../assets/setdeck/screen5.png';
-import screen6 from '../assets/setdeck/screen6.png';
-import screen7 from '../assets/setdeck/screen7.png';
-import screen8 from '../assets/setdeck/screen8.png';
-import screen9 from '../assets/setdeck/screen9.png';
-import screen10 from '../assets/setdeck/screen10.png';
-import screen11 from '../assets/setdeck/screen11.png';
-import screen12 from '../assets/setdeck/screen12.png';
-import screen13 from '../assets/setdeck/screen13.png';
-import ScreensCarousel from '../components/ScreensCarousel';
-import FeatureCard from '../components/FeatureCard';
-import ScrollToTop from '../components/ScrollToTop';
-import DownloadCTA from '../components/DownloadCTA';
-import { usePageMeta, useScrollToStart } from '../hooks';
+import AppShowcase from '../components/AppShowcase';
+import { screensFromGlob } from '../utils/screens';
+import icon from '../assets/setdeck/icon.png';
 
 // Official brand color: SetDeck Green Start
 const ACCENT_COLOR = '#65DA92';
+const APP_STORE_URL = 'https://apps.apple.com/us/app/setdeck/id6484503374';
+
+const screens = screensFromGlob(
+  import.meta.glob('../assets/setdeck/screens/*', { eager: true, import: 'default' })
+);
 
 export default function SetDeck() {
-  const slides = [screen1, screen2, screen3, screen4, screen5, screen6, screen7, screen8, screen9, screen10, screen11, screen12, screen13];
-  const carouselRefDesktop = React.useRef<HTMLDivElement | null>(null);
-  const carouselRefMobile = React.useRef<HTMLDivElement | null>(null);
-
-  const [loaded, setLoaded] = useState<Record<number, boolean>>({});
-  const markLoaded = (i: number) => setLoaded(prev => ({ ...prev, [i]: true }));
-
-  usePageMeta({
-    title: 'SetDeck – Track Your Gym Progress | Nick Molargik',
-    description: 'Effortless workout logging with set-by-set tracking, water & calories, trends, and HealthKit. Built with Swift & SwiftUI.',
-    accentColor: ACCENT_COLOR,
-    preloadImage: setDeckIcon,
-  });
-
-  useScrollToStart(carouselRefDesktop, carouselRefMobile);
-
   return (
-    <>
-      <section>
-        <Hero
-          heading="SetDeck"
-          description="Crush every workout and stay on top of your hydration and energy goals."
-          imageSrc={setDeckIcon}
-          appStoreHref="https://apps.apple.com/us/app/setdeck/id6484503374"
-          githubHref="https://github.com/NMolargik/SetDeck"
-          systemRequirements={["iOS 18+", "iPadOS 18+", "visionOS 2+", "watchOS 11+"]}
-        />
-      </section>
-      {/* Responsive screenshots section */}
-      <section className="bg-gradient-to-b from-green-50/50 to-[#FAFAFA] pt-6 pb-16">
-        <div>
-        <ScreensCarousel
-          slides={slides}
-          loaded={loaded}
-          offset={0}
-          markLoaded={markLoaded}
-          desktopRef={carouselRefDesktop}
-          mobileRef={carouselRefMobile}
-          altPrefix="SetDeck"
-        />
-        {/* Large text area below images */}
-        <section
-          aria-label="About SetDeck"
-          className="mt-16 px-4"
-        >
-          <div className="mx-auto max-w-5xl">
-            <div className="relative overflow-hidden bg-white dark:bg-[#0a0a0c] rounded-3xl border border-gray-100 dark:border-gray-800 border-t-2 px-6 py-10 shadow-sm sm:px-10" style={{ borderTopColor: ACCENT_COLOR }}>
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#65DA92] to-transparent opacity-40"
-              />
-              <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                  SetDeck — Your Complete Workout Routine Companion
-                </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  Crush every workout with structured routines, track every set you complete, and stay on top of your hydration and energy goals—all in one beautifully streamlined app.
-                </p>
-
-                <hr className="my-6 border-gray-200 dark:border-gray-800" />
-
-                <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        What is SetDeck?
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        SetDeck is a modern fitness companion built for people who want structure, progression, and clarity.
-                        Whether you're following a weekly routine or building your own from scratch, SetDeck guides you through
-                        every exercise set by set while automatically tracking your performance over time. Plus: quickly log
-                        water intake, calorie intake, and other daily stats with a single swipe.
-                      </p>
-                    </div>
-
-                    <hr className="my-6 border-gray-200 dark:border-gray-800 lg:hidden" />
-
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        Why Choose SetDeck?
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        SetDeck is built for lifters, athletes, and anyone who wants a structured, measurable path toward real
-                        progress. With a clean UI designed around clarity and speed, every workout becomes easier to follow—and
-                        every metric becomes easier to track.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        Build Your Ideal Training Week
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        Create custom routines in seconds and shape your ideal training week. Add SetDeck widgets to your
-                        Home Screen to instantly see today's water intake and calorie consumption at a glance. View your
-                        patterns for hydration, calories, and strength performance across exercises and sets with insightful
-                        trends and analytics.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        Start Building a Stronger You
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        Download SetDeck today and take control of your training—one set at a time.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                      Key Features
-                    </h3>
-                    <div className="mt-4 grid gap-4">
-                      <FeatureCard
-                        icon="📅"
-                        title="Daily Routines, Clearly Organized"
-                        description="Create or customize your weekly workout routine with up to seven distinct training days. Each day holds its own list of exercises to keep your sessions focused and intentional."
-                        index={0}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="🏋️"
-                        title="Set-By-Set Workout Flow"
-                        description="Every exercise includes one or more sets—with reps, weight, RPE, or duration. As you train, log your actual results to track true progress."
-                        index={1}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="📈"
-                        title="Automatic Set History & Strength Progression"
-                        description="SetDeck saves a history entry every time you complete a set. Over weeks and months, your stats reveal patterns, trends, and areas of growth—helping you outlift your past self every session."
-                        index={2}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="🔥"
-                        title="Water & Energy Tracking"
-                        description="Swipe to log water consumed or calories taken in. See your hydration and intake trends over time to ensure you're fueling properly for your training."
-                        index={3}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="🤖"
-                        title="AI-Powered Muscle Group Tracking"
-                        description="SetDeck uses Foundation Models to automatically associate muscle groups with your exercises—no manual tagging required. It tracks your muscle group and push/pull distribution over time, helping you identify imbalances and find muscle groups that need more attention in your training."
-                        index={4}
-                        accentColor={ACCENT_COLOR}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 italic">
-                  Some of SetDeck's features require iOS 26 and iPadOS 26. Others require access to Apple Intelligence.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-        <DownloadCTA
-          appName="SetDeck"
-          appStoreUrl="https://apps.apple.com/us/app/setdeck/id6484503374"
-          accentColor={ACCENT_COLOR}
-        />
-        </div>
-      </section>
-      <ScrollToTop />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "SoftwareApplication",
-            "name": "SetDeck",
-            "applicationCategory": "FitnessApplication",
-            "operatingSystem": "iOS, iPadOS",
-            "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-            "url": "https://apps.apple.com/us/app/ready-set/id6484503374",
-            "description": "SetDeck is a structured workout companion that tracks routines, sets, hydration, calories, and long-term strength progression."
-          })
-        }}
-      />
-    </>
+    <AppShowcase
+      name="SetDeck"
+      tagline="Plan the week. Log every set. Watch the numbers climb."
+      icon={icon}
+      accentColor={ACCENT_COLOR}
+      meta={{
+        title: 'SetDeck – Strength Training Companion | Nick Molargik',
+        description:
+          'Plan your training week, log every set, and watch the numbers climb. SetDeck tracks routines, history, stats, achievements, hydration, and calories — with Apple Watch, Siri, and Apple Health. Built with Swift & SwiftUI.',
+      }}
+      appStoreUrl={APP_STORE_URL}
+      githubUrl="https://github.com/NMolargik/SetDeck"
+      requirements={['iOS 18+', 'iPadOS 18+', 'watchOS 11+', 'visionOS 2+']}
+      screens={screens}
+      screensClassName="bg-gradient-to-b from-green-50/50 to-[#FAFAFA]"
+      about={{
+        title: 'SetDeck — Structure Without Friction',
+        intro:
+          'SetDeck is a strength training companion for people who want structure without friction. Build a weekly routine, work through it set by set, and let SetDeck keep the history, the stats, and the streaks. Then check in on hydration and calories with a swipe, right alongside your training.',
+        sections: [
+          {
+            title: 'Build Your Week',
+            body: 'Plan up to seven training days, each with its own ordered list of exercises. Add notes, equipment, and a reference video to any exercise. Type an exercise name and SetDeck can suggest the muscle groups it works, entirely on device.',
+          },
+          {
+            title: 'Train Set by Set',
+            body: 'Every exercise holds the sets you plan to do: reps and weight, as many as possible, timed, or freeform. As you train, log what you actually did, add an RPE if you want, and swipe on to the next card. Start a strength workout and a Live Activity keeps the elapsed time on your Lock Screen and in the Dynamic Island.',
+          },
+          {
+            title: 'See Real Progress',
+            body: 'SetDeck records a history entry every time you finish a set. The Stats tab turns that history into volume trends, personal records, a muscle heatmap, balance analysis, and intensity breakdowns so you can see what is working and what needs attention.',
+          },
+          {
+            title: 'Private by Design',
+            body: 'Your training data lives in your private iCloud database and in Apple Health. There are no accounts, no ads, and no tracking. Download SetDeck and take control of your training, one set at a time.',
+          },
+        ],
+        features: [
+          {
+            icon: '📅',
+            title: 'Weekly Routine Deck',
+            description:
+              'Up to seven training days, each an ordered deck of exercises with notes, equipment, and reference videos.',
+          },
+          {
+            icon: '🏋️',
+            title: 'Set-by-Set Logging',
+            description:
+              'Reps and weight, AMRAP, timed, or freeform sets. Log what you actually did, add an RPE, and swipe to the next card.',
+          },
+          {
+            icon: '📈',
+            title: 'Stats That Tell a Story',
+            description:
+              'Volume trends, personal records, a muscle heatmap, balance analysis, and intensity breakdowns built from every set you finish.',
+          },
+          {
+            icon: '🏅',
+            title: 'Achievements',
+            description:
+              'Unlock badges for consistency, volume, variety, strength milestones, and a fully built routine. Hit a plate milestone or a month-long streak and SetDeck celebrates with you.',
+          },
+          {
+            icon: '💧',
+            title: 'Hydration & Energy',
+            description:
+              'Log water and calories with a swipe and see today’s totals against your goals. Everything is written to Apple Health, and Home Screen widgets keep it at a glance.',
+          },
+          {
+            icon: '⌚',
+            title: 'Apple Watch',
+            description:
+              'See today’s routine on your wrist, log sets as you finish them, follow a guided rest timer, and keep the session on your watch face with a complication.',
+          },
+          {
+            icon: '🗣️',
+            title: 'Siri, Spotlight & Control Center',
+            description:
+              'Ask Siri "What’s my workout today?", start or stop a workout from Control Center, find any exercise in Spotlight, and sync privately with iCloud.',
+          },
+        ],
+        footnote:
+          'SetDeck is free on the App Store and available in English, Spanish, French (Canada), and Japanese. Some features require iOS 26 and iPadOS 26; on-device muscle group suggestions require Apple Intelligence.',
+      }}
+      jsonLd={{
+        name: 'SetDeck',
+        applicationCategory: 'HealthApplication',
+        operatingSystem: 'iOS, iPadOS, watchOS, visionOS',
+        inLanguage: ['en', 'es', 'fr-CA', 'ja'],
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        url: APP_STORE_URL,
+        description:
+          'SetDeck is a strength training companion: plan a weekly routine, log every set, track stats and achievements, and keep hydration and calories in view.',
+      }}
+    />
   );
 }

@@ -9,24 +9,24 @@ import type { CSSProperties } from 'react';
 import logo from '../assets/logo.svg';
 import headshot from '../assets/nickheadshot.jpg';
 import resumePDF from '../assets/nickmolargikresume.pdf';
-import opaliteIcon from '../assets/opalite/opaliteicon.png';
-import storkIcon from '../assets/stork/storkicon.png';
-import mygraIcon from '../assets/mygra/mygraicon.png';
-import waffleIcon from '../assets/waffle/waffleicon.png';
-import setDeckIcon from '../assets/setdeck/setdeckicon.png';
+import opaliteIcon from '../assets/opalite/icon.png';
+import storkIcon from '../assets/stork/icon.png';
+import mygraIcon from '../assets/mygra/icon.png';
+import waffleIcon from '../assets/waffle/icon.png';
+import setDeckIcon from '../assets/setdeck/icon.png';
 import v1SportsIcon from '../assets/v1sports/V1Sports.jpg';
 import streetIQIcon from '../assets/streetiq/streetiqicon.webp';
-import maestroIcon from '../assets/maestro/maestroicon.png';
+import maestroIcon from '../assets/maestro/icon.png';
 import { staggerContainer, staggerChild, fadeUp } from '../utils/animations';
 
 const projects = [
-  { title: 'Maestro', tagline: 'Turn any song into a Tesla light show, choreographed on your Mac.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
+  { title: 'Maestro', tagline: 'Turn any song into a Tesla light show on iPhone, iPad, and Mac. No AI, nothing uploaded.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
   { title: 'Opalite', tagline: 'The ultimate color manager for designers, developers, and digital artists.', image: opaliteIcon, path: '/opalite', accentColor: '#CAC0E8' },
-  { title: 'Stork', tagline: 'Tracking and statistics for Labor & Delivery nurses.', image: storkIcon, path: '/stork', accentColor: '#E8672B' },
-  { title: 'SetDeck', tagline: 'A gym companion to track & smash workout routines.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
-  { title: 'Mygra', tagline: 'Migraine insights powered by on-device AI.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
-  { title: 'Waffle', tagline: 'Webpage multitasking, managed, on iPad.', image: waffleIcon, path: '/waffle', accentColor: '#DFA656' },
-  { title: 'StreetIQ', tagline: 'AI-powered pavement intelligence helping cities assess roads and plan budgets. Building their native iOS app.', image: streetIQIcon, path: '/streetiq', accentColor: '#3FA8BC', ctaLabel: 'View Employment' },
+  { title: 'Stork', tagline: 'Delivery stats, milestones, and share cards for Labor & Delivery nurses.', image: storkIcon, path: '/stork', accentColor: '#E8672B' },
+  { title: 'SetDeck', tagline: 'Plan the week, log every set, and watch the numbers climb.', image: setDeckIcon, path: '/setdeck', accentColor: '#65DA92' },
+  { title: 'Mygra', tagline: 'An intelligent migraine journal with private, on-device insights.', image: mygraIcon, path: '/mygra', accentColor: '#6E60FF' },
+  { title: 'Waffle', tagline: 'Browse the web in a grid, not in tabs, on iPad.', image: waffleIcon, path: '/waffle', accentColor: '#DFA656' },
+  { title: 'StreetIQ', tagline: 'Building SCOUT, the native iOS field app behind StreetIQ’s AI pavement assessments: live coverage, offline maps, GoPro companions.', image: streetIQIcon, path: '/streetiq', accentColor: '#3FA8BC', ctaLabel: 'View Employment' },
   { title: 'V1 Sports', tagline: 'Empowering golfers to improve their game. Supporting coaches in growing their business.', image: v1SportsIcon, path: '/v1sports', accentColor: '#C84640', ctaLabel: 'View Employment' },
 ];
 

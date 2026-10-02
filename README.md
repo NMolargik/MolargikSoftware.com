@@ -10,11 +10,14 @@ Molargik Software LLC is an indie development studio founded in 2025, focused on
 
 | App | Description | Platforms |
 |-----|-------------|-----------|
+| **[Maestro](https://molargiksoftware.com/#/maestro)** | Turns any song into a Tesla light show with on-device signal processing | iOS, iPadOS, macOS |
 | **[Opalite](https://molargiksoftware.com/#/opalite)** | The ultimate color manager for designers, developers, and digital artists | iOS, iPadOS, macOS, watchOS, visionOS, tvOS |
-| **[SetDeck](https://molargiksoftware.com/#/setdeck)** | Structured workout companion with set-by-set tracking and HealthKit sync | iOS, iPadOS, watchOS, visionOS |
-| **[Mygra](https://molargiksoftware.com/#/mygra)** | Intelligent migraine journal with on-device AI and weather correlations | iOS, iPadOS, watchOS, visionOS |
-| **[Stork](https://molargiksoftware.com/#/stork)** | Delivery tracking and statistics for Labor & Delivery nurses | iOS, iPadOS, macOS, watchOS, visionOS |
-| **[Waffle](https://molargiksoftware.com/#/waffle)** | Grid-based browser for iPad with customizable layouts up to 4x4 | iPadOS, macOS, visionOS |
+| **[SetDeck](https://molargiksoftware.com/#/setdeck)** | Strength training companion with set-by-set logging, stats, and achievements | iOS, iPadOS, watchOS, visionOS |
+| **[Mygra](https://molargiksoftware.com/#/mygra)** | Intelligent migraine journal with on-device AI and weather correlations | iOS, iPadOS, macOS, watchOS, visionOS |
+| **[Stork](https://molargiksoftware.com/#/stork)** | Delivery stats, milestones, and share cards for Labor & Delivery nurses | iOS, iPadOS, macOS, watchOS, visionOS |
+| **[Waffle](https://molargiksoftware.com/#/waffle)** | Grid-based browser for iPad with customizable layouts up to 4x4 | iPadOS |
+
+The site also documents employment work: **[StreetIQ / SCOUT](https://molargiksoftware.com/#/streetiq)** and **[V1 Sports](https://molargiksoftware.com/#/v1sports)**.
 
 ## Tech Stack
 
@@ -51,7 +54,19 @@ npm run preview
 
 # Run ESLint
 npm run lint
+
+# Re-import app icons and screenshots from ../../Apps (all apps, or a subset)
+npm run assets
+npm run assets -- stork maestro
 ```
+
+### Updating App Screenshots
+
+Each app's icon and screenshots are pulled from the sibling `Apps` directory by
+`scripts/sync-app-assets.mjs` (sources and ordering live in `scripts/app-assets.config.mjs`).
+The script resizes and encodes them into `src/assets/<app>/icon.png` and
+`src/assets/<app>/screens/NN.webp`; pages pick up whatever is in `screens/`
+automatically. Set `APPS_DIR` if the Apps folder lives elsewhere.
 
 ### Environment Variables
 

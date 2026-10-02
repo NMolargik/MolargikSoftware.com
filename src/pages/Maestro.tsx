@@ -1,225 +1,115 @@
-import maestroIcon from '../assets/maestro/maestroicon.png';
-import Hero from '../components/Hero';
-import FeatureCard from '../components/FeatureCard';
-import ScrollToTop from '../components/ScrollToTop';
-import DownloadCTA from '../components/DownloadCTA';
+import AppShowcase from '../components/AppShowcase';
 import ExportCounter from '../components/ExportCounter';
-import { usePageMeta } from '../hooks';
+import { screensFromGlob } from '../utils/screens';
+import icon from '../assets/maestro/icon.png';
 
 // Official brand color: Tesla Autopilot blue, the app's own accent.
 const ACCENT_COLOR = '#2D7FF9';
+const APP_STORE_URL = 'https://apps.apple.com/us/app/maestro-light-show-studio/id6803264666';
 
-// TODO: replace with the real App Store URL once v1 is live.
-const APP_STORE_URL = 'https://apps.apple.com/us/app/maestro-light-show-studio/';
-
-/** Placeholder marketing frames until real captures land - solid panels in
- *  the app's palette, each naming the shot that will replace it. */
-const placeholderShots = [
-  { label: 'The Stage', caption: 'Five Teslas mid-chorus, lights blazing', color: '#101828' },
-  { label: 'Sequence Editor', caption: 'Every channel on a timeline', color: '#0D1526' },
-  { label: 'Song Analysis', caption: 'Beats, drops and solos, detected', color: '#111B33' },
-  { label: 'USB Export', caption: 'Validated for the car, every time', color: '#0A1120' },
-  { label: 'Fleet Circle', caption: 'One car or a whole fleet', color: '#0F1930' },
-  { label: 'Vertical Video', caption: 'Social-ready 9:16 exports', color: '#0C1424' },
-];
+const screens = screensFromGlob(
+  import.meta.glob('../assets/maestro/screens/*', { eager: true, import: 'default' })
+);
 
 export default function Maestro() {
-  usePageMeta({
-    title: 'Maestro – Tesla Light Show Studio for Mac | Nick Molargik',
-    description:
-      'Maestro turns any song into a Tesla light show on your Mac. On-device signal processing, a channel-level sequence editor, and USB-ready exports. No AI, nothing uploaded.',
-    accentColor: ACCENT_COLOR,
-    preloadImage: maestroIcon,
-  });
-
   return (
-    <>
-      <section>
-        <Hero
-          heading="Maestro"
-          description="Drop in a song. Get a Tesla light show. Choreographed on your Mac, played on your car."
-          imageSrc={maestroIcon}
-          appStoreHref={APP_STORE_URL}
-          systemRequirements={['macOS 14+', 'Model S · 3 · X · Y · Cybertruck']}
-        />
-      </section>
-
-      {/* The counter - front and center. */}
-      <section
-        aria-label="Exported show counter"
-        className="bg-[#07090f] py-16 sm:py-20"
-      >
-        <div className="mx-auto max-w-4xl px-6">
-          <ExportCounter accentColor={ACCENT_COLOR} />
-        </div>
-      </section>
-
-      <section className="bg-surface dark:bg-[#0c0c10] pt-10 pb-16">
-        {/* Placeholder marketing imagery: solid panels until real captures. */}
-        <div className="mx-auto max-w-6xl px-6">
-          <div className="grid grid-cols-2 gap-4 md:grid-cols-3">
-            {placeholderShots.map((shot) => (
-              <div
-                key={shot.label}
-                className="relative flex aspect-[4/3] flex-col items-center justify-center rounded-2xl border border-white/10 p-4 text-center"
-                style={{ backgroundColor: shot.color }}
-                role="img"
-                aria-label={`${shot.label} - ${shot.caption}`}
-              >
-                <span
-                  className="text-sm font-semibold uppercase tracking-widest"
-                  style={{ color: ACCENT_COLOR }}
-                >
-                  {shot.label}
-                </span>
-                <span className="mt-2 text-xs text-gray-400">{shot.caption}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <section
-          aria-label="About Maestro"
-          className="mt-16 px-4 bg-[linear-gradient(to_right,_#2D7FF908_1px,_transparent_1px),linear-gradient(to_bottom,_#2D7FF908_1px,_transparent_1px)] bg-[size:40px_40px]"
-        >
-          <div className="mx-auto max-w-5xl">
-            <div
-              className="relative overflow-hidden bg-white dark:bg-[#0a0a0c] rounded-3xl border border-gray-100 dark:border-gray-800 border-t-2 px-6 py-10 shadow-sm sm:px-10"
-              style={{ borderTopColor: ACCENT_COLOR }}
-            >
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute inset-x-10 top-0 h-px bg-gradient-to-r from-transparent via-[#2D7FF9] to-transparent opacity-40"
-              />
-              <div className="relative space-y-6">
-                <h2 className="text-3xl sm:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white">
-                  Maestro — Your Tesla&apos;s Light Show Studio
-                </h2>
-                <p className="text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                  Maestro listens to your song — its beats, key, builds, drops and solos — and choreographs a
-                  full Tesla light show around them. Preview it on an animated stage of hardware-accurate
-                  vehicles, fine-tune every channel in the sequence editor, then export USB-ready files the
-                  car accepts on the first try.
-                </p>
-
-                <hr className="my-6 border-gray-200 dark:border-gray-800" />
-
-                <div className="grid gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)] lg:items-start">
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        No AI. Just signal processing.
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        Maestro doesn&apos;t guess with a generative model. It measures your song and
-                        choreographs from the math — deterministic, reproducible, and entirely on your Mac.
-                        Nothing is ever uploaded.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        Every body style, faithfully
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        Model S, 3, X, Y and Cybertruck — old and new bodies — each previewed with the lamps,
-                        light bars, closures and interior lighting that car actually has. What you see on the
-                        stage is what plays in the driveway.
-                      </p>
-                    </div>
-
-                    <div>
-                      <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                        Two free shows, then one purchase
-                      </h3>
-                      <p className="mt-2 text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
-                        Your first two exported shows are free. One purchase unlocks unlimited shows, unlimited
-                        exports and the Sequence Editor — no subscription, yours forever.
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="mt-4 lg:mt-0" role="region" aria-label="Key Features">
-                    <h3 className="text-xl sm:text-2xl font-semibold text-gray-900 dark:text-white">
-                      Key Features
-                    </h3>
-                    <div className="mt-4 grid gap-4">
-                      <FeatureCard
-                        icon="🎼"
-                        title="Song-Aware Choreography"
-                        description="Sections, drops, solos and full stops each get their own treatment. Re-roll any section with a right-click until the take feels right."
-                        index={0}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="🎛️"
-                        title="Sequence Editor"
-                        description="Every channel on a timeline: move, add, delete and reshape blocks, with the selected fixture outlined in red on every car."
-                        index={1}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="🚗"
-                        title="Animated Fleet Preview"
-                        description="Up to 15 of each model on stage, in rows or a circle, with beams, closures and interior RGB simulated exactly as the hardware behaves."
-                        index={2}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="📼"
-                        title="USB-Ready Exports"
-                        description="Validated .fseq and audio files named the way the car wants them, written straight to your drive's LightShow folder."
-                        index={3}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="📱"
-                        title="Vertical Video Export"
-                        description="Render a 9:16 social cut of your show in seconds, watermarked with the song and how fast Maestro made it."
-                        index={4}
-                        accentColor={ACCENT_COLOR}
-                      />
-                      <FeatureCard
-                        icon="🌍"
-                        title="Five Languages"
-                        description="English, Spanish, German, Dutch and Norwegian, with hardware-accurate previews in every one of them."
-                        index={5}
-                        accentColor={ACCENT_COLOR}
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                <p className="mt-4 text-sm text-gray-500 dark:text-gray-400 italic">
-                  Maestro requires macOS 14 or later. Light show playback requires a Tesla vehicle with
-                  software v11.0 (2021.44.25) or newer. Not affiliated with Tesla.
-                </p>
-              </div>
-            </div>
+    <AppShowcase
+      name="Maestro"
+      heading="Maestro - Light Show Studio"
+      tagline="Drop in a song. Get a Tesla light show. Choreographed on your iPhone, iPad, or Mac, played on your car."
+      icon={icon}
+      accentColor={ACCENT_COLOR}
+      meta={{
+        title: 'Maestro – Tesla Light Show Studio for iPhone, iPad & Mac | Nick Molargik',
+        description:
+          'Maestro turns any song into a Tesla light show. On-device signal processing, a hardware-accurate fleet preview, a channel-level Sequence Editor on the Mac, and USB-ready exports. No AI, nothing uploaded.',
+      }}
+      appStoreUrl={APP_STORE_URL}
+      requirements={['iOS 17+', 'iPadOS 17+', 'macOS 14+', 'Model S · 3 · X · Y · Cybertruck']}
+      screens={screens}
+      screensClassName="bg-gradient-to-b from-[#0b1220] via-[#0c1424] to-surface"
+      afterScreens={
+        <section aria-label="Exported show counter" className="bg-[#07090f] py-16 sm:py-20">
+          <div className="mx-auto max-w-4xl px-6">
+            <ExportCounter accentColor={ACCENT_COLOR} />
           </div>
         </section>
-
-        <DownloadCTA
-          appName="Maestro"
-          appStoreUrl={APP_STORE_URL}
-          accentColor={ACCENT_COLOR}
-        />
-      </section>
-      <ScrollToTop />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'SoftwareApplication',
-            name: 'Maestro: Light Show Studio',
-            applicationCategory: 'EntertainmentApplication',
-            operatingSystem: 'macOS',
-            offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
-            url: APP_STORE_URL,
-          }),
-        }}
-      />
-    </>
+      }
+      about={{
+        title: 'Maestro — Your Tesla’s Light Show Studio',
+        intro:
+          'Drop in a song. Maestro listens to it the way a choreographer would, then writes a complete Tesla light show around what it hears: the beats, the key, the builds, the drops, the solos, even the quiet moments that deserve darkness. Preview it on a stage of hardware-accurate vehicles, fine-tune every channel in the Sequence Editor, then export the exact files the car wants.',
+        sections: [
+          {
+            title: 'No AI. Just signal processing.',
+            body: 'Maestro measures your music right on your device and choreographs from the math. Nothing is uploaded, nothing is generated by a model, and the same song with the same seed always produces the identical show. Do not like a take? Reroll it, or on the Mac right-click a single section and reroll just that passage.',
+          },
+          {
+            title: 'Built for the actual hardware',
+            body: 'Every Tesla lamp has a personality, and Maestro knows all of them. Headlights that ramp, signatures that snap, the Cybertruck’s pixel light bars, interior ambient strips, and the closures: mirrors that fold on the hush, windows that dance, falcon doors that open for the finale, a charge port that saves its rainbow for the last chorus. Command budgets and thermal limits are respected so the car never refuses your show.',
+          },
+          {
+            title: 'See it before the driveway does',
+            body: 'A live preview stage plays your show on Model S, Model 3, Model X, Model Y, and Cybertruck, including pre-refresh 3 and Y bodies with their real lamp responses. Build a fleet of up to 15 of each, arrange rows or a circle, and watch the light wash between cars. Presentation mode turns your iPad or Mac into the party screen.',
+          },
+          {
+            title: 'One library, every device',
+            body: 'Your shows sync through iCloud between your iPhone, iPad, and Mac. Choreograph on the couch, fine-tune in the Sequence Editor on your Mac, and export from whichever device is closest to the car.',
+          },
+          {
+            title: 'Try it free',
+            body: 'A finished sample show is included, and your first two exported shows are free. One purchase unlocks unlimited shows and unlimited exports on iPhone, iPad, and Mac, and the Sequence Editor on the Mac. No subscription. Yours forever, on all your devices.',
+          },
+        ],
+        features: [
+          {
+            icon: '🎼',
+            title: 'Song-Aware Choreography',
+            description:
+              'Verses breathe, choruses hit, drum solos flip through every lamp, and the finale lands exactly with the song. Every show ends dark, validated, and ready for the car.',
+          },
+          {
+            icon: '🚗',
+            title: 'Hardware-Accurate Fleet Preview',
+            description:
+              'Five body styles with real lamp physics, ramping channels, diffused pixel bars, beams that wash the pavement, and one shared light field across the whole stage.',
+          },
+          {
+            icon: '🎛️',
+            title: 'Sequence Editor (Mac)',
+            description:
+              'Every channel on a timeline. Move, stretch, add, and delete blocks, snap to the beat grid, and watch the selected fixture outline on every car that has it.',
+          },
+          {
+            icon: '📼',
+            title: 'USB-Ready Exports',
+            description:
+              'The exact .fseq and audio pair the car expects, validated against Tesla’s own rules. Save straight to a USB drive, AirDrop to your Mac, then open Toybox and schedule the show.',
+          },
+          {
+            icon: '📱',
+            title: 'Share-Ready Video',
+            description:
+              'Render the preview stage to video, including a vertical cut sized for TikTok, Reels, and Shorts.',
+          },
+          {
+            icon: '🌍',
+            title: 'Five Languages',
+            description:
+              'English, Spanish, German, Dutch, and Norwegian, with hardware-accurate previews in every one of them.',
+          },
+        ],
+        footnote:
+          'Maestro is an independent app and is not affiliated with or endorsed by Tesla, Inc. Tesla, Model S, Model 3, Model X, Model Y, and Cybertruck are trademarks of Tesla, Inc. A Tesla vehicle with light show support and a USB drive are required to play shows on a car.',
+      }}
+      jsonLd={{
+        name: 'Maestro: Light Show Studio',
+        applicationCategory: 'EntertainmentApplication',
+        operatingSystem: 'iOS, iPadOS, macOS',
+        inLanguage: ['en', 'es', 'de', 'nl', 'nb'],
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
+        url: APP_STORE_URL,
+      }}
+    />
   );
 }
