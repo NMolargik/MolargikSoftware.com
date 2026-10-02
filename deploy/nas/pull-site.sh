@@ -8,9 +8,13 @@
 # Safe to run every few minutes from a scheduled task; it exits quietly when
 # nothing changed. Run with FORCE=1 to redeploy the current release.
 #
-# A copy lives on the NAS at /volume1/docker/web/deploy/pull-site.sh and is
-# scheduled from UGOS (Control Panel → Task Scheduler). Keep this file in the
-# repo as the source of truth and copy it over when it changes.
+# A copy lives on the NAS at /volume1/docker/web/deploy/pull-site.sh and runs
+# every 5 minutes as root from /etc/cron.d/molargiksoftware-deploy:
+#
+#   */5 * * * * root /volume1/docker/web/deploy/pull-site.sh >/dev/null 2>&1
+#
+# Keep this file in the repo as the source of truth and copy it over when it
+# changes. If a UGOS update ever clears /etc/cron.d, recreate that one line.
 
 set -euo pipefail
 

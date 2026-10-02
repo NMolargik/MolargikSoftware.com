@@ -43,7 +43,8 @@ Pull-based, no SSH involved:
 1. `git tag v2.1 && git push origin v2.1` — the GitHub Actions workflow
    (`.github/workflows/deploy.yml`) builds the site and attaches `site.tar.gz`
    to a GitHub Release for that tag.
-2. The NAS runs `deploy/nas/pull-site.sh` on a schedule (copy lives at
+2. The NAS runs `deploy/nas/pull-site.sh` every 5 minutes as root via
+   `/etc/cron.d/molargiksoftware-deploy` (copy lives at
    `/volume1/docker/web/deploy/pull-site.sh`). It checks the latest release,
    downloads the asset when the tag changes, and rsyncs it into the nginx
    document root `/volume1/docker/web/sites/molargiksoftware` with

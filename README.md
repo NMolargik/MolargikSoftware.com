@@ -119,7 +119,7 @@ The site is self-hosted on a UGREEN DXP4800 NAS running Nginx in Docker, exposed
    ```
 
 2. GitHub Actions (`.github/workflows/deploy.yml`) builds the site and attaches `site.tar.gz` to a GitHub Release.
-3. A scheduled task on the NAS runs [`deploy/nas/pull-site.sh`](deploy/nas/pull-site.sh) every few minutes. When it sees a new release it downloads the archive and rsyncs it into the Nginx document root with web-readable permissions.
+3. A root cron job on the NAS (`/etc/cron.d/molargiksoftware-deploy`) runs [`deploy/nas/pull-site.sh`](deploy/nas/pull-site.sh) every 5 minutes. When it sees a new release it downloads the archive and rsyncs it into the Nginx document root with web-readable permissions.
 
 The script logs to `/volume1/docker/web/deploy/pull-site.log` and records the deployed tag next to it. Run it with `FORCE=1` to redeploy the current release.
 
