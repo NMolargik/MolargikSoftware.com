@@ -1,29 +1,40 @@
-name: Deploy on Tag
+name: Release site
+
+# Tag a commit `v*` and push the tag. This builds the site and attaches
+# `site.tar.gz` to a GitHub Release. The NAS polls for new releases with
+# deploy/nas/pull-site.sh and swaps the new build in — nothing here needs
+# SSH access to the NAS, and no secrets are required.
+#
+#   git tag v2.1 && git push origin v2.1
 
 on:
   push:
     tags:
-      - 'v*'  # Triggers on tags like v1.0
+      - 'v*'
+
+permissions:
+  contents: write
 
 jobs:
-  build-and-deploy:
+  build-and-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
+          cache: 'npm'
+
       - run: npm ci
-      - run: npm run build  # Assumes Vite; outputs to dist
-      - name: Deploy to NAS
-        uses: appleboy/scp-action@v0.1.7
+      - run: npm run build
+
+      - name: Package dist
+        run: tar -czf site.tar.gz -C dist .
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
         with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          source: "dist/*"
-          target: "/volume1/web/molargiksoftware"
-          strip_components: 1
-          rm: true  # Overwrite existing files
+          files: site.tar.gz
+          generate_release_notes: true

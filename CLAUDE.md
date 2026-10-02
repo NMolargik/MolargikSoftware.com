@@ -38,7 +38,20 @@ only supplies content. Distill page copy from the app's current App Store descri
 
 ## Deployment
 
-GitHub Actions workflow (`.github/workflows/deploy.yml`) triggers on git tags matching `v*`. It builds and deploys via SCP to the NAS at `/volume1/web/molargiksoftware`.
+Pull-based, no SSH involved:
+
+1. `git tag v2.1 && git push origin v2.1` — the GitHub Actions workflow
+   (`.github/workflows/deploy.yml`) builds the site and attaches `site.tar.gz`
+   to a GitHub Release for that tag.
+2. The NAS runs `deploy/nas/pull-site.sh` on a schedule (copy lives at
+   `/volume1/docker/web/deploy/pull-site.sh`). It checks the latest release,
+   downloads the asset when the tag changes, and rsyncs it into the nginx
+   document root `/volume1/docker/web/sites/molargiksoftware` with
+   web-readable permissions. State and a log live in `/volume1/docker/web/deploy/`.
+
+The nginx container serves that folder as `/usr/share/nginx/html/molargiksoftware`
+and is exposed through a Cloudflare Tunnel. Never copy files to the NAS over SMB:
+they land owner-only and the container cannot read them.
 
 ## Architecture
 
