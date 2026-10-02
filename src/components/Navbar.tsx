@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { trackLiquidGlassCursor } from '../utils/liquidGlass';
 import GlassButton from './GlassButton';
-import Logo from '../assets/logoLong.png';
+import Logo from '../assets/logolong.png';
 
 const links = [
   { label: 'Maestro', path: '/maestro' },
