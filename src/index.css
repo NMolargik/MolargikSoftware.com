@@ -55,11 +55,12 @@ body {
    ============================================================
    Translucent material that reads as a refractive lens over the
    background. Layers, from back to front:
-     1. backdrop-filter — blur + saturate (+ SVG dispersion on
-        Chromium) on the content behind the element. The SVG
-        filter splits R/G/B channels, displaces each at slightly
-        different scales, and recombines — producing chromatic
-        fringe at high-bend regions (Apple's Liquid Glass look).
+     1. backdrop-filter — blur + saturate on the content behind
+        the element. (An SVG feDisplacementMap dispersion filter
+        used to ride along here for Chromium only; it rasterized
+        at the compositor without edge clamping and produced
+        aliased, colour-fringed streaks along element edges, so
+        it was removed. Every browser now gets the same material.)
      2. Body — adaptive linear-gradient tint that mixes with the
         per-surface --lg-accent so the pane picks up its context.
      3. ::before — dual specular: primary hot-spot follows the
@@ -95,7 +96,6 @@ body {
   --lg-edge-bottom: rgba(0, 0, 0, 0.06);
   --lg-ring: rgba(255, 255, 255, 0.6);
   --lg-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
-  --lg-filter: url(#liquid-glass-distortion);
   --lg-corner-smoothing: 0.6;
   --lg-light-angle: 215deg;
 }
@@ -114,10 +114,7 @@ body {
       color-mix(in oklab, rgb(var(--lg-accent)) var(--lg-accent-strength), var(--lg-tint)) 0%,
       color-mix(in oklab, rgb(var(--lg-accent)) var(--lg-accent-strength-2), var(--lg-tint-2)) 100%
     );
-  /* Chromium honors the url() filter and gives us real refraction
-     + chromatic dispersion. Safari/Firefox ignore the url() and
-     fall through to blur+saturate. */
-  backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate)) var(--lg-filter);
+  backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
   -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
   border: 1px solid var(--lg-ring);
   box-shadow:
@@ -204,7 +201,6 @@ body {
   --lg-sheen-size: 75%;
   --lg-cool-sheen: rgba(200, 220, 255, 0.25);
   --lg-shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
-  --lg-filter: url(#liquid-glass-distortion-soft);
 }
 
 /* Card — larger surfaces; more presence, deeper shadow. */
@@ -216,8 +212,8 @@ body {
   --lg-shadow: 0 14px 40px rgba(15, 23, 42, 0.1);
 }
 
-/* Lens — hero / showcase surface. Heavy refraction with strong
-   dispersion; do not place small text directly on this. */
+/* Lens — hero / showcase surface. Heaviest blur and strongest
+   sheen; do not place small text directly on this. */
 .liquid-glass-lens {
   --lg-blur: 28px;
   --lg-saturate: 220%;
@@ -227,13 +223,12 @@ body {
   --lg-sheen-size: 55%;
   --lg-cool-sheen: rgba(180, 210, 255, 0.42);
   --lg-shadow: 0 24px 60px rgba(15, 23, 42, 0.18);
-  --lg-filter: url(#liquid-glass-lens);
 }
 
 /* Button — solid tinted glass: the accent dominates the body
-   while the dispersion filter, specular sheen, and bezel ring
-   still read on top. Use accent-strength 88/72 so the brand
-   color is unmistakable. Pair with .liquid-glass-interactive. */
+   while the specular sheen and bezel ring still read on top.
+   Use accent-strength 88/72 so the brand color is unmistakable.
+   Pair with .liquid-glass-interactive. */
 .liquid-glass-button {
   --lg-blur: 14px;
   --lg-saturate: 170%;
@@ -246,7 +241,6 @@ body {
   --lg-cool-sheen: rgba(255, 255, 255, 0.08);
   --lg-ring: rgba(255, 255, 255, 0.3);
   --lg-shadow: 0 6px 18px rgba(15, 23, 42, 0.18);
-  --lg-filter: url(#liquid-glass-distortion-soft);
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -308,8 +302,10 @@ body {
   transform: translateY(-1px);
   backdrop-filter:
     blur(calc(var(--lg-blur) + 2px))
-    saturate(calc(var(--lg-saturate) + 20%))
-    url(#liquid-glass-bezel);
+    saturate(calc(var(--lg-saturate) + 20%));
+  -webkit-backdrop-filter:
+    blur(calc(var(--lg-blur) + 2px))
+    saturate(calc(var(--lg-saturate) + 20%));
   box-shadow:
     inset 0 1px 0 var(--lg-edge-top),
     inset 1px 0 0 var(--lg-edge-side),
@@ -321,21 +317,23 @@ body {
   transform: translateY(0) scale(0.985);
   backdrop-filter:
     blur(calc(var(--lg-blur) + 4px))
-    saturate(calc(var(--lg-saturate) + 30%))
-    url(#liquid-glass-bezel);
+    saturate(calc(var(--lg-saturate) + 30%));
+  -webkit-backdrop-filter:
+    blur(calc(var(--lg-blur) + 4px))
+    saturate(calc(var(--lg-saturate) + 30%));
 }
 
-/* Honor user prefs — refraction filters and animated sheen can
-   be uncomfortable for some viewers. */
+/* Honor user prefs — the press/hover motion and animated sheen
+   can be uncomfortable for some viewers. */
 @media (prefers-reduced-motion: reduce) {
   .liquid-glass {
     transition: none;
-    --lg-filter: none;
   }
   .liquid-glass-interactive:hover,
   .liquid-glass-interactive:active {
     transform: none;
     backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
+    -webkit-backdrop-filter: blur(var(--lg-blur)) saturate(var(--lg-saturate));
   }
 }
 
