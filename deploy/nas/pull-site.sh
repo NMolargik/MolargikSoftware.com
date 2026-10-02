@@ -31,6 +31,22 @@ log() {
 
 mkdir -p "$STATE_DIR"
 
+# The nginx container reads the site as an unprivileged user, so every file
+# must be world-readable and every directory world-traversable. Enforce it on
+# every run (not just deploys) so a bad copy can never take the site down for
+# more than one tick.
+ensure_readable() {
+  [ -d "$SITE_DIR" ] || return 0
+  local unreadable
+  unreadable=$(find "$SITE_DIR" ! -perm -o=r -o -type d ! -perm -o=x | wc -l)
+  if [ "$unreadable" -gt 0 ]; then
+    chmod -R u=rwX,go=rX "$SITE_DIR"
+    log "fixed permissions on $unreadable unreadable path(s) under $SITE_DIR"
+  fi
+}
+
+ensure_readable
+
 latest_json=$(curl -fsSL -H 'Accept: application/vnd.github+json' \
   "https://api.github.com/repos/$REPO/releases/latest") \
   || { log "could not query GitHub releases for $REPO"; exit 1; }
@@ -60,6 +76,8 @@ mkdir -p "$SITE_DIR"
 # --delete clears files from previous builds; --chmod keeps everything
 # readable by the nginx container regardless of the caller's umask.
 rsync -a --delete --chmod=D755,F644 "$tmp/site/" "$SITE_DIR/"
+# Belt and braces: --chmod has been seen not to apply under cron on UGOS.
+chmod -R u=rwX,go=rX "$SITE_DIR"
 
 printf '%s\n' "$tag" > "$STATE_FILE"
 log "deployed $tag to $SITE_DIR"
