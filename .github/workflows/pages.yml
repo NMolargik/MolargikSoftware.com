@@ -1,0 +1,56 @@
+name: Deploy to GitHub Pages
+
+# Builds the Vite site and publishes it to GitHub Pages on every push to main.
+# A 404.html fallback (a copy of index.html) lets the client-side router handle
+# deep links like /maestro. The public/CNAME file sets the custom domain.
+#
+# The counter at api.molargiksoftware.com is a separate Cloudflare Worker and is
+# not touched here. The legacy deploy.yml (NAS release) is kept as a rollback.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: SPA fallback for client-side routing
+        run: cp dist/index.html dist/404.html
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
