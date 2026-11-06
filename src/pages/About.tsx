@@ -91,7 +91,7 @@ export default function About() {
                   />
                 </picture>
               </div>
-              <div className="w-40 h-40 shrink-0 aspect-square rounded-full overflow-hidden shadow-lg border-[3px] border-brandOrange bg-white -ml-8">
+              <div className="w-40 h-40 shrink-0 aspect-square rounded-full overflow-hidden shadow-lg border-[3px] border-brandOrange bg-white ml-4">
                 <picture>
                   <source srcSet={familyshotWebp} type="image/webp" />
                   <img
