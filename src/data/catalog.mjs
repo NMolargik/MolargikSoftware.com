@@ -12,7 +12,7 @@ export const apps = [
   {
     slug: 'maestro',
     name: 'Maestro',
-    storeName: 'Maestro: Light Show Studio',
+    storeName: 'Maestro - Light Show Studio',
     source: 'Maestro',
     job: 'Turn any song into a Tesla light show, choreographed on your iPhone, iPad, or Mac.',
     description:
@@ -25,7 +25,7 @@ export const apps = [
     price: 'Free to try, $12.99 one-time unlock',
     priceDetail: 'A sample show and your first two exports are free. One purchase unlocks unlimited shows and exports on every device. No subscription.',
     promo: {
-      label: 'Launch promo: unlock Maestro for $4.99 through November 23, 2026 (regularly $12.99)',
+      label: 'Cybertruck send-off sale: unlock Maestro for $4.99 through November 23, 2026 (regularly $12.99)',
       start: '2026-11-09',
       end: '2026-11-23',
     },
@@ -47,7 +47,7 @@ export const apps = [
     platforms: ['iPhone', 'iPad', 'Mac', 'Apple Watch', 'Apple TV', 'Vision Pro'],
     languages: ['English', 'Spanish', 'French (Canada)', 'Japanese'],
     price: 'Free, Onyx $9.99 one-time',
-    priceDetail: 'Unlimited colors, every picker, and the contrast checker are free. Onyx adds unlimited palettes, the canvas, community downloads, and export for a single $9.99 purchase.',
+    priceDetail: 'Unlimited colors, five palettes, one canvas, every picker, and the contrast checker are free. Onyx adds unlimited palettes and canvases, Community saves, and pro export formats for a single $9.99 purchase. No subscription.',
     category: 'DesignApplication',
     offers: { price: '0', priceCurrency: 'USD' },
     testimonials: [
@@ -84,7 +84,7 @@ export const apps = [
       'Log migraines in seconds, let on-device Apple Intelligence explain what may have contributed, and watch the trends emerge. Weather correlations, Apple Health, Apple Watch, Siri, and iCloud sync. Private by design.',
     accent: '#6E60FF',
     appStoreUrl: 'https://apps.apple.com/us/app/mygra/id6747298583',
-    platforms: ['iPhone', 'iPad', 'Mac', 'Apple Watch', 'Vision Pro'],
+    platforms: ['iPhone', 'iPad', 'Apple Watch', 'Vision Pro'],
     languages: ['English', 'Spanish', 'French (Canada)', 'Japanese'],
     price: 'Free, Mygra Plus from $2.99/mo',
     priceDetail: 'Logging, history, and Apple Health are free. Mygra Plus is $2.99 a month or $14.99 a year with a 7-day free trial, or $29.99 once.',
@@ -95,17 +95,17 @@ export const apps = [
   {
     slug: 'stork',
     name: 'Stork',
-    storeName: 'Stork - Delivery Stats',
+    storeName: 'Stork - L&D Companion',
     source: 'Stork',
     job: 'Track the deliveries you perform, visualize trends, and celebrate every birth.',
     description:
       'Track the deliveries you perform, visualize trends, and celebrate every birth with Stork, the privacy-first companion for L&D nurses, midwives, and OB-GYNs.',
     accent: '#E8672B',
-    appStoreUrl: 'https://apps.apple.com/us/app/stork-delivery-stats/id6740038476',
-    platforms: ['iPhone', 'iPad', 'Mac', 'Apple Watch', 'Vision Pro'],
+    appStoreUrl: 'https://apps.apple.com/us/app/stork-l-d-companion/id6740038476',
+    platforms: ['iPhone', 'iPad', 'Mac', 'Apple Watch'],
     languages: ['English', 'Spanish', 'French (Canada)', 'Japanese'],
     price: 'Free, Stork Pro $4.99 one-time',
-    priceDetail: 'Log deliveries and see your dashboard for free. Stork Pro unlocks the full stats suite, share cards, and PDF/CSV export for a single $4.99 purchase.',
+    priceDetail: 'Log every delivery and see your dashboard for free. Stork Pro adds milestone share cards, PDF and CSV export, insight cards and the heat map, alternate icons, weather at each delivery, and Lock Screen widgets for a single $4.99 purchase.',
     category: 'MedicalApplication',
     offers: { price: '0', priceCurrency: 'USD' },
     testimonials: [],
@@ -117,7 +117,7 @@ export const apps = [
     source: 'Waffle',
     job: 'Browse the web in a grid of live pages on iPad, not in a pile of tabs.',
     description:
-      'Waffle turns your iPad into a grid of live webpages. Browse sites side by side in a split-screen grid, save preset layouts, pop cells into their own windows, and sync with iCloud.',
+      'Waffle turns your iPad into a grid of live webpages. Browse sites side by side in a split-screen grid, auto-refresh any cell on a timer, save and share preset layouts, pop cells into their own windows, and sync with iCloud.',
     accent: '#C98A2E',
     appStoreUrl: 'https://apps.apple.com/us/app/waffle-browser/id6751783473',
     platforms: ['iPad'],
