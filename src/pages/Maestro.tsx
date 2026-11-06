@@ -56,7 +56,7 @@ export default function Maestro() {
           },
           {
             title: 'Try it free',
-            body: 'A finished sample show is included, and your first two exported shows are free. One purchase unlocks unlimited shows and unlimited exports on iPhone, iPad, and Mac, and the Sequence Editor on the Mac. No subscription. Yours forever, on all your devices.',
+            body: 'A finished sample show is included, and your first two exported shows are free. One-time $12.99 unlock. One purchase unlocks unlimited shows and unlimited exports on iPhone, iPad, and Mac, and the Sequence Editor on the Mac. No subscription. Yours forever, on all your devices.',
           },
         ],
         features: [
@@ -91,6 +91,12 @@ export default function Maestro() {
               'Render the preview stage to video, including a vertical cut sized for TikTok, Reels, and Shorts.',
           },
           {
+            icon: '✨',
+            title: 'What’s New in 1.5.0',
+            description:
+              'Composition Shows stitch several songs into one performance, finished videos share straight to TikTok, Reels, and Shorts from the share sheet, and the whole app now supports VoiceOver.',
+          },
+          {
             icon: '🌍',
             title: 'Five Languages',
             description:
@@ -101,7 +107,7 @@ export default function Maestro() {
           'Maestro is an independent app and is not affiliated with or endorsed by Tesla, Inc. Tesla, Model S, Model 3, Model X, Model Y, and Cybertruck are trademarks of Tesla, Inc. A Tesla vehicle with light show support and a USB drive are required to play shows on a car.',
       }}
       jsonLd={{
-        name: 'Maestro: Light Show Studio',
+        name: 'Maestro - Light Show Studio',
         applicationCategory: 'EntertainmentApplication',
         operatingSystem: 'iOS, iPadOS, macOS',
         inLanguage: ['en', 'es', 'de', 'nl', 'nb'],

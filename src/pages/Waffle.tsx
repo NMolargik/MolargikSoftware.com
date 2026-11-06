@@ -76,7 +76,13 @@ export default function Waffle() {
             icon: '⭐️',
             title: 'Presets',
             description:
-              'Save an entire grid — size and every page in it — as a Preset and bring it back in one tap. A morning news grid, a work grid, a game-day grid.',
+              'Save an entire grid — size and every page in it — as a Preset and bring it back in one tap. A morning news grid, a work grid, a game-day grid. Share any preset as a link so a friend can open the same grid.',
+          },
+          {
+            icon: '🔄',
+            title: 'Auto-Refresh',
+            description:
+              'Keep live data current without lifting a finger: set any cell to reload every 30 seconds, 1, 5, or 15 minutes, or leave it off. Included free.',
           },
           {
             icon: '☁️',

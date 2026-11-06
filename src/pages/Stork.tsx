@@ -5,7 +5,7 @@ import icon from '../assets/stork/icon.png';
 
 // Official brand color: Stork Orange
 const ACCENT_COLOR = '#E8672B';
-const APP_STORE_URL = 'https://apps.apple.com/us/app/stork-delivery-stats/id6740038476';
+const APP_STORE_URL = 'https://apps.apple.com/us/app/stork-l-d-companion/id6740038476';
 
 const app = findApp('stork')!;
 
@@ -23,17 +23,17 @@ export default function Stork() {
       accentColor={ACCENT_COLOR}
       app={app}
       githubUrl="https://github.com/NMolargik/Stork"
-      requirements={['iOS 26+', 'iPadOS 26+', 'macOS 26+', 'visionOS 26+', 'watchOS 26+']}
+      requirements={['iOS 26+', 'iPadOS 26+', 'macOS 26+', 'watchOS 26+']}
       screens={screens}
       screensClassName="bg-gradient-to-b from-orange-50/30 to-[#FAFAFA]"
       about={{
         title: 'Stork — Labor & Delivery Companion',
         intro:
-          'Stork helps medical professionals track the deliveries they perform, visualize trends, and celebrate every birth. Designed for Labor & Delivery nurses, midwives, and OB-GYNs, Stork makes it simple to record, review, and analyze your delivery stats — all in one beautiful, privacy-first app across iPhone, iPad, Mac, Apple Watch, and Apple Vision Pro.',
+          'Stork helps medical professionals track the deliveries they perform, visualize trends, and celebrate every birth. Designed for Labor & Delivery nurses, midwives, and OB-GYNs, Stork makes it simple to record, review, and analyze your delivery stats — all in one beautiful, privacy-first app across iPhone, iPad, Mac, and Apple Watch.',
         sections: [
           {
             title: 'What is Stork?',
-            body: 'Stork is a focused companion for Labor & Delivery professionals who want a clear picture of their work. Log each delivery in seconds, organize with personal tags, search and filter your entire history, and browse it month by month in the calendar. Track your impact over weeks and years, and bring real numbers into conversations with peers and leadership.',
+            body: 'Stork is a focused companion for Labor & Delivery professionals who want a clear picture of their work. Log each delivery in seconds, including deliveries from any past date, organize with personal tags, search and filter your entire history, and browse it month by month in the calendar. Track your impact over weeks and years, and bring real numbers into conversations with peers and leadership.',
           },
           {
             title: 'Designed for Busy L&D Teams',
@@ -41,7 +41,7 @@ export default function Stork() {
           },
           {
             title: 'Celebrate Every Birth',
-            body: 'Each entry adds a marble to your Delivery Jar — a playful visualization of every miracle you have been part of. Stork recognizes career milestones as you reach them and turns them, and your favorite stats, into share cards perfect for celebrating with friends and colleagues.',
+            body: 'Each entry adds a marble to your Delivery Jar — a playful visualization of every miracle you have been part of. With Stork Pro, Stork recognizes career milestones as you reach them and turns them, and your favorite stats, into share cards perfect for celebrating with friends and colleagues.',
           },
           {
             title: 'Private by Design',
@@ -53,13 +53,13 @@ export default function Stork() {
             icon: '🍼',
             title: 'Track Every Delivery',
             description:
-              'Log babies and their measurements, delivery method, epidural use, NICU stays, nurse catches, personal tags, and notes — all in seconds.',
+              'Log babies and their measurements, delivery method, epidural use, NICU stays, nurse catches, personal tags, and notes — all in seconds. Back-date any delivery to the day it happened.',
           },
           {
             icon: '📊',
             title: 'Trends & Statistics',
             description:
-              'A customizable dashboard brings your career to life: delivery counts, sex distribution, delivery methods, time-of-day and day-of-week patterns, year-over-year growth, and personal bests.',
+              'A customizable dashboard brings your career to life with delivery counts and the Delivery Jar for free. Stork Pro adds insight cards for time of day, day of week, year over year, personal bests, and baby measurements, plus the calendar heat map.',
           },
           {
             icon: '🔍',
@@ -69,30 +69,36 @@ export default function Stork() {
           },
           {
             icon: '🎉',
-            title: 'Milestones & Share Cards',
+            title: 'Milestones & Share Cards (Pro)',
             description:
-              'Stork celebrates career milestones as you reach them and turns your favorite stats into shareable cards.',
+              'Stork celebrates career milestones as you reach them and turns your favorite stats into shareable cards. Part of Stork Pro.',
           },
           {
             icon: '📤',
-            title: 'Export & Share',
+            title: 'Export & Share (Pro)',
             description:
-              'Generate polished PDF reports or CSV exports of your delivery records for portfolios, reviews, or your own analysis.',
+              'Generate polished PDF reports or CSV exports of your delivery records for portfolios, reviews, or your own analysis. Part of Stork Pro.',
           },
           {
             icon: '📱',
             title: 'Built for Every Apple Device',
             description:
-              'Full support for iPhone, iPad, Mac, and Apple Vision Pro, plus an Apple Watch app, Home Screen and Lock Screen widgets, and Siri and Shortcuts. Available in English, Spanish, French (Canada), and Japanese.',
+              'Full support for iPhone, iPad, and Mac, plus an Apple Watch app, Home Screen widgets, and Siri and Shortcuts, all free. Lock Screen and interactive widgets come with Stork Pro. Available in English, Spanish, French (Canada), and Japanese.',
+          },
+          {
+            icon: '💎',
+            title: 'Stork Pro',
+            description:
+              'One $4.99 purchase, with Family Sharing, unlocks milestone share cards, PDF and CSV export, insight cards and the calendar heat map, alternate app icons, weather at each delivery, and Lock Screen and interactive widgets. Bought Stork before 3.0? Pro is yours free for life.',
           },
         ],
         footnote:
-          'Stork requires the latest Apple platforms (iOS 26, iPadOS 26, macOS 26, watchOS 26, or visionOS 26). Perfect for Labor & Delivery nurses, midwives, OB-GYNs, and maternity unit staff.',
+          'Stork requires the latest Apple platforms (iOS 26, iPadOS 26, macOS 26, or watchOS 26). Perfect for Labor & Delivery nurses, midwives, OB-GYNs, and maternity unit staff.',
       }}
       jsonLd={{
         name: 'Stork – L&D Companion',
         applicationCategory: 'MedicalApplication',
-        operatingSystem: 'iOS, iPadOS, macOS, watchOS, visionOS',
+        operatingSystem: 'iOS, iPadOS, macOS, watchOS',
         inLanguage: ['en', 'es', 'fr-CA', 'ja'],
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         url: APP_STORE_URL,

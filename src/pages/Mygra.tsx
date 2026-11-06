@@ -22,25 +22,25 @@ export default function Mygra() {
       accentColor={ACCENT_COLOR}
       app={app}
       githubUrl="https://github.com/NMolargik/Mygra"
-      requirements={['iOS 18+', 'iPadOS 18+', 'macOS 15+', 'watchOS 11+', 'visionOS 2+']}
+      requirements={['iOS 18+', 'iPadOS 18+', 'watchOS 11+', 'visionOS 2+']}
       screens={screens}
       screensClassName="bg-gradient-to-b from-purple-50/30 to-[#FAFAFA]"
       about={{
         title: 'Mygra — Your Intelligent Migraine Journal',
         intro:
-          'Take control of your migraines with Mygra, a private, intelligent companion that helps you spot patterns, understand your triggers, and find relief. Log an attack in seconds, let on-device Apple Intelligence explain what may have contributed, and watch the trends emerge. Everything syncs securely through your own iCloud account and connects with Apple Health for the full picture of your well-being.',
+          'Take control of your migraines with Mygra, a private, intelligent companion that helps you spot patterns, understand your triggers, and find relief. Log an attack in seconds, watch the trends emerge, and, with Mygra Plus, let on-device Apple Intelligence explain what may have contributed. Everything syncs securely through your own iCloud account and connects with Apple Health for the full picture of your well-being.',
         sections: [
           {
             title: 'Log Migraines in Seconds',
             body: 'Capture start and end times, pain and stress on a 0–10 scale, triggers from a curated list (or your own), foods, and notes. Track an attack as it happens with a Live Activity on your Lock Screen and in the Dynamic Island. Health and weather are attached automatically, so each entry records how you slept, what you drank, and what the sky was doing.',
           },
           {
-            title: 'Insights, Privately',
-            body: 'The Migraine Assistant is an analyst powered by Apple Intelligence that knows your history and profile, and every word stays on your device. Each logged attack gets a plain-language explanation of likely contributing factors, Quick Bits surface rule-based trends across triggers, foods, hydration, sleep, and more, and weather correlations warn you when conditions turn risky.',
+            title: 'Insights, Privately (Plus)',
+            body: 'Mygra Plus adds the Migraine Assistant, an analyst powered by Apple Intelligence that knows your history and profile, and every word stays on your device. Each logged attack gets a plain-language explanation of likely contributing factors, Quick Bits explain the trends across triggers, foods, hydration, sleep, and more, and weather-risk forecasts and alerts warn you when conditions turn risky.',
           },
           {
             title: 'See the Big Picture',
-            body: 'The Dashboard opens with your migraine-free streak, followed by local weather, today’s Health stats with Quick Add, and the latest Quick Bits. The Calendar colors each month by severity, History is searchable and grouped by month with powerful filters, and a PDF report is one tap away for your doctor.',
+            body: 'The Dashboard opens with your migraine-free streak, followed by local weather, today’s Health stats with Quick Add, and the latest Quick Bits. The Calendar colors each month by severity, History is searchable and grouped by month with powerful filters, and with Plus a doctor-ready PDF report is one tap away.',
           },
           {
             title: 'Private by Design',
@@ -56,15 +56,21 @@ export default function Mygra() {
           },
           {
             icon: '🤖',
-            title: 'Migraine Assistant',
+            title: 'Migraine Assistant (Plus)',
             description:
-              'Chat with an on-device Apple Intelligence analyst that knows your history, and get a per-migraine insight the moment you log an attack.',
+              'Chat with an on-device Apple Intelligence analyst that knows your history, and get a per-migraine insight the moment you log an attack. Part of Mygra Plus.',
           },
           {
             icon: '🌦️',
-            title: 'Weather Correlations',
+            title: 'Weather Correlations (Plus)',
             description:
-              'See how pressure, humidity, temperature, and conditions line up with your attacks, and get a heads-up when conditions turn risky.',
+              'See how pressure, humidity, temperature, and conditions line up with your attacks, and get a heads-up when conditions turn risky. Weather-risk forecasts and alerts are part of Mygra Plus.',
+          },
+          {
+            icon: '📄',
+            title: 'Doctor-Ready Reports (Plus)',
+            description:
+              'Turn your history into a clean PDF report for your next appointment, or export everything as CSV for your own analysis. Part of Mygra Plus.',
           },
           {
             icon: '❤️',
@@ -80,18 +86,24 @@ export default function Mygra() {
           },
           {
             icon: '🖥️',
-            title: 'iPad & Mac',
+            title: 'Built for iPad',
             description:
-              'A sidebar, two-column layouts, keyboard shortcuts, and a menu bar. Available in English, Spanish, French (Canada), and Japanese.',
+              'A sidebar, two-column layouts, and keyboard shortcuts make the most of the bigger screen, and the iPad app runs on Apple Vision Pro too. Available in English, Spanish, French (Canada), and Japanese.',
+          },
+          {
+            icon: '💎',
+            title: 'Simple Pricing',
+            description:
+              'Free forever: logging, Live Activity, calendar, history, tags, charts, Apple Health, Apple Watch, widgets, Siri, and Spotlight. Mygra Plus adds the Migraine Assistant, trigger insights, weather-risk forecasts and alerts, doctor-ready reports, and CSV export for $2.99 a month, $14.99 a year with a 7-day free trial, or $29.99 once, with Family Sharing. Bought Mygra before 2.0? Plus is yours free for life.',
           },
         ],
         footnote:
-          'Mygra may use on-device intelligence to generate wellness insights. These are for informational purposes only and are not medical advice. Some features require iOS 26 or iPadOS 26; the Migraine Assistant and per-migraine insights require Apple Intelligence.',
+          'Mygra is free to download; Mygra Plus is an optional upgrade. Mygra may use on-device intelligence to generate wellness insights. These are for informational purposes only and are not medical advice. Some features require iOS 26 or iPadOS 26; the Migraine Assistant and per-migraine insights require Apple Intelligence.',
       }}
       jsonLd={{
         name: 'Mygra',
         applicationCategory: 'HealthApplication',
-        operatingSystem: 'iOS, iPadOS, macOS, watchOS, visionOS',
+        operatingSystem: 'iOS, iPadOS, watchOS, visionOS',
         inLanguage: ['en', 'es', 'fr-CA', 'ja'],
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         url: APP_STORE_URL,

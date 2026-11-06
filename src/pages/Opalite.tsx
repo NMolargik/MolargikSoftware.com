@@ -107,7 +107,7 @@ export default function Opalite() {
           },
           {
             title: 'Organize Your Palette Library',
-            body: 'Unlimited colors, free forever. Smart palettes with names, notes, and tags, drag-and-drop reordering, instant search across your entire library, and iCloud sync across iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
+            body: 'Unlimited colors and five palettes, free forever; Onyx removes the palette limit. Smart palettes with names, notes, and tags, drag-and-drop reordering, instant search across your entire library, and iCloud sync across iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
           },
           {
             title: 'Design for Everyone',
@@ -121,8 +121,8 @@ export default function Opalite() {
             title: 'Draw & Export',
             body: (
               <>
-                <span className="text-brandPurple font-medium">Onyx</span> unlocks a full PencilKit canvas with Apple Pencil
-                support and shape tools, unlimited saved canvases, and export everywhere: Procreate .swatches, Adobe ASE for
+                <span className="text-brandPurple font-medium">Onyx</span> unlocks unlimited saved canvases on the PencilKit canvas (one canvas, with Apple Pencil
+                support and shape tools, is free) and pro export formats everywhere: Procreate .swatches, Adobe ASE for
                 Photoshop & Illustrator, SwiftUI and CSS for developers, GIMP/GPL palettes, and PDF portfolios.
               </>
             ),
@@ -155,9 +155,9 @@ export default function Opalite() {
           },
           {
             icon: '✏️',
-            title: 'Canvas (Onyx)',
+            title: 'Unlimited Canvases (Onyx)',
             description:
-              'Apple Pencil and PencilKit support with squares, circles, lines, arrows, and custom shapes, plus unlimited saved canvases.',
+              'Apple Pencil and PencilKit support with squares, circles, lines, arrows, and custom shapes. One canvas is free; Onyx unlocks unlimited saved canvases.',
           },
           {
             icon: '📤',
@@ -169,7 +169,7 @@ export default function Opalite() {
             icon: '💎',
             title: 'Simple Pricing',
             description:
-              'Free: unlimited colors, 5 palettes, all pickers, and the contrast checker. Onyx ($9.99, one-time): unlimited palettes, canvas, community downloads, and export. No subscription.',
+              'Free: unlimited colors, 5 palettes, 1 canvas, every picker, the contrast checker, and color vision simulation. Onyx ($9.99, one-time): unlimited palettes and canvases, Community saves, and pro export formats. No subscription.',
           },
         ],
         footnote:
