@@ -1,11 +1,17 @@
 name: Deploy to GitHub Pages
 
 # Builds the Vite site and publishes it to GitHub Pages on every push to main.
-# A 404.html fallback (a copy of index.html) lets the client-side router handle
-# deep links like /maestro. The public/CNAME file sets the custom domain.
+# `npm run build` also runs scripts/postbuild-seo.mjs, which writes one HTML
+# file per route (with that route's <head>), a 404.html SPA fallback, and
+# sitemap.xml / robots.txt. The public/CNAME file sets the custom domain.
+#
+# Build-time configuration comes from repository variables and secrets
+# (Settings > Secrets and variables > Actions); none of it is in git:
+#   vars.VITE_CLOUDKIT_CONTAINER, vars.VITE_CLOUDKIT_ENVIRONMENT
+#   secrets.VITE_CLOUDKIT_API_TOKEN, secrets.EMAILJS_SERVICE/TEMPLATE/PUBLIC
 #
 # The counter at api.molargiksoftware.com is a separate Cloudflare Worker and is
-# not touched here. The legacy deploy.yml (NAS release) is kept as a rollback.
+# not touched here.
 
 on:
   push:
@@ -35,9 +41,13 @@ jobs:
 
       - run: npm ci
       - run: npm run build
-
-      - name: SPA fallback for client-side routing
-        run: cp dist/index.html dist/404.html
+        env:
+          VITE_EMAILJS_SERVICE: ${{ secrets.EMAILJS_SERVICE }}
+          VITE_EMAILJS_TEMPLATE: ${{ secrets.EMAILJS_TEMPLATE }}
+          VITE_EMAILJS_PUBLIC: ${{ secrets.EMAILJS_PUBLIC }}
+          VITE_CLOUDKIT_CONTAINER: ${{ vars.VITE_CLOUDKIT_CONTAINER }}
+          VITE_CLOUDKIT_ENVIRONMENT: ${{ vars.VITE_CLOUDKIT_ENVIRONMENT }}
+          VITE_CLOUDKIT_API_TOKEN: ${{ secrets.VITE_CLOUDKIT_API_TOKEN }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3

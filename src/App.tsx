@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { BrowserRouter, HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import LoadingSpinner from './components/LoadingSpinner';
@@ -8,6 +8,8 @@ import LoadingSpinner from './components/LoadingSpinner';
 const Home = lazy(() => import('./pages/Home'));
 const About = lazy(() => import('./pages/About'));
 const Contact = lazy(() => import('./pages/Contact'));
+const Support = lazy(() => import('./pages/Support'));
+const Press = lazy(() => import('./pages/Press'));
 const Stork = lazy(() => import('./pages/Stork'));
 const Mygra = lazy(() => import('./pages/Mygra'));
 const SetDeck = lazy(() => import('./pages/SetDeck'));
@@ -18,6 +20,7 @@ const V1Sports = lazy(() => import('./pages/V1Sports'));
 const StreetIQ = lazy(() => import('./pages/StreetIQ'));
 const Maestro = lazy(() => import('./pages/Maestro'));
 const OpaliteWeb = lazy(() => import('./pages/OpaliteWeb'));
+const Go = lazy(() => import('./pages/Go'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 function PageLoader() {
@@ -28,12 +31,13 @@ function PageLoader() {
   );
 }
 
+/**
+ * BrowserRouter everywhere. GitHub Pages serves a prerendered HTML file for
+ * each known route (scripts/postbuild-seo.mjs) and falls back to 404.html,
+ * a copy of index.html, for everything else, so deep links always load.
+ */
 export default function App() {
-  return import.meta.env.PROD ? (
-    <HashRouter>
-      <AppShell />
-    </HashRouter>
-  ) : (
+  return (
     <BrowserRouter>
       <AppShell />
     </BrowserRouter>
@@ -83,7 +87,10 @@ function AppShell() {
             <Route path="/streetiq" element={<StreetIQ />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/support" element={<Support />} />
+            <Route path="/press" element={<Press />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/go/:app" element={<Go />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </Suspense>
