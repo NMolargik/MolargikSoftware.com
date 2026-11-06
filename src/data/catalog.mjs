@@ -81,7 +81,7 @@ export const apps = [
     source: 'Mygra',
     job: 'Log migraines in seconds and let on-device intelligence find the patterns.',
     description:
-      'Log migraines in seconds, let on-device Apple Intelligence explain what may have contributed, and watch the trends emerge. Weather correlations, Apple Health, Apple Watch, Siri, and iCloud sync. Private by design.',
+      'Log migraines in seconds and watch the trends emerge. Free forever for logging, calendar, Apple Health, Apple Watch, and Siri. Mygra Plus adds on-device AI insights, weather-risk alerts, and doctor-ready reports. Private by design.',
     accent: '#6E60FF',
     appStoreUrl: 'https://apps.apple.com/us/app/mygra/id6747298583',
     platforms: ['iPhone', 'iPad', 'Apple Watch', 'Vision Pro'],
