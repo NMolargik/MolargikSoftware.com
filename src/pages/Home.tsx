@@ -2,12 +2,34 @@ import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { ShieldCheck, Smartphone, Languages } from 'lucide-react';
 import AppCard from '../components/AppCard';
+import ProjectCard from '../components/ProjectCard';
 import GlassButton from '../components/GlassButton';
 import LiquidGlass from '../components/LiquidGlass';
 import { useRouteMeta } from '../hooks';
 import { apps } from '../data/apps';
 import { fadeUp, staggerContainer, staggerChild } from '../utils/animations';
 import logo from '../assets/logo.svg';
+import streetIQIcon from '../assets/streetiq/streetiqicon.webp';
+import v1SportsIcon from '../assets/v1sports/V1Sports.jpg';
+
+const professionalWork = [
+  {
+    title: 'StreetIQ',
+    tagline: 'Building SCOUT, the native iOS field app behind StreetIQ’s AI pavement assessments: live coverage, offline maps, GoPro companions.',
+    image: streetIQIcon,
+    path: '/streetiq',
+    accentColor: '#3FA8BC',
+    ctaLabel: 'View Employment',
+  },
+  {
+    title: 'V1 Sports',
+    tagline: 'Empowering golfers to improve their game. Supporting coaches in growing their business.',
+    image: v1SportsIcon,
+    path: '/v1sports',
+    accentColor: '#C84640',
+    ctaLabel: 'View Employment',
+  },
+];
 
 const reasons = [
   {
@@ -129,8 +151,25 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Professional work */}
+      <section id="work" className="bg-surface py-16 scroll-mt-20">
+        <div className="max-w-6xl mx-auto px-6">
+          <motion.div className="text-center mb-10" {...fadeUp}>
+            <h2 className="text-headline text-gray-900">Professional work</h2>
+            <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
+              The products Nick builds and has built for other teams, alongside the studio's own apps.
+            </p>
+          </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {professionalWork.map((project, idx) => (
+              <ProjectCard key={project.path} {...project} index={idx} />
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Why Molargik */}
-      <section className="bg-surface py-16">
+      <section className="bg-white py-16">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div className="text-center mb-10" {...fadeUp}>
             <h2 className="text-headline text-gray-900">Why Molargik</h2>
