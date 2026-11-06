@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Molargik Software portfolio website - a React SPA showcasing Apple-platform app projects (Maestro, Opalite, SetDeck, Mygra, Stork, Waffle) plus employment pages (StreetIQ / SCOUT, V1 Sports). Self-hosted on a UGREEN DXP4800 NAS via Nginx and Cloudflare.
+Molargik Software portfolio website - a React SPA showcasing Apple-platform app projects (Maestro, Opalite, SetDeck, Mygra, Stork, Waffle) plus employment pages (StreetIQ / SCOUT, V1 Sports). Hosted on GitHub Pages at molargiksoftware.com.
 
 ## Commands
 
@@ -38,21 +38,16 @@ only supplies content. Distill page copy from the app's current App Store descri
 
 ## Deployment
 
-Pull-based, no SSH involved:
+Hosted on GitHub Pages, deployed on every push to `main`:
 
-1. `git tag v2.1 && git push origin v2.1` — the GitHub Actions workflow
-   (`.github/workflows/deploy.yml`) builds the site and attaches `site.tar.gz`
-   to a GitHub Release for that tag.
-2. The NAS runs `deploy/nas/pull-site.sh` every 5 minutes as root via
-   `/etc/cron.d/molargiksoftware-deploy` (copy lives at
-   `/volume1/docker/web/deploy/pull-site.sh`). It checks the latest release,
-   downloads the asset when the tag changes, and rsyncs it into the nginx
-   document root `/volume1/docker/web/sites/molargiksoftware` with
-   web-readable permissions. State and a log live in `/volume1/docker/web/deploy/`.
+1. Push to `main` — the GitHub Actions workflow (`.github/workflows/pages.yml`)
+   builds the Vite site and publishes `dist/` to GitHub Pages.
+2. The custom domain `molargiksoftware.com` is set via `public/CNAME`, and HTTPS
+   is enforced in the repo's Pages settings. The build also copies
+   `dist/index.html` to `dist/404.html` as a client-side-routing fallback.
 
-The nginx container serves that folder as `/usr/share/nginx/html/molargiksoftware`
-and is exposed through a Cloudflare Tunnel. Never copy files to the NAS over SMB:
-they land owner-only and the container cannot read them.
+The export counter at `api.molargiksoftware.com` is a separate Cloudflare Worker
+(`workers/maestro-counter`), independent of the site hosting.
 
 ## Architecture
 
