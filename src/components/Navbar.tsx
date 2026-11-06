@@ -13,7 +13,7 @@ const links = [
   { label: 'Mygra', path: '/mygra' },
   { label: 'Stork', path: '/stork' },
   { label: 'Waffle', path: '/waffle' },
-  { label: 'StreetIQ', path: '/streetiq' },
+  { label: 'Support', path: '/support' },
   { label: 'About', path: '/about' },
 ];
 

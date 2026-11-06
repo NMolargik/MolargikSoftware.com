@@ -1,10 +1,13 @@
 import AppShowcase from '../components/AppShowcase';
 import { screensFromGlob } from '../utils/screens';
+import { findApp } from '../data/apps';
 import icon from '../assets/stork/icon.png';
 
 // Official brand color: Stork Orange
 const ACCENT_COLOR = '#E8672B';
 const APP_STORE_URL = 'https://apps.apple.com/us/app/stork-delivery-stats/id6740038476';
+
+const app = findApp('stork')!;
 
 const screens = screensFromGlob(
   import.meta.glob('../assets/stork/screens/*', { eager: true, import: 'default' })
@@ -18,12 +21,7 @@ export default function Stork() {
       tagline="Track the deliveries you perform, visualize trends, and celebrate every birth."
       icon={icon}
       accentColor={ACCENT_COLOR}
-      meta={{
-        title: 'Stork – L&D Companion for Labor & Delivery Nurses | Nick Molargik',
-        description:
-          'Track the deliveries you perform, visualize trends, and celebrate every birth with Stork — the privacy-first companion for L&D nurses, midwives, and OB-GYNs. Built with Swift & SwiftUI.',
-      }}
-      appStoreUrl={APP_STORE_URL}
+      app={app}
       githubUrl="https://github.com/NMolargik/Stork"
       requirements={['iOS 26+', 'iPadOS 26+', 'macOS 26+', 'visionOS 26+', 'watchOS 26+']}
       screens={screens}
@@ -96,7 +94,7 @@ export default function Stork() {
         applicationCategory: 'MedicalApplication',
         operatingSystem: 'iOS, iPadOS, macOS, watchOS, visionOS',
         inLanguage: ['en', 'es', 'fr-CA', 'ja'],
-        offers: { '@type': 'Offer', price: '0.99', priceCurrency: 'USD' },
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         url: APP_STORE_URL,
       }}
     />

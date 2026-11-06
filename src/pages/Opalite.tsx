@@ -2,12 +2,15 @@ import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppShowcase from '../components/AppShowcase';
 import { screensFromGlob } from '../utils/screens';
+import { findApp } from '../data/apps';
 import icon from '../assets/opalite/icon.png';
 import opaliteDemo from '../assets/opalite/opaliteWorkflowDemo.mp4';
 
 // Official brand color: Opalite Lavender
 const ACCENT_COLOR = '#CAC0E8';
 const APP_STORE_URL = 'https://apps.apple.com/us/app/opalite-color-studio/id6755093664';
+
+const app = findApp('opalite')!;
 
 const screens = screensFromGlob(
   import.meta.glob('../assets/opalite/screens/*', { eager: true, import: 'default' })
@@ -86,12 +89,7 @@ export default function Opalite() {
       tagline="Take control of your colors. The color toolkit designers, developers, and digital artists actually need."
       icon={icon}
       accentColor={ACCENT_COLOR}
-      meta={{
-        title: 'Opalite – Color Studio for Designers & Developers | Nick Molargik',
-        description:
-          'Pick colors from photos, check WCAG contrast, simulate color blindness, draw on a canvas, and export palettes to Procreate, SwiftUI, CSS, and Adobe — on iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
-      }}
-      appStoreUrl={APP_STORE_URL}
+      app={app}
       githubUrl="https://github.com/NMolargik/Opalite"
       webHref="/opalite-web"
       requirements={['iOS 18.4+', 'iPadOS 18.4+', 'macOS 15+', 'watchOS 10+', 'tvOS 18+', 'visionOS 26.2+']}
@@ -171,7 +169,7 @@ export default function Opalite() {
             icon: '💎',
             title: 'Simple Pricing',
             description:
-              'Free: unlimited colors, 5 palettes, all pickers, and the contrast checker. Onyx ($4.99/year or $19.99 lifetime): unlimited palettes, canvas, community downloads, and export.',
+              'Free: unlimited colors, 5 palettes, all pickers, and the contrast checker. Onyx ($9.99, one-time): unlimited palettes, canvas, community downloads, and export. No subscription.',
           },
         ],
         footnote:

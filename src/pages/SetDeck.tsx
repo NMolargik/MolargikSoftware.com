@@ -1,10 +1,13 @@
 import AppShowcase from '../components/AppShowcase';
 import { screensFromGlob } from '../utils/screens';
+import { findApp } from '../data/apps';
 import icon from '../assets/setdeck/icon.png';
 
 // Official brand color: SetDeck Green Start
 const ACCENT_COLOR = '#65DA92';
 const APP_STORE_URL = 'https://apps.apple.com/us/app/setdeck/id6484503374';
+
+const app = findApp('setdeck')!;
 
 const screens = screensFromGlob(
   import.meta.glob('../assets/setdeck/screens/*', { eager: true, import: 'default' })
@@ -17,12 +20,7 @@ export default function SetDeck() {
       tagline="Plan the week. Log every set. Watch the numbers climb."
       icon={icon}
       accentColor={ACCENT_COLOR}
-      meta={{
-        title: 'SetDeck – Strength Training Companion | Nick Molargik',
-        description:
-          'Plan your training week, log every set, and watch the numbers climb. SetDeck tracks routines, history, stats, achievements, hydration, and calories — with Apple Watch, Siri, and Apple Health. Built with Swift & SwiftUI.',
-      }}
-      appStoreUrl={APP_STORE_URL}
+      app={app}
       githubUrl="https://github.com/NMolargik/SetDeck"
       requirements={['iOS 18+', 'iPadOS 18+', 'watchOS 11+', 'visionOS 2+']}
       screens={screens}

@@ -1,10 +1,13 @@
 import AppShowcase from '../components/AppShowcase';
 import { screensFromGlob } from '../utils/screens';
+import { findApp } from '../data/apps';
 import icon from '../assets/waffle/icon.png';
 
 // Official brand color: Waffle Secondary
 const ACCENT_COLOR = '#DFA656';
 const APP_STORE_URL = 'https://apps.apple.com/us/app/waffle-browser/id6751783473';
+
+const app = findApp('waffle')!;
 
 const screens = screensFromGlob(
   import.meta.glob('../assets/waffle/screens/*', { eager: true, import: 'default' })
@@ -17,12 +20,7 @@ export default function Waffle() {
       tagline="Browse the web in a grid, not in tabs."
       icon={icon}
       accentColor={ACCENT_COLOR}
-      meta={{
-        title: 'Waffle – Grid Browser for iPad | Nick Molargik',
-        description:
-          'Waffle turns your iPad into a grid of live webpages. Browse sites side by side in a split-screen grid, save preset layouts, pop cells into their own windows, and sync with iCloud.',
-      }}
-      appStoreUrl={APP_STORE_URL}
+      app={app}
       githubUrl="https://github.com/NMolargik/Waffle"
       requirements={['iPadOS 27+']}
       screens={screens}

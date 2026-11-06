@@ -1,10 +1,13 @@
 import AppShowcase from '../components/AppShowcase';
 import { screensFromGlob } from '../utils/screens';
+import { findApp } from '../data/apps';
 import icon from '../assets/mygra/icon.png';
 
 // Official brand color: Mygra Purple
 const ACCENT_COLOR = '#6E60FF';
 const APP_STORE_URL = 'https://apps.apple.com/us/app/mygra/id6747298583';
+
+const app = findApp('mygra')!;
 
 const screens = screensFromGlob(
   import.meta.glob('../assets/mygra/screens/*', { eager: true, import: 'default' })
@@ -17,12 +20,7 @@ export default function Mygra() {
       tagline="Your intelligent migraine journal. Private, on-device insights that help you find relief."
       icon={icon}
       accentColor={ACCENT_COLOR}
-      meta={{
-        title: 'Mygra – Intelligent Migraine Journal | Nick Molargik',
-        description:
-          'Log migraines in seconds, let on-device Apple Intelligence explain what may have contributed, and watch the trends emerge. Weather correlations, Apple Health, Apple Watch, Siri, and iCloud sync. Private by design.',
-      }}
-      appStoreUrl={APP_STORE_URL}
+      app={app}
       githubUrl="https://github.com/NMolargik/Mygra"
       requirements={['iOS 18+', 'iPadOS 18+', 'macOS 15+', 'watchOS 11+', 'visionOS 2+']}
       screens={screens}
@@ -95,7 +93,7 @@ export default function Mygra() {
         applicationCategory: 'HealthApplication',
         operatingSystem: 'iOS, iPadOS, macOS, watchOS, visionOS',
         inLanguage: ['en', 'es', 'fr-CA', 'ja'],
-        offers: { '@type': 'Offer', price: '2.99', priceCurrency: 'USD' },
+        offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         url: APP_STORE_URL,
       }}
     />

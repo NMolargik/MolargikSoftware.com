@@ -1,11 +1,14 @@
 import AppShowcase from '../components/AppShowcase';
 import ExportCounter from '../components/ExportCounter';
 import { screensFromGlob } from '../utils/screens';
+import { findApp } from '../data/apps';
 import icon from '../assets/maestro/icon.png';
 
 // Official brand color: Tesla Autopilot blue, the app's own accent.
 const ACCENT_COLOR = '#2D7FF9';
 const APP_STORE_URL = 'https://apps.apple.com/us/app/maestro-light-show-studio/id6803264666';
+
+const app = findApp('maestro')!;
 
 const screens = screensFromGlob(
   import.meta.glob('../assets/maestro/screens/*', { eager: true, import: 'default' })
@@ -19,12 +22,7 @@ export default function Maestro() {
       tagline="Drop in a song. Get a Tesla light show. Choreographed on your iPhone, iPad, or Mac, played on your car."
       icon={icon}
       accentColor={ACCENT_COLOR}
-      meta={{
-        title: 'Maestro – Tesla Light Show Studio for iPhone, iPad & Mac | Nick Molargik',
-        description:
-          'Maestro turns any song into a Tesla light show. On-device signal processing, a hardware-accurate fleet preview, a channel-level Sequence Editor on the Mac, and USB-ready exports. No AI, nothing uploaded.',
-      }}
-      appStoreUrl={APP_STORE_URL}
+      app={app}
       requirements={['iOS 17+', 'iPadOS 17+', 'macOS 14+', 'Model S · 3 · X · Y · Cybertruck']}
       screens={screens}
       screensClassName="bg-gradient-to-b from-[#0b1220] via-[#0c1424] to-surface"

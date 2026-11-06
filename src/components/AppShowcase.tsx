@@ -4,7 +4,12 @@ import ScreensCarousel from './ScreensCarousel';
 import FeatureCard from './FeatureCard';
 import ScrollToTop from './ScrollToTop';
 import DownloadCTA from './DownloadCTA';
+import PriceLine from './PriceLine';
+import Testimonials from './Testimonials';
 import { usePageMeta, useScrollToStart } from '../hooks';
+import type { SiteApp } from '../data/apps';
+import { appStoreLink, siteChannel } from '../utils/appStore';
+import { findRoute } from '../seo/routes.mjs';
 
 export interface AppFeature {
   icon: string;
@@ -26,8 +31,19 @@ export interface AppShowcaseProps {
   tagline: string;
   icon: string;
   accentColor: string;
-  meta: { title: string; description: string };
+  /** Head tags; defaults to the route entry in src/seo/routes.mjs when `app` is given. */
+  meta?: { title: string; description: string };
+  /**
+   * Catalog entry (src/data/apps.ts). Supplies the App Store links, price,
+   * platforms, promo window, testimonials, and OG image; explicit props below
+   * still win when given.
+   */
+  app?: SiteApp;
   appStoreUrl?: string;
+  macAppStoreUrl?: string;
+  /** Overrides the catalog price line. */
+  price?: string;
+  platforms?: string[];
   githubUrl?: string;
   webHref?: string;
   /** Pills under the hero: supported OS versions, hardware, etc. */
@@ -64,7 +80,11 @@ export default function AppShowcase({
   icon,
   accentColor,
   meta,
+  app,
   appStoreUrl,
+  macAppStoreUrl,
+  price,
+  platforms,
   githubUrl,
   webHref,
   requirements = [],
@@ -80,11 +100,25 @@ export default function AppShowcase({
   const [loaded, setLoaded] = useState<Record<number, boolean>>({});
   const markLoaded = (i: number) => setLoaded((prev) => ({ ...prev, [i]: true }));
 
+  const channel = siteChannel(app?.slug ?? name);
+  const storeUrl = appStoreUrl ?? app?.appStoreUrl;
+  const trackedStoreUrl = storeUrl ? appStoreLink(storeUrl, channel) : undefined;
+  const macUrl = macAppStoreUrl ?? app?.macAppStoreUrl;
+  const trackedMacUrl = macUrl ? appStoreLink(macUrl, `${channel}_mac`) : undefined;
+  const priceLine = price ?? app?.price;
+  const platformList = platforms ?? app?.platforms ?? [];
+
+  const route = app ? findRoute(app.path) : undefined;
+  const title = meta?.title ?? route?.title ?? name;
+  const description = meta?.description ?? route?.description ?? app?.description ?? tagline;
+
   usePageMeta({
-    title: meta.title,
-    description: meta.description,
+    title,
+    description,
     accentColor,
     preloadImage: icon,
+    image: app ? `/og/${app.slug}.png` : undefined,
+    path: app?.path,
   });
 
   useScrollToStart(carouselRefDesktop, carouselRefMobile);
@@ -96,12 +130,22 @@ export default function AppShowcase({
           heading={heading ?? name}
           description={tagline}
           imageSrc={icon}
-          appStoreHref={appStoreUrl}
-          showAppStoreButton={Boolean(appStoreUrl)}
+          appStoreHref={trackedStoreUrl}
+          macAppStoreHref={trackedMacUrl}
+          showAppStoreButton={Boolean(trackedStoreUrl)}
           githubHref={githubUrl}
           webHref={webHref}
           systemRequirements={requirements}
         />
+        {(priceLine || platformList.length > 0) && (
+          <PriceLine
+            price={priceLine ?? 'Free'}
+            detail={price ? undefined : app?.priceDetail}
+            platforms={platformList}
+            promo={app?.promo}
+            accentColor={accentColor}
+          />
+        )}
       </section>
 
       <section className={`${screensClassName} pt-6 pb-16`}>
@@ -181,10 +225,14 @@ export default function AppShowcase({
           </div>
         </section>
 
-        {cta !== false && appStoreUrl && (
+        {app && <Testimonials appName={name} items={app.testimonials} accentColor={accentColor} />}
+
+        {cta !== false && trackedStoreUrl && (
           <DownloadCTA
             appName={name}
-            appStoreUrl={appStoreUrl}
+            appStoreUrl={trackedStoreUrl}
+            macAppStoreUrl={trackedMacUrl}
+            price={priceLine}
             accentColor={accentColor}
             preorder={cta.preorder}
           />
