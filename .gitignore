@@ -26,3 +26,8 @@ dist-ssr
 # secrets
 .env
 .env.*
+
+# Cloudflare Worker (workers/maestro-counter)
+workers/**/node_modules
+workers/**/.wrangler
+workers/**/.dev.vars
