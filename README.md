@@ -1,130 +1,93 @@
 # Molargik Software LLC
 
-The official portfolio website for **[molargiksoftware.com](https://molargiksoftware.com)** — showcasing iOS, iPadOS, macOS, watchOS, and visionOS applications built by **Nicholas Molargik**.
+The product site for **[molargiksoftware.com](https://molargiksoftware.com)**: six independent apps for iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro, built by **Nick Molargik**. Private by design.
 
-## About
+## Apps
 
-Molargik Software LLC is an indie development studio founded in 2025, focused on building privacy-first Apple ecosystem applications. Each app is born from real user needs and crafted with native Swift and SwiftUI.
+| App | One line | Price | Platforms |
+|-----|----------|-------|-----------|
+| **[Maestro](https://molargiksoftware.com/maestro)** | Turn any song into a Tesla light show | Free to try, $12.99 one-time unlock | iPhone, iPad, Mac |
+| **[Opalite](https://molargiksoftware.com/opalite)** | Pick, organize, check, and export colors | Free, Onyx $9.99 one-time | iPhone, iPad, Mac, Watch, TV, Vision Pro |
+| **[SetDeck](https://molargiksoftware.com/setdeck)** | Plan the training week and log every set | Free | iPhone, iPad, Watch, Vision Pro |
+| **[Mygra](https://molargiksoftware.com/mygra)** | Migraine journal with on-device insights | Free, Mygra Plus from $2.99/mo | iPhone, iPad, Mac, Watch, Vision Pro |
+| **[Stork](https://molargiksoftware.com/stork)** | Delivery stats for L&D nurses | Free, Stork Pro $4.99 one-time | iPhone, iPad, Mac, Watch, Vision Pro |
+| **[Waffle](https://molargiksoftware.com/waffle)** | Browse the web in a grid on iPad | Free, Syrup $2.99 one-time | iPad |
 
-### Featured Apps
+The facts above live in one place, [`src/data/catalog.mjs`](src/data/catalog.mjs), and feed the home grid, the app pages, the press kit, the support page, the OG images, and the prerendered `<head>` tags.
 
-| App | Description | Platforms |
-|-----|-------------|-----------|
-| **[Maestro](https://molargiksoftware.com/#/maestro)** | Turns any song into a Tesla light show with on-device signal processing | iOS, iPadOS, macOS |
-| **[Opalite](https://molargiksoftware.com/#/opalite)** | The ultimate color manager for designers, developers, and digital artists | iOS, iPadOS, macOS, watchOS, visionOS, tvOS |
-| **[SetDeck](https://molargiksoftware.com/#/setdeck)** | Strength training companion with set-by-set logging, stats, and achievements | iOS, iPadOS, watchOS, visionOS |
-| **[Mygra](https://molargiksoftware.com/#/mygra)** | Intelligent migraine journal with on-device AI and weather correlations | iOS, iPadOS, macOS, watchOS, visionOS |
-| **[Stork](https://molargiksoftware.com/#/stork)** | Delivery stats, milestones, and share cards for Labor & Delivery nurses | iOS, iPadOS, macOS, watchOS, visionOS |
-| **[Waffle](https://molargiksoftware.com/#/waffle)** | Grid-based browser for iPad with customizable layouts up to 4x4 | iPadOS |
+## Routes
 
-The site also documents employment work: **[StreetIQ / SCOUT](https://molargiksoftware.com/#/streetiq)** and **[V1 Sports](https://molargiksoftware.com/#/v1sports)**.
+| Route | Page |
+|-------|------|
+| `/` | Company-first home: hero, six-app grid, "Why Molargik" |
+| `/maestro` `/opalite` `/setdeck` `/mygra` `/stork` `/waffle` | App pages (`AppShowcase` layout: hero, price and platforms, screenshots, about, testimonials, download CTA) |
+| `/support` | Per-app FAQ, contact email, link to privacy |
+| `/press` | Press kit: blurbs, icons, screenshots, descriptions |
+| `/privacy` | One privacy policy covering every app and the site |
+| `/about` | Nick: résumé, experience (links to StreetIQ and V1 Sports), skills, GitHub, LinkedIn |
+| `/contact` | Support and press contact form (EmailJS) |
+| `/opalite-web` | Opalite Web: sign in with Apple and browse your Opalite library (CloudKit JS) |
+| `/go/<app>?ct=<channel>` | Short tracked redirect to the App Store, e.g. `/go/maestro?ct=x`; add `&platform=mac` for the Mac App Store |
+| `/streetiq` `/v1sports` | Employment pages |
 
-## Tech Stack
+Legacy hash links (`/#/maestro`) are rewritten to the path on load.
 
-- **React 19** + **TypeScript** — Component-driven UI with strict type safety
-- **Vite 7** — Lightning-fast dev server and optimized production builds
-- **Tailwind CSS 3.4** — Responsive styling with custom brand colors
-- **React Router v7** — Client-side navigation (HashRouter in production)
-- **Framer Motion** — Smooth animations and transitions
-- **Embla Carousel** — Touch-friendly image galleries
-- **EmailJS** — Contact form integration
-- **Lucide React** — Icon library
+## Tech stack
+
+React 19 + TypeScript, Vite 7, React Router 7 (BrowserRouter), Tailwind CSS 3.4, Framer Motion, Embla Carousel, Lucide, EmailJS, sharp (build-time images).
 
 ## Development
 
-### Prerequisites
+```bash
+npm ci
+npm run dev       # Vite dev server on https://localhost:5173
+npm run build     # tsc + vite build + scripts/postbuild-seo.mjs
+npm run preview   # serve dist/
+npm run lint
+```
 
-- Node.js 18+
-- npm or yarn
-
-### Commands
+Build-time asset scripts (outputs are committed; re-run when sources change):
 
 ```bash
-# Install dependencies
-npm install
-
-# Start development server (localhost:5173)
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-
-# Run ESLint
-npm run lint
-
-# Re-import app icons and screenshots from ../../Apps (all apps, or a subset)
-npm run assets
-npm run assets -- stork maestro
+npm run assets    # app icons + screenshot carousels from ../../Apps -> src/assets/<app>/
+npm run og        # 1200x630 Open Graph images -> public/og/
+npm run press     # press-kit icons + 3 screenshots per app -> public/press/
+npm run photos    # re-encode the portrait photos in src/assets as WebP + JPEG
 ```
 
-### Updating App Screenshots
+### Configuration
 
-Each app's icon and screenshots are pulled from the sibling `Apps` directory by
-`scripts/sync-app-assets.mjs` (sources and ordering live in `scripts/app-assets.config.mjs`).
-The script resizes and encodes them into `src/assets/<app>/icon.png` and
-`src/assets/<app>/screens/NN.webp`; pages pick up whatever is in `screens/`
-automatically. Set `APPS_DIR` if the Apps folder lives elsewhere.
+`src/config/site.ts` holds the two "fill in later" constants:
 
-### Environment Variables
+- `APP_STORE_PT`: Apple campaign provider token. Every App Store link carries `?ct=site_<page>&mt=8`; `pt=` is added once this is set.
+- `CF_BEACON_TOKEN`: Cloudflare Web Analytics token. The beacon is rendered into `index.html` only when set.
 
-Create a `.env` file for the contact form:
+`.env` (gitignored) provides the EmailJS and CloudKit JS values for local builds:
 
 ```
-VITE_EMAILJS_SERVICE=<service_id>
-VITE_EMAILJS_TEMPLATE=<template_id>
-VITE_EMAILJS_PUBLIC=<public_key>
+VITE_EMAILJS_SERVICE=...
+VITE_EMAILJS_TEMPLATE=...
+VITE_EMAILJS_PUBLIC=...
+VITE_CLOUDKIT_CONTAINER=iCloud.<container>
+VITE_CLOUDKIT_ENVIRONMENT=production
+VITE_CLOUDKIT_API_TOKEN=...
 ```
 
-## Project Structure
+The same values must exist in the GitHub repository for the Pages build (Settings > Secrets and variables > Actions): secrets `EMAILJS_SERVICE`, `EMAILJS_TEMPLATE`, `EMAILJS_PUBLIC`, `VITE_CLOUDKIT_API_TOKEN` and variables `VITE_CLOUDKIT_CONTAINER`, `VITE_CLOUDKIT_ENVIRONMENT`. Without them the contact form cannot send and Opalite Web shows its "temporarily unavailable" state.
 
-```
-src/
-├── assets/           # Static assets organized by project
-│   ├── logos/
-│   ├── mygra/
-│   ├── opalite/
-│   ├── setdeck/
-│   ├── stork/
-│   └── waffle/
-├── components/       # Reusable UI components
-│   ├── Hero.tsx
-│   ├── Navbar.tsx
-│   ├── Footer.tsx
-│   ├── ProjectCard.tsx
-│   ├── ScreensCarousel.tsx
-│   └── ...
-├── pages/            # Route components
-│   ├── Home.tsx
-│   ├── About.tsx
-│   ├── Contact.tsx
-│   ├── SetDeck.tsx
-│   ├── Mygra.tsx
-│   ├── Stork.tsx
-│   ├── Waffle.tsx
-│   └── Opalite.tsx
-└── hooks/            # Custom React hooks
-```
+## SEO and sharing
+
+`scripts/postbuild-seo.mjs` runs as part of `npm run build` and, from `src/seo/routes.mjs`:
+
+- writes `dist/<route>.html` per route with title, description, canonical, Open Graph, and Twitter tags (GitHub Pages serves `maestro.html` at `/maestro`),
+- writes `dist/404.html` as the SPA fallback for unknown paths such as `/go/...`,
+- writes `dist/sitemap.xml` and `dist/robots.txt`.
+
+The client keeps the tags current on navigation through `usePageMeta` / `useRouteMeta`.
 
 ## Deployment
 
-The site is hosted on **GitHub Pages** at [molargiksoftware.com](https://molargiksoftware.com) and deploys automatically on every push to `main`:
-
-1. Push to `main`.
-2. GitHub Actions (`.github/workflows/pages.yml`) builds the Vite site and publishes `dist/` to GitHub Pages.
-
-The custom domain is configured via [`public/CNAME`](public/CNAME), and HTTPS is enforced in the repository's Pages settings. The export counter at `api.molargiksoftware.com` is a separate Cloudflare Worker ([`workers/maestro-counter`](workers/maestro-counter)), independent of the site hosting.
-
-## Brand Colors
-
-```css
---brandPurple: #6D00FF
---brandOrange: #FF6C00
-```
-
-Each app page sets its own accent color via CSS custom properties for consistent theming.
+GitHub Pages, deployed by `.github/workflows/pages.yml` on every push to `main`. The custom domain is set by `public/CNAME`. The Maestro export counter at `api.molargiksoftware.com` is a separate Cloudflare Worker in `workers/maestro-counter`.
 
 ## Links
 
@@ -135,8 +98,4 @@ Each app page sets its own accent color via CSS custom properties for consistent
 
 ## License
 
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
-
----
-
-Built with care in Indiana by Nick Molargik.
+MIT. See [LICENSE](LICENSE).

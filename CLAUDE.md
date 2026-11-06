@@ -4,16 +4,19 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Molargik Software portfolio website - a React SPA showcasing Apple-platform app projects (Maestro, Opalite, SetDeck, Mygra, Stork, Waffle) plus employment pages (StreetIQ / SCOUT, V1 Sports). Hosted on GitHub Pages at molargiksoftware.com.
+Molargik Software product website - a React SPA for the studio's six Apple-platform apps (Maestro, Opalite, SetDeck, Mygra, Stork, Waffle) with support, press, privacy, and about/résumé pages, plus two employment pages (StreetIQ / SCOUT, V1 Sports) that are linked from About and must not be edited. Hosted on GitHub Pages at molargiksoftware.com.
 
 ## Commands
 
 ```bash
 npm run dev      # Start Vite dev server (localhost:5173, network accessible)
-npm run build    # TypeScript type check + Vite production build → dist/
+npm run build    # tsc + Vite build + scripts/postbuild-seo.mjs (per-route HTML, 404, sitemap, robots)
 npm run lint     # ESLint on all TypeScript/TSX files
 npm run preview  # Preview production build locally
 npm run assets   # Re-import app icons + screenshots from ../../Apps (see below)
+npm run og       # Regenerate public/og/*.png Open Graph images (committed)
+npm run press    # Regenerate public/press/<app>/ icons + screenshots (committed)
+npm run photos   # Re-encode src/assets portrait photos as WebP + JPEG
 ```
 
 No test framework is configured.
@@ -32,30 +35,54 @@ Pages load screenshots with `screensFromGlob(import.meta.glob('../assets/<app>/s
 from `src/utils/screens.ts`, so updating screenshots is just `npm run assets -- <app>`
 (or no argument for every app) followed by a commit. Override the Apps location with `APPS_DIR=...`.
 
-App pages are built on `src/components/AppShowcase.tsx` (hero → screenshots →
-optional slot → About card with feature cards → download CTA → JSON-LD); a page
-only supplies content. Distill page copy from the app's current App Store description.
+App pages are built on `src/components/AppShowcase.tsx` (hero → price/platform
+line → screenshots → optional slot → About card with feature cards → testimonials
+→ download CTA → JSON-LD); a page supplies `app={findApp('<slug>')}` plus its
+long-form copy. Prices, platforms, promo windows, testimonials, store URLs, and
+the short description live in `src/data/catalog.mjs` (plain ESM so build scripts
+can read it too); `src/data/apps.ts` wraps it with bundled icons. Head tags per
+route come from `src/seo/routes.mjs`. Distill page copy from the app's current
+App Store description.
+
+App Store links go through `appStoreLink(url, siteChannel(page))` in
+`src/utils/appStore.ts`, which appends `?pt=&ct=site_<page>&mt=8`
+(`APP_STORE_PT` in `src/config/site.ts`; `pt` is omitted while empty).
+`/go/<app>?ct=<channel>` is a redirect route for short tracked links.
 
 ## Deployment
 
 Hosted on GitHub Pages, deployed on every push to `main`:
 
 1. Push to `main` — the GitHub Actions workflow (`.github/workflows/pages.yml`)
-   builds the Vite site and publishes `dist/` to GitHub Pages.
+   builds the Vite site and publishes `dist/` to GitHub Pages. The build step
+   reads EmailJS and CloudKit values from repository secrets/variables
+   (`EMAILJS_*`, `VITE_CLOUDKIT_API_TOKEN`, `VITE_CLOUDKIT_CONTAINER`,
+   `VITE_CLOUDKIT_ENVIRONMENT`).
 2. The custom domain `molargiksoftware.com` is set via `public/CNAME`, and HTTPS
-   is enforced in the repo's Pages settings. The build also copies
-   `dist/index.html` to `dist/404.html` as a client-side-routing fallback.
+   is enforced in the repo's Pages settings.
+3. `scripts/postbuild-seo.mjs` writes `dist/<route>.html` for every route in
+   `src/seo/routes.mjs` (Pages serves `maestro.html` at `/maestro`), `404.html`
+   as the SPA fallback, and `sitemap.xml` / `robots.txt`.
 
 The export counter at `api.molargiksoftware.com` is a separate Cloudflare Worker
 (`workers/maestro-counter`), independent of the site hosting.
 
 ## Architecture
 
-**Routing:** Uses HashRouter in production (for static file hosting compatibility) and BrowserRouter in development. The router mode is determined by `import.meta.env.PROD` in `App.tsx`.
+**Routing:** BrowserRouter everywhere. Deep links work because every route is prerendered to its own HTML file and unknown paths fall back to `404.html`. `src/main.tsx` rewrites legacy `/#/path` hash links to `/path` before render.
+
+**Head tags:** `usePageMeta` (title, description, canonical, OG, Twitter) and `useRouteMeta` (same, from `src/seo/routes.mjs`). Open Graph images live in `public/og/`.
+
+**Site constants:** `src/config/site.ts` (`SITE_URL`, `CONTACT_EMAIL`, `APP_STORE_PT`, `CF_BEACON_TOKEN`). The Cloudflare beacon is injected into `index.html` by a plugin in `vite.config.ts` only when `CF_BEACON_TOKEN` is set.
+
+**Hard rule:** do not edit `src/pages/StreetIQ.tsx`, `src/pages/V1Sports.tsx`, their assets, or their routes.
 
 **Structure:**
 - `src/components/` - Reusable UI components (Navbar, Footer, Hero, ProjectCard, ScreensCarousel, etc.)
-- `src/pages/` - Route components (Home, About, Contact, project showcases like SetDeck, Mygra, Stork, Waffle)
+- `src/pages/` - Route components (Home, About, Contact, Support, Press, Privacy, Go, OpaliteWeb, and the six app pages)
+- `src/data/` - App catalog (`catalog.mjs` + typed wrapper `apps.ts`)
+- `src/seo/` - Per-route head metadata used by the app and the post-build script
+- `scripts/` - Build-time asset and SEO scripts (sharp)
 - `src/assets/` - Static assets organized by project (`<app>/icon.png`, `<app>/screens/`), generated by `npm run assets`
 
 **Styling:** Tailwind CSS with custom brand colors defined in `tailwind.config.js`:
@@ -76,9 +103,13 @@ Per-project accent colors are set via CSS variables (`--link-accent`, `--accent`
 
 ## Environment Variables
 
-Contact form requires EmailJS credentials in `.env`:
+`.env` (gitignored) supplies the contact form and Opalite Web configuration; CloudKit JS is only loaded on `/opalite-web`:
 ```
 VITE_EMAILJS_SERVICE=<service_id>
 VITE_EMAILJS_TEMPLATE=<template_id>
 VITE_EMAILJS_PUBLIC=<public_key>
+VITE_CLOUDKIT_CONTAINER=<iCloud container id>
+VITE_CLOUDKIT_ENVIRONMENT=production
+VITE_CLOUDKIT_API_TOKEN=<CloudKit JS API token>
 ```
+Never print the values. Missing values produce a friendly "unavailable" state in Opalite Web, not a raw error.
