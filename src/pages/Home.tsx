@@ -27,7 +27,7 @@ const professionalWork = [
     image: v1SportsIcon,
     path: '/v1sports',
     accentColor: '#C84640',
-    ctaLabel: 'View Employment',
+    ctaLabel: 'View Previous Employment',
   },
 ];
 
@@ -155,7 +155,7 @@ export default function Home() {
       <section id="work" className="bg-surface py-16 scroll-mt-20">
         <div className="max-w-6xl mx-auto px-6">
           <motion.div className="text-center mb-10" {...fadeUp}>
-            <h2 className="text-headline text-gray-900">Professional work</h2>
+            <h2 className="text-headline text-gray-900">Professional Work</h2>
             <p className="mt-4 text-lg text-gray-500 max-w-2xl mx-auto">
               The products Nick builds and has built for other teams, alongside the studio's own apps.
             </p>
