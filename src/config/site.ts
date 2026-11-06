@@ -14,7 +14,7 @@ export const FOUNDER = 'Nick Molargik';
  * parameter). Leave empty until Apple issues one; links omit `pt` when this
  * is blank and still carry `ct` (channel) and `mt=8` (App Store media type).
  */
-export const APP_STORE_PT = '';
+export const APP_STORE_PT = '122216719';
 
 /**
  * Cloudflare Web Analytics beacon token. Empty disables the beacon entirely
