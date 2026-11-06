@@ -1,13 +1,19 @@
-import { useEffect, type CSSProperties } from 'react';
+import { type CSSProperties } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import ProjectCard from '../components/ProjectCard';
 import LiquidGlass from '../components/LiquidGlass';
 import GlassButton from '../components/GlassButton';
 import { staggerContainer } from '../utils/animations';
 import { hexToRgbTriple, trackLiquidGlassCursor } from '../utils/liquidGlass';
 import familyshot from '../assets/familyshot.jpg';
+import familyshotWebp from '../assets/familyshot.webp';
+import headshot from '../assets/nickheadshot.jpg';
+import headshotWebp from '../assets/nickheadshot.webp';
+import resumePDF from '../assets/nickmolargikresume.pdf';
 import logo from '../assets/logo.svg';
 import ScrollToTop from '../components/ScrollToTop';
+import { useRouteMeta } from '../hooks';
 import opaliteIcon from '../assets/opalite/icon.png';
 import mygraIcon from '../assets/mygra/icon.png';
 import waffleIcon from '../assets/waffle/icon.png';
@@ -25,12 +31,12 @@ const SKILL_GROUPS = [
   {
     category: 'Apple Ecosystem',
     accent: '#16A34A',
-    items: ['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API'],
+    items: ['HealthKit', 'WeatherKit', 'Apple Intelligence', 'SwiftData', 'CloudKit', 'WebView API', 'CoreML', 'AVFoundation'],
   },
   {
     category: 'Systems Engineering',
     accent: '#7C3AED',
-    items: ['C Libraries', 'MATLAB', 'Python Automation', 'GitLab CI/CD', 'Hardware Integration'],
+    items: ['C Libraries', 'MATLAB', 'Python Automation', 'GitLab CI/CD', 'Hardware Integration', 'Arduino', '3D Printing'],
   },
 ];
 
@@ -51,17 +57,7 @@ function GlassSkillPill({ skill, accent }: { skill: string; accent: string }) {
 }
 
 export default function About() {
-  useEffect(() => {
-    document.title = 'About – Nick Molargik | Molargik Software LLC';
-    const desc = 'Nick Molargik: Crafting mobile applications that balance elegant design with technical capability — built with Swift, SwiftUI, SwiftData, Kotlin Multiplatform, and Flutter. From world-class storefronts at Sweetwater to advanced sports technology at V1 Sports and infrastructure intelligence at StreetIQ, now also developing useful, Apple-centric tools like Maestro, SetDeck, Mygra, Waffle, and Stork.';
-    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = desc;
-  }, []);
+  useRouteMeta();
 
   const projects = [
     { title: 'Maestro', tagline: 'Turns any song into a Tesla light show on iPhone, iPad, and Mac: on-device signal processing, a hardware-accurate fleet preview, a Sequence Editor, and USB-ready exports.', image: maestroIcon, path: '/maestro', accentColor: '#2D7FF9' },
@@ -82,16 +78,54 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
-            <img
-              src={familyshot}
-              alt="Nick Molargik"
-              className="w-40 h-40 rounded-full object-cover mx-auto shadow-lg mb-6"
-            />
+            <div className="relative flex items-center justify-center mb-6">
+              <picture>
+                <source srcSet={headshotWebp} type="image/webp" />
+                <img
+                  src={headshot}
+                  alt="Nick Molargik"
+                  width={160}
+                  height={160}
+                  className="w-40 h-40 rounded-full object-cover shadow-lg border-[3px] border-brandPurple bg-white relative z-10"
+                />
+              </picture>
+              <picture>
+                <source srcSet={familyshotWebp} type="image/webp" />
+                <img
+                  src={familyshot}
+                  alt="Nick with his family"
+                  width={160}
+                  height={160}
+                  loading="lazy"
+                  className="w-40 h-40 rounded-full object-cover shadow-lg border-[3px] border-brandOrange -ml-8"
+                />
+              </picture>
+            </div>
+            <LiquidGlass
+              variant="pill"
+              accentColor="#16A34A"
+              className="inline-flex items-center gap-2 rounded-full px-3 py-1 text-xs font-medium tracking-wide mb-4"
+              style={{ color: '#15803D' }}
+            >
+              <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
+              Available for new projects
+            </LiquidGlass>
             <h1 className="text-headline text-gray-900 dark:text-white mb-2">Nick Molargik</h1>
-            <p className="text-xl text-gray-500 dark:text-gray-400 mb-6">Senior Software Engineer & Indie Developer</p>
+            <p className="text-xl text-gray-500 dark:text-gray-400 mb-6">Senior Software Engineer & Founder, Molargik Software LLC</p>
             <p className="text-gray-600 dark:text-gray-300 leading-relaxed max-w-2xl mx-auto">
               Versatile engineer, transitioned from electrical engineering to mobile development. Expertise in Swift, SwiftUI, Flutter, Kotlin Multiplatform, and hardware integration. Building privacy-first solutions that solve real user problems. Husband, Father, Dog Dad, living life in Indiana.
             </p>
+            <div className="mt-8 flex flex-col sm:flex-row justify-center gap-3">
+              <GlassButton href={resumePDF} download accentColor="#FF6C00" size="md">
+                Download Résumé
+              </GlassButton>
+              <GlassButton href="https://github.com/NMolargik" target="_blank" accentColor="#24292f" size="md">
+                GitHub
+              </GlassButton>
+              <GlassButton href="https://www.linkedin.com/in/nicholas-molargik/" target="_blank" accentColor="#0A66C2" size="md">
+                LinkedIn
+              </GlassButton>
+            </div>
           </motion.div>
         </div>
       </section>
@@ -184,7 +218,9 @@ export default function About() {
                 </div>
                 <div className="flex-1 md:order-1">
                   <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Senior Software Engineer</h3>
-                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">StreetIQ</h4>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">
+                    <Link to="/streetiq" className="hover:text-brandPurple underline-offset-4 hover:underline">StreetIQ</Link>
+                  </h4>
                   <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
                       Joined the Indianapolis-based infrastructure intelligence company to rebuild its field app natively, and shipped <strong className="text-gray-900 dark:text-white font-semibold">SCOUT</strong>: a ground-up <strong className="text-gray-900 dark:text-white font-semibold">Swift 6.2 / SwiftUI</strong> app on a layered Swift Package, replacing the original Flutter implementation with ~1,150 tests behind it.
@@ -226,7 +262,9 @@ export default function About() {
                 </div>
                 <div className="flex-1 md:order-1">
                   <h3 className="text-2xl font-semibold mb-2 text-gray-900 dark:text-white">Senior Mobile Software Engineer</h3>
-                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">V1 Sports</h4>
+                  <h4 className="text-xl text-gray-500 dark:text-gray-400 mb-4">
+                    <Link to="/v1sports" className="hover:text-brandPurple underline-offset-4 hover:underline">V1 Sports</Link>
+                  </h4>
                   <div className="space-y-3 text-gray-600 dark:text-gray-300 leading-relaxed">
                     <p>
                       Built a custom <strong className="text-gray-900 dark:text-white font-semibold">golf ball tracer</strong> from scratch—training a YOLO-based detection model on 28,000 images, converting it to <strong className="text-gray-900 dark:text-white font-semibold">CoreML</strong> for on-device inference, and designing a multi-phase tracking algorithm with trajectory-based detection gating and cluster rejection using Apple's <strong className="text-gray-900 dark:text-white font-semibold">Vision framework</strong>.
@@ -530,32 +568,32 @@ export default function About() {
             className="text-3xl font-bold mb-6 text-gray-900 dark:text-white"
             {...fadeUp}
           >
-            Let's Build Together
+            Have an idea? Let's build it.
           </motion.h2>
           <motion.p
             className="text-lg text-gray-600 dark:text-gray-300 mb-8"
             {...fadeUp}
           >
-            Open to collaborations on Apple platform development or IoT projects. From data-driven solutions to indie apps — let's solve challenging problems together!
+            Open to collaborations on Apple platform development or IoT projects. Whether it's a new app concept, contract work, or a partnership, I'd love to hear from you.
           </motion.p>
           <motion.div
             className="flex flex-col sm:flex-row gap-4 justify-center flex-wrap"
             {...fadeUp}
           >
             <GlassButton
-              href="/resume.pdf"
-              target="_blank"
+              href={resumePDF}
+              download
               accentColor="#FF6C00"
               size="lg"
             >
-              Download Resume
+              Download Résumé
             </GlassButton>
             <GlassButton
-              href="mailto:nick@molargiksoftware.com"
+              to="/contact"
               accentColor="#6D00FF"
               size="lg"
             >
-              Email Me
+              Get in Touch
             </GlassButton>
             <GlassButton
               href="https://www.linkedin.com/in/nicholas-molargik/"

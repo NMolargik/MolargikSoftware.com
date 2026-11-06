@@ -1,27 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { Mail } from 'lucide-react';
 import emailjs from '@emailjs/browser';
 import ScrollToTop from '../components/ScrollToTop';
 import LiquidGlass from '../components/LiquidGlass';
 import GlassButton from '../components/GlassButton';
+import { useRouteMeta } from '../hooks';
+import { CONTACT_EMAIL } from '../config/site';
 
 
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
 
-  useEffect(() => {
-    document.title = 'Contact – Nick Molargik | Molargik Software LLC';
-    const desc = 'Get in touch with Nick Molargik for collaborations, questions, or project inquiries.';
-    let meta = document.querySelector('meta[name="description"]') as HTMLMetaElement | null;
-    if (!meta) {
-      meta = document.createElement('meta');
-      meta.name = 'description';
-      document.head.appendChild(meta);
-    }
-    meta.content = desc;
-  }, []);
+  useRouteMeta({ accentColor: '#FF6C00' });
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -77,7 +70,7 @@ export default function Contact() {
                 style={{ color: '#15803D' }}
               >
                 <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-green-500" />
-                Available for new projects
+                Replies from the developer, usually within a day or two
               </LiquidGlass>
             </motion.div>
 
@@ -87,7 +80,7 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
             >
-              Let's Connect
+              Support and press
             </motion.h1>
 
             <motion.p
@@ -96,7 +89,19 @@ export default function Contact() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              Have a question, an idea, or a project in mind? Send a message and I'll get back to you.
+              Stuck in one of the apps, found a bug, or writing a story? Send a message below or email{' '}
+              <a href={`mailto:${CONTACT_EMAIL}`} className="text-brandPurple underline underline-offset-4">
+                {CONTACT_EMAIL}
+              </a>
+              . For the quickest fixes, check the{' '}
+              <Link to="/support" className="text-brandPurple underline underline-offset-4">
+                support page
+              </Link>{' '}
+              first; press materials live in the{' '}
+              <Link to="/press" className="text-brandPurple underline underline-offset-4">
+                press kit
+              </Link>
+              .
             </motion.p>
           </header>
 
@@ -167,7 +172,7 @@ export default function Contact() {
                 name="message"
                 rows={7}
                 className="w-full resize-y rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-[#0a0a0c] px-4 py-3 text-base text-gray-900 dark:text-white placeholder-gray-400 outline-none transition focus:border-brandOrange focus:ring-2 focus:ring-brandOrange/20"
-                placeholder="How can I help?"
+                placeholder="Which app, which device, and what happened? Screenshots are welcome by email."
                 required
                 disabled={state === 'sending'}
               />
@@ -215,7 +220,7 @@ export default function Contact() {
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="h-5 w-5">
                     <path fillRule="evenodd" d="M16.704 5.29a1 1 0 00-1.408-1.418L8 11.168 4.704 7.87A1 1 0 103.296 9.29l4 4a1 1 0 001.408 0l8-8z" clipRule="evenodd" />
                   </svg>
-                  Message sent! I'll reply soon.
+                  Message sent. I'll reply by email soon.
                 </LiquidGlass>
               )}
               {state === 'error' && (
