@@ -25,7 +25,7 @@ export const apps = [
     price: 'Free to try, $12.99 one-time unlock',
     priceDetail: 'A sample show and your first two exports are free. One purchase unlocks unlimited shows and exports on every device. No subscription.',
     promo: {
-      label: 'Launch promo: unlock Maestro for $4.99 through November 23',
+      label: 'Launch promo: unlock Maestro for $4.99 through November 23, 2026 (regularly $12.99)',
       start: '2026-11-09',
       end: '2026-11-23',
     },
