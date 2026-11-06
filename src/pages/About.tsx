@@ -79,27 +79,31 @@ export default function About() {
             transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] as const }}
           >
             <div className="relative flex items-center justify-center mb-6">
-              <picture>
-                <source srcSet={headshotWebp} type="image/webp" />
-                <img
-                  src={headshot}
-                  alt="Nick Molargik"
-                  width={160}
-                  height={160}
-                  className="w-40 h-40 rounded-full object-cover shadow-lg border-[3px] border-brandPurple bg-white relative z-10"
-                />
-              </picture>
-              <picture>
-                <source srcSet={familyshotWebp} type="image/webp" />
-                <img
-                  src={familyshot}
-                  alt="Nick with his family"
-                  width={160}
-                  height={160}
-                  loading="lazy"
-                  className="w-40 h-40 rounded-full object-cover shadow-lg border-[3px] border-brandOrange -ml-8"
-                />
-              </picture>
+              <div className="w-40 h-40 shrink-0 aspect-square rounded-full overflow-hidden shadow-lg border-[3px] border-brandPurple bg-white relative z-10">
+                <picture>
+                  <source srcSet={headshotWebp} type="image/webp" />
+                  <img
+                    src={headshot}
+                    alt="Nick Molargik"
+                    width={160}
+                    height={160}
+                    className="block w-full h-full object-cover object-center"
+                  />
+                </picture>
+              </div>
+              <div className="w-40 h-40 shrink-0 aspect-square rounded-full overflow-hidden shadow-lg border-[3px] border-brandOrange bg-white -ml-8">
+                <picture>
+                  <source srcSet={familyshotWebp} type="image/webp" />
+                  <img
+                    src={familyshot}
+                    alt="Nick with his family"
+                    width={160}
+                    height={160}
+                    loading="lazy"
+                    className="block w-full h-full object-cover object-center"
+                  />
+                </picture>
+              </div>
             </div>
             <LiquidGlass
               variant="pill"
