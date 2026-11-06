@@ -190,11 +190,23 @@ export default function OpaliteWeb() {
         </div>
       )}
 
-      {/* Auth error */}
+      {/* Auth error: friendly copy only, with a retry that re-runs sign-in */}
       {auth.error && (
-        <div className="rounded-xl bg-red-50 border border-red-200 p-6 text-center">
-          <p className="text-red-700 font-medium">Failed to connect to iCloud</p>
-          <p className="text-red-500 text-sm mt-1">{auth.error}</p>
+        <div role="alert" className="max-w-xl mx-auto mt-8 rounded-2xl bg-gray-50 dark:bg-[#0a0a0c] border border-gray-200 dark:border-gray-800 p-8 text-center">
+          <svg className="w-10 h-10 mx-auto text-gray-800 dark:text-gray-100 mb-4" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+          </svg>
+          <h2 className="text-xl font-semibold text-gray-900 dark:text-white mb-2">Couldn't connect to iCloud</h2>
+          <p className="text-gray-500 dark:text-gray-400 text-sm mb-6">{auth.error}</p>
+          <button
+            onClick={auth.retry}
+            className="inline-flex items-center gap-2 bg-black text-white font-medium text-sm px-6 py-3 rounded-xl hover:bg-gray-800 transition-colors"
+          >
+            Try signing in with Apple again
+          </button>
+          <p className="mt-4 text-xs text-gray-400">
+            Your colors are safe in the Opalite app; this page only reads them from iCloud.
+          </p>
         </div>
       )}
 

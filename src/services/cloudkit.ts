@@ -20,38 +20,109 @@ const colorRecordMap = new Map<string, CloudKitRecord>();
 // Palette recordName keyed by CD_id — needed for setting CD_palette references
 const paletteRecordNameMap = new Map<string, string>();
 
-/** Waits for the CloudKit JS SDK to load, then configures the container. */
-function getContainer(): Promise<CloudKitContainer> {
-  if (container) return Promise.resolve(container);
+const CLOUDKIT_JS_URL = 'https://cdn.apple-cloudkit.com/ck/2/cloudkit.js';
+const CLOUDKIT_SCRIPT_ID = 'cloudkit-js';
 
+/** Thrown when the site was built without the CloudKit configuration. */
+export class CloudKitConfigError extends Error {
+  constructor() {
+    super('CloudKit is not configured for this build');
+    this.name = 'CloudKitConfigError';
+  }
+}
+
+/**
+ * Loads CloudKit JS on demand. Only the Opalite Web route needs it, so the
+ * 200 KB script is not in index.html; it is injected the first time a
+ * CloudKit call is made and reused afterwards.
+ */
+function loadCloudKitScript(): Promise<void> {
+  if (window.CloudKit) return Promise.resolve();
   return new Promise((resolve, reject) => {
-    const check = () => {
-      if (window.CloudKit) {
-        window.CloudKit.configure({
-          containers: [
-            {
-              containerIdentifier: import.meta.env.VITE_CLOUDKIT_CONTAINER,
-              apiTokenAuth: {
-                apiToken: import.meta.env.VITE_CLOUDKIT_API_TOKEN,
-                persist: true,
-              },
-              environment:
-                (import.meta.env.VITE_CLOUDKIT_ENVIRONMENT as 'development' | 'production') ??
-                'development',
-            },
-          ],
-        });
-        container = window.CloudKit.getDefaultContainer();
-        resolve(container);
-      } else {
-        setTimeout(check, 100);
-      }
-    };
-
-    const timeout = setTimeout(() => reject(new Error('CloudKit JS failed to load')), 10_000);
-    check();
-    void Promise.resolve().then(() => clearTimeout(timeout));
+    let script = document.getElementById(CLOUDKIT_SCRIPT_ID) as HTMLScriptElement | null;
+    if (!script) {
+      script = document.createElement('script');
+      script.id = CLOUDKIT_SCRIPT_ID;
+      script.src = CLOUDKIT_JS_URL;
+      script.async = true;
+      document.head.appendChild(script);
+    }
+    const timeout = setTimeout(() => reject(new Error('CloudKit JS failed to load')), 15_000);
+    script.addEventListener('load', () => {
+      clearTimeout(timeout);
+      resolve();
+    });
+    script.addEventListener('error', () => {
+      clearTimeout(timeout);
+      script?.remove();
+      reject(new Error('CloudKit JS failed to load'));
+    });
   });
+}
+
+/** Configures the container once CloudKit JS is available. */
+async function getContainer(): Promise<CloudKitContainer> {
+  if (container) return container;
+
+  const containerIdentifier = import.meta.env.VITE_CLOUDKIT_CONTAINER as string | undefined;
+  const apiToken = import.meta.env.VITE_CLOUDKIT_API_TOKEN as string | undefined;
+  const environment = (import.meta.env.VITE_CLOUDKIT_ENVIRONMENT as 'development' | 'production' | undefined) ?? 'production';
+  if (!containerIdentifier || !apiToken) {
+    // Without these, CloudKit JS builds requests against ".../undefined/..."
+    // and Apple answers "Method Not Allowed". Fail early with a clear cause.
+    throw new CloudKitConfigError();
+  }
+
+  await loadCloudKitScript();
+  if (!window.CloudKit) throw new Error('CloudKit JS failed to load');
+
+  window.CloudKit.configure({
+    containers: [
+      {
+        containerIdentifier,
+        apiTokenAuth: { apiToken, persist: true },
+        environment,
+      },
+    ],
+  });
+  container = window.CloudKit.getDefaultContainer();
+  return container;
+}
+
+/** Drops the cached container so the next call reconfigures from scratch. */
+export function resetContainer() {
+  container = null;
+}
+
+/**
+ * Turns CloudKit's raw errors into something a person can act on. The raw
+ * message is logged to the console for debugging; the UI never shows it.
+ */
+export function describeCloudKitError(err: unknown): string {
+  const raw = err instanceof Error ? err.message : typeof err === 'string' ? err : JSON.stringify(err);
+  console.error('[CloudKit]', raw, err);
+  if (err instanceof CloudKitConfigError) {
+    return 'Opalite Web is temporarily unavailable. Please try again later.';
+  }
+  const text = raw.toLowerCase();
+  if (text.includes('authentication failed') || text.includes('authentication_failed')) {
+    // The API token does not allow this origin, or belongs to another
+    // container/environment: fixed in CloudKit Dashboard, not by retrying.
+    return "Opalite Web isn't authorized to reach iCloud from this address yet. Please try again later.";
+  }
+  if (text.includes('failed to load')) {
+    return "We couldn't load Apple's iCloud library. Check your connection and try again.";
+  }
+  if (text.includes('method not allowed') || text.includes('unexpected_server_response') || text.includes('not_found')) {
+    return "We couldn't reach your iCloud library right now. Please try again in a moment.";
+  }
+  if (text.includes('auth') || text.includes('401') || text.includes('403')) {
+    return 'Your iCloud session has expired. Sign in again to continue.';
+  }
+  if (text.includes('network') || text.includes('fetch')) {
+    return 'The connection to iCloud was interrupted. Check your network and try again.';
+  }
+  return 'Something went wrong while talking to iCloud. Please try again.';
 }
 
 /** Authenticate the user via Apple ID. Returns user identity or null. */

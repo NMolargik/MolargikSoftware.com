@@ -1,10 +1,20 @@
 import { useState, useEffect, useCallback } from 'react';
-import { signIn, onSignOut, onSignIn, fetchPortfolio, saveColorPaletteAssignment, createColorFromHex } from '../services/cloudkit';
+import {
+  signIn,
+  onSignOut,
+  onSignIn,
+  fetchPortfolio,
+  saveColorPaletteAssignment,
+  createColorFromHex,
+  resetContainer,
+  describeCloudKitError,
+} from '../services/cloudkit';
 import type { OpaliteColor, OpalitePalette } from '../types/opalite';
 
 interface AuthState {
   isAuthenticated: boolean;
   isLoading: boolean;
+  /** A person-readable message; the raw CloudKit error only goes to the console. */
   error: string | null;
 }
 
@@ -14,6 +24,14 @@ export function useCloudKitAuth() {
     isLoading: true,
     error: null,
   });
+  const [attempt, setAttempt] = useState(0);
+
+  /** Reconfigures CloudKit and runs the sign-in flow again. */
+  const retry = useCallback(() => {
+    resetContainer();
+    setAuth({ isAuthenticated: false, isLoading: true, error: null });
+    setAttempt((n) => n + 1);
+  }, []);
 
   useEffect(() => {
     let cancelled = false;
@@ -45,7 +63,7 @@ export function useCloudKitAuth() {
           setAuth({
             isAuthenticated: false,
             isLoading: false,
-            error: err instanceof Error ? err.message : 'Failed to initialize CloudKit',
+            error: describeCloudKitError(err),
           });
         }
       }
@@ -55,9 +73,9 @@ export function useCloudKitAuth() {
     return () => {
       cancelled = true;
     };
-  }, []);
+  }, [attempt]);
 
-  return auth;
+  return { ...auth, retry };
 }
 
 interface PortfolioData {
@@ -87,7 +105,7 @@ export function usePortfolioData(isAuthenticated: boolean): PortfolioData {
       setPalettes(data.palettes);
       setLooseColors(data.looseColors);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Failed to fetch portfolio data');
+      setError(describeCloudKitError(err));
     } finally {
       setIsLoading(false);
     }
