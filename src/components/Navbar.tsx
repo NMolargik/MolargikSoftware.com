@@ -28,9 +28,9 @@ export default function Navbar() {
   }, []);
 
   const linkClass =
-    'px-3 py-2 rounded-lg text-sm font-medium text-gray-600 hover:text-brandOrange hover:bg-orange-50/80 transition-all duration-200';
+    'px-2.5 xl:px-3 py-2 rounded-lg text-sm font-medium whitespace-nowrap text-gray-600 hover:text-brandOrange hover:bg-orange-50/80 transition-all duration-200';
   const activeLinkClass =
-    'px-3 py-2 rounded-lg text-sm font-semibold text-gray-900 bg-gray-100/60';
+    'px-2.5 xl:px-3 py-2 rounded-lg text-sm font-semibold whitespace-nowrap text-gray-900 bg-gray-100/60';
 
   return (
     <header
@@ -51,12 +51,12 @@ export default function Navbar() {
       />
       <nav className="relative mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-4">
         {/* Logo */}
-        <Link to="/" className="flex items-center gap-2">
+        <Link to="/" className="flex shrink-0 items-center gap-2">
           <img src={Logo} alt="Molargik Software" className="h-6 w-auto" />
         </Link>
 
-        {/* Desktop links — absolutely centered */}
-        <ul className="hidden gap-1 lg:flex items-center list-none absolute left-1/2 -translate-x-1/2">
+        {/* Desktop links — in flow between the logo and Contact so they can never overlap either */}
+        <ul className="hidden lg:flex flex-1 min-w-0 justify-center items-center gap-0.5 xl:gap-1 mx-4 list-none">
           {links.map(({ label, path }) => (
             <li key={path}>
               <NavLink
@@ -71,7 +71,7 @@ export default function Navbar() {
         </ul>
 
         {/* Contact button (desktop only — mobile gets one inside the menu) */}
-        <div className="hidden lg:block">
+        <div className="hidden lg:block shrink-0">
           <GlassButton to="/contact" accentColor="#6D00FF" size="sm">
             Contact
           </GlassButton>

@@ -20,4 +20,4 @@ export const APP_STORE_PT = '122216719';
  * Cloudflare Web Analytics beacon token. Empty disables the beacon entirely
  * (nothing is rendered into index.html). Set it and rebuild to turn it on.
  */
-export const CF_BEACON_TOKEN = '';
+export const CF_BEACON_TOKEN = '8b27de4a6b5d48efa8ac666a98f8147c';
