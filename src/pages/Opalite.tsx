@@ -151,7 +151,7 @@ export default function Opalite() {
             icon: '🌈',
             title: 'What’s New in 1.8',
             description:
-              'OKLCH and Display P3 values with an out-of-sRGB warning, CSS and SwiftUI export of both, APCA contrast next to WCAG, and a one-tap fix for text failing AA. Now on iPhone, iPad, Mac, Apple TV, and Vision Pro. iPhone and iPad are on 1.8.1, which fixes the drawing canvas.',
+              'OKLCH and Display P3 values with an out-of-sRGB warning, CSS and SwiftUI export of both, APCA contrast next to WCAG, and a one-tap fix for text failing AA. Now on iPhone, iPad, Mac, Apple TV, and Vision Pro. iPhone and iPad are on 1.8.1, which fixes the drawing canvas on iPhone Duo and iPad.',
           },
           {
             icon: '🌎',
