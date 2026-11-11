@@ -45,7 +45,7 @@ export default function Stork() {
           },
           {
             title: 'Private by Design',
-            body: 'Stork is HIPAA-conscious from the ground up: no patient information and no facility tracking — only your personal stats, synced seamlessly across your devices through your private iCloud.',
+            body: 'Stork is HIPAA-conscious from the ground up: no patient information and no facility tracking — only your personal stats, synced seamlessly across your devices through your private iCloud. Lock the app with Face ID, and get a warning if a note looks like it contains a patient identifier.',
           },
         ],
         features: [
@@ -53,13 +53,31 @@ export default function Stork() {
             icon: '🍼',
             title: 'Track Every Delivery',
             description:
-              'Log babies and their measurements, delivery method, epidural use, NICU stays, nurse catches, personal tags, and notes — all in seconds. Back-date any delivery to the day it happened.',
+              'Log babies and their measurements, delivery method, epidural use, NICU stays, nurse catches, personal tags, and notes — all in seconds. Back-date any delivery to the day it happened, or add past births from before you used Stork.',
           },
           {
             icon: '📊',
             title: 'Trends & Statistics',
             description:
               'A customizable dashboard brings your career to life with delivery counts and the Delivery Jar for free. Stork Pro adds insight cards for time of day, day of week, year over year, personal bests, and baby measurements, plus the calendar heat map.',
+          },
+          {
+            icon: '🎞️',
+            title: 'Year in Births Wrap',
+            description:
+              'A story of your year in births, free for everyone. Share images never include names or patient details.',
+          },
+          {
+            icon: '🗂️',
+            title: 'Past Births',
+            description:
+              'Add births from before you used Stork, either as estimates or from a CSV file.',
+          },
+          {
+            icon: '🔒',
+            title: 'Face ID Lock & Note Warning',
+            description:
+              'Lock Stork with Face ID. If a note looks like it contains a patient identifier, Stork warns you before you save it.',
           },
           {
             icon: '🔍',

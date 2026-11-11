@@ -35,12 +35,16 @@ export default function Mygra() {
             body: 'Capture start and end times, pain and stress on a 0–10 scale, triggers from a curated list (or your own), foods, and notes. Track an attack as it happens with a Live Activity on your Lock Screen and in the Dynamic Island. Health and weather are attached automatically, so each entry records how you slept, what you drank, and what the sky was doing.',
           },
           {
+            title: 'Attack Mode',
+            body: 'One tap starts a migraine and switches to a dim, quiet screen, and you log the details later. Start it from a widget, Control Center, Siri, or Apple Watch.',
+          },
+          {
             title: 'Insights, Privately (Plus)',
-            body: 'Mygra Plus adds the Migraine Assistant, an analyst powered by Apple Intelligence that knows your history and profile, and every word stays on your device. Each logged attack gets a plain-language explanation of likely contributing factors, Quick Bits explain the trends across triggers, foods, hydration, sleep, and more, and weather-risk forecasts and alerts warn you when conditions turn risky.',
+            body: 'Mygra Plus adds the Migraine Assistant, an analyst powered by Apple Intelligence that knows your history and profile, and every word stays on your device. Each logged attack gets a plain-language explanation of likely contributing factors, Quick Bits explain the trends across triggers, foods, hydration, sleep, and more, weather-risk forecasts and alerts warn you when conditions turn risky, Cycle Insights show whether your migraines cluster around your period, and a pressure graph marks the drop threshold you set.',
           },
           {
             title: 'See the Big Picture',
-            body: 'The Dashboard opens with your migraine-free streak, followed by local weather, today’s Health stats with Quick Add, and the latest Quick Bits. The Calendar colors each month by severity, History is searchable and grouped by month with powerful filters, and with Plus a doctor-ready PDF report is one tap away.',
+            body: 'The Dashboard is simpler, with one Log a Migraine button. The Calendar colors each month by severity, History is searchable and grouped by month with powerful filters, and with Plus a doctor-ready PDF report is one tap away, now with MIDAS and HIT-6 scores.',
           },
           {
             title: 'Private by Design',
@@ -55,6 +59,18 @@ export default function Mygra() {
               'Start and end times, pain and stress, triggers, foods, notes, and a Live Activity that follows an attack in progress.',
           },
           {
+            icon: '🌙',
+            title: 'Attack Mode',
+            description:
+              'One tap starts a migraine and switches to a dim, quiet screen. Log the details later. Start it from a widget, Control Center, Siri, or Apple Watch.',
+          },
+          {
+            icon: '💊',
+            title: 'Medication Tracking',
+            description:
+              'Track the medication you take, with overuse alerts.',
+          },
+          {
             icon: '🤖',
             title: 'Migraine Assistant (Plus)',
             description:
@@ -64,13 +80,19 @@ export default function Mygra() {
             icon: '🌦️',
             title: 'Weather Correlations (Plus)',
             description:
-              'See how pressure, humidity, temperature, and conditions line up with your attacks, and get a heads-up when conditions turn risky. Weather-risk forecasts and alerts are part of Mygra Plus.',
+              'See how pressure, humidity, temperature, and conditions line up with your attacks, and get a heads-up when conditions turn risky. Weather-risk forecasts and alerts are part of Mygra Plus, along with a pressure graph that uses your own drop threshold.',
+          },
+          {
+            icon: '🔄',
+            title: 'Cycle Insights (Plus)',
+            description:
+              'See whether your migraines cluster around your period. Part of Mygra Plus.',
           },
           {
             icon: '📄',
             title: 'Doctor-Ready Reports (Plus)',
             description:
-              'Turn your history into a clean PDF report for your next appointment, or export everything as CSV for your own analysis. Part of Mygra Plus.',
+              'Turn your history into a clean PDF report for your next appointment, or export everything as CSV for your own analysis. The report includes MIDAS and HIT-6 scores. Part of Mygra Plus.',
           },
           {
             icon: '❤️',
@@ -94,7 +116,7 @@ export default function Mygra() {
             icon: '💎',
             title: 'Simple Pricing',
             description:
-              'Free forever: logging, Live Activity, calendar, history, tags, charts, Apple Health, Apple Watch, widgets, Siri, and Spotlight. Mygra Plus adds the Migraine Assistant, trigger insights, weather-risk forecasts and alerts, doctor-ready reports, and CSV export for $2.99 a month, $14.99 a year with a 7-day free trial, or $29.99 once, with Family Sharing. Bought Mygra before 2.0? Plus is yours free for life.',
+              'Free forever: logging, Live Activity, calendar, history, tags, charts, Apple Health, Apple Watch, widgets, Siri, and Spotlight. Mygra Plus adds the Migraine Assistant, trigger insights, Cycle Insights, weather-risk forecasts and alerts, doctor-ready reports, and CSV export for $2.99 a month, $14.99 a year with a 7-day free trial, or $29.99 once, with Family Sharing. Bought Mygra before 2.0? Plus is yours free for life.',
           },
         ],
         footnote:

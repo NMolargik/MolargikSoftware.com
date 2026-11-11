@@ -24,10 +24,13 @@ export const apps = [
     languages: ['English', 'Spanish', 'German', 'Dutch', 'Norwegian'],
     price: 'Free to try, $12.99 one-time unlock',
     priceDetail: 'A sample show and your first two exports are free. One purchase unlocks unlimited shows and exports on every device. No subscription.',
+    // HOLIDAY SALE: delete this whole `promo` block after November 22, 2026 to remove the
+    // banner on /maestro and the sale price on the home card. (It also hides itself
+    // automatically once `end` has passed.)
     promo: {
-      label: 'Cybertruck send-off sale: unlock Maestro for $4.99 through November 23, 2026 (regularly $12.99)',
+      label: 'Holiday sale: unlock Maestro for $4.99 through November 22, 2026 (regularly $12.99)',
       start: '2026-11-09',
-      end: '2026-11-23',
+      end: '2026-11-22',
     },
     category: 'EntertainmentApplication',
     offers: { price: '0', priceCurrency: 'USD' },
@@ -40,7 +43,7 @@ export const apps = [
     source: 'Opalite',
     job: 'Pick, organize, check, and export colors on every Apple device you own.',
     description:
-      'Pick colors from photos, check WCAG contrast, simulate color blindness, draw on a canvas, and export palettes to Procreate, SwiftUI, CSS, and Adobe on iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
+      'Pick colors from photos, check WCAG and APCA contrast, work in OKLCH and Display P3, simulate color blindness, draw on a canvas, and export palettes to Procreate, SwiftUI, CSS, and Adobe on iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
     accent: '#9F95AF',
     appStoreUrl: 'https://apps.apple.com/us/app/opalite-color-studio/id6755093664',
     macAppStoreUrl: 'https://apps.apple.com/us/app/opalite-color-studio/id6755093664?platform=mac',
@@ -81,7 +84,7 @@ export const apps = [
     source: 'Mygra',
     job: 'Log migraines in seconds and let on-device intelligence find the patterns.',
     description:
-      'Log migraines in seconds and watch the trends emerge. Free forever for logging, calendar, Apple Health, Apple Watch, and Siri. Mygra Plus adds on-device AI insights, weather-risk alerts, and doctor-ready reports. Private by design.',
+      'Log migraines in seconds and watch the trends emerge. Free forever for logging, calendar, Apple Health, Apple Watch, and Siri. Attack Mode starts a migraine in one tap. Mygra Plus adds on-device AI insights, Cycle Insights, weather-risk alerts, and doctor-ready reports. Private by design.',
     accent: '#6E60FF',
     appStoreUrl: 'https://apps.apple.com/us/app/mygra/id6747298583',
     platforms: ['iPhone', 'iPad', 'Apple Watch', 'Vision Pro'],

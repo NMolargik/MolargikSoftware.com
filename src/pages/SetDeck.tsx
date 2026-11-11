@@ -82,7 +82,13 @@ export default function SetDeck() {
             icon: '⌚',
             title: 'Apple Watch',
             description:
-              'See today’s routine on your wrist, log sets as you finish them, follow a guided rest timer, and keep the session on your watch face with a complication.',
+              'SetDeck runs on Apple Watch by itself. Start workouts from your wrist, log sets with Double Tap or the Action Button, follow a rest timer that taps you when it ends, and keep the session on your watch face with a complication.',
+          },
+          {
+            icon: '✨',
+            title: 'What’s New in 2.6',
+            description:
+              'SetDeck now runs on Apple Watch on its own. Start workouts from the wrist, log sets with Double Tap or the Action Button, and let the rest timer tap you.',
           },
           {
             icon: '🗣️',

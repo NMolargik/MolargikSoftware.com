@@ -99,7 +99,7 @@ export default function Opalite() {
       about={{
         title: 'Opalite — The Ultimate Color Manager',
         intro:
-          'Pick colors from photos, check WCAG contrast, simulate color blindness, and export palettes to Procreate, SwiftUI, CSS, and Adobe — all in one app. Opalite is the color toolkit designers, developers, and digital artists actually need, built for iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
+          'Pick colors from photos, check WCAG and APCA contrast, work in OKLCH and Display P3, simulate color blindness, and export palettes to Procreate, SwiftUI, CSS, and Adobe — all in one app. Opalite is the color toolkit designers, developers, and digital artists actually need, built for iPhone, iPad, Mac, Apple Watch, Apple TV, and Vision Pro.',
         sections: [
           {
             title: 'Pick Colors Six Ways',
@@ -111,7 +111,7 @@ export default function Opalite() {
           },
           {
             title: 'Design for Everyone',
-            body: 'A WCAG contrast checker (AA & AAA), color blindness simulation for Protanopia, Deuteranopia, Tritanopia, and Achromatopsia, auto-generated harmonies — complementary, triadic, analogous, and more — and effortless, AI-powered color naming.',
+            body: 'A contrast checker with WCAG (AA & AAA) and APCA, a one-tap fix for text that fails AA, OKLCH and Display P3 values with an out-of-sRGB warning, color blindness simulation for Protanopia, Deuteranopia, Tritanopia, and Achromatopsia, auto-generated harmonies — complementary, triadic, analogous, and more — and effortless, AI-powered color naming.',
           },
           {
             title: 'Join the Community',
@@ -145,7 +145,13 @@ export default function Opalite() {
             icon: '♿',
             title: 'Accessibility Tools',
             description:
-              'WCAG AA & AAA contrast checking, four kinds of color blindness simulation, and auto-generated harmonies so your designs work for everyone.',
+              'WCAG AA & AAA and APCA contrast checking, a one-tap fix for text failing AA, four kinds of color blindness simulation, and auto-generated harmonies so your designs work for everyone.',
+          },
+          {
+            icon: '🌈',
+            title: 'What’s New in 1.8',
+            description:
+              'OKLCH and Display P3 values with an out-of-sRGB warning, CSS and SwiftUI export of both, APCA contrast next to WCAG, and a one-tap fix for text failing AA. Now on iPhone, iPad, Mac, Apple TV, and Vision Pro. iPhone and iPad are on 1.8.1, which fixes the drawing canvas.',
           },
           {
             icon: '🌎',

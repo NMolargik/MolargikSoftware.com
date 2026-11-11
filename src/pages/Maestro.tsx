@@ -44,7 +44,7 @@ export default function Maestro() {
           },
           {
             title: 'Built for the actual hardware',
-            body: 'Every Tesla lamp has a personality, and Maestro knows all of them. Headlights that ramp, signatures that snap, the Cybertruck’s pixel light bars, interior ambient strips, and the closures: mirrors that fold on the hush, windows that dance, falcon doors that open for the finale, a charge port that saves its rainbow for the last chorus. Command budgets and thermal limits are respected so the car never refuses your show.',
+            body: 'Every Tesla lamp has a personality, and Maestro knows all of them. Headlights that ramp, signatures that snap, pixel light bars on the cars that have them, interior ambient strips, and the closures: mirrors that fold on the hush, windows that dance, falcon doors that open for the finale, a charge port that saves its rainbow for the last chorus. Command budgets and thermal limits are respected so the car never refuses your show.',
           },
           {
             title: 'See it before the driveway does',
@@ -92,6 +92,12 @@ export default function Maestro() {
           },
           {
             icon: '✨',
+            title: 'What’s New on Mac (1.6.0)',
+            description:
+              'Install to USB checks, Export for Multiple Cars, and German, Spanish, Norwegian, and Dutch.',
+          },
+          {
+            icon: '✨',
             title: 'What’s New in 1.5.0',
             description:
               'Composition Shows stitch several songs into one performance, finished videos share straight to TikTok, Reels, and Shorts from the share sheet, and the whole app now supports VoiceOver.',
@@ -100,7 +106,7 @@ export default function Maestro() {
             icon: '🌍',
             title: 'Five Languages',
             description:
-              'English, Spanish, German, Dutch, and Norwegian, with hardware-accurate previews in every one of them.',
+              'English, Spanish, German, Dutch, and Norwegian, with hardware-accurate previews in every one of them. German, Spanish, Norwegian, and Dutch arrive on the Mac in 1.6.0.',
           },
         ],
         footnote:
