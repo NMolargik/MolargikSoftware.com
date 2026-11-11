@@ -11,7 +11,7 @@ The product site for **[molargiksoftware.com](https://molargiksoftware.com)**: s
 | **[SetDeck](https://molargiksoftware.com/setdeck)** | Plan the training week and log every set | Free | iPhone, iPad, Watch, Vision Pro |
 | **[Mygra](https://molargiksoftware.com/mygra)** | Migraine journal with on-device insights | Free, Mygra Plus from $2.99/mo | iPhone, iPad, Mac, Watch, Vision Pro |
 | **[Stork](https://molargiksoftware.com/stork)** | Delivery stats for L&D nurses | Free, Stork Pro $4.99 one-time | iPhone, iPad, Mac, Watch, Vision Pro |
-| **[Waffle](https://molargiksoftware.com/waffle)** | Browse the web in a grid on iPad | Free, Syrup $2.99 one-time | iPad |
+| **[Waffle](https://molargiksoftware.com/waffle)** | Browse the web in a grid on iPad | Free, Syrup $4.99 one-time | iPad |
 
 The facts above live in one place, [`src/data/catalog.mjs`](src/data/catalog.mjs), and feed the home grid, the app pages, the press kit, the support page, the OG images, and the prerendered `<head>` tags.
 
