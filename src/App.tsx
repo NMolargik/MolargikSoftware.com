@@ -20,6 +20,8 @@ const V1Sports = lazy(() => import('./pages/V1Sports'));
 const StreetIQ = lazy(() => import('./pages/StreetIQ'));
 const Maestro = lazy(() => import('./pages/Maestro'));
 const OpaliteWeb = lazy(() => import('./pages/OpaliteWeb'));
+const Guides = lazy(() => import('./pages/Guides'));
+const Guide = lazy(() => import('./pages/Guide'));
 const Go = lazy(() => import('./pages/Go'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
@@ -90,6 +92,8 @@ function AppShell() {
             <Route path="/support" element={<Support />} />
             <Route path="/press" element={<Press />} />
             <Route path="/privacy" element={<Privacy />} />
+            <Route path="/guides" element={<Guides />} />
+            <Route path="/guides/:slug" element={<Guide />} />
             <Route path="/go/:app" element={<Go />} />
             <Route path="*" element={<NotFound />} />
           </Routes>

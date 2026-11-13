@@ -3,6 +3,7 @@
 // per route with these tags baked in, plus sitemap.xml and robots.txt.
 
 import { apps, SITE_URL } from '../data/catalog.mjs';
+import { guides, guidePath, guideJsonLd } from '../data/guides.mjs';
 
 export { SITE_URL };
 
@@ -100,7 +101,29 @@ const appRoutes = apps.map((app) => ({
   priority: 0.9,
 }));
 
-export const routes = [...staticRoutes, ...appRoutes];
+/** Guides hub plus one route per guide (src/data/guides.mjs). */
+const guideRoutes = [
+  {
+    path: '/guides',
+    title: `Tesla light show guides${SUFFIX}`,
+    description:
+      'Plain-language guides to Tesla light shows: how to make one, set up the USB drive, fix a show the car will not see, which lights each Tesla can use, and running several cars at once.',
+    ogImage: '/og/maestro.png',
+    changefreq: 'monthly',
+    priority: 0.8,
+  },
+  ...guides.map((g) => ({
+    path: guidePath(g.slug),
+    title: `${g.title}${SUFFIX}`,
+    description: g.description,
+    ogImage: '/og/maestro.png',
+    changefreq: 'monthly',
+    priority: 0.8,
+    jsonLd: guideJsonLd(g),
+  })),
+];
+
+export const routes = [...staticRoutes, ...appRoutes, ...guideRoutes];
 
 /** @param {string} path */
 export function findRoute(path) {

@@ -32,6 +32,9 @@ function canonicalFor(routePath) {
 function headFor(route, { noindex = Boolean(route.noindex) } = {}) {
   const canonical = canonicalFor(route.path);
   const image = absolute(route.ogImage);
+  const jsonLd = (route.jsonLd ?? []).map(
+    (obj) => `<script type="application/ld+json" data-route-jsonld>${JSON.stringify(obj).replace(/</g, '\\u003c')}</script>`,
+  );
   return [
     `<title>${escape(route.title)}</title>`,
     `<meta name="description" content="${escape(route.description)}" />`,
@@ -49,6 +52,7 @@ function headFor(route, { noindex = Boolean(route.noindex) } = {}) {
     `<meta name="twitter:title" content="${escape(route.title)}" />`,
     `<meta name="twitter:description" content="${escape(route.description)}" />`,
     `<meta name="twitter:image" content="${image}" />`,
+    ...jsonLd,
   ].join('\n    ');
 }
 

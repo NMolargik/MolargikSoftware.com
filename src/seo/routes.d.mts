@@ -8,6 +8,8 @@ export interface RouteMeta {
   priority?: number;
   /** Excluded from sitemap and marked noindex */
   noindex?: boolean;
+  /** schema.org objects baked into the prerendered <head> as JSON-LD */
+  jsonLd?: Record<string, unknown>[];
 }
 
 export const SITE_URL: string;
