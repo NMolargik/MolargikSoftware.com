@@ -3,7 +3,7 @@ import ExportCounter from '../components/ExportCounter';
 import { screensFromGlob } from '../utils/screens';
 import { Link } from 'react-router-dom';
 import { findApp } from '../data/apps';
-import { guides, guidePath } from '../data/guides.mjs';
+import { guidesIn, guidePath } from '../data/guides.mjs';
 import icon from '../assets/maestro/icon.png';
 
 // Official brand color: Tesla Autopilot blue, the app's own accent.
@@ -42,7 +42,7 @@ export default function Maestro() {
                 Plain-language help for making, loading, and fixing light shows. They work with or without Maestro.
               </p>
               <ul className="mt-6 grid gap-3 sm:grid-cols-2 list-none p-0">
-                {guides.map((g) => (
+                {guidesIn('tesla').map((g) => (
                   <li key={g.slug}>
                     <Link
                       to={guidePath(g.slug)}

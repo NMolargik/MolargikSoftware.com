@@ -1,7 +1,10 @@
-export type GuideBlock = string | { ul: string[] } | { ol: string[] };
+export type GuideBlock = string | { ul: string[] } | { ol: string[] } | { code: string };
 
 export interface Guide {
   slug: string;
+  group: 'tesla' | 'color';
+  app: 'maestro' | 'opalite';
+  og: string;
   short: string;
   title: string;
   h1: string;
@@ -24,3 +27,14 @@ export function findGuide(slug: string): Guide | undefined;
 export function guidePath(slug: string): string;
 export function guideChannel(slug: string): string;
 export function guideJsonLd(guide: Guide): Record<string, unknown>[];
+export interface GuideApp {
+  slug: string;
+  heading: string;
+  blurb: string;
+  button: string;
+  notice: string;
+  checked: string;
+}
+export const guideApps: Record<'maestro' | 'opalite', GuideApp>;
+export const guideGroups: { id: 'tesla' | 'color'; title: string; blurb: string }[];
+export function guidesIn(group: 'tesla' | 'color'): Guide[];

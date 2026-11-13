@@ -2,7 +2,9 @@ import { useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import AppShowcase from '../components/AppShowcase';
 import { screensFromGlob } from '../utils/screens';
+import { Link } from 'react-router-dom';
 import { findApp } from '../data/apps';
+import { guidesIn, guidePath } from '../data/guides.mjs';
 import icon from '../assets/opalite/icon.png';
 import opaliteDemo from '../assets/opalite/opaliteWorkflowDemo.mp4';
 
@@ -95,7 +97,34 @@ export default function Opalite() {
       requirements={['iOS 18.4+', 'iPadOS 18.4+', 'macOS 15+', 'watchOS 10+', 'tvOS 18+', 'visionOS 26.2+']}
       screens={screens}
       screensClassName="bg-gradient-to-br from-blue-50 via-pink-50 to-purple-50"
-      afterScreens={<WorkflowDemo />}
+      afterScreens={
+        <>
+          <WorkflowDemo />
+          <section aria-label="Color and accessibility guides" className="mt-12 px-4">
+            <div className="mx-auto max-w-5xl">
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-gray-900">
+                Color and accessibility guides
+              </h2>
+              <p className="mt-2 text-gray-600">
+                WCAG contrast, color blindness, palettes from photos, and exporting to code. They work with or without
+                Opalite.
+              </p>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2 list-none p-0">
+                {guidesIn('color').map((g) => (
+                  <li key={g.slug}>
+                    <Link
+                      to={guidePath(g.slug)}
+                      className="block h-full rounded-2xl border border-gray-200 bg-white px-5 py-4 text-gray-900 shadow-sm transition-shadow hover:shadow-md"
+                    >
+                      {g.short}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </>
+      }
       about={{
         title: 'Opalite — The Ultimate Color Manager',
         intro:

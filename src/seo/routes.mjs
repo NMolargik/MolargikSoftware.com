@@ -105,10 +105,10 @@ const appRoutes = apps.map((app) => ({
 const guideRoutes = [
   {
     path: '/guides',
-    title: `Tesla light show guides${SUFFIX}`,
+    title: `Guides: Tesla light shows, color and accessibility${SUFFIX}`,
     description:
-      'Plain-language guides to Tesla light shows: how to make one, set up the USB drive, fix a show the car will not see, which lights each Tesla can use, and running several cars at once.',
-    ogImage: '/og/maestro.png',
+      'Plain-language guides to Tesla light shows (making one, USB setup, troubleshooting) and to color and accessibility (WCAG contrast, color blindness, palettes from photos, exporting to code).',
+    ogImage: '/og/default.png',
     changefreq: 'monthly',
     priority: 0.8,
   },
@@ -116,7 +116,7 @@ const guideRoutes = [
     path: guidePath(g.slug),
     title: `${g.title}${SUFFIX}`,
     description: g.description,
-    ogImage: '/og/maestro.png',
+    ogImage: g.og,
     changefreq: 'monthly',
     priority: 0.8,
     jsonLd: guideJsonLd(g),

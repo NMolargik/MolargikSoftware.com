@@ -13,13 +13,13 @@ import {
   guidePath,
   guideChannel,
   guideJsonLd,
-  guideNotice,
+  guideApps,
+  guideGroups,
   GUIDES_CHECKED,
   type GuideBlock,
 } from '../data/guides.mjs';
 import { fadeUp } from '../utils/animations';
 
-const ACCENT = '#2D7FF9';
 
 /** Renders [label](/internal/path) markup from the guide data as router links. */
 function Inline({ text }: { text: string }): ReactNode {
@@ -41,6 +41,13 @@ function BlockView({ block }: { block: GuideBlock }) {
       <p className="mt-3 text-base sm:text-lg leading-relaxed text-gray-600">
         <Inline text={block} />
       </p>
+    );
+  }
+  if ('code' in block) {
+    return (
+      <pre className="mt-4 overflow-x-auto rounded-2xl bg-gray-900 p-4 text-sm leading-relaxed text-gray-100">
+        <code>{block.code}</code>
+      </pre>
     );
   }
   if ('ul' in block) {
@@ -90,15 +97,18 @@ export default function Guide() {
   usePageMeta({
     title: route?.title ?? guide?.title ?? 'Guide',
     description: route?.description ?? guide?.description ?? '',
-    image: route?.ogImage ?? '/og/maestro.png',
+    image: route?.ogImage ?? '/og/default.png',
     path: guidePath(slug),
-    accentColor: ACCENT,
+    accentColor: guide?.app === 'opalite' ? '#9F95AF' : '#2D7FF9',
     noindex: !guide,
   });
   useJsonLd(guide ? guideJsonLd(guide) : []);
 
   if (!guide) return <NotFound />;
 
+  const ACCENT = guide.app === 'opalite' ? '#9F95AF' : '#2D7FF9';
+  const cta = guideApps[guide.app];
+  const group = guideGroups.find((g) => g.id === guide.group);
   const related = guide.related.map((s) => findGuide(s)).filter((g) => g !== undefined);
 
   return (
@@ -111,7 +121,7 @@ export default function Guide() {
                 Guides
               </Link>
               <ChevronRight size={14} aria-hidden="true" />
-              <span className="text-gray-400">Tesla light shows</span>
+              <span className="text-gray-400">{group?.title}</span>
             </nav>
             <h1 className="mt-4 text-headline text-gray-900">{guide.h1}</h1>
             {guide.intro.map((p) => (
@@ -120,7 +130,7 @@ export default function Guide() {
               </p>
             ))}
             <p className="mt-4 text-sm text-gray-400">
-              Checked against Tesla’s published light show guide on {GUIDES_CHECKED}.
+              Checked against {cta.checked} on {GUIDES_CHECKED}.
             </p>
           </div>
         </header>
@@ -171,7 +181,7 @@ export default function Guide() {
           </motion.div>
         </section>
 
-        <section className="pb-10 bg-white" aria-label="Try Maestro">
+        <section className="pb-10 bg-white" aria-label={`Try ${cta.slug === 'opalite' ? 'Opalite' : 'Maestro'}`}>
           <motion.div className="max-w-3xl mx-auto px-6" {...fadeUp}>
             <LiquidGlass variant="card" accentColor={ACCENT} className="relative overflow-hidden rounded-3xl px-6 py-10 sm:px-10">
               <div
@@ -181,18 +191,16 @@ export default function Guide() {
               />
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
                 <div className="text-center sm:text-left">
-                  <h2 className="text-2xl font-bold tracking-tight text-gray-900">Want a show made from a song?</h2>
-                  <p className="mt-2 text-gray-600">
-                    Maestro turns any song into a Tesla light show on iPhone, iPad, or Mac. Free to try, no account.
-                  </p>
+                  <h2 className="text-2xl font-bold tracking-tight text-gray-900">{cta.heading}</h2>
+                  <p className="mt-2 text-gray-600">{cta.blurb}</p>
                 </div>
                 <div className="flex justify-center flex-shrink-0">
-                  <GlassButton to={`/go/maestro?ct=${guideChannel(guide.slug)}`} accentColor={ACCENT} size="md">
-                    Get Maestro on the App Store
+                  <GlassButton to={`/go/${cta.slug}?ct=${guideChannel(guide.slug)}`} accentColor={ACCENT} size="md">
+                    {cta.button}
                   </GlassButton>
                 </div>
               </div>
-              <p className="mt-6 text-sm text-gray-500 italic">{guideNotice}</p>
+              <p className="mt-6 text-sm text-gray-500 italic">{cta.notice}</p>
             </LiquidGlass>
           </motion.div>
         </section>
@@ -214,7 +222,7 @@ export default function Guide() {
             ))}
             <li>
               <Link to="/guides" className="text-gray-500 underline underline-offset-4 hover:text-brandPurple">
-                All Tesla light show guides
+                All guides
               </Link>
             </li>
           </ul>
