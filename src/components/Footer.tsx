@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { CONTACT_EMAIL, LEGAL_NAME } from '../config/site';
 
 const links = [
+  { label: 'Guides', to: '/guides' },
   { label: 'Support', to: '/support' },
   { label: 'Press', to: '/press' },
   { label: 'Privacy', to: '/privacy' },

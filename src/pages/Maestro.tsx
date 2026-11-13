@@ -1,7 +1,9 @@
 import AppShowcase from '../components/AppShowcase';
 import ExportCounter from '../components/ExportCounter';
 import { screensFromGlob } from '../utils/screens';
+import { Link } from 'react-router-dom';
 import { findApp } from '../data/apps';
+import { guides, guidePath } from '../data/guides.mjs';
 import icon from '../assets/maestro/icon.png';
 
 // Official brand color: Tesla Autopilot blue, the app's own accent.
@@ -27,11 +29,33 @@ export default function Maestro() {
       screens={screens}
       screensClassName="bg-gradient-to-b from-[#0b1220] via-[#0c1424] to-surface"
       afterScreens={
-        <section aria-label="Exported show counter" className="bg-[#07090f] py-16 sm:py-20">
-          <div className="mx-auto max-w-4xl px-6">
-            <ExportCounter accentColor={ACCENT_COLOR} />
-          </div>
-        </section>
+        <>
+          <section aria-label="Exported show counter" className="bg-[#07090f] py-16 sm:py-20">
+            <div className="mx-auto max-w-4xl px-6">
+              <ExportCounter accentColor={ACCENT_COLOR} />
+            </div>
+          </section>
+          <section aria-label="Tesla light show guides" className="bg-[#07090f] pb-16 sm:pb-20">
+            <div className="mx-auto max-w-4xl px-6">
+              <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-white">Tesla light show guides</h2>
+              <p className="mt-2 text-gray-400">
+                Plain-language help for making, loading, and fixing light shows. They work with or without Maestro.
+              </p>
+              <ul className="mt-6 grid gap-3 sm:grid-cols-2 list-none p-0">
+                {guides.map((g) => (
+                  <li key={g.slug}>
+                    <Link
+                      to={guidePath(g.slug)}
+                      className="block h-full rounded-2xl border border-white/10 bg-white/5 px-5 py-4 text-gray-100 transition-colors hover:border-white/30 hover:bg-white/10"
+                    >
+                      {g.short}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </section>
+        </>
       }
       about={{
         title: 'Maestro — Your Tesla’s Light Show Studio',
