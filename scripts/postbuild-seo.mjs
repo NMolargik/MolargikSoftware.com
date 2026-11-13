@@ -16,7 +16,8 @@
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
-import { routes, defaultRoute, SITE_URL } from '../src/seo/routes.mjs';
+import { routes, defaultRoute, SITE_URL, findRoute } from '../src/seo/routes.mjs';
+import { apps } from '../src/data/catalog.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
@@ -34,7 +35,7 @@ function canonicalFor(routePath) {
   return routePath === '/' ? `${SITE_URL}/` : `${SITE_URL}${routePath}`;
 }
 
-function headFor(route, { noindex = Boolean(route.noindex) } = {}) {
+function headFor(route, { noindex = Boolean(route.noindex), robots } = {}) {
   const canonical = canonicalFor(route.path);
   const image = absolute(route.ogImage);
   const jsonLd = (route.jsonLd ?? []).map(
@@ -44,7 +45,7 @@ function headFor(route, { noindex = Boolean(route.noindex) } = {}) {
     `<title>${escape(route.title)}</title>`,
     `<meta name="description" content="${escape(route.description)}" />`,
     `<link rel="canonical" href="${canonical}" />`,
-    `<meta name="robots" content="${noindex ? 'noindex, nofollow' : 'index, follow'}" />`,
+    `<meta name="robots" content="${robots ?? (noindex ? 'noindex, nofollow' : 'index, follow')}" />`,
     `<meta property="og:type" content="website" />`,
     `<meta property="og:site_name" content="Molargik Software" />`,
     `<meta property="og:title" content="${escape(route.title)}" />`,
@@ -78,6 +79,59 @@ function fileFor(routePath) {
   return path.join(DIST, `${routePath.replace(/^\//, '')}.html`);
 }
 
+/**
+ * Static redirect pages for the tracked short links /go/<app>?ct=<channel>.
+ * GitHub Pages answers unknown paths with 404.html (HTTP 404), which link
+ * checkers, email scanners and link-preview fetchers treat as broken, so each
+ * app gets a real page (HTTP 200) instead. The inline script builds exactly the
+ * destination src/pages/Go.tsx + src/utils/appStore.ts build: ct sanitised and
+ * defaulting to "go", platform=mac picking the Mac App Store URL, then pt (when
+ * APP_STORE_PT is set), ct and mt=8 set on the URL. No app bundle is loaded.
+ */
+async function writeGoPages() {
+  const site = await fs.readFile(path.join(ROOT, 'src/config/site.ts'), 'utf8');
+  const pt = (site.match(/APP_STORE_PT\s*=\s*'([^']*)'/) ?? [])[1] ?? '';
+  for (const app of apps) {
+    const route = findRoute(`/${app.slug}`);
+    const targets = { web: app.appStoreUrl, mac: app.macAppStoreUrl ?? null };
+    const script =
+      `(function(){var T=${JSON.stringify(targets).replace(/</g, '\\u003c')},PT=${JSON.stringify(pt)};` +
+      `var q=new URLSearchParams(location.search),c=q.get('ct');if(c===null)c='go';` +
+      `c=c.replace(/[^a-z0-9_-]/gi,'').slice(0,40)||'go';` +
+      `var b=(q.get('platform')==='mac'&&T.mac)?T.mac:T.web,u=new URL(b);` +
+      `if(PT)u.searchParams.set('pt',PT);u.searchParams.set('ct',c);u.searchParams.set('mt','8');` +
+      `var h=u.toString();document.getElementById('go').href=h;location.replace(h)})();`;
+    const fallback = app.appStoreUrl;
+    const noscriptUrl = new URL(fallback);
+    if (pt) noscriptUrl.searchParams.set('pt', pt);
+    noscriptUrl.searchParams.set('ct', 'go');
+    noscriptUrl.searchParams.set('mt', '8');
+    const html = [
+      '<!doctype html>',
+      '<html lang="en">',
+      '  <head>',
+      '    <meta charset="UTF-8" />',
+      '    <meta name="viewport" content="width=device-width, initial-scale=1.0" />',
+      '    <meta name="theme-color" content="#6D00FF" />',
+      `    ${headFor(route, { robots: 'noindex' })}`,
+      `    <noscript><meta http-equiv="refresh" content="0; url=${escape(noscriptUrl.toString())}" /></noscript>`,
+      '  </head>',
+      '  <body style="font-family:-apple-system,system-ui,sans-serif;text-align:center;padding:4rem 1.5rem">',
+      `    <h1 style="font-size:1.5rem">Opening ${escape(app.name)} on the App Store…</h1>`,
+      `    <p>Not redirected? <a id="go" href="${escape(noscriptUrl.toString())}">Continue to the App Store</a></p>`,
+      `    <script>${script}</script>`,
+      '  </body>',
+      '</html>',
+      '',
+    ].join('\n');
+    const dir = path.join(DIST, 'go');
+    await fs.mkdir(path.join(dir, app.slug), { recursive: true });
+    await fs.writeFile(path.join(dir, `${app.slug}.html`), html);
+    await fs.writeFile(path.join(dir, app.slug, 'index.html'), html);
+    console.log(`  dist/go/${app.slug}.html (${Buffer.byteLength(html)} bytes)`);
+  }
+}
+
 async function main() {
   const template = await fs.readFile(path.join(DIST, 'index.html'), 'utf8');
   const today = new Date().toISOString().slice(0, 10);
@@ -99,6 +153,8 @@ async function main() {
       console.log('  dist/guides/index.html');
     }
   }
+
+  await writeGoPages();
 
   // SPA fallback: unknown URLs (for example /go/maestro) load the app shell.
   await fs.writeFile(path.join(DIST, '404.html'), render(template, defaultRoute, { noindex: true }));
