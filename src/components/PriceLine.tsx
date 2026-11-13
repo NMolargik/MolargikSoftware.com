@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion';
 import { Tag } from 'lucide-react';
 import type { Promo } from '../data/apps';
-import { isPromoActive } from '../data/apps';
+import { usePromoActive } from '../hooks/usePromoActive';
 import { trackLiquidGlassCursor } from '../utils/liquidGlass';
 
 interface PriceLineProps {
@@ -17,7 +17,7 @@ interface PriceLineProps {
  * date-driven promo banner (rendered only while the promo window is open).
  */
 export default function PriceLine({ price, detail, platforms, promo, accentColor }: PriceLineProps) {
-  const promoLive = isPromoActive(promo);
+  const promoLive = usePromoActive(promo);
   return (
     <motion.div
       className="max-w-3xl mx-auto px-6 -mt-6 pb-10 text-center"

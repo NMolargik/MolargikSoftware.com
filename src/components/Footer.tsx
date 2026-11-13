@@ -15,7 +15,7 @@ export default function Footer() {
     <footer className="border-t border-gray-200 bg-gray-50 px-6 py-10 text-sm">
       <div className="mx-auto flex max-w-7xl flex-col items-center gap-5 sm:flex-row sm:justify-between">
         <div className="text-center sm:text-left">
-          <span className="text-gray-500">&copy; {new Date().getFullYear()} {LEGAL_NAME}</span>
+          <span className="text-gray-500" suppressHydrationWarning>&copy; {new Date().getFullYear()} {LEGAL_NAME}</span>
           <p className="mt-1 text-gray-400 tracking-wide">Independent apps for every Apple device. Private by design.</p>
         </div>
 

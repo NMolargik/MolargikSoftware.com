@@ -56,10 +56,10 @@ function ScrollToTopOnNav() {
 
 /** Returns true when the page is served from opalite.molargiksoftware.com */
 function isOpaliteSubdomain() {
-  return window.location.hostname.startsWith('opalite.');
+  return typeof window !== 'undefined' && window.location.hostname.startsWith('opalite.');
 }
 
-function AppShell() {
+export function AppShell() {
   const opaliteSub = isOpaliteSubdomain();
 
   return (

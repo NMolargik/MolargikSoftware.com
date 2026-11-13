@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import type { CSSProperties } from 'react';
 import type { SiteApp } from '../data/apps';
-import { isPromoActive } from '../data/apps';
+import { usePromoActive } from '../hooks/usePromoActive';
 import { appStoreLink, siteChannel } from '../utils/appStore';
 import { hexToRgbTriple, trackLiquidGlassCursor } from '../utils/liquidGlass';
 import AppStoreBadge from './AppStoreBadge';
@@ -20,7 +20,7 @@ export default function AppCard({ app, index = 0, channel = 'home' }: AppCardPro
   const accentRgb = hexToRgbTriple(app.accent);
   const style: CSSProperties = { borderTop: `2px solid ${app.accent}` };
   if (accentRgb) (style as Record<string, string>)['--lg-accent'] = accentRgb;
-  const promoLive = isPromoActive(app.promo);
+  const promoLive = usePromoActive(app.promo);
 
   return (
     <motion.article

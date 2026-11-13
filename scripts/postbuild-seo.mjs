@@ -5,6 +5,9 @@
 //   - writes dist/<route>.html for every route with that route's <title>,
 //     description, canonical, Open Graph, and Twitter tags baked into <head>
 //     (GitHub Pages serves `maestro.html` at `/maestro` with no redirect)
+//   - renders each route's page to static HTML (dist-ssr/entry-server.js, built by
+//     `vite build --ssr`) and puts it in <div id="root">, so crawlers that do not run
+//     JavaScript see the real content; the client hydrates it (src/main.tsx)
 //   - writes dist/404.html (SPA fallback for unknown paths, marked noindex)
 //   - writes dist/sitemap.xml and dist/robots.txt
 //
@@ -12,13 +15,15 @@
 
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { routes, defaultRoute, SITE_URL } from '../src/seo/routes.mjs';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DIST = path.join(ROOT, 'dist');
+const DIST_SSR = path.join(ROOT, 'dist-ssr');
 const START = '<!--seo:start-->';
 const END = '<!--seo:end-->';
+const ROOT_EMPTY = '<div id="root"></div>';
 
 const escape = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -56,13 +61,16 @@ function headFor(route, { noindex = Boolean(route.noindex) } = {}) {
   ].join('\n    ');
 }
 
-function render(template, route, opts) {
+function render(template, route, opts, body = '') {
   const start = template.indexOf(START);
   const end = template.indexOf(END);
   if (start === -1 || end === -1) {
     throw new Error(`dist/index.html is missing the ${START} / ${END} markers`);
   }
-  return template.slice(0, start) + headFor(route, opts) + template.slice(end + END.length);
+  const html = template.slice(0, start) + headFor(route, opts) + template.slice(end + END.length);
+  if (!body) return html;
+  if (!html.includes(ROOT_EMPTY)) throw new Error(`dist/index.html is missing ${ROOT_EMPTY}`);
+  return html.replace(ROOT_EMPTY, () => `<div id="root" data-prerender="${route.path}">${body}</div>`);
 }
 
 function fileFor(routePath) {
@@ -74,11 +82,22 @@ async function main() {
   const template = await fs.readFile(path.join(DIST, 'index.html'), 'utf8');
   const today = new Date().toISOString().slice(0, 10);
 
+  const { render: renderApp } = await import(pathToFileURL(path.join(DIST_SSR, 'entry-server.js')).href);
+
   for (const route of routes) {
+    const body = await renderApp(route.path);
+    const html = render(template, route, undefined, body);
     const out = fileFor(route.path);
     await fs.mkdir(path.dirname(out), { recursive: true });
-    await fs.writeFile(out, render(template, route));
-    console.log(`  ${path.relative(ROOT, out)}`);
+    await fs.writeFile(out, html);
+    console.log(`  ${path.relative(ROOT, out)} (${Buffer.byteLength(html)} bytes)`);
+    // GitHub Pages serves guides.html at /guides but may redirect to /guides/ when a
+    // guides/ directory exists, so the hub also gets guides/index.html. Either way it resolves.
+    if (route.path === '/guides') {
+      await fs.mkdir(path.join(DIST, 'guides'), { recursive: true });
+      await fs.writeFile(path.join(DIST, 'guides', 'index.html'), html);
+      console.log('  dist/guides/index.html');
+    }
   }
 
   // SPA fallback: unknown URLs (for example /go/maestro) load the app shell.

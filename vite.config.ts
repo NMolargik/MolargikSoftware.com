@@ -21,11 +21,15 @@ function cloudflareBeacon(): Plugin {
 }
 
 export default defineConfig({
+  define: { __BUILD_ISO__: JSON.stringify(new Date().toISOString()) },
   plugins: [react(), basicSsl(), cloudflareBeacon()],
   server: {
     host: '0.0.0.0',
     port: 5173,
   },
+  // The prerender build (`vite build --ssr`) bundles its dependencies so Node
+  // resolves react-dom/static the way the bundler does.
+  ssr: { noExternal: true },
   build: {
     target: ['es2020', 'safari14'],
   },

@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { Mail } from 'lucide-react';
@@ -13,6 +13,10 @@ import { CONTACT_EMAIL } from '../config/site';
 export default function Contact() {
   const formRef = useRef<HTMLFormElement>(null);
   const [state, setState] = useState<'idle' | 'sending' | 'sent' | 'error'>('idle');
+
+  // Set after mount so the prerendered HTML and hydration agree.
+  const [ts, setTs] = useState('0');
+  useEffect(() => setTs(String(Date.now())), []);
 
   useRouteMeta({ accentColor: '#FF6C00' });
 
@@ -121,7 +125,7 @@ export default function Contact() {
               className="relative space-y-8"
             >
             <input type="text" name="website" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
-            <input type="hidden" name="ts" value={String(Date.now())} />
+            <input type="hidden" name="ts" value={ts} />
 
             {/* Accent line */}
             <div

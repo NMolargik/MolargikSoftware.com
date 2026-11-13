@@ -71,6 +71,8 @@ The export counter at `api.molargiksoftware.com` is a separate Cloudflare Worker
 
 **Routing:** BrowserRouter everywhere. Deep links work because every route is prerendered to its own HTML file and unknown paths fall back to `404.html`. `src/main.tsx` rewrites legacy `/#/path` hash links to `/path` before render.
 
+**Prerender and hydration:** `npm run build` also runs `vite build --ssr src/entry-server.tsx --outDir dist-ssr`; `scripts/postbuild-seo.mjs` renders every route in `src/seo/routes.mjs` through it and writes the real page HTML into `<div id="root" data-prerender="<route>">`, so crawlers without JavaScript see the content. `src/main.tsx` hydrates when `data-prerender` matches the URL and otherwise renders from scratch (dev server, `404.html` for `/go/...`, legacy hash links, the `opalite.` subdomain). Anything that reads `window`/`document`/the clock at render time must be guarded (see `usePromoActive`, which judges the sale window as of `__BUILD_ISO__` until hydration). `/guides` is also written as `guides/index.html`.
+
 **Head tags:** `usePageMeta` (title, description, canonical, OG, Twitter) and `useRouteMeta` (same, from `src/seo/routes.mjs`). Open Graph images live in `public/og/`.
 
 **Site constants:** `src/config/site.ts` (`SITE_URL`, `CONTACT_EMAIL`, `APP_STORE_PT`, `CF_BEACON_TOKEN`). The Cloudflare beacon is injected into `index.html` by a plugin in `vite.config.ts` only when `CF_BEACON_TOKEN` is set.
